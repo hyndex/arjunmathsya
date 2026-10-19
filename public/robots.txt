@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mathsya-connected-services.arjtha.chatgpt.site/sitemap-index.xml

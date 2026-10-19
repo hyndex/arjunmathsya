@@ -5,8 +5,12 @@ import sitemap from '@astrojs/sitemap';
 
 import tailwindcss from '@tailwindcss/vite';
 
-// Canonical origin. Change this one value when the site moves to a registered Mathsya domain.
-const site = 'https://mathsya-connected-services.arjtha.chatgpt.site';
+// Canonical origin for canonical tags, social images, the sitemap and robots.txt:
+// SITE_URL if set, else the project's production domain on Vercel (set automatically there), else the current public address.
+const site =
+  process.env.SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  'https://mathsya-connected-services.arjtha.chatgpt.site';
 
 export default defineConfig({
   site,

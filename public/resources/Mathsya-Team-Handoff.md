@@ -6,12 +6,12 @@ A public automotive technology company website and a consistent source for cohor
 
 ## Current public website
 https://mathsya-connected-services.arjtha.chatgpt.site
-Moving to a registered Mathsya domain is a separate DNS/hosting task. When it happens, change the single `site` value in `astro.config.mjs` and the sitemap line in `public/robots.txt`.
+Moving to a registered Mathsya domain is a separate DNS/hosting task. When it happens, set the `SITE_URL` environment variable on the host (on Vercel the production domain is picked up automatically); canonical tags, the sitemap and robots.txt follow it.
 
 ## Source and hosting
 - Built with Astro (static output) + React islands, Tailwind CSS and shadcn/ui (Radix) components, Motion and GSAP/Lenis for animation, and three.js / React Three Fiber / drei for the 3D vehicle. Node 24 (`.nvmrc`).
 - If WebGL is unavailable, data-saver is on, the model fails to load or the GPU drops the context, every 3D view falls back to a still image or SVG; no content depends on 3D.
-- `npm install`, `npm run dev` (http://localhost:4321), `npm run build` → deploy the `dist/` folder to any static host.
+- `npm install`, `npm run dev` (http://localhost:4321), `npm run build` → deploy the `dist/` folder to any static host. Vercel: import the GitHub repo; `vercel.json` configures the build, clean URLs, redirects and headers.
 - `build.format: 'file'` emits `platform.html`, `pmg.html` … so both clean URLs and legacy `*.html` links work on hosts that map `/platform` → `platform.html`.
 - Redirects: `public/_redirects` gives true 301s on hosts that read it (Cloudflare Pages, Netlify); every build also emits instant meta-refresh pages for `/pitch` → `/investors` and `/investor-brief` → `/investors/brief`.
 - No analytics, trackers or third-party requests: fonts and 3D libraries are bundled with the site.
@@ -48,7 +48,7 @@ All vehicle and component visuals are schematic concept renders and must stay la
 1. Obtain and configure the approved business inbox (`SITE.contactEmail`); test the email-draft route.
 2. If a true submission form is wanted, implement a delivery backend, protect it against abuse, update the privacy page and verify delivery. Never display a "sent" confirmation for the current draft behaviour.
 3. Register or confirm the Mathsya domain, configure hosting/DNS/HTTPS, and redirect the existing address if supported.
-4. Update `site` in `astro.config.mjs` and `public/robots.txt` for the confirmed domain.
+4. Set `SITE_URL` to the confirmed domain on the host (Vercel uses its production domain automatically).
 5. Run desktop/mobile checks in Chrome and Safari: navigation, the scroll story forwards and backwards, explorer controls, tabs, form validation, downloads and print output.
 
 ## Acceptance checks
