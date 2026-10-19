@@ -1,0 +1,214 @@
+---
+// Plan-view schematic: where each part of the platform runs. Numbers match DEPLOYMENT_LOCATIONS.
+---
+
+<figure class="vp">
+  <svg viewBox="0 0 320 600" role="img" aria-labelledby="vp-title vp-desc" class="vp-svg">
+    <title id="vp-title">Plan view of an electric vehicle showing four deployment locations</title>
+    <desc id="vp-desc">
+      1, Battery and Charging AI software on the battery management system or adjacent module compute in the battery pack. 2, Evo Core
+      hardware at the power-electronics location near the rear axle. 3, PMG software on gateway, telematics or central compute. 4, optional
+      cloud services outside the vehicle. An approved vehicle network links locations 1, 2 and 3.
+    </desc>
+
+    <!-- body -->
+    <path
+      class="vp-body"
+      d="M160 18C214 18 256 34 262 88L268 200V420L262 512C256 566 214 582 160 582S64 566 58 512L52 420V200L58 88C64 34 106 18 160 18Z"
+    ></path>
+    <text class="vp-label" x="160" y="44" text-anchor="middle">FRONT</text>
+    <!-- wheels + axles -->
+    <g class="vp-wheels">
+      <rect x="36" y="118" width="18" height="60" rx="6"></rect>
+      <rect x="266" y="118" width="18" height="60" rx="6"></rect>
+      <rect x="36" y="430" width="18" height="60" rx="6"></rect>
+      <rect x="266" y="430" width="18" height="60" rx="6"></rect>
+    </g>
+    <path class="vp-axle" d="M56 148H264M56 460H264"></path>
+
+    <!-- 1 · battery pack + BMS (reference) with Battery AI software ring -->
+    <rect class="vp-pack" x="82" y="196" width="156" height="236" rx="14"></rect>
+    <path class="vp-cells" d="M160 244V422M92 284H228M92 324H228M92 364H228M92 404H228"></path>
+    <rect class="vp-ring vp-ring--battery" x="122" y="202" width="76" height="34" rx="9"></rect>
+    <rect class="vp-host" x="127" y="207" width="66" height="24" rx="5"></rect>
+    <text class="vp-host-text" x="160" y="223" text-anchor="middle">BMS</text>
+
+    <!-- 3 · vehicle compute (reference) with PMG software ring -->
+    <rect class="vp-ring vp-ring--pmg" x="121" y="92" width="78" height="34" rx="9"></rect>
+    <rect class="vp-host" x="126" y="97" width="68" height="24" rx="5"></rect>
+    <text class="vp-host-text" x="160" y="113" text-anchor="middle">COMPUTE</text>
+
+    <!-- 2 · Evo Core power hardware (solid = hardware) -->
+    <rect class="vp-evo" x="116" y="490" width="88" height="38" rx="7"></rect>
+    <path class="vp-evo-lines" d="M138 498V520M160 498V520M182 498V520"></path>
+
+    <!-- approved vehicle network -->
+    <path class="vp-net" d="M199 109H246V509H204M198 219H246"></path>
+
+    <!-- 4 · optional cloud (dashed = optional, off-vehicle) -->
+    <path class="vp-link-optional" d="M199 104L262 66"></path>
+    <path
+      class="vp-cloud"
+      d="M268 62h36a12 12 0 0 0 1-24 16 16 0 0 0-30-6 11 11 0 0 0-8 30z"
+    ></path>
+
+    <!-- markers -->
+    <g class="vp-marker vp-marker--battery"><circle cx="102" cy="219" r="11"></circle><text x="102" y="223" text-anchor="middle">1</text></g>
+    <g class="vp-marker vp-marker--evo"><circle cx="94" cy="509" r="11"></circle><text x="94" y="513" text-anchor="middle">2</text></g>
+    <g class="vp-marker vp-marker--pmg"><circle cx="100" cy="109" r="11"></circle><text x="100" y="113" text-anchor="middle">3</text></g>
+    <g class="vp-marker vp-marker--cloud"><circle cx="286" cy="88" r="11"></circle><text x="286" y="92" text-anchor="middle">4</text></g>
+  </svg>
+  <ul class="vp-key" aria-label="Schematic key">
+    <li><span class="vp-sw vp-sw--hw" aria-hidden="true"></span>Solid block: Mathsya hardware</li>
+    <li><span class="vp-sw vp-sw--sw" aria-hidden="true"></span>Ring on grey host: Mathsya software on existing compute</li>
+    <li><span class="vp-sw vp-sw--net" aria-hidden="true"></span>Approved vehicle network</li>
+    <li><span class="vp-sw vp-sw--opt" aria-hidden="true"></span>Dashed: optional, off-vehicle</li>
+  </ul>
+  <figcaption class="fineprint">Schematic concept illustration · not a production design</figcaption>
+</figure>
+
+<style>
+  .vp {
+    display: grid;
+    gap: 18px;
+    justify-items: center;
+    margin: 0;
+  }
+  .vp-svg {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    overflow: visible;
+  }
+  .vp-body {
+    fill: var(--c-white);
+    stroke: var(--c-ink-soft);
+    stroke-width: 1.5;
+  }
+  .vp-label {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    fill: var(--c-slate);
+  }
+  .vp-wheels rect {
+    fill: #c7d0db;
+  }
+  .vp-axle {
+    stroke: var(--c-line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    fill: none;
+  }
+  .vp-pack {
+    fill: var(--c-mint);
+    stroke: var(--p-battery);
+    stroke-width: 1.5;
+  }
+  .vp-cells {
+    stroke: var(--p-battery);
+    stroke-opacity: 0.32;
+    stroke-width: 1;
+    fill: none;
+  }
+  .vp-host {
+    fill: #e3e8ee;
+    stroke: #9aa8b8;
+    stroke-width: 1;
+  }
+  .vp-host-text {
+    font-family: var(--f-mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    fill: var(--c-ink-soft);
+  }
+  .vp-ring {
+    fill: var(--c-white);
+    stroke-width: 2;
+  }
+  .vp-ring--battery {
+    stroke: var(--p-battery);
+  }
+  .vp-ring--pmg {
+    stroke: var(--p-pmg);
+  }
+  .vp-evo {
+    fill: var(--p-evo);
+  }
+  .vp-evo-lines {
+    stroke: var(--c-white);
+    stroke-opacity: 0.6;
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .vp-net {
+    fill: none;
+    stroke: var(--c-cobalt);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+  }
+  .vp-link-optional {
+    stroke: var(--c-slate);
+    stroke-width: 1.25;
+    stroke-dasharray: 4 4;
+    fill: none;
+  }
+  .vp-cloud {
+    fill: var(--c-white);
+    stroke: var(--c-slate);
+    stroke-width: 1.4;
+    stroke-dasharray: 4 3;
+  }
+  .vp-marker circle {
+    fill: var(--c-white);
+    stroke-width: 2;
+  }
+  .vp-marker text {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    fill: var(--c-ink);
+  }
+  .vp-marker--battery circle { stroke: var(--p-battery); }
+  .vp-marker--evo circle { stroke: var(--p-evo-ink); }
+  .vp-marker--pmg circle { stroke: var(--p-pmg); }
+  .vp-marker--cloud circle {
+    stroke: var(--c-slate);
+    stroke-dasharray: 3 2;
+  }
+  .vp-key {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .vp-key li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .vp-sw {
+    flex: none;
+    width: 18px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .vp-sw--hw {
+    background: var(--p-evo);
+  }
+  .vp-sw--sw {
+    background: #e3e8ee;
+    box-shadow: 0 0 0 2px var(--c-white), 0 0 0 3.5px var(--p-pmg);
+  }
+  .vp-sw--net {
+    height: 0;
+    border-top: 2px solid var(--c-cobalt);
+    border-radius: 0;
+  }
+  .vp-sw--opt {
+    border: 1.5px dashed var(--c-slate);
+  }
+</style>

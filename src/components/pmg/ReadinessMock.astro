@@ -1,0 +1,256 @@
+---
+// Illustrative driver-facing readiness card. Values (times, wording) are illustrative only.
+import { INTERFACE_COPY as C } from '@/data/pmg';
+const label =
+  'Illustrative interface concept: a readiness card for a departure tomorrow at 07:30, a readiness plan, a battery preconditioning request awaiting the driver’s confirmation with Allow once and Not now options, and a verified result recorded after departure.';
+---
+
+<figure class="rm-figure">
+  <p class="rm-label">{C.label}</p>
+  <div class="rm-layout">
+    <div class="rm" role="img" aria-label={label}>
+      <div class="rm-status">
+        <span>PMG · Readiness</span>
+        <span>Illustrative</span>
+      </div>
+
+      <div class="rm-block rm-dep">
+        <span class="rm-badge">1</span>
+        <span class="rm-k">Next departure</span>
+        <span class="rm-time">Tomorrow · 07:30</span>
+      </div>
+
+      <div class="rm-block rm-plan">
+        <span class="rm-badge">2</span>
+        <span class="rm-k">Readiness plan</span>
+        <ul>
+          <li data-s="done">Charge within your set limit, finishing before departure</li>
+          <li data-s="done">Battery warm after the drive: cooling and charging coordinated</li>
+          <li data-s="wait">Precondition the battery before departure</li>
+        </ul>
+      </div>
+
+      <div class="rm-block rm-ask">
+        <span class="rm-badge">3</span>
+        <span class="rm-k">Awaiting your confirmation</span>
+        <span class="rm-q">Precondition the battery from 07:00?</span>
+        <span class="rm-why">Approved interface · within your permissions</span>
+        <span class="rm-actions">
+          <span class="rm-btn rm-btn--yes">Allow once</span>
+          <span class="rm-btn">Not now</span>
+        </span>
+      </div>
+
+      <div class="rm-block rm-result">
+        <span class="rm-badge">4</span>
+        <span class="rm-k">Verified result · after departure</span>
+        <span class="rm-res">Readiness checked at departure and recorded locally</span>
+      </div>
+    </div>
+
+    <ol class="rm-notes">
+      {
+        C.annotations.map((a) => (
+          <li>
+            <span class="rm-notes-n" aria-hidden="true">{a.n}</span>
+            <div>
+              <p class="rm-notes-t">{a.title}</p>
+              <p class="rm-notes-b">{a.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figcaption class="fineprint">Illustrative interface concept · not a product screen. Times and wording are examples.</figcaption>
+</figure>
+
+<style>
+  .rm-figure {
+    display: grid;
+    align-content: start;
+    gap: 18px;
+    margin: 0;
+  }
+  .rm-label {
+    justify-self: start;
+    padding: 5px 12px;
+    border: 1px dashed var(--c-cobalt);
+    border-radius: var(--r-pill);
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .rm-layout {
+    display: grid;
+    gap: 28px;
+  }
+  .rm {
+    display: grid;
+    gap: 10px;
+    width: min(100%, 360px);
+    padding: 16px 14px 18px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: 34px;
+    background: linear-gradient(180deg, var(--c-ice), var(--c-white) 42%);
+    box-shadow: var(--sh-2);
+  }
+  .rm-status {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px 6px;
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: var(--c-slate);
+  }
+  .rm-block {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    padding: 14px 16px 14px 40px;
+    border: 1px solid var(--c-line);
+    border-radius: 20px;
+    background: var(--c-white);
+  }
+  .rm-badge {
+    position: absolute;
+    top: 13px;
+    left: 11px;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--c-ink);
+    color: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+  }
+  .rm-k {
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .rm-time {
+    font-family: var(--f-display);
+    font-size: 1.6rem;
+    font-weight: 750;
+    letter-spacing: -0.03em;
+  }
+  .rm-plan ul {
+    display: grid;
+    gap: 6px;
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rm-plan li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.86rem;
+    line-height: 1.4;
+    color: var(--c-ink-soft);
+  }
+  .rm-plan li::before {
+    content: '';
+    position: absolute;
+    top: 0.32em;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid var(--p-battery);
+  }
+  .rm-plan li[data-s='done']::before {
+    background: var(--p-battery);
+  }
+  .rm-plan li[data-s='wait']::before {
+    border-style: dashed;
+    border-color: var(--c-cobalt);
+  }
+  .rm-ask {
+    border: 1.5px solid var(--c-cobalt);
+    background: var(--c-ice);
+  }
+  .rm-q {
+    font-family: var(--f-display);
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+  .rm-why {
+    font-size: 0.78rem;
+    color: var(--c-slate);
+  }
+  .rm-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .rm-btn {
+    padding: 8px 14px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-family: var(--f-display);
+    font-size: 0.84rem;
+    font-weight: 650;
+  }
+  .rm-btn--yes {
+    border-color: var(--c-cobalt);
+    background: var(--c-cobalt);
+    color: var(--c-white);
+  }
+  .rm-result {
+    border-style: dashed;
+    border-color: var(--c-line-strong);
+  }
+  .rm-res {
+    font-size: 0.86rem;
+    color: var(--c-ink-soft);
+  }
+  .rm-notes {
+    display: grid;
+    align-content: start;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rm-notes li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .rm-notes-n {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--c-ink);
+    color: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+  }
+  .rm-notes-t {
+    font-family: var(--f-display);
+    font-weight: 700;
+  }
+  .rm-notes-b {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-slate);
+  }
+  @media (min-width: 720px) {
+    .rm-layout {
+      grid-template-columns: 340px minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(28px, 4vw, 56px);
+    }
+  }
+</style>

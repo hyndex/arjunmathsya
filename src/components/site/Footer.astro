@@ -1,0 +1,175 @@
+---
+import { ArrowRight, ArrowUpRight } from '@lucide/astro';
+import Logo from './Logo';
+import { SITE, contactHref } from '@/data/site';
+
+const year = new Date().getFullYear();
+const columns = [
+  {
+    title: 'Technologies',
+    links: [
+      { label: 'Battery & Charging AI', href: '/battery-ai' },
+      { label: 'Proactive Mobility Guardian', href: '/pmg' },
+      { label: 'Evo Core', href: '/evo-core' },
+      { label: 'Vehicle Explorer', href: '/explore' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'Connected platform', href: '/platform' },
+      { label: 'Research & engineering', href: '/research' },
+      { label: 'About Mathsya', href: '/about' },
+      { label: 'Investors & partnerships', href: '/investors' },
+    ],
+  },
+  {
+    title: 'Connect',
+    links: [
+      { label: 'Contact & enquiries', href: '/contact' },
+      { label: 'Discuss an OEM pilot', href: contactHref('oem-pilot') },
+      { label: 'Investor brief', href: '/investors/brief' },
+      { label: 'Privacy', href: '/privacy' },
+    ],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="container--wide footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="brand-link"><Logo uid="ft" /><span class="visually-hidden">, home</span></a>
+      <p class="footer-mission">{SITE.tagline}<span>{SITE.mission}</span></p>
+      <a class="link-arrow" href={contactHref('oem-pilot')}>Bring a problem. Build the first proof. <ArrowRight size={16} aria-hidden="true" /></a>
+    </div>
+    {
+      columns.map((col) => (
+        <nav class="footer-col" aria-label={col.title}>
+          <h2 class="footer-title">{col.title}</h2>
+          <ul>
+            {col.links.map((l) => (
+              <li>
+                <a href={l.href}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <div class="container--wide footer-legal">
+    <p>© {year} {SITE.name} · {SITE.location}</p>
+    <p>{SITE.stageNote} · {SITE.conceptNote}</p>
+    <p class="credit">
+      Vehicle model adapted from <a href="https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept" rel="noopener noreferrer">“Car Concept”</a> by Eric Chadwick, © 2024 Darmstadt Graphics Group GmbH,
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener noreferrer">CC BY 4.0</a> (logos removed, materials and parts changed).
+    </p>
+    <a href="#top" class="to-top">Back to top <ArrowUpRight size={14} aria-hidden="true" /></a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    background: var(--c-white);
+    border-top: 1px solid var(--c-line);
+    padding-top: clamp(56px, 7vw, 96px);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+    gap: 40px 48px;
+  }
+  .brand-link {
+    display: inline-flex;
+    text-decoration: none;
+    border-radius: 12px;
+  }
+  .footer-mission {
+    margin: 22px 0 18px;
+    max-width: 30ch;
+    font-family: var(--f-display);
+    font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+    font-weight: 720;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+  .footer-mission span {
+    display: block;
+    margin-top: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--c-slate);
+  }
+  .footer-title {
+    margin-bottom: 14px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .footer-col ul {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .footer-col a {
+    display: inline-block;
+    padding: 7px 0;
+    color: var(--c-ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .footer-col a:hover {
+    color: var(--c-cobalt-ink);
+    text-decoration: underline;
+  }
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 28px;
+    margin-top: clamp(48px, 6vw, 80px);
+    padding-block: 24px 32px;
+    border-top: 1px solid var(--c-line);
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .credit {
+    flex-basis: 100%;
+    order: 3;
+  }
+  .credit a {
+    color: inherit;
+  }
+  .to-top {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--c-ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .to-top {
+      margin-left: 0;
+    }
+  }
+</style>

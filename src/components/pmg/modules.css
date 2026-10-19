@@ -1,0 +1,131 @@
+/* /pmg module applications: a vertical value chain per candidate workflow. */
+.mx {
+  gap: 30px;
+}
+.mx-trigger.mx-trigger {
+  gap: 9px;
+}
+.mx-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--tab-accent);
+}
+.mx-panel {
+  display: grid;
+  gap: 28px;
+}
+.mx-panel[data-state='inactive'] {
+  display: none;
+}
+.mx-side {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+.mx-k {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acc-ink);
+}
+.mx-title {
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.mx-proof {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 16px 18px;
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-m);
+  background: var(--c-white);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+.mx-candidate {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--c-slate);
+}
+.mx-chain {
+  position: relative;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--c-line);
+}
+.mx-chain::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 9px;
+  width: 2px;
+  background: linear-gradient(var(--acc), var(--c-cobalt));
+}
+.mx-row {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 20px 0 20px 36px;
+  border-bottom: 1px solid var(--c-line);
+  animation: mx-in 0.45s var(--ease-flow) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.mx-row::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--acc);
+  border-radius: 50%;
+  background: var(--c-white);
+}
+.mx-row:last-child::before {
+  border-color: var(--c-cobalt);
+  background: var(--c-cobalt);
+}
+.mx-row-k {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}
+.mx-row-n {
+  margin-right: 8px;
+  color: var(--acc-ink);
+}
+.mx-row-v {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--c-ink);
+}
+@keyframes mx-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (min-width: 720px) {
+  .mx-row {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 20px;
+    align-items: baseline;
+  }
+}
+@media (min-width: 1000px) {
+  .mx-panel {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: clamp(40px, 5vw, 80px);
+  }
+}

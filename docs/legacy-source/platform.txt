@@ -1,0 +1,122 @@
+     The connected product platform — Mathsya Connected Services                      [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+THE MATHSYA PLATFORM / FROM CELL TO CUSTOMER
+# Local intelligence.
+ Connected outcomes.
+Battery & Charging AI interprets module behavior. Evo Core provides a coordinated power foundation. PMG connects the insights at vehicle level, with optional cloud services for authorized OEM and fleet learning.
+ [Explore the architecture ↗ ](#architecture) [Follow the pitch journey →](pitch.html)
+Architecture and PoC planning · development-stage program
+ [IMG src=assets/automotive-concept.webp alt='AI-generated illustration of a connected vehicle.']
+AI-generated concept illustration · not a production prototype
+ [How it connects](#architecture) [Product roles](#roles) [Integration path](#interfaces) [Benefits](#benefits) [Engineering principles](#principles)
+{id=architecture}
+ONE PORTFOLIO / THREE LEVELS
+## From the module.
+ Through the vehicle. Into learning.
+ 03 / ORGANIZATIONAL LEARNING
+### Optional OEM & fleet services
+Authorized evidence · quality investigations · service learning
+ CLOUD / SaaS OPTIONS
+↑↓
+ 02 / VEHICLE SOFTWARE
+### Proactive Mobility Guardian
+Vehicle context · permitted recommendations · verified outcomes
+ [EXPLORE PMG ↗](pmg.html)
+↑↓
+ [ 01 / MODULE INTELLIGENCE
+### Battery & Charging AI
+Health, charge readiness and thermal context
+ SOFTWARE / EMBEDDED AI ↗ ](battery-ai.html) [ 01 / POWER HARDWARE
+### Evo Core
+Integrated control, power conversion and supervision
+ HARDWARE + EMBEDDED SOFTWARE ↗ ](evo-core.html)
+ OTHER VEHICLE MODULES
+### Approved interfaces
+Thermal, connected functions and future module AI
+ PARTNER / FUTURE APPLICATIONS
+Module products can be evaluated independently. PMG connects selected products through approved vehicle interfaces; the cloud adds learning without becoming a prerequisite for local operation.
+{id=roles}
+A CLEAR ROLE FOR EACH PRODUCT
+## Hardware, embedded AI
+ and vehicle software.
+A customer can begin with one product. The connected architecture is the expansion path, rather than a requirement to purchase the complete portfolio.
+ Proposed product roles and commercial paths; production specifications and pricing are not released.
+  | Product  | What it does / where it runs  | Who could adopt / commercial path
+  | Battery & Charging AI  | Embedded software on suitable BMS or adjacent module compute; health trends, state-estimation evaluation and charging context.  | Battery and BMS suppliers, OEMs; scoped engineering and embedded-runtime licensing.
+  | Evo Core  | EV power hardware plus embedded software; shared control, defined power functions and AI supervision.  | OEMs and power-system partners; paid development, supply and program software/support options.
+  | PMG  | Vehicle software on suitable gateway, telematics or central compute; connects module insight to vehicle and customer context.  | OEMs, vehicle platforms and fleets; integration and embedded-software licensing.
+  | PMG cloud services  | Optional off-vehicle software; authorized fleet evidence, quality workflows and service learning.  | OEM or fleet organizations; SaaS subscription or enterprise terms after the value case is proven.
+{id=interfaces}
+HOW INTEGRATION WORKS
+## Connect through interfaces.
+ Keep ownership clear.
+ 01
+### Observe the module
+Use approved signals and diagnostics from existing sensing and control. Define what is available, at what quality and for which operating conditions.
+ 02
+### Evaluate on the edge
+Run a bounded model on suitable compute. Retain confidence, version and evidence; compare its usefulness with deterministic and model-based methods.
+ 03
+### Coordinate with PMG
+Exchange health and context events through the approved vehicle network. PMG combines module information with journey, customer and service intent.
+ 04
+### Verify and learn
+Request only permitted actions. Check outcomes locally and share authorized, relevant evidence with quality or fleet services.
+ The deployment architecture follows the vehicle.
+The exact network, APIs, compute, memory, latency and diagnostic integration are set during the reference program. Data access and secure update responsibilities need an agreed owner.
+{id=benefits}
+EXPLORE THE BENEFITS
+## Start with a moment.
+ Follow the value.
+Choose a candidate scenario to see the module intelligence, the role of PMG and the outcomes a pilot should measure.
+{id=benefit-battery-tab}{data-benefit=battery}Battery care
+{id=benefit-charging-tab}{data-benefit=charging}Charging readiness
+{id=benefit-thermal-tab}{data-benefit=thermal}Power & thermal
+{id=benefit-service-tab}{data-benefit=service}OEM quality & service
+{id=benefit-panel}
+{id=benefit-number}01 / BATTERY CARE
+### {id=benefit-title}Understand the battery behind the percentage.
+{id=benefit-scene}A driver sees a charge percentage. The useful question is whether the battery is ready for the next journey, and whether its behavior is changing.
+ THE INPUT
+{id=benefit-signals}Available cell voltages, pack current, temperatures, charging history and validated battery-state estimates.
+ 01
+ MODULE INTELLIGENCE
+{id=benefit-module}Battery AI evaluates health trends and unusual behavior, with confidence and data-quality checks.
+ 02
+ PMG / VEHICLE CONTEXT
+{id=benefit-pmg}PMG adds departure, journey and service context, then prepares a permitted recommendation and checks its outcome.
+ FOR THE CUSTOMER
+{id=benefit-customer}Clearer battery-health guidance and a charging or service decision that fits the next journey.
+ FOR THE OEM
+{id=benefit-oem}Evidence to investigate degradation patterns, review service decisions and identify repeat issues.
+ WHAT TO MEASURE
+{id=benefit-proof}Held-out state-estimation error, actionable alerts, false alerts, customer overrides and independently verified health outcomes.
+Illustrative workflows. Outcomes depend on data access, integration and evaluation against the existing system; no achieved savings or battery-life gains are claimed.
+{id=principles}
+ENGINEERING PRINCIPLES
+## Useful AI.
+ Defined authority.
+ LOCAL OPERATION
+### Edge inference first.
+Evaluate selected functions within the vehicle. Optional cloud learning adds value when available; connectivity loss has a defined local behavior.
+ VALIDATED CONTROL
+### Respect existing limits.
+Protection, real-time control and permitted actuator authority belong to the validated vehicle architecture. Model output is not an unrestricted control command.
+ EVIDENCE & ADOPTION
+### Prove incremental value.
+Measure the improvement over existing methods, including false alerts, resource needs, integration, validation and support costs.
+BUILD THE FIRST PROOF
+## Choose one entry point.
+Connect the value case.
+Start with Battery AI, a PMG vehicle workflow or an Evo Core reference architecture.
+ [Discuss a pilot ↗ ](contact.html?topic=Portfolio%20/%20integration)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

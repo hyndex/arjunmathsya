@@ -1,0 +1,20 @@
+/* ---------- Cross-document page transitions (native; no JS) ---------- */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: vt-out var(--dur-m) var(--ease-in-out) both;
+}
+::view-transition-new(root) {
+  animation: vt-in var(--dur-l) var(--ease-out) both;
+}
+@keyframes vt-out { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(14px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

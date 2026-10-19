@@ -1,0 +1,154 @@
+     Edge AI, connected vehicle software & intelligent EV power — Mathsya Connected Services                      [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+   MATHSYA / EDGE AI FOR AUTOMOTIVE
+# Intelligence inside.
+ Value beyond.
+From battery and charging intelligence to integrated power hardware and vehicle software. We’re developing a connected product portfolio for better customer experiences and stronger OEM decisions.
+ [Discover the journey ↗](#journey) [The investor story →](pitch.html)
+Development-stage portfolio · Bengaluru, India
+ MATHSYA / PRODUCT ECOSYSTEM CONCEPT VIEW
+ [IMG src=assets/automotive-concept.webp alt='AI-generated illustration of intelligence distributed across a passenger vehicle.']
+ 01 / MODULE Battery AI + Evo Core
+ ↑
+ 02 / VEHICLE PMG software
+ ↑
+ 03 / ORGANIZATION OEM & service learning
+AI-generated vehicle illustration · not a production prototype
+ UNDERSTAND THE MODULE CONNECT THE VEHICLE VERIFY THE BENEFIT
+ [ 01 The opportunity](#journey) [ 02 The products](#products) [ 03 The benefits](#benefits) [ 04 The next proof](#proof) [ 05 The investment](investors.html)
+{id=journey}
+01 / THE OPPORTUNITY
+## A vehicle has signals.
+ Value needs context.
+A battery knows its operating state. A charger knows its session. A power module knows its temperature. Mathsya’s direction is to interpret those signals locally, connect them to the vehicle’s needs and preserve evidence that helps engineering and service.
+ THE CUSTOMER
+### Ready for the next journey.
+Useful charging guidance, understandable health information and better-informed service planning.
+ THE MODULE
+### Understand changing behavior.
+Evaluate trends across usage and conditions, then compare the insight with today’s estimation and diagnostic methods.
+ THE OEM
+### Turn events into learning.
+Link evidence to quality, warranty and product decisions; verify whether the correction actually helped.
+{id=products}
+02 / THE PRODUCT PORTFOLIO
+## Different products.
+ A connected purpose.
+Enter through one module, a power platform or the vehicle software layer. Each product needs its own technical proof and commercial case.
+ 01 / MODULE AI Concept & PoC planning
+           EDGE AI
+### Battery &
+Charging AI
+Embedded intelligence for battery health, charging readiness and useful thermal context, alongside the validated BMS.
+- Battery health
+- Charging context
+- Module runtime
+ [Explore Battery AI ↗ ](battery-ai.html)
+ 02 / VEHICLE SOFTWARE Architecture & PoC planning
+ [IMG src=assets/pmg-concept.webp alt='AI-generated concept render of an automotive edge-compute board.']
+### Proactive Mobility
+Guardian
+PMG connects module insights to vehicle, journey and service context. Optional SaaS services extend authorized learning beyond the vehicle.
+- Vehicle coordination
+- Customer context
+- OEM services
+ [Explore PMG ↗ ](pmg.html)
+ 03 / POWER HARDWARE Hardware planning
+ [IMG src=assets/evo-concept.webp alt='AI-generated concept render of an EV power-electronics assembly.']
+### Evo
+Core
+A hardware and embedded-software platform for coordinated EV power, common control and supervisory intelligence.
+- Power integration
+- Gen 1–3 roadmap
+- Common control
+ [Explore Evo Core ↗ ](evo-core.html)
+Product renders are AI-generated concept illustrations; Battery AI uses a schematic graphic. None depicts a production prototype.
+ [See how the whole portfolio connects →](platform.html)
+{id=benefits}
+EXPLORE THE BENEFITS
+## Start with a moment.
+ Follow the value.
+Choose a candidate scenario to see the module intelligence, the role of PMG and the outcomes a pilot should measure.
+{id=benefit-battery-tab}{data-benefit=battery}Battery care
+{id=benefit-charging-tab}{data-benefit=charging}Charging readiness
+{id=benefit-thermal-tab}{data-benefit=thermal}Power & thermal
+{id=benefit-service-tab}{data-benefit=service}OEM quality & service
+{id=benefit-panel}
+{id=benefit-number}01 / BATTERY CARE
+### {id=benefit-title}Understand the battery behind the percentage.
+{id=benefit-scene}A driver sees a charge percentage. The useful question is whether the battery is ready for the next journey, and whether its behavior is changing.
+ THE INPUT
+{id=benefit-signals}Available cell voltages, pack current, temperatures, charging history and validated battery-state estimates.
+ 01
+ MODULE INTELLIGENCE
+{id=benefit-module}Battery AI evaluates health trends and unusual behavior, with confidence and data-quality checks.
+ 02
+ PMG / VEHICLE CONTEXT
+{id=benefit-pmg}PMG adds departure, journey and service context, then prepares a permitted recommendation and checks its outcome.
+ FOR THE CUSTOMER
+{id=benefit-customer}Clearer battery-health guidance and a charging or service decision that fits the next journey.
+ FOR THE OEM
+{id=benefit-oem}Evidence to investigate degradation patterns, review service decisions and identify repeat issues.
+ WHAT TO MEASURE
+{id=benefit-proof}Held-out state-estimation error, actionable alerts, false alerts, customer overrides and independently verified health outcomes.
+Illustrative workflows. Outcomes depend on data access, integration and evaluation against the existing system; no achieved savings or battery-life gains are claimed.
+HARDWARE THAT CAN EVOLVE
+## Evo Core.
+ A deliberate evolution.
+A proposed roadmap starts with charging and power, extends to battery and thermal intelligence, and explores wider energy coordination.
+ [Explore Gen 1, 2 & 3 ↗](evo-core.html#generations)
+ GEN 1
+### Charging & power
+OBC · DC/DC · EVCC · HV distribution
+Common control and Edge AI supervision
+ GEN 2
+### Battery & thermal
+Battery-state context and AI
+Broader thermal and charging options
+ GEN 3
+### Energy & propulsion
+Wider energy supervision
+Optional inverter coordination
+Working roadmap; each extension follows feasibility and validation.
+{id=proof}
+04 / THE NEXT PROOF
+## Make one use case work.
+ Then earn the next.
+The entry point is a partner-defined module or vehicle problem with approved data, a current baseline and an outcome worth measuring.
+ PROPOSED PMG SOFTWARE PoC 12–16 weeks
+After partner, data and test access are agreed. Evo Core hardware follows separate realization and qualification gates.
+ 01
+### Define
+Problem, signal access, baseline and acceptance criteria.
+ 02
+### Connect
+Edge runtime, reviewable inference and controlled integration.
+ 03
+### Evaluate
+Useful decisions, false alerts, resources and verified outcomes.
+ 04
+### Decide
+Complete adoption cost and a route to a paid program.
+ [Explore the investment and proof plan →](investors.html#milestones)
+THE COMPANY BEHIND THE JOURNEY
+## Built from vehicle experience.
+ Focused on useful intelligence.
+ [Meet Mathsya and the founder →](about.html)
+Founder Arjun Amuthan brings an automotive engineering background spanning vehicle programs, connected systems, telematics hardware, validation and EV power electronics.
+Product Neural Chain and Engineering Intelligence support the wider lifecycle. Solar-assisted auxiliaries remain a separate research track.
+ [Explore the enabling programs →](research.html)
+BUILD THE FIRST PROOF
+## Bring a problem.
+Build the first proof.
+Explore a scoped module, vehicle, hardware or investment discussion. Start with the product journey and a measurable pilot.
+ [Discuss a pilot ↗ ](contact.html?topic=Investment%20discussion)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

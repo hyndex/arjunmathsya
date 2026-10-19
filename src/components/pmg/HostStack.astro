@@ -1,0 +1,246 @@
+---
+// Hero schematic: PMG is software on existing vehicle compute (never a box with pins).
+import { PMG_STACK as S } from '@/data/pmg';
+const label =
+  'Schematic: PMG vehicle software runs on suitable vehicle compute, a gateway, telematics unit or central computer selected for the reference architecture. It receives module events through approved vehicle interfaces from Battery & Charging AI, Evo Core and other vehicle modules. Optional OEM and fleet services sit outside the vehicle boundary.';
+---
+
+<figure class="hs">
+  <div class="hs-stack" role="img" aria-label={label}>
+    <div class="hs-layer hs-cloud">
+      <span class="hs-k">Off-vehicle · optional</span>
+      <span class="hs-name">{S.cloud.name}</span>
+      <span class="hs-note">{S.cloud.note}</span>
+    </div>
+    <div class="hs-boundary"><span>{S.boundary}</span></div>
+    <div class="hs-unit">
+      <div class="hs-layer hs-pmg">
+        <span class="hs-k">Mathsya vehicle software</span>
+        <span class="hs-name">{S.pmg.name}</span>
+        <ul class="hs-parts">{S.pmg.parts.map((p) => <li>{p}</li>)}</ul>
+      </div>
+      <div class="hs-layer hs-host">
+        <span class="hs-k">Runs on · reference vehicle system</span>
+        <span class="hs-name">{S.host.name}</span>
+        <ul class="hs-hosts">{S.host.options.map((o) => <li>{o}</li>)}</ul>
+        <span class="hs-note">{S.host.note}</span>
+      </div>
+    </div>
+    <div class="hs-iface"><span>{S.iface}</span></div>
+    <ul class="hs-modules">
+      {S.modules.map((m) => <li data-id={m.id}>{m.name}</li>)}
+    </ul>
+  </div>
+  <figcaption class="fineprint">{S.caption}</figcaption>
+</figure>
+
+<style>
+  .hs {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+  }
+  .hs-stack {
+    display: grid;
+    gap: 0;
+    padding: clamp(18px, 2.4vw, 30px);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-xl);
+    background-color: var(--c-white);
+    background-image: radial-gradient(rgba(24, 90, 219, 0.1) 1px, transparent 1.2px);
+    background-size: 20px 20px;
+    box-shadow: var(--sh-2);
+  }
+  .hs-stack > * {
+    animation: hs-settle 0.7s var(--ease-flow) both;
+  }
+  /* bottom-up assembly: modules first, optional services last */
+  .hs-modules { animation-delay: 80ms; }
+  .hs-iface { animation-delay: 160ms; }
+  .hs-unit { animation-delay: 240ms; }
+  .hs-boundary { animation-delay: 320ms; }
+  .hs-cloud { animation-delay: 400ms; }
+
+  .hs-layer {
+    display: grid;
+    gap: 4px;
+    padding: 14px 16px;
+    border-radius: var(--r-s);
+  }
+  .hs-k {
+    font-family: var(--f-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .hs-name {
+    font-family: var(--f-display);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--c-ink);
+  }
+  .hs-note {
+    font-size: 0.8rem;
+    color: var(--c-slate);
+  }
+  .hs-cloud {
+    border: 1.5px dashed var(--c-slate-2);
+    background: var(--c-white);
+  }
+  .hs-boundary {
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: start;
+    height: 44px;
+  }
+  .hs-boundary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    left: -12px;
+    border-top: 1.5px dashed var(--c-slate-2);
+  }
+  /* optional evidence path crosses the boundary */
+  .hs-boundary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1.5px dashed var(--c-cobalt);
+  }
+  .hs-boundary span {
+    position: relative;
+    z-index: 1;
+    padding: 1px 10px;
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .hs-unit {
+    position: relative;
+    display: grid;
+  }
+  .hs-pmg {
+    position: relative;
+    z-index: 1;
+    margin: 0 14px -10px;
+    padding: 16px 18px 18px;
+    border: 1.5px solid var(--c-cobalt);
+    background: var(--c-ice);
+  }
+  .hs-pmg .hs-k {
+    color: var(--c-cobalt-ink);
+  }
+  .hs-pmg .hs-name {
+    font-size: 1.2rem;
+  }
+  .hs-parts,
+  .hs-hosts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .hs-parts li {
+    padding: 4px 10px;
+    border: 1px solid color-mix(in srgb, var(--c-cobalt) 40%, transparent);
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-cobalt-ink);
+  }
+  .hs-host {
+    padding-top: 24px;
+    border: 1px solid var(--c-line);
+    background: #eef2f6;
+  }
+  .hs-hosts li {
+    padding: 4px 10px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--r-xs);
+    background: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    color: var(--c-ink-soft);
+  }
+  .hs-hosts li + li::before {
+    content: 'or ';
+    color: var(--c-slate);
+  }
+  .hs-iface {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 58px;
+  }
+  .hs-iface::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--c-cobalt);
+  }
+  .hs-iface span {
+    position: relative;
+    padding: 4px 12px;
+    border: 1.5px solid var(--c-cobalt);
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .hs-modules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .hs-modules li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--r-s);
+    background: var(--c-white);
+    font-family: var(--f-display);
+    font-size: 0.84rem;
+    font-weight: 650;
+    line-height: 1.25;
+  }
+  .hs-modules li::before {
+    content: '';
+    flex: none;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-radius: 2px;
+    background: #c7d0db;
+  }
+  .hs-modules li[data-id='battery']::before { background: var(--p-battery); }
+  .hs-modules li[data-id='evo']::before { background: var(--p-evo); }
+  @keyframes hs-settle {
+    from {
+      transform: translateY(10px);
+    }
+  }
+</style>

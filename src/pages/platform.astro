@@ -1,0 +1,1057 @@
+---
+import { ArrowDown } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+import { buttonVariants } from '@/components/ui/button';
+import ArchitectureDiagram from '@/components/platform/ArchitectureDiagram';
+import IntegrationStepper from '@/components/platform/IntegrationStepper';
+import BenefitFlow from '@/components/platform/BenefitFlow';
+import VehiclePlan from '@/components/platform/VehiclePlan.astro';
+import { contactHref } from '@/data/site';
+import {
+  PLATFORM_META,
+  PLATFORM_HERO,
+  ROLE_ROWS,
+  ROLES_CAPTION,
+  ADOPTION_LEAD,
+  ADOPTION_ROUTES,
+  ADOPTION_EXPANSION,
+  DEPLOYMENT_LOCATIONS,
+  DEPLOYMENT_INTERFACES,
+  RESPONSIBILITIES,
+  HW_SW_COLS,
+  HW_SW_ROWS,
+  BENEFITS_INTRO,
+  PRINCIPLES,
+  INTEGRATION_TERMS,
+  PLATFORM_CTA,
+} from '@/data/platform';
+
+const nav = [
+  { id: 'architecture', label: 'Architecture' },
+  { id: 'integration', label: 'Integration path' },
+  { id: 'roles', label: 'Product roles' },
+  { id: 'adoption', label: 'Adoption' },
+  { id: 'deployment', label: 'Deployment' },
+  { id: 'benefits', label: 'Benefits' },
+  { id: 'principles', label: 'Principles' },
+];
+const chip = (id: string) => `pchip pchip--${id}`;
+const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
+---
+
+<BaseLayout title={PLATFORM_META.title} description={PLATFORM_META.description}>
+  <!-- ============ Hero: the headline is the diagram ============ -->
+  <section class="pf-hero" aria-labelledby="pf-title">
+    <div class="container--wide pf-hero-inner">
+      <p class="eyebrow">{PLATFORM_HERO.eyebrow}</p>
+      <h1 id="pf-title" class="pf-title">
+        {
+          PLATFORM_HERO.lines.map((l, i) => (
+            <>
+              <span class="pf-line" data-i={i} data-note={l.note} style={`--i:${i}`}>
+                <span class="pf-node" data-level={i} aria-hidden="true" />
+                <span class="pf-text">{l.text}</span>
+              </span>{' '}
+            </>
+          ))
+        }
+      </h1>
+      <div class="pf-hero-foot">
+        <div class="pf-hero-copy">
+          <p class="pf-statement">{PLATFORM_HERO.statement}</p>
+          <p class="lead">{PLATFORM_HERO.lead}</p>
+        </div>
+        <div class="pf-hero-actions">
+          <div class="btn-row">
+            <a class={buttonVariants({ size: 'lg' })} href="#architecture">Explore the architecture <ArrowDown aria-hidden="true" /></a>
+            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/explore">Explore the vehicle</a>
+          </div>
+          <p class="stage stage--pmg pf-stage">{PLATFORM_HERO.stage}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PageNav items={nav} label="Platform sections" />
+
+  <!-- ============ 01 Architecture (signature) ============ -->
+  <section id="architecture" class="section tone-ice" aria-labelledby="architecture-title">
+    <div class="container--wide">
+      <ArchitectureDiagram
+        client:visible
+        eyebrow="One portfolio / three levels"
+        title="Three levels, joined by approved interfaces"
+        lead="Battery & Charging AI and Evo Core work at module level, PMG at vehicle level, and optional services outside the vehicle. Each level keeps its own role; selecting a product shows what it exchanges, and with whom."
+      />
+    </div>
+  </section>
+
+  <!-- ============ 02 Integration path ============ -->
+  <section id="integration" class="section tone-white" aria-labelledby="integration-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">How integration works</p>
+          <h2 id="integration-title" class="h2">Four steps from a module signal to a verified outcome</h2>
+        </div>
+        <p class="lead">Connect through interfaces and keep ownership clear. Step through what each stage uses, retains or requests, and where it happens.</p>
+      </div>
+      <IntegrationStepper client:visible />
+    </div>
+  </section>
+
+  <!-- ============ 03 Product roles ============ -->
+  <section id="roles" class="section tone-pearl" aria-labelledby="roles-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">A clear role for each product</p>
+        <h2 id="roles-title" class="h2">Hardware, embedded AI and vehicle software</h2>
+        <p class="lead">Four proposed roles, each with its own place, its own adopters and its own route to revenue.</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="roles-caption">
+        <table class="table roles-table">
+          <caption id="roles-caption">{ROLES_CAPTION}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">What it does</th>
+              <th scope="col">Where it runs</th>
+              <th scope="col">Who could adopt</th>
+              <th scope="col">Proposed commercial path</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              ROLE_ROWS.map((r) => (
+                <tr>
+                  <th scope="row">
+                    <span class={chip(r.id)}>{r.product}</span>
+                  </th>
+                  <td>{r.what}</td>
+                  <td>{r.where}</td>
+                  <td>{r.who}</td>
+                  <td>{r.path}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 Independent adoption ============ -->
+  <section id="adoption" class="section tone-white" aria-labelledby="adoption-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">Independent adoption</p>
+          <h2 id="adoption-title" class="h2">Every product has its own way in</h2>
+        </div>
+        <p class="lead">{ADOPTION_LEAD}</p>
+      </div>
+      <div class="routes">
+        <ol class="routes-list">
+          {
+            ADOPTION_ROUTES.map((r, i) => (
+              <li class="route" style={`--route:var(--p-${r.id})`}>
+                <div class="route-start">
+                  <span class="route-n">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 class="route-title">{r.start}</h3>
+                  <p class="route-who">{r.who}</p>
+                </div>
+                <dl class="route-steps">
+                  <div class="route-step">
+                    <dt>First proof</dt>
+                    <dd>{r.first}</dd>
+                  </div>
+                  <div class="route-step route-step--later">
+                    <dt>Connect later · optional</dt>
+                    <dd>{r.later}</dd>
+                  </div>
+                </dl>
+              </li>
+            ))
+          }
+        </ol>
+        <aside class="routes-merge" aria-label="Expansion path">
+          <p class="routes-merge-k">Expansion path</p>
+          <p class="routes-merge-title">{ADOPTION_EXPANSION.title}</p>
+          <p class="routes-merge-body">{ADOPTION_EXPANSION.body}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 Deployment ============ -->
+  <section id="deployment" class="section tone-ice" aria-labelledby="deployment-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Deployment</p>
+        <h2 id="deployment-title" class="h2">Where each part runs</h2>
+        <p class="lead">Battery & Charging AI and PMG are software on suitable vehicle compute; Evo Core is power hardware with its own embedded software; the cloud sits outside the vehicle and stays optional.</p>
+      </div>
+
+      <div class="deploy">
+        <div class="deploy-figure">
+          <VehiclePlan />
+        </div>
+        <div class="deploy-main">
+          <ol class="deploy-list">
+            {
+              DEPLOYMENT_LOCATIONS.map((l) => (
+                <li class="deploy-item" data-id={l.id}>
+                  <span class="deploy-n" aria-hidden="true">{l.n}</span>
+                  <div class="deploy-copy">
+                    <p class="deploy-place">
+                      <span class="visually-hidden">Location {l.n}: </span>
+                      {l.place}
+                    </p>
+                    <h3 class="deploy-runs">{l.runs}</h3>
+                    <p class="deploy-detail">{l.detail}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+
+          <div class="deploy-ifaces">
+            <h3 class="deploy-sub">Approved interfaces</h3>
+            <dl>
+              {
+                DEPLOYMENT_INTERFACES.map((it) => (
+                  <div>
+                    <dt>{it.label}</dt>
+                    <dd>{it.text}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="resp">
+        <div class="resp-col">
+          <h3 class="resp-title">{RESPONSIBILITIES.local.label}</h3>
+          <ul>{RESPONSIBILITIES.local.items.map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <div class="resp-boundary" aria-hidden="true"><span>Vehicle boundary</span></div>
+        <div class="resp-col resp-col--cloud">
+          <h3 class="resp-title">{RESPONSIBILITIES.cloud.label}</h3>
+          <ul>{RESPONSIBILITIES.cloud.items.map((t) => <li>{t}</li>)}</ul>
+        </div>
+      </div>
+
+      <div class="table-wrap hwsw-wrap" tabindex="0" role="region" aria-labelledby="hwsw-caption">
+        <table class="table hwsw">
+          <caption id="hwsw-caption">Hardware and software separation. PMG cloud services are optional and separate from the PMG vehicle runtime.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              {HW_SW_COLS.map((c) => <th scope="col">{c}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              HW_SW_ROWS.map((r) => (
+                <tr>
+                  <th scope="row">
+                    <span class={chip(r.id)}>{r.product}</span>
+                    <span class="hwsw-summary">{r.summary}</span>
+                  </th>
+                  {r.cells.map((c) => (
+                    <td data-v={c}>
+                      <span class="hwsw-mark" aria-hidden="true" />
+                      <span class="hwsw-text">{mark[c]}</span>
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 Benefits ============ -->
+  <section id="benefits" class="section tone-white" aria-labelledby="benefits-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">Customer and OEM benefits</p>
+          <h2 id="benefits-title" class="h2">Start with a moment. Follow the value.</h2>
+        </div>
+        <p class="lead">{BENEFITS_INTRO}</p>
+      </div>
+      <BenefitFlow client:visible />
+    </div>
+  </section>
+
+  <!-- ============ 07 Principles, validation, integration ============ -->
+  <section id="principles" class="section tone-pearl" aria-labelledby="principles-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Engineering principles</p>
+        <h2 id="principles-title" class="h2">Useful AI needs defined authority</h2>
+      </div>
+
+      <ol class="principles">
+        {
+          PRINCIPLES.map((p) => (
+            <li class="principle">
+              <p class="principle-k">
+                <span class="principle-n">{p.n}</span>
+                {p.label}
+              </p>
+              <h3 class="principle-title">{p.title}</h3>
+              <p class="principle-body">{p.body}</p>
+              <div class="principle-req">
+                <p class="principle-req-k">Validation requirement</p>
+                <p>{p.require}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="terms">
+        <div class="terms-head">
+          <p class="terms-eyebrow">Integration & commercial considerations</p>
+          <h3 class="h3">{INTEGRATION_TERMS.title}</h3>
+          <p class="terms-body">{INTEGRATION_TERMS.body}</p>
+        </div>
+        <div class="terms-sheet">
+          <div class="terms-group">
+            <p class="terms-k">Set during the reference program</p>
+            <ul>{INTEGRATION_TERMS.reference.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <div class="terms-group terms-group--owner">
+            <p class="terms-k">Needs an agreed owner</p>
+            <ul>{INTEGRATION_TERMS.owner.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <p class="terms-commercial">{INTEGRATION_TERMS.commercial}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={PLATFORM_CTA.title}
+    body={PLATFORM_CTA.body}
+    primary={{ label: 'Discuss a pilot', href: contactHref('oem-pilot') }}
+    secondary={{ label: 'Explore the vehicle', href: '/explore' }}
+  />
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .pf-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(48px, 7vw, 112px) 0 clamp(56px, 7vw, 104px);
+    background: linear-gradient(180deg, var(--c-ice) 0%, #f1f7ff 55%, var(--c-pearl) 100%);
+  }
+  .pf-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--c-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    pointer-events: none;
+  }
+  .pf-hero-inner {
+    position: relative;
+  }
+  .pf-title {
+    --step: 0px;
+    --gut: 26px;
+    position: relative;
+    display: grid;
+    gap: 0.16em;
+    margin: 26px 0 0;
+    padding-left: var(--gut);
+    font-size: clamp(2.45rem, 0.6rem + 5.6vw, 7rem);
+    font-weight: 750;
+    line-height: 0.98;
+    letter-spacing: var(--ls-display);
+  }
+  /* mobile rail through the three levels */
+  .pf-title::before {
+    content: '';
+    position: absolute;
+    top: calc(18px + 0.49em);
+    bottom: 0.49em;
+    left: 7px;
+    width: 2px;
+    background: linear-gradient(var(--p-battery), var(--p-pmg) 60%, var(--c-slate-2));
+    transform-origin: top;
+    animation: pf-grow-y 1.1s var(--ease-out) 0.2s both;
+  }
+  .pf-line {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: calc(var(--i) * var(--step));
+    animation: pf-rise 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 140ms + 60ms);
+  }
+  .pf-node {
+    position: absolute;
+    top: calc(18px + 0.49em);
+    left: calc(var(--gut) * -1);
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: var(--c-white);
+    border: 2px solid var(--c-ink);
+  }
+  .pf-node[data-level='0'] {
+    border: 0;
+    background: linear-gradient(90deg, var(--p-battery) 50%, var(--p-evo) 50%);
+  }
+  .pf-node[data-level='1'] {
+    border: 0;
+    background: var(--p-pmg);
+  }
+  .pf-node[data-level='2'] {
+    border: 2px dashed var(--c-slate);
+  }
+  /* level annotation lives in CSS so the h1 text stays the headline alone (empty alt text hides it from AT) */
+  .pf-line::before {
+    content: attr(data-note);
+    content: attr(data-note) / '';
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .pf-hero-foot {
+    display: grid;
+    gap: 32px;
+    margin-top: clamp(36px, 5vw, 64px);
+  }
+  .pf-hero-copy {
+    display: grid;
+    gap: 14px;
+    max-width: 62ch;
+  }
+  .pf-statement {
+    font-family: var(--f-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .pf-hero-actions {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+  }
+  .pf-stage {
+    justify-self: start;
+    white-space: normal;
+    border-radius: var(--r-s);
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .pf-title {
+      --step: clamp(48px, 9vw, 168px);
+      --gut: 0.62em;
+      gap: 0.1em;
+    }
+    .pf-title::before {
+      display: none;
+    }
+    .pf-line {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.32em;
+      padding-left: calc(var(--i) * var(--step));
+    }
+    .pf-line::before {
+      order: 2;
+      max-width: 15ch;
+      font-size: clamp(0.62rem, 0.5rem + 0.2vw, 0.74rem);
+    }
+    .pf-node {
+      top: 0.52em;
+      left: calc(var(--i) * var(--step) - var(--gut) + 0.08em);
+      width: 0.22em;
+      height: 0.22em;
+      margin-top: -0.11em;
+    }
+    .pf-node[data-level='2'] {
+      border-width: 0.03em;
+    }
+    /* elbow connector from each level down to the next */
+    .pf-line:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 0.68em;
+      left: calc(var(--i) * var(--step) - var(--gut) + 0.18em);
+      width: var(--step);
+      height: 0.92em;
+      border-left: 2px solid rgba(23, 43, 69, 0.3);
+      border-bottom: 2px solid rgba(23, 43, 69, 0.3);
+      border-bottom-left-radius: 0.24em;
+      transform-origin: top;
+      animation: pf-grow-y 0.7s var(--ease-out) both;
+      animation-delay: calc(var(--i) * 140ms + 420ms);
+    }
+    .pf-line[data-i='1']::after {
+      border-style: dashed;
+    }
+    .pf-hero-foot {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 32px clamp(32px, 4vw, 72px);
+    }
+  }
+  @media (min-width: 1100px) {
+    /* align with the third step of the headline: 2 steps + the node gutter (0.62em of the title size) */
+    .pf-hero-foot {
+      margin-left: calc(2 * clamp(48px, 9vw, 168px) + 0.62 * clamp(2.45rem, 0.6rem + 5.6vw, 7rem));
+    }
+  }
+  /* transform only: the headline is never invisible, even before the animation clock starts */
+  @keyframes pf-rise {
+    from {
+      transform: translateY(0.22em);
+    }
+  }
+  @keyframes pf-grow-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  /* ---------- Product chips used in tables ---------- */
+  .pchip--cloud::before {
+    background: transparent;
+    border: 1.5px dashed var(--c-slate-2);
+  }
+
+  /* ---------- Roles table ---------- */
+  .roles-table {
+    min-width: 980px;
+  }
+  .roles-table tbody th {
+    min-width: 200px;
+  }
+
+  /* ---------- Adoption routes ---------- */
+  .routes {
+    display: grid;
+    gap: 28px;
+  }
+  .routes-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .route {
+    position: relative;
+    display: grid;
+    gap: 16px;
+    padding: 26px 0 26px 20px;
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .route::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    bottom: 26px;
+    left: 0;
+    width: 4px;
+    border-radius: 2px;
+    background: var(--route);
+  }
+  .route-start {
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+  .route-n {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--c-slate);
+  }
+  .route-title {
+    font-size: 1.22rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .route-who {
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  .route-steps {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+  }
+  .route-step dt {
+    margin-bottom: 4px;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .route-step dd {
+    margin: 0;
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .route-step--later {
+    padding-left: 14px;
+    border-left: 2px dashed var(--c-slate-2);
+  }
+  .routes-merge {
+    display: grid;
+    gap: 8px;
+    align-content: center;
+    padding: 22px 24px;
+    border: 1.5px dashed var(--c-slate-2);
+    border-radius: var(--r-l);
+    background: var(--c-pearl);
+  }
+  .routes-merge-k {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .routes-merge-title {
+    font-family: var(--f-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .routes-merge-body {
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .route {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr);
+      gap: 32px;
+      padding-left: 28px;
+    }
+    .route-steps {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+  @media (min-width: 1100px) {
+    .routes {
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 0 64px;
+      align-items: center;
+    }
+    /* each route reaches the shared expansion path with a dashed lead-out */
+    .route::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -64px;
+      width: 64px;
+      border-top: 2px dashed var(--route);
+    }
+    .routes-merge {
+      min-height: 72%;
+    }
+  }
+
+  /* ---------- Deployment ---------- */
+  .deploy {
+    display: grid;
+    gap: 40px;
+  }
+  .deploy-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .deploy-item {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .deploy-n {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--dn, var(--c-ink));
+    background: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .deploy-item[data-id='battery'] { --dn: var(--p-battery); }
+  .deploy-item[data-id='evo'] { --dn: var(--p-evo-ink); }
+  .deploy-item[data-id='pmg'] { --dn: var(--p-pmg); }
+  .deploy-item[data-id='cloud'] .deploy-n {
+    border-style: dashed;
+    border-color: var(--c-slate);
+  }
+  .deploy-copy {
+    display: grid;
+    gap: 3px;
+  }
+  .deploy-place {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .deploy-runs {
+    font-size: 1.12rem;
+    letter-spacing: -0.015em;
+  }
+  .deploy-detail {
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  .deploy-ifaces {
+    margin-top: 28px;
+  }
+  .deploy-sub,
+  .resp-title {
+    margin-bottom: 12px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .deploy-ifaces dl {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+  }
+  .deploy-ifaces dl > div {
+    display: grid;
+    gap: 2px;
+    padding-left: 14px;
+    border-left: 2px solid var(--c-cobalt);
+  }
+  .deploy-ifaces dt {
+    font-family: var(--f-display);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .deploy-ifaces dd {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .deploy {
+      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+    .deploy-figure {
+      position: sticky;
+      top: calc(var(--header-h) + 80px);
+    }
+    .deploy-ifaces dl {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+    }
+  }
+
+  .resp {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(48px, 6vw, 80px);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-l);
+    background: var(--c-white);
+    overflow: hidden;
+  }
+  .resp-col {
+    padding: 24px clamp(20px, 3vw, 36px);
+  }
+  .resp-col ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .resp-col li {
+    position: relative;
+    padding-left: 18px;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  .resp-col li::before {
+    content: '';
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 8px;
+    height: 2px;
+    background: var(--c-cobalt);
+  }
+  .resp-col--cloud {
+    background: var(--c-pearl);
+  }
+  .resp-col--cloud li::before {
+    background: var(--c-slate-2);
+  }
+  .resp-boundary {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 30px;
+  }
+  .resp-boundary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    border-top: 1.5px dashed var(--c-slate-2);
+  }
+  .resp-boundary span {
+    position: relative;
+    padding: 2px 10px;
+    border-radius: var(--r-pill);
+    background: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .resp {
+      grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+    }
+    .resp-boundary {
+      height: auto;
+    }
+    .resp-boundary::before {
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      right: auto;
+      border-top: 0;
+      border-left: 1.5px dashed var(--c-slate-2);
+    }
+    .resp-boundary span {
+      white-space: nowrap;
+      transform: rotate(-90deg);
+    }
+  }
+
+  .hwsw-wrap {
+    margin-top: 28px;
+  }
+  .hwsw {
+    min-width: 640px;
+  }
+  .hwsw-summary {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    color: var(--c-slate);
+  }
+  .hwsw td {
+    vertical-align: middle;
+  }
+  .hwsw td > * {
+    vertical-align: middle;
+  }
+  .hwsw-mark {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--c-line-strong);
+  }
+  .hwsw td[data-v='yes'] .hwsw-mark {
+    border-color: var(--c-ink);
+    background: var(--c-ink);
+  }
+  .hwsw td[data-v='optional'] .hwsw-mark {
+    border-style: dashed;
+    border-color: var(--c-slate);
+  }
+  .hwsw-text {
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .hwsw td[data-v='yes'] .hwsw-text {
+    color: var(--c-ink);
+    font-weight: 600;
+  }
+
+  /* ---------- Principles ---------- */
+  .principles {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .principle {
+    display: grid;
+    gap: 12px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .principle-k {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .principle-n {
+    color: var(--c-cobalt-ink);
+  }
+  .principle-title {
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  .principle-body {
+    color: var(--c-ink-soft);
+    max-width: 52ch;
+  }
+  .principle-req {
+    display: grid;
+    gap: 4px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--c-cobalt);
+    background: var(--c-white);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .principle-req-k {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  @media (min-width: 1000px) {
+    .principle {
+      grid-template-columns: 180px minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+    .principle-k {
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 6px;
+    }
+  }
+
+  .terms {
+    display: grid;
+    gap: 28px;
+    margin-top: clamp(56px, 7vw, 96px);
+    padding: clamp(24px, 3.5vw, 48px);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-xl);
+    background: var(--c-white);
+  }
+  .terms-head {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+  .terms-eyebrow {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .terms-body {
+    color: var(--c-ink-soft);
+  }
+  .terms-sheet {
+    display: grid;
+    gap: 22px;
+  }
+  .terms-k {
+    margin-bottom: 10px;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .terms-group ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .terms-group li {
+    padding: 6px 12px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--r-xs);
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    color: var(--c-ink);
+  }
+  .terms-group--owner li {
+    border-style: dashed;
+    border-color: var(--c-tangerine-ink);
+    color: var(--c-tangerine-ink);
+  }
+  .terms-commercial {
+    padding-top: 18px;
+    border-top: 1px solid var(--c-line);
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .terms {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+    }
+  }
+</style>

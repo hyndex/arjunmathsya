@@ -1,0 +1,106 @@
+/* Mathsya design tokens — light-first. Every colour, type, spacing and motion value lives here. */
+:root {
+  /* Core palette */
+  --c-pearl: #f8fafc;
+  --c-white: #ffffff;
+  --c-ink: #172b45;
+  --c-ink-soft: #2b4160;
+  --c-slate: #55667a; /* AA on white, pearl, ice, mint and ivory (brief value #617286 darkened for tints) */
+  --c-slate-2: #8494a7; /* decorative strokes only, never text */
+  --c-cobalt: #185adb;
+  --c-cobalt-ink: #1249b8;
+  --c-cobalt-soft: #dbe7fc;
+  --c-ice: #eaf4ff;
+  --c-ice-2: #d6e8fb;
+  --c-emerald: #087f6b;
+  --c-emerald-ink: #066a59;
+  --c-mint: #e8f6ef;
+  --c-mint-2: #cfeee0;
+  --c-aqua: #85ddd3;
+  --c-tangerine: #f07831;
+  --c-tangerine-ink: #b0521a; /* text-safe tangerine */
+  --c-ivory: #fff8ee;
+  --c-ivory-2: #f8e9d4;
+  --c-line: rgba(23, 43, 69, 0.1);
+  --c-line-strong: rgba(23, 43, 69, 0.18);
+  --c-grid: rgba(24, 90, 219, 0.06);
+
+  /* Product language */
+  --p-battery: var(--c-emerald);
+  --p-battery-ink: var(--c-emerald-ink);
+  --p-battery-bg: var(--c-mint);
+  --p-evo: var(--c-tangerine);
+  --p-evo-ink: var(--c-tangerine-ink);
+  --p-evo-bg: var(--c-ivory);
+  --p-pmg: var(--c-cobalt);
+  --p-pmg-ink: var(--c-cobalt-ink);
+  --p-pmg-bg: var(--c-ice);
+
+  /* Type */
+  --f-display: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-body: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --fs-display: clamp(3rem, 1.1rem + 6.8vw, 7.5rem);
+  --fs-h1: clamp(2.6rem, 1.3rem + 4.8vw, 5.75rem);
+  --fs-h2: clamp(2.05rem, 1.25rem + 3vw, 4.1rem);
+  --fs-h3: clamp(1.3rem, 1.1rem + 0.7vw, 1.7rem);
+  --fs-h4: 1.125rem;
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.45vw, 1.4rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-xs: 0.8125rem;
+  --fs-label: 0.75rem;
+
+  --lh-display: 0.98;
+  --lh-heading: 1.06;
+  --lh-snug: 1.3;
+  --lh-body: 1.62;
+
+  --ls-display: -0.045em;
+  --ls-heading: -0.032em;
+  --ls-label: 0.13em;
+
+  /* Space & layout */
+  --gutter: clamp(16px, 4vw, 56px);
+  --container: 1280px;
+  --container-wide: 1480px;
+  --measure: 62ch;
+  --section-y: clamp(84px, 5.5vw + 48px, 176px);
+  --header-h: 72px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* Shape & depth (shadows are blue-tinted to read as studio light, not grey dirt) */
+  --r-xs: 8px;
+  --r-s: 12px;
+  --r-m: 18px;
+  --r-l: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+  --sh-1: 0 1px 2px rgba(23, 43, 69, 0.05), 0 2px 10px -4px rgba(23, 43, 69, 0.08);
+  --sh-2: 0 1px 2px rgba(23, 43, 69, 0.04), 0 14px 34px -14px rgba(24, 90, 219, 0.2);
+  --sh-3: 0 2px 6px rgba(23, 43, 69, 0.05), 0 36px 72px -28px rgba(24, 90, 219, 0.28);
+  --sh-focus: 0 0 0 3px var(--c-white), 0 0 0 6px var(--c-cobalt);
+
+  /* Motion tokens (mirrored in src/lib/motion.ts for React) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-mech: cubic-bezier(0.7, 0, 0.18, 1); /* Evo Core: engineered, decisive */
+  --ease-flow: cubic-bezier(0.45, 0.05, 0.25, 1); /* PMG: connected, continuous */
+  --dur-xs: 120ms;
+  --dur-s: 220ms;
+  --dur-m: 380ms;
+  --dur-l: 680ms;
+  --dur-xl: 1100ms;
+  --stagger: 70ms;
+}

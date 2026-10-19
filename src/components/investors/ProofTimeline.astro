@@ -1,0 +1,489 @@
+---
+// (d) Proof milestone timeline. The PMG software PoC is drawn to a week scale from "access agreed";
+// the Evo Core hardware path is deliberately unscaled (no committed dates) and kept on its own track.
+import { PMG_POC, POC_NOTE, HARDWARE_GATES } from '@/data/portfolio';
+import { PROOF } from '@/data/investors';
+
+const WEEKS = 16;
+const spans: [number, number][] = [[0, 2], [2, 6], [6, 10], [10, 16]];
+const pct = (w: number) => `${(w / WEEKS) * 100}%`;
+const ticks = [0, 2, 6, 10, 12, 16];
+---
+
+<div class="tl">
+  <section class="tl-track tl-sw" aria-labelledby="tl-sw-title">
+    <header class="tl-head">
+      <div>
+        <p class="tl-k">Software path · PMG</p>
+        <h3 id="tl-sw-title" class="h4">Proposed 12–16 week software PoC</h3>
+      </div>
+      <p class="tl-start"><span>Week 0</span> partner, approved data and test access agreed</p>
+    </header>
+
+    <div class="tl-scale">
+      <div
+        class="tl-bar"
+        role="img"
+        aria-label="Week scale: Gate 01 weeks 0 to 2, Gate 02 weeks 2 to 6, Gate 03 weeks 6 to 10, Gate 04 weeks 10 to 16. The PoC ends between week 12 and week 16."
+      >
+        {
+          PMG_POC.map((g, i) => (
+            <span class={`tl-seg tl-seg--${i + 1}`} style={`left:${pct(spans[i][0])};width:${pct(spans[i][1] - spans[i][0])}`}>
+              {g.gate.replace('Gate ', '')}
+            </span>
+          ))
+        }
+        <span class="tl-range" style={`left:${pct(12)};width:${pct(4)}`}></span>
+      </div>
+      <div class="tl-axis" aria-hidden="true">
+        {ticks.map((w) => <span class:list={['tl-tick', { 'tl-tick--end': w === WEEKS, 'tl-tick--start': w === 0 }]} style={`left:${pct(w)}`}>{w === WEEKS ? `${w} wk` : w}</span>)}
+      </div>
+      <p class="tl-range-label" aria-hidden="true"><i></i> PoC ends between week 12 and 16</p>
+    </div>
+
+    <ol class="tl-gates">
+      {
+        PMG_POC.map((g, i) => (
+          <li class={`tl-gate tl-gate--${i + 1}`}>
+            <p class="tl-gate-k">
+              <span>{g.gate}</span>
+              <span>{g.weeks}</span>
+            </p>
+            <h4 class="tl-gate-title">{g.title}</h4>
+            <p>{g.body}</p>
+            <p class="tl-lens">
+              <span>Investor view</span>
+              {PROOF.gateLens[i]}
+            </p>
+            <p class="tl-evidence">
+              <span>Gate evidence</span>
+              {g.evidence}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="tl-model"><span>Model path · Battery AI</span>{PROOF.batteryNote}</p>
+    <p class="note">{POC_NOTE}</p>
+  </section>
+
+  <p class="tl-split" aria-hidden="true"><span>Separate path</span></p>
+
+  <section class="tl-track tl-hw" aria-labelledby="tl-hw-title">
+    <header class="tl-head">
+      <div>
+        <p class="tl-k">Hardware path · Evo Core</p>
+        <h3 id="tl-hw-title" class="h4">Realization and qualification gates</h3>
+      </div>
+      <p class="tl-start tl-start--hw"><span>Unscaled</span> timing is set with a reference program · no committed dates</p>
+    </header>
+    <ol class="tl-hw-gates">
+      {
+        HARDWARE_GATES.map((g) => (
+          <li>
+            <p class="tl-hw-n">{g.n}</p>
+            <h4 class="tl-gate-title">{g.title}</h4>
+            <p>{g.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="tl-ws" aria-labelledby="tl-ws-title">
+    <h3 id="tl-ws-title" class="h3">What milestone funding covers</h3>
+    <dl class="tl-ws-list">
+      {
+        PROOF.workstreams.map((w) => (
+          <div>
+            <dt>
+              <span class="tl-k">{w.k}</span>
+              <span class="tl-ws-title">{w.title}</span>
+            </dt>
+            <dd>{w.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</div>
+
+<style>
+  .tl {
+    display: grid;
+    gap: 28px;
+  }
+  .tl-track {
+    display: grid;
+    gap: 26px;
+    padding: clamp(22px, 3vw, 40px);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-l);
+    background: var(--c-white);
+  }
+  .tl-k {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .tl-hw .tl-k {
+    color: var(--c-tangerine-ink);
+  }
+  .tl-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px 32px;
+  }
+  .tl-head .h4 {
+    margin-top: 6px;
+  }
+  .tl-start {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .tl-start span {
+    padding: 3px 9px;
+    border-radius: var(--r-pill);
+    background: var(--c-ink);
+    color: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .tl-start--hw span {
+    background: transparent;
+    color: var(--c-tangerine-ink);
+    border: 1px dashed var(--c-tangerine);
+  }
+
+  /* Week scale */
+  .tl-scale {
+    display: grid;
+    gap: 8px;
+  }
+  .tl-bar {
+    position: relative;
+    height: 46px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--c-pearl);
+  }
+  .tl-seg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-right: 2px solid var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .tl-seg--1 {
+    background: var(--c-cobalt-soft);
+    color: var(--c-cobalt-ink);
+  }
+  .tl-seg--2 {
+    background: #bcd2f7;
+    color: var(--c-cobalt-ink);
+  }
+  .tl-seg--3 {
+    background: #8db2f1;
+    color: var(--c-ink);
+  }
+  .tl-seg--4 {
+    background: var(--c-cobalt);
+    color: var(--c-white);
+    border-right: 0;
+  }
+  .tl-range {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.34) 0 6px, transparent 6px 12px);
+    border-left: 2px dashed rgba(255, 255, 255, 0.9);
+  }
+  .tl-axis {
+    position: relative;
+    height: 18px;
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    color: var(--c-slate);
+  }
+  .tl-tick {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .tl-tick::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    width: 1px;
+    height: 6px;
+    background: var(--c-line-strong);
+  }
+  .tl-tick--start {
+    transform: none;
+  }
+  .tl-tick--start::before {
+    left: 0;
+  }
+  .tl-tick--end {
+    transform: translateX(-100%);
+  }
+  .tl-tick--end::before {
+    left: auto;
+    right: 0;
+  }
+  .tl-range-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .tl-range-label i {
+    width: 22px;
+    height: 12px;
+    border-radius: 3px;
+    background:
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0 4px, transparent 4px 8px),
+      var(--c-cobalt);
+  }
+
+  /* Gate details */
+  .tl-gates {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .tl-gates {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1100px) {
+    .tl-gates {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+    }
+    .tl-gate + .tl-gate {
+      border-left: 1px solid var(--c-line);
+    }
+    .tl-gates > .tl-gate {
+      padding-inline: 20px;
+    }
+    .tl-gates > .tl-gate:first-child {
+      padding-left: 0;
+    }
+    .tl-gates > .tl-gate:last-child {
+      padding-right: 0;
+    }
+  }
+  .tl-gate {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    padding-top: 16px;
+    border-top: 4px solid var(--seg);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  .tl-gate--1 { --seg: var(--c-cobalt-soft); }
+  .tl-gate--2 { --seg: #bcd2f7; }
+  .tl-gate--3 { --seg: #8db2f1; }
+  .tl-gate--4 { --seg: var(--c-cobalt); }
+  .tl-gate-k {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .tl-gate-k span:first-child {
+    color: var(--c-cobalt-ink);
+  }
+  .tl-gate-title {
+    font-family: var(--f-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--c-ink);
+  }
+  .tl-lens,
+  .tl-evidence,
+  .tl-model {
+    display: grid;
+    gap: 2px;
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    color: var(--c-slate);
+  }
+  .tl-lens span,
+  .tl-evidence span,
+  .tl-model span {
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .tl-evidence {
+    padding-top: 10px;
+    border-top: 1px dashed var(--c-line-strong);
+    color: var(--c-ink);
+    font-weight: 600;
+  }
+  .tl-model {
+    padding: 14px 18px;
+    border: 1px dashed color-mix(in srgb, var(--p-battery) 55%, transparent);
+    border-radius: var(--r-s);
+    background: color-mix(in srgb, var(--c-mint) 55%, white);
+    color: var(--c-ink-soft);
+  }
+  .tl-model span {
+    color: var(--p-battery-ink);
+  }
+
+  /* Track separator */
+  .tl-split {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: -6px 0;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .tl-split::before,
+  .tl-split::after {
+    content: '';
+    flex: 1;
+    border-top: 1.5px dashed var(--c-line-strong);
+  }
+
+  /* Hardware path */
+  .tl-hw {
+    background: var(--c-white);
+    border-color: color-mix(in srgb, var(--p-evo) 35%, var(--c-line));
+  }
+  .tl-hw-gates {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tl-hw-gates li {
+    position: relative;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 0 0 22px 46px;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  .tl-hw-gates li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 34px;
+    bottom: 4px;
+    border-left: 1.5px dashed var(--p-evo);
+  }
+  .tl-hw-n {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1.5px solid var(--p-evo);
+    background: var(--c-ivory);
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    color: var(--c-tangerine-ink);
+  }
+  @media (min-width: 900px) {
+    .tl-hw-gates {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .tl-hw-gates li {
+      padding: 48px 0 0;
+    }
+    .tl-hw-gates li:not(:last-child)::after {
+      left: 44px;
+      right: -16px;
+      top: 15px;
+      bottom: auto;
+      border-left: 0;
+      border-top: 1.5px dashed var(--p-evo);
+    }
+  }
+
+  /* Workstreams */
+  .tl-ws {
+    display: grid;
+    gap: 18px;
+    margin-top: clamp(12px, 2vw, 28px);
+  }
+  .tl-ws-list {
+    margin: 0;
+  }
+  .tl-ws-list > div {
+    display: grid;
+    gap: 6px 32px;
+    padding: 18px 0;
+    border-top: 1px solid var(--c-line);
+  }
+  .tl-ws-list > div:last-child {
+    border-bottom: 1px solid var(--c-line);
+  }
+  .tl-ws-list dt {
+    display: grid;
+    gap: 4px;
+  }
+  .tl-ws-title {
+    font-family: var(--f-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .tl-ws-list dd {
+    margin: 0;
+    color: var(--c-slate);
+  }
+  @media (min-width: 820px) {
+    .tl-ws-list > div {
+      grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+      align-items: baseline;
+    }
+  }
+</style>

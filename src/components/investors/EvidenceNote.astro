@@ -1,0 +1,20 @@
+---
+// (f) Evidence-stage indicator: claim proposed → evidence defined → established. Nothing is established yet.
+import type { Evidence } from '@/data/investors';
+interface Props {
+  ev: Evidence;
+  showClaim?: boolean;
+}
+const { ev, showClaim = true } = Astro.props;
+---
+
+<div class="inv-ev" role="note">
+  <p class="inv-ev-k">Evidence to establish</p>
+  {showClaim && <p class="inv-ev-claim"><span class="visually-hidden">Claim: </span>{ev.claim}</p>}
+  <p class="inv-ev-text">{ev.evidence}</p>
+  <p class="inv-ev-status">
+    <span class="inv-meter" aria-hidden="true"><i data-on></i><i data-on></i><i></i></span>
+    <span><span class="visually-hidden">Status: </span>{ev.status}</span>
+    <span class="visually-hidden">— claim proposed and evidence defined, not yet established.</span>
+  </p>
+</div>

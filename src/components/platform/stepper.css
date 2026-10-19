@@ -1,0 +1,255 @@
+/* /platform: Observe → Interpret → Coordinate → Verify stepper with a five-station signal path. */
+.steps {
+  gap: 28px;
+}
+.steps-list.steps-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--c-line-strong);
+}
+.steps-trigger.steps-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 56px;
+  padding: 8px 4px 12px;
+  font-size: clamp(0.86rem, 0.8rem + 0.4vw, 1.05rem);
+  white-space: normal;
+  text-align: left;
+}
+.steps-trigger-n {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--c-slate);
+}
+.steps-trigger[data-state='active'] .steps-trigger-n {
+  color: var(--c-cobalt-ink);
+}
+
+/* ---------- Signal path ---------- */
+.steps-track {
+  --p: 0;
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding: 8px 0 4px 0;
+}
+.steps-rail {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 8px;
+  width: 2px;
+  background: var(--c-line-strong);
+}
+.steps-rail-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--c-cobalt);
+  transform: scaleY(var(--p));
+  transform-origin: top;
+  transition: transform var(--dur-l) var(--ease-flow);
+}
+.steps-station {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: start;
+  padding-right: 160px;
+}
+.steps-marker {
+  grid-row: 1 / span 2;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 2px solid var(--c-slate-2);
+  background: var(--c-white);
+  transition: background-color var(--dur-m), border-color var(--dur-m);
+}
+.steps-station[data-state='done'] .steps-marker {
+  border-color: var(--c-cobalt);
+  background: var(--c-cobalt-soft);
+}
+.steps-station[data-state='active'] .steps-marker {
+  border-color: var(--c-cobalt);
+  background: var(--c-cobalt);
+}
+.steps-station[data-optional] .steps-marker {
+  border-style: dashed;
+}
+.steps-station[data-optional][data-state='active'] .steps-marker {
+  background: var(--c-white);
+}
+.steps-station-label {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--c-ink);
+}
+.steps-station[data-state='next'] .steps-station-label {
+  color: var(--c-slate);
+}
+.steps-station-detail {
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--c-slate);
+}
+.steps-packet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: inline-block;
+  max-width: 150px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-white);
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ---------- Panels ---------- */
+.steps-panel {
+  display: grid;
+  gap: 24px;
+  padding-top: 6px;
+}
+/* unlayered CSS beats Tailwind's data-[state=inactive]:hidden, so restate it */
+.steps-panel[data-state='inactive'] {
+  display: none;
+}
+.steps-panel-main {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.steps-panel-n {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-cobalt-ink);
+}
+.steps-panel-body {
+  max-width: 58ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+.steps-panel-side {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 20px 22px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-l);
+  background: var(--c-white);
+}
+.steps-tag-label {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+.steps-carries {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-line);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  color: var(--c-ink);
+}
+.steps-carries .steps-tag-label {
+  margin-right: 8px;
+}
+.steps-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.steps-tags li {
+  padding: 5px 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 550;
+  color: var(--c-ink);
+}
+.steps-next {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--f-display);
+  font-weight: 650;
+  color: var(--c-cobalt-ink);
+}
+.steps-next:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------- Wider screens: horizontal path ---------- */
+@media (min-width: 900px) {
+  .steps-track {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0 12px;
+    padding: 52px 0 6px;
+  }
+  .steps-rail {
+    top: 61px;
+    bottom: auto;
+    left: 10%;
+    right: 10%;
+    width: auto;
+    height: 2px;
+  }
+  .steps-rail-fill {
+    transform: scaleX(var(--p));
+    transform-origin: left;
+  }
+  .steps-station {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    row-gap: 6px;
+    padding-right: 0;
+    text-align: center;
+  }
+  .steps-marker {
+    position: relative;
+    grid-row: auto;
+    margin: 0 0 8px;
+  }
+  .steps-packet {
+    top: auto;
+    right: auto;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    translate: -50% 0;
+    max-width: none;
+  }
+  .steps-panel {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+    gap: clamp(32px, 5vw, 80px);
+  }
+}

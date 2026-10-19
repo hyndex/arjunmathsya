@@ -1,0 +1,80 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import { buttonVariants } from '@/components/ui/button';
+
+interface Action {
+  label: string;
+  href: string;
+}
+interface Props {
+  eyebrow?: string;
+  title: string; // use "\n" for an intentional line break
+  body?: string;
+  primary: Action;
+  secondary?: Action;
+  tertiary?: Action;
+}
+const { eyebrow = 'Build the first proof', title, body, primary, secondary, tertiary } = Astro.props;
+const lines = title.split('\n');
+---
+
+<section class="cta-band tone-cobalt" aria-labelledby="cta-title">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="container cta-inner">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="cta-title" class="h2 cta-title">
+      {lines.map((l, i) => <span class:list={['soft-break', { 'cta-dim': i > 0 }]}>{l}{i < lines.length - 1 ? ' ' : ''}</span>)}
+    </h2>
+    {body && <p class="lead cta-body">{body}</p>}
+    <div class="btn-row">
+      <a class={buttonVariants({ variant: 'light', size: 'lg' })} href={primary.href}>{primary.label} <ArrowRight aria-hidden="true" /></a>
+      {secondary && <a class={buttonVariants({ variant: 'outlineLight', size: 'lg' })} href={secondary.href}>{secondary.label}</a>}
+      {tertiary && <a class={buttonVariants({ variant: 'outlineLight', size: 'lg' })} href={tertiary.href}>{tertiary.label}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(88px, 9vw, 150px);
+    isolation: isolate;
+  }
+  .cta-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 90% at 85% 10%, rgba(133, 221, 211, 0.38), transparent 60%),
+      radial-gradient(50% 80% at 10% 100%, rgba(255, 255, 255, 0.16), transparent 60%),
+      linear-gradient(120deg, #1450c4, #185adb 45%, #2468e6);
+  }
+  .cta-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+  }
+  .cta-inner {
+    display: grid;
+    gap: 22px;
+    justify-items: start;
+  }
+  .cta-title {
+    max-width: 16ch;
+  }
+  .cta-dim {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .cta-body {
+    max-width: 56ch;
+  }
+  .btn-row {
+    margin-top: 10px;
+  }
+</style>

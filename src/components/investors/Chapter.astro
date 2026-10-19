@@ -1,0 +1,32 @@
+---
+// Numbered chapter frame: numeral | heading + lead | evidence note, then a full-width body.
+import EvidenceNote from './EvidenceNote.astro';
+import { CHAPTERS, EVIDENCE, type ChapterId } from '@/data/investors';
+
+interface Props {
+  id: ChapterId;
+  title: string | readonly string[];
+  lead?: string;
+  tone?: 'white' | 'pearl' | 'ice';
+}
+const { id, title, lead, tone = 'white' } = Astro.props;
+const ch = CHAPTERS.find((c) => c.id === id)!;
+const lines = typeof title === 'string' ? [title] : title;
+---
+
+<section id={id} class:list={['inv-ch', `tone-${tone}`]} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <header class="inv-ch-head">
+      <p class="inv-ch-num" aria-hidden="true">{ch.n}</p>
+      <div class="inv-ch-titles">
+        <p class="eyebrow"><span class="visually-hidden">Chapter {ch.n}: </span>{ch.kicker}</p>
+        <h2 id={`${id}-title`} class="inv-ch-title">
+          {lines.map((l, i) => <span class:list={['soft-break', { 'inv-ch-title-2': i > 0 }]}>{l}</span>)}
+        </h2>
+        {lead && <p class="lead">{lead}</p>}
+      </div>
+      <EvidenceNote ev={EVIDENCE[id]} />
+    </header>
+    <slot />
+  </div>
+</section>

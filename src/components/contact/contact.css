@@ -1,0 +1,465 @@
+/* /contact: page layout, enquiry form and draft review. Imported by src/pages/contact.astro only. Prefix: ct-
+   Left unlayered on purpose: the form controls must win over the shadcn utility classes on Input / Textarea / Label. */
+
+/* The shared Button focus ring is cobalt at 45% alpha (about 2:1 on white). Solid cobalt on this page keeps focus at 3:1 or better. */
+.ct-hero .btn-row a:focus-visible,
+.ct-card [data-slot='button']:focus-visible,
+.ct-draft-actions a:focus-visible {
+  --tw-ring-color: var(--c-cobalt);
+}
+
+/* ---------- Hero: one wide headline, then lead + actions beside the honest status ---------- */
+.ct-hero {
+  padding-block: clamp(56px, 4vw + 32px, 112px) clamp(48px, 4vw + 16px, 88px);
+}
+.ct-title {
+  margin-top: 20px;
+  font-size: clamp(2.5rem, 1.2rem + 4.4vw, 4.75rem); /* .h1 weight, tracking and leading; smaller than .h1 so each sentence holds one line on desktop */
+}
+.ct-hero-grid {
+  display: grid;
+  gap: 40px;
+  margin-top: clamp(28px, 3vw, 48px);
+}
+@media (min-width: 900px) {
+  .ct-hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+}
+.ct-hero-copy {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+}
+/* Hero buttons use the shared .btn-row; on phones they stack at full width. */
+@media (max-width: 520px) {
+  .ct-actions {
+    display: grid;
+    width: 100%;
+  }
+  .ct-actions > a {
+    justify-content: center;
+  }
+}
+.ct-status {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line-strong);
+}
+.ct-status > p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--c-ink-soft);
+}
+.ct-facts {
+  display: grid;
+  width: 100%;
+  margin: 0;
+}
+.ct-facts > div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding-block: 10px;
+  border-top: 1px solid var(--c-line);
+}
+.ct-facts dt {
+  padding-top: 0.25em;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+.ct-facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ---------- Enquiry: heading, form card and guide ---------- */
+.ct-enquiry {
+  padding-block: clamp(56px, 4vw + 32px, 120px);
+}
+.ct-enquiry-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 40px);
+}
+.ct-h2 {
+  margin-top: 16px;
+  font-size: clamp(1.9rem, 1.25rem + 1.5vw, 2.6rem); /* .h2 weight and tracking at a column-friendly size */
+  line-height: 1.06;
+}
+.ct-enquiry-head > p:not(.eyebrow) {
+  margin-top: 16px;
+  max-width: 40ch;
+  color: var(--tone-muted);
+}
+@media (min-width: 1024px) {
+  .ct-enquiry-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    grid-template-areas:
+      'head card'
+      'guide card';
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(40px, 5vw, 88px);
+    row-gap: clamp(32px, 3vw, 48px);
+    align-items: start;
+  }
+  .ct-enquiry-head {
+    grid-area: head;
+  }
+  .ct-card {
+    grid-area: card;
+  }
+  .ct-guide {
+    grid-area: guide;
+  }
+}
+
+.ct-guide dl {
+  display: grid;
+  margin: 12px 0 0;
+}
+.ct-guide dl > div {
+  display: grid;
+  gap: 4px;
+  padding-block: 16px;
+  border-top: 1px solid var(--c-line-strong);
+}
+.ct-guide dt {
+  font-family: var(--f-display);
+  font-size: 1.0625rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+.ct-guide dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--tone-muted);
+}
+
+/* Form card. Controls are 48px+ tall; borders are #74859a (3.8:1 on white) so every field edge is perceivable. */
+.ct-card {
+  --ct-field-border: #74859a;
+  container-type: inline-size;
+  padding: clamp(20px, 3vw, 40px);
+}
+.ct-form {
+  display: grid;
+  gap: 22px;
+}
+.ct-required-note {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--c-slate);
+}
+.ct-fields {
+  display: grid;
+  gap: 22px 20px;
+  grid-template-columns: minmax(0, 1fr);
+}
+@container (min-width: 40rem) {
+  .ct-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ct-field--wide {
+    grid-column: 1 / -1;
+  }
+}
+.ct-field {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+}
+.ct-label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--f-display);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--c-ink);
+}
+.ct-optional {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+.ct-hint {
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--c-slate);
+}
+.ct-control {
+  width: 100%;
+  min-height: 3rem;
+  height: auto;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--ct-field-border);
+  border-radius: var(--r-s);
+  background: var(--c-white);
+  box-shadow: none;
+  color: var(--c-ink);
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: border-color var(--dur-s), box-shadow var(--dur-s);
+}
+.ct-control:hover {
+  border-color: var(--c-ink-soft);
+}
+.ct-control:focus-visible {
+  outline: 3px solid var(--c-cobalt);
+  outline-offset: 2px;
+  border-color: var(--c-cobalt);
+  box-shadow: none;
+}
+.ct-control[aria-invalid='true'] {
+  border-color: var(--destructive);
+  box-shadow: inset 0 0 0 1px var(--destructive);
+}
+.ct-textarea {
+  min-height: 9.5rem;
+  max-height: 28rem;
+  resize: vertical;
+}
+.ct-select {
+  position: relative;
+}
+.ct-select select {
+  appearance: none;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+.ct-select-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  translate: 0 -50%;
+  color: var(--c-slate);
+  pointer-events: none;
+}
+
+.ct-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 550;
+  line-height: 1.45;
+  color: var(--destructive);
+}
+.ct-error svg {
+  flex: none;
+  margin-top: 0.18em;
+}
+.ct-summary {
+  padding: 16px 20px;
+  border: 1px solid color-mix(in srgb, var(--destructive) 40%, var(--c-white));
+  border-radius: var(--r-m);
+  background: color-mix(in srgb, var(--destructive) 5%, var(--c-white));
+}
+.ct-summary h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--destructive);
+}
+.ct-summary ul {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding-left: 1.4rem;
+}
+.ct-summary a {
+  color: var(--c-ink);
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ct-submit {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  margin-top: 4px;
+  padding-top: 22px;
+  border-top: 1px solid var(--c-line);
+}
+@container (min-width: 36rem) {
+  .ct-submit {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 22px;
+  }
+}
+@container (max-width: 28rem) {
+  .ct-submit {
+    justify-items: stretch;
+  }
+  .ct-draft-actions > * {
+    flex: 1 1 100%;
+  }
+}
+.ct-fineprint {
+  margin: 0;
+  max-width: 52ch;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--c-slate);
+}
+.ct-fineprint a,
+.ct-facts a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.ct-status-line {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+.ct-status-line:not(:empty) {
+  margin-top: 14px;
+}
+
+/* ---------- Draft review panel ---------- */
+.ct-draft {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  padding: clamp(16px, 2.4vw, 28px);
+  border: 1px solid var(--c-ice-2);
+  border-radius: var(--r-m);
+  background: var(--c-ice);
+  animation: ct-draft-in var(--dur-m) var(--ease-out) both;
+}
+@keyframes ct-draft-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.ct-draft-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.ct-draft h3 {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.ct-draft-text {
+  max-height: 20rem;
+  margin: 0;
+  padding: 16px 18px;
+  overflow: auto;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-s);
+  background: var(--c-white);
+  font-family: var(--f-mono);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--c-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ct-draft-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ct-notice {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+/* ---------- Read-first list ---------- */
+.ct-paths {
+  padding-block: clamp(56px, 4vw + 32px, 112px);
+}
+.ct-paths-grid {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 1024px) {
+  .ct-paths-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    column-gap: clamp(40px, 5vw, 88px);
+    align-items: start;
+  }
+}
+.ct-path-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--c-line-strong);
+}
+.ct-path {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 20px 8px;
+  border-bottom: 1px solid var(--c-line);
+  color: var(--c-ink);
+  text-decoration: none;
+  transition: background-color var(--dur-s);
+}
+.ct-path:hover {
+  background: var(--c-pearl);
+  text-decoration: none;
+}
+.ct-path-name {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-display);
+  font-size: 1.125rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+.ct-path-name::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--ct-dot, var(--c-cobalt));
+}
+.ct-path-desc {
+  grid-column: 1;
+  padding-left: 22px;
+  font-size: var(--fs-small);
+  color: var(--c-slate);
+}
+.ct-path > svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--c-cobalt-ink);
+  transition: translate var(--dur-m) var(--ease-out);
+}
+.ct-path:hover > svg {
+  translate: 3px 0;
+}

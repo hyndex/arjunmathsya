@@ -1,0 +1,60 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import ExplorerApp from '@/components/explore/ExplorerApp';
+import { PRODUCT_LIST } from '@/data/products';
+import { contactHref } from '@/data/site';
+import '@/styles/explore.css';
+---
+
+<BaseLayout
+  title="Vehicle Explorer"
+  image="/og/og-explore.png"
+  description="Rotate, zoom and cut away a schematic concept EV to see where Battery & Charging AI, Evo Core and PMG operate — and what each system must still prove."
+>
+  <section class="explore-head">
+    <div class="container--wide explore-head-inner">
+      <div>
+        <p class="eyebrow">Interactive vehicle explorer</p>
+        <h1 class="h2">Explore the intelligence inside.</h1>
+      </div>
+      <p class="explore-lead">Select a system to see what it is, what Mathsya is developing there, how it connects and what still has to be validated. Prefer a narrated route? Start the guided tour, or return to the <a href="/#scene-surface">scroll story</a>.</p>
+    </div>
+  </section>
+
+  <ExplorerApp client:load />
+
+  <section class="section section--tight tone-pearl explore-after" aria-labelledby="h-read">
+    <div class="container explore-after-grid">
+      <div class="stack">
+        <p class="eyebrow">How to read this view</p>
+        <h2 id="h-read" class="h3">A schematic, not a product render.</h2>
+        <p class="muted">The vehicle, its dimensions and every component are schematic illustrations. Positions show where each function typically sits; a real program defines locations, ratings and interfaces with the OEM partner. Grey parts are reference vehicle systems that Mathsya does not develop.</p>
+      </div>
+      <ul class="explore-products">
+        {
+          PRODUCT_LIST.map((p) => (
+            <li>
+              <a href={p.href} class={`pchip pchip--${p.id}`}>
+                {p.name}
+              </a>
+              <span>{p.kind}</span>
+              <span class={`stage stage--${p.id}`}>{p.stage}</span>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/platform" class="link-arrow">How the three connect <ArrowRight size={16} aria-hidden="true" /></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Next step"
+    title={'Found the system you care about?\nScope a pilot around it.'}
+    primary={{ label: 'Discuss an OEM pilot', href: contactHref('oem-pilot') }}
+    secondary={{ label: 'Read the platform overview', href: '/platform' }}
+  />
+</BaseLayout>

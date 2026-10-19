@@ -1,0 +1,6 @@
+# Permanent redirects for hosts that read _redirects (Cloudflare Pages, Netlify).
+# Static builds also emit instant meta-refresh pages for these paths (astro.config.mjs → redirects).
+/pitch              /investors          301
+/pitch.html         /investors          301
+/investor-brief     /investors/brief    301
+/investor-brief.html /investors/brief   301

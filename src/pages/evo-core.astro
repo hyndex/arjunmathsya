@@ -1,0 +1,386 @@
+---
+import { ArrowDown, Download, Info } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+import StageMeter from '@/components/ui/StageMeter.astro';
+import { buttonVariants } from '@/components/ui/button';
+import ExplodedView from '@/components/evo/ExplodedView';
+import GenerationExplorer from '@/components/evo/GenerationExplorer';
+import { IsoStack } from '@/components/evo/IsometricSvg';
+import { PRODUCTS } from '@/data/products';
+import { MATRIX, MATRIX_NOTE, HARDWARE_GATES, GENERATIONS } from '@/data/portfolio';
+import { contactHref } from '@/data/site';
+import {
+  EVO_META,
+  EVO_HERO,
+  FUNCTIONS,
+  MATRIX_KINDS,
+  INTEGRATION_STEPS,
+  PROOF_OBLIGATIONS,
+  ENGINEERING,
+  GATE_CLOSES,
+  GATES_NOTE,
+  OVERVIEW_DOC,
+  VALUE_BLOCKS,
+  BUSINESS_CASE,
+  EVO_CTA,
+} from '@/data/evo';
+import '@/components/evo/evo.css';
+
+const evo = PRODUCTS.evo;
+const nav = [
+  { id: 'architecture', label: 'Exploded view' },
+  { id: 'generations', label: 'Gen 1–3' },
+  { id: 'scope', label: 'Integration matrix' },
+  { id: 'integration', label: 'How it integrates' },
+  { id: 'engineering', label: 'Engineering boundaries' },
+  { id: 'value', label: 'Value & cost' },
+  { id: 'gates', label: 'Hardware gates' },
+];
+const kindLabel = Object.fromEntries(MATRIX_KINDS.map((k) => [k.kind, k.label]));
+const gens = [GENERATIONS.gen1, GENERATIONS.gen2, GENERATIONS.gen3];
+const titleBlock = [
+  { k: 'Location', v: evo.runsOn },
+  { k: 'Adopters', v: evo.buyers },
+  { k: 'Proposed commercial path', v: evo.commercial },
+  { k: 'Roadmap', v: 'Gen 1–3 · proposed · no committed dates' },
+];
+---
+
+<BaseLayout title={EVO_META.title} description={EVO_META.description} image="/og/og-evo.png">
+  <!-- ============ Hero: a drawing sheet, not a product shot ============ -->
+  <section class="ev-hero" aria-labelledby="ev-title">
+    <div class="container ev-hero-inner">
+      <p class="eyebrow accent-evo">{EVO_HERO.eyebrow}</p>
+      <h1 id="ev-title" class="ev-title">
+        <span class="ev-line ev-line--a">{EVO_HERO.lines[0]}</span>
+        <span class="ev-line ev-line--b">{EVO_HERO.lines[1]}</span>
+      </h1>
+      <ol class="ev-rail" aria-label="Gen 1 proposed scope">
+        {
+          FUNCTIONS.map((f) => (
+            <li>
+              <span class="ev-rail-n">{f.n}</span>
+              <strong>{f.code}</strong>
+              <span class="ev-rail-name">{f.name}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="ev-hero-grid">
+        <div class="ev-hero-copy">
+          <p class="lead ev-lead">{EVO_HERO.lead}</p>
+          <div class="ev-btns">
+            <a class:list={[buttonVariants({ size: 'lg' }), 'ev-btn-ink']} href="#architecture">Take the architecture apart <ArrowDown aria-hidden="true" /></a>
+            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="#generations">Gen 1–3 roadmap</a>
+          </div>
+          <div class="ev-stage">
+            <StageMeter reached={1} color="var(--p-evo)" label={evo.stage} />
+            <p class="ev-stage-note"><span class="stage stage--evo">Proposed roadmap</span> {EVO_HERO.roadmapNote}</p>
+          </div>
+        </div>
+        <div class="ev-titleblock" role="group" aria-labelledby="ev-tb-title">
+          <div class="ev-tb-head">
+            <span class="ev-tb-k">Title block</span>
+            <p id="ev-tb-title" class="ev-tb-name">{evo.name}</p>
+            <span class="ev-tb-role">{evo.kind}</span>
+          </div>
+          <dl class="ev-tb-rows">
+            {
+              titleBlock.map((r) => (
+                <div>
+                  <dt>{r.k}</dt>
+                  <dd>{r.v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="ev-tb-foot">{EVO_HERO.sheetNote}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PageNav items={nav} label="Evo Core sections" />
+
+  <!-- ============ 01 Exploded architecture (signature) ============ -->
+  <section id="architecture" class="ev-arch tone-white" aria-labelledby="arch-title">
+    <div class="container--wide">
+      <div class="section-head section-head--split ev-arch-head">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow accent-evo">Gen 1 proposed scope · exploded view</p>
+          <h2 id="arch-title" class="h2">Take the proposed architecture apart.</h2>
+        </div>
+        <p class="lead">Scroll to separate the layers. Select a function to see what it does, what Mathsya proposes to coordinate, and what stays outside Evo Core.</p>
+      </div>
+    </div>
+    <ExplodedView client:visible={{ rootMargin: '600px' }} />
+  </section>
+
+  <!-- ============ 02 Generations ============ -->
+  <section id="generations" class="section tone-ivory ev-gens" aria-labelledby="gen-title">
+    <div class="container--wide">
+      <div class="section-head ev-gens-head">
+        <p class="eyebrow accent-evo">Proposed generation roadmap</p>
+        <h2 id="gen-title" class="h2"><span class="soft-break">Build the foundation.</span> <span class="soft-break">Expand what earns its place.</span></h2>
+        <p class="lead">For each generation: what could join the platform, what connects through an interface, and the proof needed before the next step. No generation has a committed date.</p>
+      </div>
+      <GenerationExplorer client:visible />
+    </div>
+  </section>
+
+  <!-- ============ 03 Integration matrix ============ -->
+  <section id="scope" class="section tone-white ev-matrix" aria-labelledby="scope-title">
+    <div class="container">
+      <div class="section-head ev-wide-head">
+        <p class="eyebrow accent-evo">Function by function</p>
+        <h2 id="scope-title" class="h2">What joins the platform, and what only connects to it</h2>
+        <p class="lead">The generation labels organise a proposed development path: read across a row to see how one function’s relationship to Evo Core could change. Battery &amp; Charging AI may connect as a module product, or share suitable compute once feasibility is established; PMG remains the connected vehicle-software layer.</p>
+      </div>
+      <ul class="mx-key" aria-label="Cell key">
+        {MATRIX_KINDS.map((k) => <li><span class={`mx-cell mx-cell--${k.kind}`}><span class={`mx-glyph mx-glyph--${k.kind}`} aria-hidden="true" />{k.label}</span></li>)}
+      </ul>
+      <p class="mx-hint" aria-hidden="true">Swipe the table sideways for Gen 2 and Gen 3 →</p>
+      <div class="table-wrap mx-wrap" tabindex="0" role="region" aria-labelledby="mx-caption">
+        <table class="table mx-table">
+          <caption id="mx-caption">{MATRIX_NOTE}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Function</th>
+              {gens.map((g) => (
+                <th scope="col">
+                  <span class="mx-gen">{g.short}</span>
+                  <span class="mx-gen-label">{g.label}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              MATRIX.map((row) => (
+                <tr>
+                  <th scope="row">{row.fn}</th>
+                  {row.cells.map((c) => (
+                    <td>
+                      <span class={`mx-cell mx-cell--${c.kind}`}>
+                        <span class={`mx-glyph mx-glyph--${c.kind}`} aria-hidden="true" />
+                        <span class="visually-hidden">{kindLabel[c.kind]}: </span>
+                        {c.text}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 How integration works ============ -->
+  <section id="integration" class="section tone-pearl ev-integ" aria-labelledby="integ-title">
+    <div class="container ev-integ-grid">
+      <div class="ev-integ-intro">
+        <p class="eyebrow accent-evo">How hardware integration works</p>
+        <h2 id="integ-title" class="h2">Integration is more than a shared enclosure.</h2>
+        <p class="lead">Four separate decisions, in order. Each one concerns a different layer of the assembly, and the last one tests them together.</p>
+        <figure class="ev-proof" aria-labelledby="proof-title">
+          <figcaption id="proof-title" class="ev-proof-title">{PROOF_OBLIGATIONS.title}</figcaption>
+          <div class="ev-proof-tracks">
+            {
+              PROOF_OBLIGATIONS.tracks.map((t) => (
+                <div class="ev-proof-track">
+                  <p class="ev-k">{t.k}</p>
+                  <p class="ev-proof-body">{t.body}</p>
+                  <p class="ev-proof-measures">
+                    <span class="ev-k">Measured</span>
+                    {t.measures}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+          <p class="ev-proof-base">{PROOF_OBLIGATIONS.base}</p>
+        </figure>
+      </div>
+      <ol class="ev-steps">
+        {
+          INTEGRATION_STEPS.map((s) => (
+            <li class="ev-step" data-reveal="left">
+              <IsoStack layer={s.layer} />
+              <div class="ev-step-text">
+                <p class="ev-step-n">
+                  {s.n} <span>· {s.decides}</span>
+                </p>
+                <h3 class="h3">{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 05 Engineering ledger ============ -->
+  <section id="engineering" class="section tone-white ev-eng" aria-labelledby="eng-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow accent-evo">Engineering boundaries</p>
+          <h2 id="eng-title" class="h2">The engineering ledger</h2>
+        </div>
+        <p class="lead">Five areas decide whether integration is worth doing. For each: the working assumption, what stays outside Evo Core, and the evidence that must exist before the next step.</p>
+      </div>
+      <div class="ev-ledger">
+        {
+          ENGINEERING.map((e, i) => (
+            <article class="ev-ledger-row" id={e.id} aria-labelledby={`${e.id}-t`}>
+              <header class="ev-ledger-head">
+                <span class="ev-ledger-n">{String(i + 1).padStart(2, '0')}</span>
+                <h3 id={`${e.id}-t`} class="h4">{e.title}</h3>
+                <p class="ev-ledger-gates">
+                  {e.gates.map((g) => (
+                    <a href="#gates" class="ev-gate-chip">
+                      Gate {g} · {HARDWARE_GATES.find((h) => h.n === g)?.title}
+                    </a>
+                  ))}
+                </p>
+              </header>
+              <dl class="ev-ledger-cells">
+                <div>
+                  <dt>Working assumption</dt>
+                  <dd>{e.assume}</dd>
+                </div>
+                <div class="is-outside">
+                  <dt>Stays outside / boundary</dt>
+                  <dd>{e.outside}</dd>
+                </div>
+                <div class="is-evidence">
+                  <dt>Evidence before the next step</dt>
+                  <dd>{e.evidence}</dd>
+                </div>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 Value & complete cost ============ -->
+  <section id="value" class="section tone-ivory ev-value" aria-labelledby="value-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow accent-evo">The hardware value case</p>
+          <h2 id="value-title" class="h2">Fewer unnecessary boundaries, more reusable evidence</h2>
+        </div>
+        <p class="lead">Each benefit below is something to measure in a reference program, not a result. Every one of them is weighed against the complete cost of adopting the integrated concept.</p>
+      </div>
+      <div class="ev-value-grid">
+        {
+          VALUE_BLOCKS.map((b) => (
+            <article class="ev-value-item">
+              <p class="ev-k">{b.audience}</p>
+              <h3 class="h3">{b.title}</h3>
+              <p>{b.body}</p>
+              <p class="ev-measure">
+                <span class="ev-measure-k">Measure</span>
+                {b.measure}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <article class="ev-net" aria-labelledby="net-title">
+        <header class="ev-net-head">
+          <p class="ev-k">{BUSINESS_CASE.audience}</p>
+          <h3 id="net-title" class="h3">{BUSINESS_CASE.title}</h3>
+          <p>{BUSINESS_CASE.body}</p>
+        </header>
+        <div class="ev-net-eq">
+          <div class="ev-net-term">
+            <p class="ev-net-label">Measured against the reference design</p>
+            <ul class="ev-net-list">{BUSINESS_CASE.measured.map((m) => <li>{m}</li>)}</ul>
+          </div>
+          <span class="ev-net-op" aria-hidden="true">−</span>
+          <div class="ev-net-term ev-net-term--cost">
+            <p class="ev-net-label">Complete adoption cost</p>
+            <dl class="ev-net-costs">
+              {
+                BUSINESS_CASE.costs.map((c) => (
+                  <div>
+                    <dt>{c.k}</dt>
+                    <dd>{c.body}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+          <span class="ev-net-op" aria-hidden="true">=</span>
+          <div class="ev-net-term ev-net-term--result">
+            <p class="ev-net-label">Net value</p>
+            <p class="ev-net-verdict">{BUSINESS_CASE.verdict}</p>
+          </div>
+        </div>
+        <p class="note ev-net-note"><Info size={16} aria-hidden="true" />{BUSINESS_CASE.caveat}</p>
+        <p class="ev-net-commercial">{BUSINESS_CASE.commercial}</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ 07 Hardware gates ============ -->
+  <section id="gates" class="section tone-white ev-gates" aria-labelledby="gates-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow accent-evo">Prototype pathway · a separate hardware path</p>
+          <h2 id="gates-title" class="h2">From architecture to a program-ready platform</h2>
+        </div>
+        <p class="lead">Reference scope, bench evidence, a costed prototype, then partner-defined vehicle qualification. Each gate closes specific items in the engineering ledger.</p>
+      </div>
+      <ol class="ev-gate-track">
+        {
+          HARDWARE_GATES.map((g) => (
+            <li class="ev-gate">
+              <span class="ev-gate-post" aria-hidden="true" />
+              <p class="ev-gate-n">Gate {g.n}</p>
+              <h3 class="h3">{g.title}</h3>
+              <p class="ev-gate-body">{g.body}</p>
+              <p class="ev-k">Closes</p>
+              <ul class="ev-gate-closes">
+                {GATE_CLOSES[g.n].map((c) => (
+                  <li>
+                    <a href={c.href}>{c.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="ev-gate-axis" aria-hidden="true"><span>Release dates</span> not committed</p>
+      <div class="ev-gates-foot">
+        <p class="note"><Info size={16} aria-hidden="true" />{GATES_NOTE}</p>
+        <a class="resource ev-resource" href={OVERVIEW_DOC.href} download>
+          <span class="resource-meta">{OVERVIEW_DOC.meta}</span>
+          <strong class="h4">{OVERVIEW_DOC.title}</strong>
+          <span class="ev-resource-body">{OVERVIEW_DOC.body}</span>
+          <span class="resource-action">Download the Evo Core overview <Download size={16} aria-hidden="true" /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow={EVO_CTA.eyebrow}
+    title={EVO_CTA.title}
+    body={EVO_CTA.body}
+    primary={{ label: 'Discuss Evo Core hardware', href: contactHref('evo') }}
+    secondary={{ label: 'See how the products connect', href: '/platform' }}
+  />
+</BaseLayout>

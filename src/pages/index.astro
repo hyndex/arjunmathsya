@@ -1,0 +1,377 @@
+---
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, X } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import { buttonVariants } from '@/components/ui/button';
+import StoryStage from '@/components/home/StoryStage';
+import StoryRail from '@/components/home/StoryRail';
+import BatteryScenarios from '@/components/home/BatteryScenarios';
+import GenSelector from '@/components/home/GenSelector';
+import PmgJourney from '@/components/home/PmgJourney';
+import ConnectivityToggle from '@/components/home/ConnectivityToggle';
+import ValueScenarios from '@/components/home/ValueScenarios';
+import { PRODUCTS, BOUNDARIES, VALUE_CHAIN } from '@/data/products';
+import { MATRIX, MATRIX_NOTE, PMG_POC, POC_NOTE, PROOF_PATH, PROGRAMS } from '@/data/portfolio';
+import { SITE, contactHref } from '@/data/site';
+import '@/styles/home.css';
+
+const legend = [
+  { k: 'concept', t: 'Mathsya product concept' },
+  { k: 'reference', t: 'Reference vehicle system' },
+  { k: 'interface', t: 'Approved interface' },
+  { k: 'future', t: 'Optional / future proposal' },
+];
+const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension', retained: 'Retained', interface: 'Interface', owned: 'BMS-owned', option: 'Option', future: 'Future' };
+---
+
+<BaseLayout
+  title="Intelligence inside. Value beyond."
+  description="Mathsya develops automotive Edge AI: Battery & Charging AI, the Evo Core EV power roadmap and PMG vehicle software — scroll through the vehicle to see where each one works."
+>
+  <div class="story" data-story>
+    <div class="story-stage" data-story-stage aria-hidden="true">
+      <div class="story-floor"></div>
+      <!-- Static hero frame (same camera as the 3D hero): paints immediately and is the LCP image; fades out once WebGL draws. -->
+      <picture class="story-hero-frame" data-hero-frame>
+        <source media="(max-width: 899px)" srcset="/posters/hero-mobile.webp" width="780" height="1688" />
+        <img src="/posters/hero-desktop.webp" alt="" width="1600" height="900" fetchpriority="high" decoding="async" />
+      </picture>
+      <StoryStage client:idle />
+    </div>
+
+    <div class="story-scenes">
+      <!-- 01 · Arrival -->
+      <section class="scene scene--hero" data-scene="arrival" id="scene-arrival" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Mathsya Connected Services · Edge AI for automotive</p>
+          <h1 id="hero-title" class="display hero-title">
+            <span class="soft-break">Intelligence inside.</span>
+            <span class="soft-break hero-accent">Value beyond.</span>
+          </h1>
+        </div>
+        <div class="hero-lower">
+          <p class="lead hero-lead">Connecting automotive Edge AI, EV power systems and vehicle intelligence to customer and OEM outcomes that can be measured.</p>
+          <div class="btn-row">
+            <a class={buttonVariants({ size: 'lg' })} href="#scene-surface">Explore the intelligence <ArrowDown aria-hidden="true" /></a>
+            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/about">Discover Mathsya</a>
+          </div>
+          <ul class="hero-products" aria-label="Product roles">
+            <li><a href="/battery-ai" class="pchip pchip--battery">Battery &amp; Charging AI</a></li>
+            <li><a href="/pmg" class="pchip pchip--pmg">Proactive Mobility Guardian</a></li>
+            <li><a href="/evo-core" class="pchip pchip--evo">Evo Core</a></li>
+          </ul>
+        </div>
+        <div class="hero-foot">
+          <span class="scroll-cue" aria-hidden="true"><span></span>Scroll to explore</span>
+          <a class="skip-story" href="#after-story">Skip the story</a>
+          <span class="fineprint concept-tag">Schematic concept vehicle · not a production design · {SITE.location}</span>
+        </div>
+      </section>
+
+      <!-- 02 · Under the surface -->
+      <section class="scene scene--right" data-scene="surface" id="scene-surface" aria-labelledby="h-surface">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow">02 · Under the surface</p>
+          <h2 id="h-surface" class="h3 plate-title">A vehicle is more than the sum of its components.</h2>
+          <p>A battery knows its operating state. A charger knows its session. A power module knows its temperature. Each signal is useful on its own — and far more useful in context.</p>
+          <p>Mathsya’s products work at specific points in this architecture and reach the rest through approved interfaces. They do not replace the vehicle around them.</p>
+          <ul class="plate-legend" aria-label="Legend">
+            {legend.map((l) => <li><span class={`swatch swatch--${l.k}`} aria-hidden="true"></span>{l.t}</li>)}
+          </ul>
+          <p class="visually-hidden">The visual shows the vehicle in x-ray: battery pack and BMS under the floor, the Evo Core power unit in the front bay, vehicle compute behind the dashboard, networks, cooling loops and the roof antenna.</p>
+        </div>
+      </section>
+
+      <!-- 03 · The battery reveal -->
+      <section class="scene scene--left" data-scene="battery" id="scene-battery" aria-labelledby="h-battery">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-battery">03 · Battery &amp; Charging AI</p>
+          <h2 id="h-battery" class="h3 plate-title">Read the behaviour behind the percentage.</h2>
+          <p>The pack and its BMS stay exactly as validated. Battery &amp; Charging AI is software: it reads the signals the BMS already provides and evaluates how the battery behaves over time and conditions.</p>
+          <ul class="signal-chips" aria-label="Signals used">
+            <li>Cell voltages</li><li>Pack current</li><li>Temperatures</li><li>Charging history</li><li>Battery-state estimates</li><li>Operating conditions</li>
+          </ul>
+          <p class="note">Runs on suitable BMS or adjacent module compute. Sensing, balancing, operating limits and protection remain with the BMS.</p>
+        </div>
+      </section>
+
+      <!-- 04 · How Battery AI creates value -->
+      <section class="scene scene--right scene--wide" data-scene="battery-ai" id="scene-battery-ai" aria-labelledby="h-battery-ai">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-battery">04 · From raw signals to useful intelligence</p>
+          <h2 id="h-battery-ai" class="h3 plate-title">An insight has to earn its way to a decision.</h2>
+          <BatteryScenarios client:visible />
+          <a class="link-arrow" href="/battery-ai">Explore Battery &amp; Charging AI <ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
+      </section>
+
+      <!-- 05 · The power system -->
+      <section class="scene scene--left" data-scene="power" id="scene-power" aria-labelledby="h-power">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-evo">05 · Evo Core</p>
+          <h2 id="h-power" class="h3 plate-title">Power, brought together. Intelligence, built in.</h2>
+          <p>Charging and power conversion usually arrive as separate units with separate controllers. Evo Core proposes one coordinated platform with common control and supervisory intelligence.</p>
+          <dl class="fn-list">
+            <div><dt>OBC</dt><dd>Converts AC grid power to charge the high-voltage battery</dd></div>
+            <div><dt>DC/DC</dt><dd>Supplies the low-voltage network from the HV battery</dd></div>
+            <div><dt>EVCC</dt><dd>Handles communication with the charging station during a session</dd></div>
+            <div><dt>HV distribution</dt><dd>Junction and protection paths for high-voltage connections</dd></div>
+            <div><dt>Common control</dt><dd>Shared compute, operating modes and diagnostics</dd></div>
+            <div><dt>Supervision</dt><dd>Edge AI evaluating module health — not real-time control</dd></div>
+          </dl>
+          <p class="note">Drawing functions together does not mean they are combined in production hardware. Shared control, physical integration and connected interfaces are separate decisions.</p>
+        </div>
+      </section>
+
+      <!-- 06 · Explore Evo Core -->
+      <section class="scene scene--right scene--wide" data-scene="evo" id="scene-evo" aria-labelledby="h-evo">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-evo">06 · A deliberate evolution</p>
+          <h2 id="h-evo" class="h3 plate-title">Three generations. Each must earn the next.</h2>
+          <GenSelector client:visible />
+          <details class="matrix-details">
+            <summary>Integration matrix: function by generation</summary>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Evo Core integration matrix">
+              <table class="table table--matrix">
+                <caption>{MATRIX_NOTE}</caption>
+                <thead><tr><th scope="col">Function</th><th scope="col">Gen 1</th><th scope="col">Gen 2</th><th scope="col">Gen 3</th></tr></thead>
+                <tbody>
+                  {MATRIX.map((row) => (
+                    <tr>
+                      <th scope="row">{row.fn}</th>
+                      {row.cells.map((c) => <td><span class={`mx mx--${c.kind}`}><span class="visually-hidden">{kindLabel[c.kind]}: </span>{c.text}</span></td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <a class="link-arrow" href="/evo-core">Explore Evo Core <ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
+      </section>
+
+      <!-- 07 · Vehicle intelligence -->
+      <section class="scene scene--left" data-scene="vehicle" id="scene-vehicle" aria-labelledby="h-vehicle">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-pmg">07 · Proactive Mobility Guardian</p>
+          <h2 id="h-vehicle" class="h3 plate-title">Connect the module to the vehicle.</h2>
+          <p>PMG is vehicle software. It runs on a suitable gateway, telematics unit or central computer — chosen with the reference architecture — and works only with approved inputs:</p>
+          <ul class="ctx-list">
+            <li><span class="pchip pchip--battery"></span>Battery &amp; Charging AI insight</li>
+            <li><span class="pchip pchip--evo"></span>Relevant Evo Core events</li>
+            <li><span class="pchip pchip--pmg"></span>Other approved module signals</li>
+            <li><span class="dot-ref"></span>Journey requirements</li>
+            <li><span class="dot-ref"></span>Customer permissions</li>
+            <li><span class="dot-ref"></span>Service context</li>
+          </ul>
+          <p class="note">Validated control, protection and safety functions keep their authority. PMG coordinates context and requests only what the architecture permits.</p>
+        </div>
+      </section>
+
+      <!-- 08 · PMG decision journey -->
+      <section class="scene scene--right scene--wide" data-scene="pmg" id="scene-pmg" aria-labelledby="h-pmg">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow accent-pmg">08 · Anticipate. Recommend. Verify.</p>
+          <h2 id="h-pmg" class="h3 plate-title">A signal says “battery warm”. A decision says what to do about it — and checks it worked.</h2>
+          <p class="plate-scenario"><strong>Illustrative scenario.</strong> Departure planned for 07:30. The battery is warm after a long drive and the car is plugged in overnight.</p>
+          <PmgJourney client:visible />
+          <a class="link-arrow" href="/pmg">Explore Proactive Mobility Guardian <ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
+      </section>
+
+      <!-- 09 · Beyond the vehicle -->
+      <section class="scene scene--left scene--wide" data-scene="cloud" id="scene-cloud" aria-labelledby="h-cloud">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow">09 · Beyond the vehicle · optional</p>
+          <h2 id="h-cloud" class="h3 plate-title">From vehicle insight to organizational learning.</h2>
+          <p>With permission, selected evidence can leave the vehicle for quality investigations, service evidence, fleet comparisons, version-aware analysis and checking whether a correction worked. Switch connectivity off to see what the vehicle keeps doing on its own.</p>
+          <ConnectivityToggle client:visible />
+          <ol class="tri-chain" aria-label="Three levels of value">
+            <li><span>01</span>Module intelligence</li>
+            <li><span>02</span>Vehicle intelligence</li>
+            <li><span>03</span>Organizational learning</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 10 · The value reveal -->
+      <section class="scene scene--right scene--wide" data-scene="value" id="scene-value" aria-labelledby="h-value">
+        <div class="scene-plate" data-plate>
+          <p class="eyebrow">10 · One connected direction</p>
+          <h2 id="h-value" class="h3 plate-title">Different benefits, each with its own measure.</h2>
+          <div class="value-who">
+            <div>
+              <p class="gen-k">For customers</p>
+              <ul>
+                <li>Better-informed charging readiness</li>
+                <li>Battery information that makes sense</li>
+                <li>Useful service planning</li>
+                <li>Recommendations that fit the journey</li>
+              </ul>
+            </div>
+            <div>
+              <p class="gen-k">For OEMs &amp; engineering teams</p>
+              <ul>
+                <li>Reviewable technical evidence</li>
+                <li>Investigation workflows to evaluate</li>
+                <li>Better-informed engineering decisions</li>
+                <li>Repeat-issue learning</li>
+                <li>Potential integration and lifecycle value</li>
+              </ul>
+            </div>
+          </div>
+          <ValueScenarios client:visible />
+        </div>
+      </section>
+
+      <!-- 11 · The complete ecosystem -->
+      <section class="scene scene--center" data-scene="ecosystem" id="scene-ecosystem" aria-labelledby="h-eco">
+        <div class="scene-plate scene-plate--eco" data-plate>
+          <p class="eyebrow">11 · The Mathsya portfolio</p>
+          <h2 id="h-eco" class="h2 plate-title">Three product roles. One connected purpose.</h2>
+          <figure class="eco-links">
+            <svg viewBox="-60 0 880 200" role="img" aria-labelledby="eco-links-t">
+              <title id="eco-links-t">Battery &amp; Charging AI shares approved insight with PMG. Evo Core shares power and thermal events with PMG. Battery &amp; Charging AI can also run within Evo Core as a proposed Gen 2 option. Each product can be adopted on its own.</title>
+              <path class="eco-l eco-l--batt" d="M150 128 C 150 70, 230 32, 300 32" />
+              <path class="eco-l eco-l--evo" d="M610 128 C 610 70, 530 32, 460 32" />
+              <path class="eco-l eco-l--opt" d="M255 150 L 505 150" />
+              <g class="eco-n eco-n--pmg"><rect x="300" y="10" width="160" height="44" rx="22" /><text x="380" y="37">PMG</text></g>
+              <g class="eco-n eco-n--batt"><rect x="40" y="128" width="215" height="44" rx="22" /><text x="147" y="155">Battery &amp; Charging AI</text></g>
+              <g class="eco-n eco-n--evo"><rect x="505" y="128" width="215" height="44" rx="22" /><text x="612" y="155">Evo Core</text></g>
+              <text class="eco-t" x="128" y="84" text-anchor="end">approved insight</text>
+              <text class="eco-t" x="632" y="84">power &amp; thermal events</text>
+              <text class="eco-t eco-t--opt" x="380" y="140">Gen 2 option</text>
+              <text class="eco-t eco-t--opt" x="380" y="172">runtime within Evo Core</text>
+            </svg>
+          </figure>
+          <div class="eco-grid">
+            {[PRODUCTS.battery, PRODUCTS.evo, PRODUCTS.pmg].map((p) => (
+              <a class={`eco-item eco-item--${p.id}`} href={p.href}>
+                <span class="eco-role">{p.role}</span>
+                <strong>{p.name}</strong>
+                <span class="eco-kind">{p.kind}</span>
+                <span class={`stage stage--${p.id}`}>{p.stage}</span>
+                <span class="eco-go">Explore <ArrowUpRight size={15} aria-hidden="true" /></span>
+              </a>
+            ))}
+          </div>
+          <p class="eco-foot">Each product can be adopted on its own. The connected portfolio is an expansion path, not a requirement.</p>
+        </div>
+      </section>
+    </div>
+    <StoryRail client:idle />
+  </div>
+
+  <!-- 12 · From vision to proof -->
+  <section class="section tone-white proof" id="after-story" aria-labelledby="h-proof" tabindex="-1">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack">
+          <p class="eyebrow">12 · From vision to proof</p>
+          <h2 id="h-proof" class="h2">Build the first proof.<span class="soft-break muted">Then earn the next.</span></h2>
+        </div>
+        <p class="lead">Mathsya is a development-stage company. The entry point is a partner-defined module or vehicle problem with approved data, a current baseline and an outcome worth measuring.</p>
+      </div>
+      <ol class="proof-path">
+        {PROOF_PATH.map((s) => (
+          <li data-reveal>
+            <span class="proof-n">{s.n}</span>
+            <h3 class="h4">{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="proof-tracks">
+        <div class="proof-track">
+          <p class="eyebrow accent-pmg">Proposed PMG software PoC · 12–16 weeks</p>
+          <ol class="gate-row">
+            {PMG_POC.map((g) => (
+              <li><span>{g.weeks}</span><strong>{g.title}</strong><em>{g.evidence}</em></li>
+            ))}
+          </ol>
+          <p class="fineprint">{POC_NOTE}</p>
+        </div>
+        <div class="proof-track proof-track--hw">
+          <p class="eyebrow accent-evo">Evo Core hardware · separate path</p>
+          <p>Reference → bench → prototype → partner qualification. Hardware generations have no committed release dates.</p>
+          <a class="link-arrow" href="/evo-core#gates">See the hardware gates <ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Essentials: roles + boundaries (for every reader, including those who skipped the story) -->
+  <section class="section tone-pearl essentials" aria-labelledby="h-essentials">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What each product is — and where its boundary sits</p>
+        <h2 id="h-essentials" class="h2">Clear roles. Defined authority.</h2>
+        <ol class="value-verbs" aria-label="The company logic">
+          {VALUE_CHAIN.map((v, i) => <li><span>{String(i + 1).padStart(2, '0')}</span><strong>{v.verb}</strong> {v.object}</li>)}
+        </ol>
+      </div>
+      <div class="boundary-rows">
+        {BOUNDARIES.map((b) => {
+          const p = PRODUCTS[b.product];
+          return (
+            <article class={`boundary boundary--${p.id}`} aria-labelledby={`b-${p.id}`}>
+              <header class="boundary-head">
+                <p class="eco-role">{p.kind}</p>
+                <h3 id={`b-${p.id}`} class="h3">{p.name}</h3>
+                <p class="boundary-runs"><span class="mono">Runs on</span> {p.runsOn}</p>
+                <span class={`stage stage--${p.id}`}>{p.stage}</span>
+                <a class="link-arrow" href={p.href}>Product details <ArrowRight size={16} aria-hidden="true" /></a>
+              </header>
+              <div class="boundary-col">
+                <p class="gen-k">Does</p>
+                <ul>{b.does.map((d) => <li><Check size={16} aria-hidden="true" />{d}</li>)}</ul>
+              </div>
+              <div class="boundary-col boundary-col--not">
+                <p class="gen-k">Does not</p>
+                <ul>{b.doesNot.map((d) => <li><X size={16} aria-hidden="true" />{d}</li>)}</ul>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight tone-white company" aria-labelledby="h-company">
+    <div class="container company-grid">
+      <div class="company-founder">
+        <p class="eyebrow">The company</p>
+        <h2 id="h-company" class="h2">Built from vehicle experience.</h2>
+        <p class="lead">Founder {SITE.founder} brings an automotive engineering background spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.</p>
+        <div class="btn-row">
+          <a class={buttonVariants({ variant: 'secondary' })} href="/about">About Mathsya</a>
+          <a class={buttonVariants({ variant: 'ghost' })} href="/investors">Investors &amp; partnerships <ArrowRight aria-hidden="true" /></a>
+        </div>
+      </div>
+      <div class="company-programs">
+        <p class="gen-k">Research &amp; enabling programs</p>
+        <ul>
+          {PROGRAMS.map((pr) => (
+            <li>
+              <a href={`/research#${pr.id}`}>
+                <strong>{pr.name}</strong>
+                <span>{pr.summary}</span>
+                <span class="stage stage--neutral">{pr.stage}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="fineprint">Solar-assisted auxiliaries are a separate research track, distinct from the three products.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Start the conversation"
+    title={'Bring a problem.\nBuild the first proof.'}
+    body="Explore the technologies, scope an OEM pilot around one measurable problem, or review the investment case and proof plan."
+    primary={{ label: 'Discuss an OEM pilot', href: contactHref('oem-pilot') }}
+    secondary={{ label: 'Explore our technologies', href: '/platform' }}
+    tertiary={{ label: 'Explore the investment case', href: '/investors' }}
+  />
+</BaseLayout>

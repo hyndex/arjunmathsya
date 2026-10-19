@@ -1,0 +1,56 @@
+---
+// Honest maturity indicator: only steps supported by the source material are marked.
+import { STAGES } from '@/data/products';
+interface Props {
+  reached: number; // index of the step currently being worked on (0-based); earlier steps are complete
+  color?: string;
+  label: string; // verbatim stage label from the source, e.g. "Architecture & PoC planning"
+}
+const { reached, color = 'var(--c-cobalt)', label } = Astro.props;
+---
+
+<div class="stage-meter" style={`--meter:${color}`}>
+  <div class="meter" role="img" aria-label={`Development stage: ${label}. Not yet evaluated, validated or commercially released.`}>
+    {STAGES.map((_, i) => <span data-on={i < reached ? '' : undefined} data-current={i === reached ? '' : undefined} />)}
+  </div>
+  <div class="meter-labels" aria-hidden="true">
+    {STAGES.map((s, i) => <span class:list={{ on: i <= reached }}>{s}</span>)}
+  </div>
+  <p class="meter-now"><span class="mono">Current stage</span> {label}</p>
+</div>
+
+<style>
+  .stage-meter {
+    display: grid;
+    gap: 10px;
+  }
+  .meter-labels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    font-size: 0.68rem;
+    line-height: 1.25;
+    color: var(--c-slate);
+  }
+  .meter-labels .on {
+    color: var(--c-ink-soft);
+    font-weight: 600;
+  }
+  .meter-now {
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  .meter-now .mono {
+    margin-right: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--meter);
+    filter: brightness(0.8);
+  }
+  @media (max-width: 560px) {
+    .meter-labels span:not(.on) {
+      visibility: hidden;
+    }
+  }
+</style>

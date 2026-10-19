@@ -1,0 +1,150 @@
+---
+import { ArrowDown, ArrowRight } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import EnquiryForm from '@/components/contact/EnquiryForm';
+import { buttonVariants } from '@/components/ui/button';
+import '@/components/contact/contact.css';
+import { SITE, TECHNOLOGIES } from '@/data/site';
+
+// Empty until an approved public business inbox exists. Empty means: prepare, copy and download only, never "send".
+const email = SITE.contactEmail.trim();
+
+const dot: Record<string, string> = {
+  battery: 'var(--p-battery)',
+  pmg: 'var(--p-pmg)',
+  evo: 'var(--p-evo)',
+  investors: 'var(--c-ink)',
+};
+const paths = [
+  ...TECHNOLOGIES.map(({ id, label, href, description }) => ({ id: id as string, label, href, description })),
+  { id: 'investors', label: 'Investors & partnerships', href: '/investors', description: 'The investment case and the investor and partner brief.' },
+];
+
+const guide = [
+  ['The module or vehicle problem', 'The application, the module or vehicle behaviour involved, and what happens today.'],
+  ['Who owns it', 'The team or role that owns the module, its data and the decision.'],
+  ['The current baseline', 'The existing estimation, diagnostics or control the result would be compared with.'],
+  ['The outcome to improve', 'What you would measure, and what would count as better than the baseline.'],
+] as const;
+---
+
+<BaseLayout
+  title="Contact & Partnership Enquiries"
+  description="Prepare a partnership, pilot or investment enquiry for Mathsya. The draft is built in your browser; nothing is sent, uploaded or saved."
+>
+  <section class="ct-hero tone-pearl">
+    <div class="container">
+      <p class="eyebrow">Contact / Investors &amp; partnerships</p>
+      <h1 class="h1 ct-title">A clear question.<span class="soft-break accent-pmg">A useful next conversation.</span></h1>
+
+      <div class="ct-hero-grid">
+        <div class="ct-hero-copy">
+          <p class="lead">
+            Prepare an enquiry about a PMG pilot, Evo Core collaboration, engineering tools or an investment discussion. A focused use case and existing baseline help define the next step.
+          </p>
+          <div class="btn-row ct-actions">
+            <a class={buttonVariants({ size: 'lg' })} href="#enquiry">Prepare your enquiry <ArrowDown aria-hidden="true" /></a>
+            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/investors/brief">Read the investor brief <ArrowRight aria-hidden="true" /></a>
+          </div>
+        </div>
+
+        <div class="ct-status">
+          {
+            email ? (
+              <>
+                <span class="stage stage--pmg">Investor &amp; partnership enquiries</span>
+                <p>Prepare your enquiry below, then review it and send it using your email application.</p>
+              </>
+            ) : (
+              <>
+                <span class="stage stage--neutral">Business inbox setup pending</span>
+                <p>Public business email setup is pending. You can prepare, copy or download an enquiry below. This page does not send messages.</p>
+              </>
+            )
+          }
+          <dl class="ct-facts">
+            {
+              email && (
+                <div>
+                  <dt>Email</dt>
+                  <dd><a href={`mailto:${email}`}>{email}</a></dd>
+                </div>
+              )
+            }
+            <div>
+              <dt>Founder</dt>
+              <dd>{SITE.founder}</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>{SITE.location}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-enquiry tone-ice">
+    <div class="container ct-enquiry-grid" id="enquiry">
+      <div class="ct-enquiry-head">
+        <p class="eyebrow">{SITE.name}</p>
+        <h2 id="enquiry-heading" class="h2 ct-h2">Define the first proof together.</h2>
+        <p>Share the module or vehicle problem, the people who own it and the outcome you want to improve.</p>
+      </div>
+
+      <div class="surface ct-card">
+        <noscript>
+          <p class="note">The enquiry draft is prepared in your browser, so this form needs JavaScript. Without it, nothing can be prepared here.</p>
+        </noscript>
+        <EnquiryForm client:load contactEmail={email} />
+      </div>
+
+      <aside class="ct-guide" aria-labelledby="guide-title">
+        <h3 id="guide-title" class="eyebrow eyebrow--plain">What helps us respond</h3>
+        <dl>
+          {
+            guide.map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="ct-paths tone-white">
+    <div class="container ct-paths-grid">
+      <div>
+        <p class="eyebrow">Before you write</p>
+        <h2 class="h2 ct-h2">Read about the technology first.</h2>
+        <p class="muted" style="margin-top: 16px; max-width: 36ch">Choose the page closest to your problem, then return here to prepare the enquiry.</p>
+      </div>
+      <ul class="ct-path-list">
+        {
+          paths.map((p) => (
+            <li>
+              <a class="ct-path" href={p.href} style={`--ct-dot: ${dot[p.id]}`}>
+                <span class="ct-path-name">{p.label}</span>
+                <span class="ct-path-desc">{p.description}</span>
+                <ArrowRight size={18} aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Investor and partner brief"
+    title={'Read the brief,\nthen prepare an enquiry.'}
+    body="The brief summarises the portfolio, the proposed proof path and what is not yet established."
+    primary={{ label: 'Read the investor brief', href: '/investors/brief' }}
+    secondary={{ label: 'Prepare an enquiry', href: '#enquiry' }}
+  />
+</BaseLayout>

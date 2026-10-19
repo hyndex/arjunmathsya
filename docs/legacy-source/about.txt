@@ -1,0 +1,54 @@
+     About Mathsya — Mathsya Connected Services                   [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+ABOUT MATHSYA / BENGALURU, INDIA
+# Automotive experience.
+ An Edge AI direction.
+Mathsya Connected Services is developing Edge AI for automotive modules, with a focus on connecting local intelligence to useful vehicle decisions and organizational value.
+ [Meet the founder ↗ ](#founder) [Read the investor brief → ](investor-brief.html)
+Development-stage portfolio led by founder Arjun Amuthan.
+ [IMG src=assets/automotive-concept.webp alt='Concept illustration of intelligence distributed across a passenger vehicle.']
+AI-generated concept illustration · development-stage program
+OUR VISION
+## Make vehicle intelligence
+ useful and measurable.
+The opportunity begins inside automotive modules: operating signals, health trends and events can carry more value when they are interpreted in context and linked to a useful decision.
+Mathsya’s direction connects three levels of value: module intelligence, vehicle and customer experience, and organizational outcomes across engineering, quality, warranty and service.
+Battery & Charging AI, PMG and Evo Core connect module software, vehicle intelligence and EV power hardware. Engineering tools and selected research support the wider evidence and product lifecycle.
+ [Explore the investment thesis →](investors.html)
+{id=founder}
+FOUNDER
+## A perspective built
+across vehicle systems.
+Arjun’s automotive engineering experience spans vehicle programs, connected services, telematics hardware, validation and EV power electronics.
+AA
+FOUNDER / MATHSYA CONNECTED SERVICES
+### Arjun Amuthan
+Bengaluru, India
+Automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.
+Mathsya brings these disciplines together to develop Edge AI with measurable module, vehicle and organizational value.
+ Vehicle programs Connected systems Hardware & validation EV power integration
+HOW WE APPROACH DEVELOPMENT
+## Define the problem.
+ Earn the next stage.
+01 / USEFULNESS
+### Start with a real decision
+Choose a vehicle or module problem with an existing workflow, approved data and an outcome a customer or organization values.
+02 / ENGINEERING
+### Make the evidence reviewable
+Define interfaces, responsibilities and acceptance criteria. Keep proposed benefits and achieved results clearly identified.
+03 / ADOPTION
+### Build a repeatable value case
+Include integration, validation, runtime and support costs. Extend a program when technical evidence and customer demand support it.
+## Build the first proof together.
+Explore a scoped OEM, module, engineering or investment discussion with Mathsya.
+ [Prepare a partnership enquiry ↗ ](contact.html?topic=General%20partnership)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+  

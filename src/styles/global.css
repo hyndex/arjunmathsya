@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./variants.css";
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./transitions.css";
+@import "./three.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Mathsya palette exposed as Tailwind utilities (bg-ice, text-ink, border-line …) + shadcn semantic tokens */
+@theme inline {
+  --font-sans: var(--f-body);
+  --font-heading: var(--f-display);
+  --font-display: var(--f-display);
+  --font-mono: var(--f-mono);
+
+  --color-pearl: var(--c-pearl);
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-slate: var(--c-slate);
+  --color-slate-2: var(--c-slate-2);
+  --color-cobalt: var(--c-cobalt);
+  --color-cobalt-ink: var(--c-cobalt-ink);
+  --color-cobalt-soft: var(--c-cobalt-soft);
+  --color-ice: var(--c-ice);
+  --color-ice-2: var(--c-ice-2);
+  --color-emerald: var(--c-emerald);
+  --color-emerald-ink: var(--c-emerald-ink);
+  --color-mint: var(--c-mint);
+  --color-mint-2: var(--c-mint-2);
+  --color-aqua: var(--c-aqua);
+  --color-tangerine: var(--c-tangerine);
+  --color-tangerine-ink: var(--c-tangerine-ink);
+  --color-ivory: var(--c-ivory);
+  --color-ivory-2: var(--c-ivory-2);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --ease-out-expo: var(--ease-out);
+  --ease-mech: var(--ease-mech);
+  --ease-flow: var(--ease-flow);
+
+}
+
+/* shadcn semantic tokens → Mathsya light-first palette */
+:root {
+  --background: var(--c-pearl);
+  --foreground: var(--c-ink);
+  --card: var(--c-white);
+  --card-foreground: var(--c-ink);
+  --popover: var(--c-white);
+  --popover-foreground: var(--c-ink);
+  --primary: var(--c-cobalt);
+  --primary-foreground: var(--c-white);
+  --secondary: var(--c-ice);
+  --secondary-foreground: var(--c-ink);
+  --muted: #eef2f7;
+  --muted-foreground: var(--c-slate);
+  --accent: var(--c-ice);
+  --accent-foreground: var(--c-ink);
+  --destructive: #b42318;
+  --border: rgba(23, 43, 69, 0.12);
+  --input: rgba(23, 43, 69, 0.2);
+  --ring: var(--c-cobalt);
+  --chart-1: var(--c-cobalt);
+  --chart-2: var(--c-emerald);
+  --chart-3: var(--c-tangerine);
+  --chart-4: var(--c-aqua);
+  --chart-5: var(--c-slate-2);
+  --radius: 1rem;
+}
+
+/* Layout containers are deliberately UNLAYERED: Tailwind v4 ships its own `.container` utility
+   (width: 100% + breakpoint max-widths) and unlayered rules win over every cascade layer. */
+.container,
+.container--wide,
+.container--narrow {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  max-width: none;
+  margin-inline: auto;
+}
+.container--wide {
+  width: min(100% - 2 * var(--gutter), var(--container-wide));
+}
+.container--narrow {
+  width: min(100% - 2 * var(--gutter), 860px);
+}

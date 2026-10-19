@@ -1,0 +1,294 @@
+---
+import { ArrowDown, ArrowRight } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import DisciplineMap from '@/components/about/DisciplineMap';
+import '@/components/about/about.css';
+import { SITE, contactHref } from '@/data/site';
+import {
+  ABOUT_HERO as HERO,
+  APPROACH,
+  COLOPHON,
+  CONTENTS,
+  DIRECTION,
+  DISCIPLINES,
+  EDGE,
+  EVIDENCE,
+  FOUNDER,
+  INFORMS,
+  PORTFOLIO_NODES,
+  PORTFOLIO_WHY,
+  VISION,
+} from '@/data/about';
+
+const dName = (id: string) => DISCIPLINES.find((d) => d.id === id)!.label;
+const pName = (id: string) => PORTFOLIO_NODES.find((p) => p.id === id)!.label;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `About ${SITE.shortName}`,
+  about: {
+    '@type': 'Organization',
+    name: SITE.name,
+    address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressCountry: 'IN' },
+    founder: { '@type': 'Person', name: FOUNDER.name, jobTitle: 'Founder' },
+  },
+};
+---
+
+<BaseLayout
+  title="About"
+  description="Mathsya Connected Services, Bengaluru: automotive Edge AI led by founder Arjun Amuthan. Our vision, approach to validation and long-term direction."
+  jsonLd={jsonLd}
+>
+  <div class="ab">
+    <section class="ab-hero" aria-labelledby="ab-title">
+      <div class="container">
+        <div class="ab-hero-grid">
+          <div class="ab-hero-copy">
+            <p class="eyebrow">{HERO.eyebrow}</p>
+            <h1 id="ab-title" class="ab-title">Automotive experience. <span>An Edge&nbsp;AI direction.</span></h1>
+            <p class="lead">{HERO.lead}</p>
+            <div class="btn-row">
+              <a class={buttonVariants({ variant: 'default' })} href="#founder">Meet the founder <ArrowDown aria-hidden="true" /></a>
+              <a class={cn(buttonVariants({ variant: 'outline' }))} href="/investors/brief">Read the investor brief</a>
+            </div>
+          </div>
+          <dl class="ab-colophon" aria-label="Company facts">
+            {
+              COLOPHON.map((c) => (
+                <div>
+                  <dt>{c.term}</dt>
+                  <dd>{c.detail}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <nav aria-label="On this page">
+          <ol class="ab-contents">
+            {
+              CONTENTS.map((c, i) => (
+                <li>
+                  <a href={`#${c.id}`}>
+                    <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    {c.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" class="ab-section ab-section--white" aria-labelledby="vision-title">
+      <div class="container">
+        <p class="eyebrow">Vision</p>
+        <h2 id="vision-title" class="ab-statement" style="margin-top: 22px" data-reveal="fade">
+          Make vehicle intelligence <b>useful and measurable.</b>
+        </h2>
+        <div class="ab-split">
+          <p class="ab-body">{VISION.body}</p>
+          <dl class="ab-terms">
+            {
+              VISION.terms.map((t) => (
+                <div>
+                  <dt>{t.term}</dt>
+                  <dd>{t.detail}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edge AI -->
+    <section id="edge-ai" class="ab-section" aria-labelledby="edge-title">
+      <div class="container">
+        <div class="ab-edge-grid">
+          <div class="ab-edge-intro">
+            <p class="eyebrow">The role of automotive Edge AI</p>
+            <h2 id="edge-title" class="h2">{EDGE.title}</h2>
+            <p class="ab-body">{EDGE.body}</p>
+          </div>
+          <ul class="ab-signals" aria-label="Module signals">
+            {
+              EDGE.signals.map((s) => (
+                <li data-reveal="left">
+                  <span class="ab-label">Module signal · {s.module}</span>
+                  <p>{s.line}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <p class="ab-baseline">{EDGE.baseline}</p>
+        <ol class="ab-principles" aria-label="Engineering principles">
+          {
+            EDGE.principles.map((p) => (
+              <li>
+                <span class="ab-label">{p.label}</span>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Founder -->
+    <section id="founder" class="ab-section ab-section--warm" aria-labelledby="founder-title">
+      <div class="container ab-founder-grid">
+        <div class="ab-mono">
+          <span class="ab-mono-letters" aria-hidden="true">AA</span>
+          <span class="ab-mono-rule" data-reveal="line" aria-hidden="true"></span>
+          <p class="ab-name">{FOUNDER.name}</p>
+          <p class="ab-name-meta">
+            <span class="ab-label">{FOUNDER.role}</span>
+            <span class="ab-label">{FOUNDER.place}</span>
+          </p>
+        </div>
+        <div class="ab-founder-copy">
+          <p class="eyebrow">The founder’s perspective</p>
+          <h2 id="founder-title" class="h2">{FOUNDER.title}</h2>
+          <p class="lead">{FOUNDER.experience}</p>
+          <p class="ab-body">{FOUNDER.purpose}</p>
+          <p class="fineprint">{FOUNDER.execution}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disciplines → portfolio (signature) -->
+    <section id="portfolio" class="ab-section" aria-labelledby="portfolio-title">
+      <div class="container">
+        <div class="ab-map-head">
+          <div>
+            <p class="eyebrow">Disciplines → portfolio</p>
+            <h2 id="portfolio-title" class="h2">{PORTFOLIO_WHY.title}</h2>
+          </div>
+          <div>
+            {PORTFOLIO_WHY.body.map((b) => <p>{b}</p>)}
+          </div>
+        </div>
+
+        <DisciplineMap client:visible />
+
+        <div class="ab-map-foot">
+          <p class="fineprint">{PORTFOLIO_WHY.note}</p>
+          <details class="ab-list">
+            <summary>Read the connections as a list</summary>
+            <ul>
+              {
+                INFORMS.map((l) => (
+                  <li>
+                    <b>{dName(l.from)}</b> → <b>{pName(l.to)}</b>: {l.why}
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Approach + evidence -->
+    <section id="approach" class="ab-section ab-section--white" aria-labelledby="approach-title">
+      <div class="container">
+        <p class="eyebrow">How we approach development</p>
+        <h2 id="approach-title" class="h2" style="margin-top: 22px; max-width: 16ch">{APPROACH.title}</h2>
+        <ol class="ab-steps">
+          {
+            APPROACH.steps.map((s) => (
+              <li>
+                <span class="ab-step-n" aria-hidden="true">{s.n}</span>
+                <div class="ab-step-title">
+                  <span class="ab-label">{s.n} / {s.label}</span>
+                  <h3 class="h3">{s.title}</h3>
+                </div>
+                <p>{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <div class="ab-evidence">
+          <h3 id="evidence-title">{EVIDENCE.title}</h3>
+          <p>{EVIDENCE.intro}</p>
+        </div>
+        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="evidence-title">
+          <table class="table">
+            <caption>{EVIDENCE.caption}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Program</th>
+                <th scope="col">Compared with</th>
+                <th scope="col">Evidence that counts</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                EVIDENCE.rows.map((r) => (
+                  <tr>
+                    <th scope="row">{r.area}</th>
+                    <td>{r.baseline}</td>
+                    <td>{r.evidence}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission + direction -->
+    <section id="direction" class="ab-section" aria-labelledby="direction-title">
+      <div class="container">
+        <div class="ab-direction-head">
+          <p class="eyebrow">{DIRECTION.eyebrow}</p>
+          <h2 id="direction-title" class="ab-statement">From module intelligence to <b>customer and OEM value.</b></h2>
+          <p class="ab-body" style="max-width: 56ch">{DIRECTION.intro}</p>
+        </div>
+        <ol class="ab-stair">
+          {
+            DIRECTION.levels.map((l, i) => (
+              <li class="ab-level">
+                {i > 0 && (
+                  <p class="ab-gate">
+                    <span>Evidence gate</span>
+                    {DIRECTION.gates[i - 1]}
+                  </p>
+                )}
+                <span class="ab-rule" data-reveal="line" aria-hidden="true" />
+                <p class="ab-level-n">
+                  {l.n} · {l.level}
+                </p>
+                <h3>{l.title}</h3>
+                <p>{l.body}</p>
+                <p class="ab-where">{l.where}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="ab-next">
+          <p>{DIRECTION.next}</p>
+          <a class="link-arrow" href="/investors">Explore the investment case <ArrowRight size={18} aria-hidden="true" /></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <CtaBand
+    eyebrow="Work with Mathsya"
+    title="Build the first proof together."
+    body="Explore a scoped OEM, module, engineering or investment discussion with Mathsya."
+    primary={{ label: 'Prepare a partnership enquiry', href: contactHref('partnership') }}
+    secondary={{ label: 'Investors & partnerships', href: '/investors' }}
+  />
+</BaseLayout>

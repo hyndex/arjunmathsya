@@ -1,0 +1,139 @@
+     Battery & Charging AI — Mathsya Connected Services                      [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+BATTERY & CHARGING AI / EMBEDDED SOFTWARE
+# Care for the battery.
+ Prepare for the journey.
+Developing an Edge AI layer for battery health, charging readiness and useful thermal context. It is designed to work alongside a validated BMS, with module insight available to PMG and Evo Core.
+ [Explore Battery AI ↗ ](#capabilities) [Follow the pitch journey →](pitch.html)
+Architecture and PoC planning · development-stage program
+ BATTERY / EMBEDDED INTELLIGENCE CONCEPT
+ VOLTAGE CURRENT TEMPERATURE HISTORY
+   Battery & Charging AI Health trends · confidence · readiness
+ MODULE OUTPUT Reviewable insight
+ →
+ VEHICLE CONTEXT PMG coordination
+Architecture illustration · cell count and arrangement are schematic
+ [Capabilities](#capabilities) [Working principle](#how) [Benefits](#benefits) [First proof](#proof) [Questions](#questions)
+{id=capabilities}
+WHAT THE MODULE PRODUCT COULD DO
+## More context.
+ Better-informed decisions.
+Conventional BMS estimation, diagnostics and protection already perform important work. The question is where data-driven inference can add useful, measurable insight.
+ 01 / HEALTH
+### Battery-health trends
+Evaluate aging patterns and state-of-health estimation using approved operating histories. Show confidence and identify when the data is insufficient.
+ Proof: accuracy on held-out batteries and operating conditions.
+ 02 / CHARGING
+### Charge-session insight
+Interpret battery condition and session behavior to support a permitted charging or readiness recommendation.
+ Proof: completion, readiness, false recommendations and energy impact.
+ 03 / THERMAL
+### Thermal behavior
+Compare temperature trends against load and ambient context; flag useful patterns for approved cooling or service evaluation.
+ Proof: known-event detection, false alerts and verified thermal outcomes.
+ 04 / CELLS
+### Cell-level patterns
+Where cell signals are accessible, evaluate imbalance trends and unusual behavior. Available sensing and balancing hardware define what can be acted on.
+ Proof: cell-event detection, data quality and actionable service evidence.
+ 05 / AVAILABLE POWER
+### State-of-power context
+Evaluate available charge/discharge power estimates under current conditions, within the BMS and power-system limits.
+ Proof: estimation error, limit compliance and usefulness over the baseline.
+ 06 / CONNECTED VALUE
+### From insight to a journey
+PMG combines the module result with departure intent and vehicle context. Evo Core provides approved power and thermal coordination interfaces.
+ [See the connected architecture →](platform.html)
+{id=how}
+WORKING PRINCIPLE
+## Signals become insight.
+ Insight becomes a decision.
+ 01
+### Access
+Read permitted voltage, current, temperature and history from an agreed pack and reference system.
+ 02
+### Interpret
+Evaluate a bounded model on suitable BMS or adjacent compute, with confidence and versioned evidence.
+ 03
+### Coordinate
+Provide approved insights to PMG and/or Evo Core. The BMS keeps its validated operating limits and protective authority.
+ 04
+### Check
+Compare outcomes with existing estimation, diagnostics and control methods. Retain useful evidence for engineering.
+ Packaging can follow the customer.
+A first pilot can use existing module hardware. A later product could license the embedded runtime, integrate with a partner’s BMS or share suitable compute within Evo Core; each deployment needs its own feasibility and validation.
+{id=benefits}
+EXPLORE THE BENEFITS
+## Start with a moment.
+ Follow the value.
+Choose a candidate scenario to see the module intelligence, the role of PMG and the outcomes a pilot should measure.
+{id=benefit-battery-tab}{data-benefit=battery}Battery care
+{id=benefit-charging-tab}{data-benefit=charging}Charging readiness
+{id=benefit-thermal-tab}{data-benefit=thermal}Power & thermal
+{id=benefit-service-tab}{data-benefit=service}OEM quality & service
+{id=benefit-panel}
+{id=benefit-number}01 / BATTERY CARE
+### {id=benefit-title}Understand the battery behind the percentage.
+{id=benefit-scene}A driver sees a charge percentage. The useful question is whether the battery is ready for the next journey, and whether its behavior is changing.
+ THE INPUT
+{id=benefit-signals}Available cell voltages, pack current, temperatures, charging history and validated battery-state estimates.
+ 01
+ MODULE INTELLIGENCE
+{id=benefit-module}Battery AI evaluates health trends and unusual behavior, with confidence and data-quality checks.
+ 02
+ PMG / VEHICLE CONTEXT
+{id=benefit-pmg}PMG adds departure, journey and service context, then prepares a permitted recommendation and checks its outcome.
+ FOR THE CUSTOMER
+{id=benefit-customer}Clearer battery-health guidance and a charging or service decision that fits the next journey.
+ FOR THE OEM
+{id=benefit-oem}Evidence to investigate degradation patterns, review service decisions and identify repeat issues.
+ WHAT TO MEASURE
+{id=benefit-proof}Held-out state-estimation error, actionable alerts, false alerts, customer overrides and independently verified health outcomes.
+Illustrative workflows. Outcomes depend on data access, integration and evaluation against the existing system; no achieved savings or battery-life gains are claimed.
+{id=proof}
+THE FIRST BATTERY PROOF
+## Choose one pack.
+ Answer one useful question.
+Start with an observable health or charging problem and approved test data. Test on batteries and operating conditions excluded from model development.
+ 01
+### Baseline
+Define existing estimation, diagnostic performance and the cost of the problem.
+ 02
+### Data
+Agree sensing access, timestamps, reference labels and independent measurements.
+ 03
+### Runtime
+Evaluate accuracy, memory, latency, compute and local fallback behavior.
+ 04
+### Outcome
+Verify an actionable advantage and the complete integration cost.
+{id=questions}
+COMMON QUESTIONS
+## An intelligence layer.
+ A clear engineering scope.
+Does this replace the BMS?
+The initial concept adds evaluated intelligence alongside the validated BMS. Sensing, balancing, operating limits and protection retain defined ownership. A future commonized controller would need its own complete architecture and qualification.
+Can AI charge every cell independently?
+AI alone does not create independently controlled charging paths. Cell-level decisions are constrained by the pack’s electrical topology, sensing, balancing and power hardware. The first concept uses the interfaces the selected pack actually provides.
+Will this increase battery life or driving range?
+These are potential outcomes to investigate, rather than established results. A pilot must compare independent health measurements and energy/readiness outcomes with the existing system, while including model errors and integration cost.
+Where will the model run?
+On suitable BMS, module or adjacent vehicle compute, depending on access and resource needs. The deployment decision follows measurement of latency, memory, compute and isolation requirements.
+TECHNICAL CONTEXT / INDEPENDENT SOURCES
+Industry references establish the sensing and control foundations; published research explores efficient ML-based battery-health estimation. These sources provide context and do not validate Mathsya’s proposed product.
+ [Texas Instruments · BMS sensing, monitoring & control ↗](https://www.ti.com/applications/automotive/hev-ev-powertrain/hev-ev-battery-management-system-bms/overview.html) [Research · Efficient online battery SoH estimation ↗](https://arxiv.org/abs/2406.06151)
+ [Download the Battery AI overview ↓](assets/Battery-AI-Program-Overview.md)
+BUILD THE FIRST PROOF
+## Start with a battery question.
+Build a measurable answer.
+Discuss available signals, a reference pack and a useful health or charging outcome.
+ [Discuss a pilot ↗ ](contact.html?topic=Battery%20%26%20Charging%20AI)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

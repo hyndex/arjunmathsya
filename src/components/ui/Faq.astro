@@ -1,0 +1,75 @@
+---
+// Native <details> accordion: answers stay in the HTML (search, no-JS, find-in-page) and animate where supported.
+interface Props {
+  items: { q: string; a: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item) => (
+      <details>
+        <summary>{item.q}</summary>
+        <div class="faq-body">
+          <p>{item.a}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--c-line-strong);
+    interpolate-size: allow-keywords;
+  }
+  details {
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size var(--dur-m) var(--ease-out), content-visibility var(--dur-m) allow-discrete;
+  }
+  details[open]::details-content {
+    block-size: auto;
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 4px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--f-display);
+    font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '';
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--c-line-strong);
+    background:
+      linear-gradient(currentColor, currentColor) center / 12px 1.6px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 1.6px 12px no-repeat;
+    transition: transform var(--dur-m) var(--ease-out), background-color var(--dur-s);
+  }
+  details[open] summary::after {
+    transform: rotate(45deg);
+    background-color: var(--c-ice);
+  }
+  .faq-body {
+    padding: 0 4px 26px;
+    max-width: 70ch;
+    color: var(--c-slate);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+// Sticky in-page navigation for long pages; highlights the section in view.
+interface Props {
+  items: { id: string; label: string }[];
+  label?: string;
+}
+const { items, label = 'On this page' } = Astro.props;
+---
+
+<nav class="pagenav" aria-label={label} data-pagenav>
+  <div class="container">
+    <ol>
+      {
+        items.map((item, i) => (
+          <li>
+            <a href={`#${item.id}`}>
+              <span class="pagenav-num">{String(i + 1).padStart(2, '0')}</span>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</nav>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-pagenav]').forEach((nav) => {
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+    const targets = links.map((a) => document.getElementById(a.hash.slice(1))).filter((t): t is HTMLElement => !!t);
+    const setActive = (id: string) =>
+      links.forEach((a) => {
+        const on = a.hash === `#${id}`;
+        a.toggleAttribute('aria-current', on);
+        if (on) a.setAttribute('aria-current', 'true');
+        if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      });
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: '-35% 0px -55% 0px' }
+    );
+    targets.forEach((t) => io.observe(t));
+  });
+</script>

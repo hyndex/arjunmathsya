@@ -1,0 +1,268 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import { buttonVariants } from '@/components/ui/button';
+
+// States only what the website does today (see docs/legacy-source/privacy.txt). Update it when the site starts
+// collecting or storing anything. Do not add claims about encryption, cookies or retention periods without a source.
+const toc = [
+  { id: 'enquiry-preparation', title: 'Enquiry preparation' },
+  { id: 'information-you-send', title: 'Information you choose to send' },
+  { id: 'website-hosting', title: 'Website hosting' },
+  { id: 'analytics-scripts', title: 'Analytics and third-party scripts' },
+  { id: 'vehicle-explorer', title: 'Interactive 3D explorer' },
+  { id: 'data-retention', title: 'Data retention' },
+  { id: 'contact-updates', title: 'Contact and updates' },
+];
+const num = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<BaseLayout
+  title="Privacy information"
+  description="How the Mathsya contact form prepares enquiries in your browser, what the hosting platform may process, and what this site does not collect or store."
+>
+  <section class="pv-hero tone-pearl">
+    <div class="container">
+      <p class="eyebrow">Privacy / Enquiry preparation</p>
+      <h1 class="h1 pv-title">Know what you choose to share.</h1>
+      <p class="lead">
+        This note describes the current contact page and the information you enter when you prepare an enquiry. It covers what the website does today.
+      </p>
+      <div class="pv-hero-foot">
+        <a class={buttonVariants({ variant: 'secondary' })} href="/contact">Return to contact <ArrowRight aria-hidden="true" /></a>
+        <p class="pv-meta">Last updated: <time datetime="2026-10">October 2026</time></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-doc tone-white">
+    <div class="container pv-grid">
+      <nav class="pv-toc" aria-label="On this page" data-toc>
+        <p class="pv-toc-title">On this page</p>
+        <ol>
+          {
+            toc.map((s, i) => (
+              <li>
+                <a href={`#${s.id}`}>
+                  <span class="num">{num(i)}</span>
+                  {s.title}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <article class="pv-article">
+        <section class="pv-section" id={toc[0].id} aria-labelledby={`${toc[0].id}-title`}>
+          <p class="num">{num(0)}</p>
+          <h2 id={`${toc[0].id}-title`}>{toc[0].title}</h2>
+          <p>
+            The contact form prepares a draft in your browser. The name, email, company, enquiry category and message you enter are not uploaded when you prepare, copy or download that draft.
+          </p>
+          <p>The form does not save those fields in browser storage.</p>
+        </section>
+
+        <section class="pv-section" id={toc[1].id} aria-labelledby={`${toc[1].id}-title`}>
+          <p class="num">{num(1)}</p>
+          <h2 id={`${toc[1].id}-title`}>{toc[1].title}</h2>
+          <p>
+            A public business email is not yet configured, so the contact page does not show an email-draft option. If one is configured later, choosing Open email draft opens your own email application with the enquiry addressed to Mathsya. You decide whether to send it; the website does not send it for you.
+          </p>
+        </section>
+
+        <section class="pv-section" id={toc[2].id} aria-labelledby={`${toc[2].id}-title`}>
+          <p class="num">{num(2)}</p>
+          <h2 id={`${toc[2].id}-title`}>{toc[2].title}</h2>
+          <p>
+            The hosting platform may process technical request and traffic information, such as an IP address and browser user agent, as part of serving the website.
+          </p>
+        </section>
+
+        <section class="pv-section" id={toc[3].id} aria-labelledby={`${toc[3].id}-title`}>
+          <p class="num">{num(3)}</p>
+          <h2 id={`${toc[3].id}-title`}>{toc[3].title}</h2>
+          <p>
+            The site does not add analytics, advertising trackers or third-party scripts. Fonts and the 3D libraries are served from the site itself, not from an external provider.
+          </p>
+        </section>
+
+        <section class="pv-section" id={toc[4].id} aria-labelledby={`${toc[4].id}-title`}>
+          <p class="num">{num(4)}</p>
+          <h2 id={`${toc[4].id}-title`}>{toc[4].title}</h2>
+          <p>The vehicle explorer runs locally in your browser. No account is created.</p>
+        </section>
+
+        <section class="pv-section" id={toc[5].id} aria-labelledby={`${toc[5].id}-title`}>
+          <p class="num">{num(5)}</p>
+          <h2 id={`${toc[5].id}-title`}>{toc[5].title}</h2>
+          <p>The website itself stores no enquiry data. A draft you download or copy exists only where you save or paste it.</p>
+        </section>
+
+        <section class="pv-section" id={toc[6].id} aria-labelledby={`${toc[6].id}-title`}>
+          <p class="num">{num(6)}</p>
+          <h2 id={`${toc[6].id}-title`}>{toc[6].title}</h2>
+          <p>
+            See the <a href="/contact">contact page</a> for the current contact options. This note will be updated if the website later collects or stores enquiry submissions.
+          </p>
+        </section>
+      </article>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Contact"
+    title={'Prepare an enquiry\nin your browser.'}
+    body="The draft stays on your device. You choose whether to download or copy it."
+    primary={{ label: 'Go to the contact page', href: '/contact' }}
+    secondary={{ label: 'Read the investor brief', href: '/investors/brief' }}
+  />
+</BaseLayout>
+
+<style>
+  .pv-hero {
+    padding-block: clamp(56px, 4vw + 32px, 104px) clamp(40px, 3vw + 24px, 72px);
+  }
+  .pv-title {
+    margin-top: 20px;
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 1.2rem + 4.2vw, 4.5rem);
+  }
+  .pv-hero .lead {
+    margin-top: 24px;
+  }
+  /* Solid ring: the shared Button ring is translucent (about 2:1 on white). */
+  .pv-hero-foot a:focus-visible {
+    --tw-ring-color: var(--c-cobalt);
+  }
+  .pv-hero-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    margin-top: 32px;
+  }
+  .pv-meta {
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+
+  .pv-doc {
+    padding-block: clamp(48px, 5vw, 96px) clamp(72px, 7vw, 128px);
+    border-top: 1px solid var(--c-line);
+  }
+  .pv-grid {
+    display: grid;
+    gap: 40px;
+  }
+  @media (min-width: 1024px) {
+    .pv-grid {
+      grid-template-columns: 15.5rem minmax(0, 1fr);
+      column-gap: clamp(48px, 6vw, 112px);
+      align-items: start;
+    }
+  }
+
+  /* Table of contents: desktop only. The document is short enough to read straight through on small screens. */
+  .pv-toc {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .pv-toc {
+      display: block;
+      position: sticky;
+      top: calc(var(--header-h) + 32px);
+    }
+  }
+  .pv-toc-title {
+    margin: 0 0 12px;
+    font-family: var(--f-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .pv-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid var(--c-line-strong);
+  }
+  .pv-toc a {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-left: -1px;
+    padding: 9px 0 9px 16px;
+    border-left: 2px solid transparent;
+    font-size: var(--fs-small);
+    font-weight: 550;
+    line-height: 1.35;
+    color: var(--c-slate);
+    text-decoration: none;
+    transition: color var(--dur-s), border-color var(--dur-s);
+  }
+  .pv-toc a:hover {
+    color: var(--c-ink);
+  }
+  .pv-toc a[aria-current='true'] {
+    color: var(--c-ink);
+    border-left-color: var(--c-cobalt);
+  }
+
+  .pv-article {
+    max-width: 52rem;
+  }
+  .pv-section {
+    display: grid;
+    gap: 12px;
+    padding-block: 36px;
+    border-top: 1px solid var(--c-line);
+  }
+  .pv-section:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .pv-section h2 {
+    font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  .pv-section p:not(.num) {
+    max-width: var(--measure);
+    color: var(--c-ink);
+  }
+  .pv-section p a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  .pv-section .num {
+    margin: 0;
+  }
+</style>
+
+<script>
+  // Marks the section being read in the table of contents.
+  const toc = document.querySelector<HTMLElement>('[data-toc]');
+  if (toc && 'IntersectionObserver' in window) {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (!hit) return;
+        links.forEach((a) => (a.hash === `#${hit.target.id}` ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+      },
+      { rootMargin: '-15% 0px -70% 0px' }
+    );
+    links.forEach((a) => {
+      const target = document.getElementById(a.hash.slice(1));
+      if (target) observer.observe(target);
+    });
+  }
+</script>

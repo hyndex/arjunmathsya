@@ -1,0 +1,985 @@
+---
+import { ArrowDown, ArrowRight, Download } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+import StageMeter from '@/components/ui/StageMeter.astro';
+import Faq from '@/components/ui/Faq.astro';
+import { buttonVariants } from '@/components/ui/button';
+import HostStack from '@/components/pmg/HostStack.astro';
+import ReadinessMock from '@/components/pmg/ReadinessMock.astro';
+import WorkflowFlow from '@/components/pmg/WorkflowFlow';
+import ModuleExplorer from '@/components/pmg/ModuleExplorer';
+import { contactHref } from '@/data/site';
+import { PRODUCTS, BOUNDARIES } from '@/data/products';
+import { PMG_POC, POC_NOTE } from '@/data/portfolio';
+import {
+  PMG_META,
+  PMG_HERO,
+  WORKFLOWS_INTRO,
+  INTERFACE_COPY,
+  PERMISSION_MODEL,
+  PMG_DEPLOYMENT as D,
+  RUNTIME_SPEC,
+  PMG_DELIVERY,
+  PMG_DELIVERY_NOTE,
+  MODULES_INTRO,
+  PMG_VALUE,
+  PMG_PROOF,
+  PMG_LIMITS,
+  PMG_FAQ,
+  PMG_CTA,
+} from '@/data/pmg';
+
+const nav = [
+  { id: 'workflows', label: 'Workflows' },
+  { id: 'interface', label: 'Permissions' },
+  { id: 'runtime', label: 'Runtime & SaaS' },
+  { id: 'modules', label: 'Module applications' },
+  { id: 'value', label: 'Value' },
+  { id: 'proof', label: 'Proof plan' },
+  { id: 'questions', label: 'Questions' },
+];
+const pmgBounds = BOUNDARIES.find((b) => b.product === 'pmg')!;
+const gates = PMG_POC.map((g) => {
+  const [a, b] = (g.weeks.match(/\d+/g) ?? ['0', '0']).map(Number);
+  return { ...g, a, b };
+});
+const ticks = [...new Set(gates.flatMap((g) => [g.a, g.b]))];
+---
+
+<BaseLayout title={PMG_META.title} description={PMG_META.description} image="/og/og-pmg.png">
+  <!-- ============ Hero ============ -->
+  <section class="pmg-hero" aria-labelledby="pmg-title">
+    <div class="container--wide pmg-hero-grid">
+      <div class="pmg-hero-copy">
+        <p class="eyebrow">{PMG_HERO.eyebrow}</p>
+        <h1 id="pmg-title" class="pmg-title">
+          <span class="soft-break">{PMG_HERO.lines[0]}</span>{' '}
+          <span class="soft-break pmg-title-2">{PMG_HERO.lines[1]}</span>
+        </h1>
+        <p class="lead">{PMG_HERO.lead}</p>
+        <div class="btn-row">
+          <a class={buttonVariants({ size: 'lg' })} href="#workflows">See the workflows <ArrowDown aria-hidden="true" /></a>
+          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('pmg')}>Discuss a PMG pilot</a>
+        </div>
+        <div class="pmg-hero-stage">
+          <StageMeter reached={PRODUCTS.pmg.stageIndex} label={PMG_HERO.stage} color="var(--p-pmg)" />
+          <p class="fineprint">Development-stage program · proposed benefits and roadmap</p>
+        </div>
+      </div>
+      <HostStack />
+    </div>
+  </section>
+
+  <PageNav items={nav} label="PMG sections" />
+
+  <!-- ============ 01 Workflows (signature) ============ -->
+  <section id="workflows" class="section tone-ice pmg-flow-section" aria-labelledby="workflows-title">
+    <div class="container--wide">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{WORKFLOWS_INTRO.eyebrow}</p>
+          <h2 id="workflows-title" class="h2">{WORKFLOWS_INTRO.title}</h2>
+        </div>
+        <div class="stack" style="--stack:14px">
+          <p class="lead">{WORKFLOWS_INTRO.lead}</p>
+          <p class="pmg-kicker">{WORKFLOWS_INTRO.kicker}</p>
+        </div>
+      </div>
+      <WorkflowFlow client:visible />
+    </div>
+  </section>
+
+  <!-- ============ 02 Interface concept + permissions ============ -->
+  <section id="interface" class="section tone-white" aria-labelledby="interface-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{INTERFACE_COPY.eyebrow}</p>
+          <h2 id="interface-title" class="h2">{INTERFACE_COPY.title}</h2>
+        </div>
+        <p class="lead">{INTERFACE_COPY.lead}</p>
+      </div>
+      <div class="if-grid">
+        <ReadinessMock />
+        <div class="if-rules">
+          <h3 class="if-sub">Customer permission model</h3>
+          <dl class="perm">
+            {
+              PERMISSION_MODEL.map((p) => (
+                <div>
+                  <dt>{p.label}</dt>
+                  <dd>{p.text}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <h3 class="if-sub">Approved action boundaries</h3>
+          <div class="bounds">
+            <div>
+              <p class="bounds-k">PMG does</p>
+              <ul>{pmgBounds.does.map((t) => <li>{t}</li>)}</ul>
+            </div>
+            <div class="bounds-not">
+              <p class="bounds-k">PMG does not</p>
+              <ul>{pmgBounds.doesNot.map((t) => <li>{t}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 Runtime vs optional SaaS ============ -->
+  <section id="runtime" class="section tone-pearl" aria-labelledby="runtime-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{D.eyebrow}</p>
+          <h2 id="runtime-title" class="h2">{D.title}</h2>
+        </div>
+        <p class="lead">{D.lead}</p>
+      </div>
+
+      <div class="rt">
+        <article class="rt-panel rt-panel--cloud" aria-labelledby="rt-saas">
+          <div class="rt-main">
+            <p class="rt-k">{D.saas.label}</p>
+            <h3 id="rt-saas" class="h3">{D.saas.title}</h3>
+            <p class="rt-body">{D.saas.body}</p>
+            <p class="rt-path"><span>Proposed commercial path</span>{D.saas.path}</p>
+          </div>
+          <div>
+            <p class="rt-list-k">Service & quality workflows · governance</p>
+            <ul class="rt-tasks">{D.saas.tasks.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        </article>
+        <div class="rt-boundary" aria-hidden="true">
+          <span>Vehicle boundary · local behaviour does not require the cloud</span>
+        </div>
+        <article class="rt-panel rt-panel--vehicle" aria-labelledby="rt-runtime">
+          <div class="rt-main">
+            <p class="rt-k">{D.runtime.label}</p>
+            <h3 id="rt-runtime" class="h3">{D.runtime.title}</h3>
+            <p class="rt-body">{D.runtime.body}</p>
+            <p class="rt-path"><span>Proposed commercial path</span>{D.runtime.path}</p>
+          </div>
+          <div>
+            <p class="rt-list-k">Embedded runtime responsibilities</p>
+            <ul class="rt-tasks">{D.runtime.tasks.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        </article>
+      </div>
+      <p class="note rt-note">{D.note}</p>
+
+      <div class="rt-more">
+        <dl class="rt-spec">
+          {
+            RUNTIME_SPEC.map((r) => (
+              <div>
+                <dt>{r.label}</dt>
+                <dd>{r.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="rt-delivery">
+          <h3 class="rt-delivery-title">Commercial delivery options</h3>
+          <ol>
+            {
+              PMG_DELIVERY.map((d, i) => (
+                <li>
+                  <span class="rt-delivery-n">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p class="rt-delivery-l">{d.label}</p>
+                    <p class="rt-delivery-t">{d.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="fineprint">{PMG_DELIVERY_NOTE}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 Module applications ============ -->
+  <section id="modules" class="section tone-white" aria-labelledby="modules-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{MODULES_INTRO.eyebrow}</p>
+          <h2 id="modules-title" class="h2">{MODULES_INTRO.title}</h2>
+        </div>
+        <div class="stack" style="--stack:14px">
+          <p class="lead">{MODULES_INTRO.lead}</p>
+          <p class="mod-entry"><strong>{MODULES_INTRO.entryTitle}</strong> {MODULES_INTRO.entryBody}</p>
+        </div>
+      </div>
+      <ModuleExplorer client:visible />
+    </div>
+  </section>
+
+  <!-- ============ 05 Value ============ -->
+  <section id="value" class="section tone-ice" aria-labelledby="value-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{PMG_VALUE.eyebrow}</p>
+        <h2 id="value-title" class="h2">{PMG_VALUE.title}</h2>
+      </div>
+      <div class="val">
+        {
+          PMG_VALUE.groups.map((g) => (
+            <article class="val-col" aria-labelledby={`val-${g.id}`}>
+              <p class="val-k">{g.label}</p>
+              <h3 id={`val-${g.id}`} class="h3">{g.title}</h3>
+              <p class="val-body">{g.body}</p>
+              <p class="val-mk">What to measure</p>
+              <ul class="val-measures">{g.measures.map((m) => <li>{m}</li>)}</ul>
+            </article>
+          ))
+        }
+      </div>
+      <p class="val-foot">
+        <span>{PMG_VALUE.compare}</span>
+        <a class="link-arrow" href="/platform#benefits">Explore the complete benefit scenarios <ArrowRight aria-hidden="true" size={18} /></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 06 Proof plan ============ -->
+  <section id="proof" class="section tone-white" aria-labelledby="proof-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{PMG_PROOF.eyebrow}</p>
+          <h2 id="proof-title" class="h2">{PMG_PROOF.title}</h2>
+        </div>
+        <p class="lead">{PMG_PROOF.lead}</p>
+      </div>
+
+      <ol class="gantt">
+        {
+          gates.map((g) => (
+            <li class="gantt-row" style={`--s:${g.a + 1};--e:${g.b + 1}`}>
+              <div class="gantt-meta">
+                <p class="gantt-gate">
+                  {g.gate} · {g.weeks}
+                </p>
+                <h3 class="gantt-title">{g.title}</h3>
+                <p class="gantt-body">{g.body}</p>
+                <p class="gantt-ev">
+                  <span>Evidence</span>
+                  {g.evidence}
+                </p>
+              </div>
+              <div class="gantt-track" aria-hidden="true">
+                <span class="gantt-bar" />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="gantt-scale" aria-hidden="true">
+        <span class="gantt-scale-pad" />
+        <div class="gantt-scale-track">
+          {ticks.map((w) => <span style={`--w:${w}`}>Wk {w}</span>)}
+        </div>
+      </div>
+
+      <ol class="pos" aria-label="Where the program stands">
+        {
+          PMG_PROOF.position.map((p, i) => (
+            <li data-current={i === 0 ? '' : undefined}>
+              <span class="pos-k">{p.label}</span>
+              <span class="pos-t">{p.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="proof-foot">
+        <p class="note">{POC_NOTE}</p>
+        <a class="resource" href={PMG_PROOF.download.href} download>
+          <span class="resource-meta">{PMG_PROOF.download.meta}</span>
+          <span class="resource-title">{PMG_PROOF.download.label}</span>
+          <span class="resource-body">{PMG_PROOF.download.body}</span>
+          <span class="resource-action">{PMG_PROOF.download.label} <Download aria-hidden="true" size={18} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 Limits + FAQ ============ -->
+  <section id="questions" class="section tone-pearl" aria-labelledby="questions-title">
+    <div class="container q-grid">
+      <div class="q-limits">
+        <p class="eyebrow">Questions about PMG</p>
+        <h2 id="questions-title" class="h2">Limits and common questions</h2>
+        <h3 class="q-sub">Engineering limitations</h3>
+        <ol class="limits">{PMG_LIMITS.map((l) => <li>{l}</li>)}</ol>
+      </div>
+      <div class="q-faq">
+        <Faq items={PMG_FAQ} />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={PMG_CTA.title}
+    body={PMG_CTA.body}
+    primary={{ label: 'Discuss a PMG pilot', href: contactHref('pmg') }}
+    secondary={{ label: 'See the connected platform', href: '/platform' }}
+  />
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .pmg-hero {
+    position: relative;
+    padding: clamp(44px, 6vw, 96px) 0 clamp(56px, 7vw, 104px);
+    background:
+      linear-gradient(180deg, var(--c-white) 0%, var(--c-white) 40%, var(--c-ice) 100%);
+  }
+  .pmg-hero-grid {
+    display: grid;
+    gap: 44px;
+  }
+  .pmg-hero-copy {
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+  .pmg-title {
+    font-size: clamp(2.6rem, 1rem + 5.4vw, 6.4rem);
+    font-weight: 750;
+    line-height: 0.98;
+    letter-spacing: var(--ls-display);
+  }
+  .pmg-title-2 {
+    color: var(--c-cobalt-ink);
+  }
+  .pmg-hero-stage {
+    display: grid;
+    gap: 10px;
+    max-width: 520px;
+    margin-top: 8px;
+  }
+  @media (min-width: 1100px) {
+    .pmg-hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(48px, 6vw, 112px);
+      align-items: center;
+    }
+  }
+
+  .pmg-kicker {
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+
+  /* ---------- Interface + permissions ---------- */
+  .if-grid {
+    display: grid;
+    gap: clamp(40px, 5vw, 72px);
+  }
+  .if-rules {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+  }
+  .if-sub {
+    margin-top: 8px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .perm {
+    display: grid;
+    margin: 0 0 18px;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .perm > div {
+    display: grid;
+    gap: 2px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .perm dt {
+    font-family: var(--f-display);
+    font-weight: 700;
+  }
+  .perm dd {
+    margin: 0;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-slate);
+  }
+  .bounds {
+    display: grid;
+    gap: 14px;
+  }
+  .bounds > div {
+    padding: 16px 18px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-m);
+    background: var(--c-ice);
+  }
+  .bounds > .bounds-not {
+    border-style: dashed;
+    border-color: var(--c-line-strong);
+    background: var(--c-white);
+  }
+  .bounds-k {
+    margin-bottom: 8px;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .bounds-not .bounds-k {
+    color: var(--c-ink-soft);
+  }
+  .bounds li::marker {
+    color: var(--c-cobalt);
+  }
+  .bounds-not li::marker {
+    color: var(--c-slate-2);
+  }
+  .bounds ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  @media (min-width: 1200px) {
+    .if-grid {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    }
+  }
+
+  /* ---------- Runtime vs SaaS (stacked: the cloud sits above the vehicle boundary) ---------- */
+  .rt {
+    display: grid;
+  }
+  .rt-panel {
+    display: grid;
+    gap: 22px;
+    padding: clamp(22px, 3vw, 40px);
+    border-radius: var(--r-xl);
+  }
+  .rt-panel--cloud {
+    border: 1.5px dashed var(--c-slate-2);
+    background: transparent;
+  }
+  .rt-panel--vehicle {
+    border: 1px solid var(--c-line);
+    border-top: 4px solid var(--c-cobalt);
+    background: var(--c-white);
+    box-shadow: var(--sh-1);
+  }
+  .rt-main {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .rt-k,
+  .rt-list-k {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .rt-panel--vehicle .rt-k {
+    color: var(--c-cobalt-ink);
+  }
+  .rt-body {
+    color: var(--c-ink-soft);
+  }
+  .rt-path {
+    display: grid;
+    gap: 2px;
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px solid var(--c-line);
+    font-family: var(--f-display);
+    font-weight: 650;
+  }
+  .rt-path span {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .rt-tasks {
+    display: grid;
+    gap: 0;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line);
+  }
+  .rt-tasks li {
+    padding: 11px 0 11px 22px;
+    border-bottom: 1px solid var(--c-line);
+    position: relative;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  .rt-tasks li::before {
+    content: '';
+    position: absolute;
+    top: 1.15em;
+    left: 2px;
+    width: 10px;
+    height: 2px;
+    background: var(--c-cobalt);
+  }
+  .rt-panel--cloud .rt-tasks li::before {
+    background: var(--c-slate-2);
+  }
+  .rt-boundary {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 64px;
+  }
+  .rt-boundary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    border-top: 1.5px dashed var(--c-slate-2);
+  }
+  .rt-boundary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1.5px dashed var(--c-cobalt);
+  }
+  .rt-boundary span {
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 24px);
+    padding: 3px 12px;
+    border-radius: var(--r-pill);
+    background: var(--c-pearl);
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .rt-note {
+    margin-top: 20px;
+  }
+  .rt-more {
+    display: grid;
+    gap: 40px;
+    margin-top: clamp(48px, 6vw, 80px);
+  }
+  .rt-spec {
+    display: grid;
+    margin: 0;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .rt-spec > div {
+    display: grid;
+    gap: 6px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .rt-spec dt {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .rt-spec dd {
+    margin: 0;
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .rt-delivery {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding: clamp(20px, 2.6vw, 32px);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-l);
+    background: var(--c-white);
+  }
+  .rt-delivery-title {
+    font-size: var(--fs-h4);
+  }
+  .rt-delivery ol {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rt-delivery li {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .rt-delivery-n {
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    color: var(--c-cobalt-ink);
+    padding-top: 2px;
+  }
+  .rt-delivery-l {
+    font-family: var(--f-display);
+    font-weight: 700;
+  }
+  .rt-delivery-t {
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .rt-panel {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(28px, 4vw, 64px);
+    }
+    .rt-spec > div {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
+    }
+    .rt-more {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+      gap: clamp(32px, 4vw, 64px);
+      align-items: start;
+    }
+  }
+
+  /* ---------- Modules intro ---------- */
+  .mod-entry {
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-slate);
+  }
+  .mod-entry strong {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--f-display);
+    color: var(--c-ink);
+  }
+
+  /* ---------- Value ---------- */
+  .val {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--c-line-strong);
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .val-col {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 32px 0;
+  }
+  .val-col + .val-col {
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .val-k,
+  .val-mk {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .val-mk {
+    margin-top: 10px;
+    color: var(--c-slate);
+  }
+  .val-body {
+    max-width: 52ch;
+    color: var(--c-ink-soft);
+  }
+  .val-measures {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line);
+  }
+  .val-measures li {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--c-line);
+    font-family: var(--f-display);
+    font-weight: 650;
+  }
+  .val-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-top: 28px;
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    /* subgrid keeps label, title, body and 'What to measure' aligned across both columns */
+    .val {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(5, auto);
+      row-gap: 12px;
+    }
+    .val-col {
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+    }
+    .val-col {
+      padding: 40px clamp(24px, 4vw, 64px) 40px 0;
+    }
+    .val-col + .val-col {
+      padding: 40px 0 40px clamp(24px, 4vw, 64px);
+      border-top: 0;
+      border-left: 1px solid var(--c-line-strong);
+    }
+  }
+
+  /* ---------- Proof plan: week-scale timeline ---------- */
+  .gantt {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .gantt-row {
+    display: grid;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .gantt-meta {
+    display: grid;
+    gap: 6px;
+  }
+  .gantt-gate {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .gantt-title {
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .gantt-body {
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .gantt-ev {
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+  .gantt-ev span {
+    margin-right: 8px;
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .gantt-track {
+    display: grid;
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    align-items: center;
+    height: 14px;
+    border-radius: var(--r-pill);
+    background: repeating-linear-gradient(90deg, var(--c-line) 0 1px, transparent 1px calc(100% / 16));
+    background-color: var(--c-pearl);
+  }
+  .gantt-bar {
+    grid-column: var(--s) / var(--e);
+    height: 100%;
+    border-radius: var(--r-pill);
+    background: var(--c-cobalt);
+  }
+  .gantt-scale {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .gantt-row,
+    .gantt-scale {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: clamp(28px, 4vw, 64px);
+      align-items: center;
+    }
+    .gantt-track {
+      height: 20px;
+    }
+    .gantt-scale {
+      display: grid;
+      padding-top: 10px;
+    }
+    .gantt-scale-track {
+      position: relative;
+      height: 18px;
+    }
+    .gantt-scale-track span {
+      position: absolute;
+      left: calc(var(--w) / 16 * 100%);
+      transform: translateX(-50%);
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      color: var(--c-slate);
+      white-space: nowrap;
+    }
+  }
+
+  .pos {
+    display: grid;
+    gap: 10px;
+    margin: clamp(40px, 5vw, 64px) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pos li {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    padding: 16px 18px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-m);
+    background: var(--c-white);
+  }
+  .pos li[data-current] {
+    border: 1.5px solid var(--c-cobalt);
+    background: var(--c-ice);
+  }
+  .pos-k {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .pos li[data-current] .pos-k {
+    color: var(--c-cobalt-ink);
+  }
+  .pos-t {
+    font-family: var(--f-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  @media (min-width: 900px) {
+    .pos {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .pos li:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      top: 50%;
+      right: -21px;
+      transform: translateY(-50%);
+      color: var(--c-slate);
+    }
+  }
+  .proof-foot {
+    display: grid;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .resource-title {
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .resource-body {
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+  @media (min-width: 900px) {
+    .proof-foot {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      align-items: start;
+    }
+  }
+
+  /* ---------- Limits + FAQ ---------- */
+  .q-grid {
+    display: grid;
+    gap: 40px;
+  }
+  .q-limits {
+    display: grid;
+    align-content: start;
+    gap: 18px;
+  }
+  .q-sub {
+    margin-top: 12px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+  .limits {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: lim;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .limits li {
+    position: relative;
+    padding: 12px 0 12px 40px;
+    border-bottom: 1px solid var(--c-line);
+    counter-increment: lim;
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .limits li::before {
+    content: counter(lim, decimal-leading-zero);
+    position: absolute;
+    top: 13px;
+    left: 0;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    color: var(--c-cobalt-ink);
+  }
+  @media (min-width: 1000px) {
+    .q-grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: clamp(48px, 6vw, 112px);
+    }
+    .q-faq {
+      padding-top: 6px;
+    }
+  }
+</style>

@@ -1,0 +1,132 @@
+     Investors & strategic partnerships — Mathsya Connected Services                       [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+INVESTORS / OEMs / INCUBATORS
+# A focused first proof.
+ A connected growth path.
+Mathsya is developing automotive Edge AI as a product portfolio: Battery & Charging AI at module level, Evo Core in EV power hardware and PMG across vehicle software and optional cloud services.
+ [Explore the investment case ↗ ](#thesis) [Follow the pitch journey →](pitch.html)
+Current stage: architecture, use cases and PoC planning · commercial terms remain to be validated
+ [IMG src=assets/automotive-concept.webp alt='AI-generated illustration of an intelligent vehicle.']
+AI-generated concept illustration · not a production prototype
+ [Investment thesis](#thesis) [Business model](#business) [First market entry](#entry) [Milestones](#milestones) [Pitch resources](#resources)
+{id=thesis}
+WHY THIS PORTFOLIO
+## One useful module.
+ Several ways to expand.
+The proposed entry is a narrowly scoped module or vehicle problem. Repeatable local intelligence can become an embedded product; PMG connects it to a broader vehicle and organizational workflow.
+ THE ENTRY
+### Battery / charging insight
+Start with available signals, a known problem and a measured baseline. Define a buyer and an acceptance gate before extending the application.
+ THE CONNECTION
+### PMG vehicle software
+Join the module result to readiness, service or quality decisions. Test embedded licensing and optional organization-level services.
+ THE HARDWARE PATH
+### Evo Core integration
+Develop power commonization through a separate hardware program. Expand generations when integration and commercial evidence support them.
+{id=investors}
+THE INVESTMENT THESIS
+For strategic OEM partners, incubators and early-stage capital.
+## {id=investors-title}Prove value in a module.
+ Repeat across programs.
+Start with a defined module or vehicle problem, approved signals and a business baseline. Evaluate Edge AI usefulness, false alerts, compute needs and net value. Extend the approach as integration and commercial evidence support it.
+{id=strategic-tab}{data-audience=strategic}Strategic / OEM partner
+{id=capital-tab}{data-audience=capital}Early-stage investor
+{id=investor-panel}
+ {id=investor-label}A PARTNER-DEFINED ENTRY POINT
+### {id=investor-panel-title}Bring a use case. Build the proof together.
+{id=investor-panel-copy}A nominated module or vehicle use case, approved data and an agreed business baseline create the foundation for a scoped Edge AI PoC.
+{id=investor-points}
+- Compare module and business outcomes against the existing workflow.
+- Define integration responsibility and acceptance criteria.
+- Advance to a paid program when technical and commercial gates are met.
+{id=business}
+PROPOSED COMMERCIAL MODEL
+## Match the revenue model
+ to the product.
+ Proposed adoption paths. No booked revenue, signed customer contract or validated price is claimed.
+  | Offering  | Potential buyer  | Paid entry / expansion
+  | Battery & Charging AI  | Battery/BMS supplier or OEM  | Paid integration/PoC → embedded-runtime licensing and program support.
+  | PMG embedded software  | OEM, vehicle platform or fleet program  | Scoped vehicle workflow → program or per-vehicle licensing, subject to agreed deployment terms.
+  | PMG cloud services  | OEM quality/service organization or fleet  | Authorized evidence workflow → enterprise subscription/services where recurring value is proven.
+  | Evo Core  | OEM or EV power-system partner  | Paid engineering/reference program → hardware supply and embedded-software/support terms.
+  | Engineering tools  | Engineering and validation teams  | Focused workflow pilot → enterprise tooling/services, as an enabling track.
+{id=entry}
+A DISCIPLINED MARKET ENTRY
+## Choose the buyer.
+ Prove the first wedge.
+ 01
+### A costly, observable problem
+Agree a charging-readiness, health or investigation case with an accountable engineering or service owner.
+ 02
+### An existing baseline
+Measure current detection, readiness, investigation effort and the complete cost of the issue.
+ 03
+### A bounded implementation
+Use approved data and controlled testing before any permitted vehicle action or wider deployment.
+ 04
+### A paid next step
+Seek acceptance against the agreed gate and validate integration responsibility, pricing and willingness to adopt.
+ ECONOMICS TO VALIDATE
+### Net value includes the whole adoption cost.
+Attributable issue cost avoided + engineering/service time saved + measured energy value − integration, runtime, validation, operation and support cost. Avoid double-counting the same benefit across products.
+### The numbers the next proof must establish
+Buyer interviews, addressable reference programs, pricing, unit economics, TAM/SAM/SOM and the funding ask require a sourced, bottom-up case. They remain open rather than being presented as traction.
+{id=milestones}
+CAPITAL ALIGNED TO EVIDENCE
+## Fund the next milestone.
+ Learn before scaling.
+A proposed 12–16 week PMG software PoC starts after partner, approved data and test access are agreed. Battery AI model development and Evo Core hardware require separately scoped work packages.
+ WEEKS 0–2
+### Define the baseline
+Problem, buyer, signal access, permissions and an agreed acceptance gate.
+ WEEKS 2–6
+### Connect the runtime
+Read-only data path, vehicle context, policy checks and a reviewable bench integration.
+ WEEKS 6–10
+### Evaluate the workflow
+Replay and controlled tests, false alerts, model/runtime needs and traceable outcomes.
+ WEEKS 10–16
+### Decide the next program
+Incremental value, complete costs and a buyer-led discussion about paid expansion.
+ SOFTWARE / DATA
+### Runtime and evaluation
+Model work, signal integration, edge runtime, versioned evidence and controlled tests.
+ HARDWARE / VALIDATION
+### Reference and bench proof
+Supplier-interface access, control feasibility, prototype planning and bottom-up cost evidence.
+ BUYER / ADOPTION
+### Commercial proof
+Partner discovery, acceptance criteria, pricing and a clear ownership/support model.
+{id=resources}
+A SOURCE FOR THE INVESTOR CONVERSATION
+## Follow the story.
+ Build the presentation.
+The website and these resources share the same product roles, benefits, generation roadmap and proof gates.
+ [ 01 / PITCH JOURNEY
+### The presentation narrative
+A structured journey from problem and portfolio to benefits, business model and the next ask.
+ Explore / print → ](pitch.html) [ 02 / INVESTOR BRIEF
+### The concise company view
+A printable summary for a first OEM, incubator or investor discussion.
+ Read / save PDF → ](investor-brief.html) [ 03 / EDITABLE PITCH SOURCE
+### Turn the story into slides
+Slide-by-slide source copy, suggested visuals and evidence needed before pitching numbers.
+ Download source ↓ ](resources/Mathsya-Pitch-Deck-Source.md) [ 04 / TEAM HANDOFF
+### Brief the website team
+Page structure, content rules, hosting, domain and contact requirements, and acceptance checks.
+ Download handoff ↓ ](resources/Mathsya-Team-Handoff.md)
+BUILD THE FIRST PROOF
+## Bring a use case.
+Align the next investment.
+Agree the first proof, the team and data needed, the milestone and a paid follow-on path.
+ [Discuss a pilot ↗ ](contact.html?topic=Investment%20discussion)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

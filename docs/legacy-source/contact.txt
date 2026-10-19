@@ -1,0 +1,56 @@
+     Contact and partnership enquiries — Mathsya Connected Services                   [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+CONTACT / INVESTORS & PARTNERSHIPS
+# A clear question.
+ A useful next conversation.
+Prepare an enquiry about a PMG pilot, Evo Core collaboration, engineering tools or an investment discussion. A focused use case and existing baseline help define the next step.
+ [Prepare your enquiry ↗ ](#enquiry) [Read the investor brief → ](investor-brief.html)
+{id=contact-hero-note}Public business email setup is pending. Enquiry preparation and download are available below.
+{id=enquiry}
+MATHSYA CONNECTED SERVICES
+## Define the first
+ proof together.
+Share the module or vehicle problem, the people who own it and the outcome you want to improve.
+{id=contact-status}BUSINESS INBOX SETUP PENDING
+{id=public-email}The public business email will appear here once confirmed.
+{id=contact-availability}Prepare and download your enquiry below. This page does not send messages yet.
+ Founder: Arjun Amuthan
+Bengaluru, India [Read the investor brief →](investor-brief.html)
+{id=enquiry-form}
+Your name *
+ [INPUT name=None type=text req=True ph=None]{id=enquiry-name}
+Your email *
+ [INPUT name=None type=email req=True ph=None]{id=enquiry-email}
+Company optional
+ [INPUT name=None type=text req=False ph=None]{id=enquiry-company}
+Interest *
+[SELECT name=None type=None req=True ph=None]{id=enquiry-topic}
+Choose an enquiry type
+Battery & Charging AI
+PMG pilot
+Evo Core collaboration
+Investment discussion
+Engineering tools
+Portfolio / integration
+General partnership
+Your problem or proposal *
+[TEXTAREA name=None type=None req=True ph='Tell us the application, current challenge and outcome you want to improve.']{id=enquiry-message}
+Your draft is prepared on your device. Preparing or downloading it does not send an enquiry. [Read the privacy note.](privacy.html)
+{id=prepare-enquiry}Prepare enquiry →
+{id=draft-panel}
+### Review your enquiry
+ {id=enquiry-preview}
+{id=download-enquiry}Download enquiry ↓
+{id=copy-enquiry}Copy enquiry
+ {id=email-enquiry}Open email draft ↗
+{id=draft-status}
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+  

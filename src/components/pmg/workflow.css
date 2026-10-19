@@ -1,0 +1,280 @@
+/* /pmg signature: module event → vehicle context → decision policy → permitted recommendation → verified result.
+   Mobile-first vertical flow with CSS pulses; ≥1280px a horizontal flow with AnimatedBeams and a write-back loop. */
+.wf-tabs {
+  gap: 26px;
+}
+.wf-bar {
+  display: grid;
+  gap: 14px;
+}
+.wf-note {
+  max-width: 62ch;
+  padding-left: 14px;
+  border-left: 2px solid var(--c-cobalt);
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--c-ink-soft);
+}
+.wf-panel {
+  display: grid;
+  gap: 24px;
+}
+.wf-panel[data-state='inactive'] {
+  display: none;
+}
+.wf-head {
+  display: grid;
+  gap: 8px;
+  max-width: 780px;
+}
+.wf-number {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-cobalt-ink);
+}
+.wf-title {
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.wf-intro {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--c-slate);
+}
+
+/* ---------- Canvas ---------- */
+.wf-canvas {
+  position: relative;
+  padding: 22px 16px 20px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-xl);
+  background-color: var(--c-white);
+  background-image: radial-gradient(rgba(24, 90, 219, 0.11) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.wf-beams {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.wf-flow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wf-node {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-m);
+  background: var(--c-white);
+  animation: wf-in 0.55s var(--ease-flow) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+.wf-node-k {
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+.wf-node-n {
+  color: var(--c-cobalt-ink);
+}
+.wf-node-src {
+  justify-self: start;
+  padding: 2px 9px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-pill);
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--c-ink-soft);
+}
+.wf-node-title {
+  font-size: 1.04rem;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.wf-node-body {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+/* where the event comes from */
+.wf-node[data-source='battery'] {
+  box-shadow: inset 4px 0 0 var(--p-battery);
+}
+.wf-node[data-source='battery'] .wf-node-src {
+  border-color: var(--p-battery);
+  color: var(--p-battery-ink);
+}
+.wf-node[data-source='module'] {
+  box-shadow: inset 4px 0 0 var(--c-slate);
+}
+.wf-node[data-source='reference'] {
+  background: #eef2f6;
+  box-shadow: inset 4px 0 0 #c7d0db;
+}
+/* the policy gate */
+.wf-node[data-stage='2'] {
+  border: 1.5px solid var(--c-cobalt);
+  background: var(--c-ice);
+}
+.wf-node[data-stage='2'] .wf-node-title {
+  color: var(--c-cobalt-ink);
+}
+/* the verified result */
+.wf-node[data-stage='4'] {
+  border-color: var(--c-cobalt);
+  background: var(--c-cobalt);
+  color: var(--c-white);
+}
+.wf-node[data-stage='4'] .wf-node-k,
+.wf-node[data-stage='4'] .wf-node-n,
+.wf-node[data-stage='4'] .wf-node-body {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* vertical connectors + pulses (mobile / tablet) */
+.wf-node:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  width: 2px;
+  height: 36px;
+  background: color-mix(in srgb, var(--c-cobalt) 35%, transparent);
+}
+.wf-pulse {
+  position: absolute;
+  top: 100%;
+  left: 28px;
+  width: 6px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--c-cobalt);
+  opacity: 0;
+}
+.wf[data-live] .wf-pulse {
+  opacity: 1;
+  animation: wf-drop 1.7s var(--ease-flow) infinite;
+  animation-delay: calc(var(--i, 0) * 0.22s);
+}
+.wf-anchor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+}
+.wf-loop {
+  margin-top: 18px;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-cobalt-ink);
+}
+
+.wf-proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding: 16px 20px;
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-m);
+  background: var(--c-white);
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+.wf-proof-k {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-cobalt-ink);
+}
+
+@keyframes wf-in {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+}
+@keyframes wf-drop {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(32px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wf-pulse {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .wf-bar {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 28px;
+  }
+}
+
+/* ---------- Wide: horizontal flow with beams ---------- */
+@media (min-width: 1280px) {
+  .wf-canvas {
+    padding: 34px 32px 28px;
+  }
+  .wf-beams {
+    display: block;
+  }
+  .wf-flow {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 44px;
+  }
+  .wf-pulse {
+    display: none;
+  }
+  /* ports where the beams enter and leave each node */
+  .wf-node:not(:first-child)::before,
+  .wf-node:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+    border: 2px solid var(--c-cobalt);
+    border-radius: 50%;
+    background: var(--c-white);
+  }
+  .wf-node:not(:first-child)::before {
+    left: -6px;
+  }
+  .wf-node:not(:last-child)::after {
+    left: auto;
+    right: -6px;
+  }
+  .wf-loop {
+    margin-top: 64px;
+    padding-left: 20%;
+    text-align: center;
+  }
+}

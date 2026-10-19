@@ -1,0 +1,201 @@
+---
+import { ArrowDown } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import NeuralChain from '@/components/research/NeuralChain';
+import InvestigationFlow from '@/components/research/InvestigationFlow';
+import SolarPath from '@/components/research/SolarPath';
+import '@/components/research/research.css';
+import { PROGRAMS } from '@/data/portfolio';
+import { contactHref } from '@/data/site';
+import { ENGINEERING_INTELLIGENCE as EI, NEURAL_CHAIN as NC, RESEARCH_CTA, RESEARCH_HERO as HERO, SOLAR } from '@/data/research';
+
+const program = Object.fromEntries(PROGRAMS.map((p) => [p.id, p]));
+const dots: Record<string, string> = { 'neural-chain': 'rs-dot-teal', 'engineering-intelligence': 'rs-dot-blue', solar: 'rs-dot-sun' };
+const nav = [
+  { id: 'neural-chain', label: 'Product Neural Chain' },
+  { id: 'engineering-intelligence', label: 'Engineering Intelligence' },
+  { id: 'solar', label: 'Solar research' },
+];
+---
+
+<BaseLayout
+  title="Research & Engineering"
+  description="Product Neural Chain, Engineering Intelligence and solar-assisted auxiliary research: three programs, each with its own stage, pilot scope and proof gate."
+>
+  <div class="rs">
+    <section class="rs-hero tone-pearl" aria-labelledby="rs-title">
+      <div class="container rs-hero-grid">
+        <div class="rs-hero-copy">
+          <p class="eyebrow" style="--tone-accent: var(--rs-teal-ink)">{HERO.eyebrow}</p>
+          <h1 id="rs-title" class="rs-title">Connecting engineering decisions to <span>better evidence.</span></h1>
+          <p class="lead">{HERO.lead}</p>
+          <div class="btn-row">
+            <a class={buttonVariants({ variant: 'default' })} href="#neural-chain">Read the three programs <ArrowDown aria-hidden="true" /></a>
+            <a class={cn(buttonVariants({ variant: 'outline' }))} href="/investors/brief">Read the investor brief</a>
+          </div>
+          <p class="fineprint">{HERO.note}</p>
+        </div>
+        <nav aria-label="Program index">
+          <ol class="rs-index">
+            {
+              PROGRAMS.map((p, i) => (
+                <li>
+                  <a href={`#${p.id}`}>
+                    <span class="rs-index-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="rs-index-name">{p.name}</span>
+                    <span class:list={['stage', dots[p.id]]}>{p.stage}</span>
+                    <span class="rs-index-sum">{p.summary}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <PageNav items={nav} label="Research programs" />
+
+    <!-- 01 · Product Neural Chain -->
+    <section id="neural-chain" class="rs-chapter rs-chapter--chain" aria-labelledby="nc-title">
+      <div class="container">
+        <header class="rs-head rs-head--split">
+          <div>
+            <p class="rs-no"><b aria-hidden="true">{NC.number}</b><span class="rs-label">{program['neural-chain'].name}</span></p>
+            <h2 id="nc-title" class="h2">{NC.title}</h2>
+          </div>
+          <div class="rs-head-meta">
+            <span class="stage rs-dot-teal">{program['neural-chain'].stage}</span>
+            <p class="lead">{NC.lead}</p>
+          </div>
+        </header>
+
+        <NeuralChain client:visible />
+
+        <div class="rs-spec">
+          <div>
+            <h3>A focused pilot</h3>
+            <p>{NC.pilot}</p>
+          </div>
+          <div>
+            <h3>The value to establish</h3>
+            <ul class="rs-measures">{NC.value.map((v) => <li>{v}</li>)}</ul>
+          </div>
+          <div>
+            <h3>Proof gate</h3>
+            <div class="rs-gate"><p>{NC.gate}</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Engineering Intelligence -->
+    <section id="engineering-intelligence" class="rs-chapter rs-chapter--ei" aria-labelledby="ei-title">
+      <div class="container">
+        <header class="rs-head rs-head--split">
+          <div>
+            <p class="rs-no"><b aria-hidden="true">{EI.number}</b><span class="rs-label">{program['engineering-intelligence'].name}</span></p>
+            <h2 id="ei-title" class="h2">{EI.title}</h2>
+          </div>
+          <div class="rs-head-meta">
+            <span class="stage rs-dot-blue">{program['engineering-intelligence'].stage}</span>
+            <p class="lead">{EI.lead}</p>
+            <div>
+              <p class="rs-label" id="ei-scope">Proposed initial scope</p>
+              <ul class="rs-scope" aria-labelledby="ei-scope" style="margin-top: 10px">{EI.scope.map((s) => <li>{s}</li>)}</ul>
+            </div>
+          </div>
+        </header>
+
+        <InvestigationFlow client:visible />
+
+        <div class="rs-spec ei-spec">
+          <div>
+            <h3>A focused pilot</h3>
+            <p>{EI.pilot}</p>
+          </div>
+          <div>
+            <h3>The value to establish</h3>
+            <ul class="rs-measures">{EI.value.map((v) => <li>{v}</li>)}</ul>
+          </div>
+          <div>
+            <h3>Who owns the conclusion</h3>
+            <div class="rs-gate">
+              <p>{EI.ownership}</p>
+            </div>
+            <p class="fineprint">{EI.adoption}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Solar-assisted auxiliaries -->
+    <section id="solar" class="rs-chapter rs-chapter--solar" aria-labelledby="sp-title">
+      <div class="container">
+        <header class="rs-head rs-head--split">
+          <div>
+            <p class="rs-no"><b aria-hidden="true">{SOLAR.number}</b><span class="rs-label">{program.solar.name}</span></p>
+            <h2 id="sp-title" class="h2">{SOLAR.title}</h2>
+          </div>
+          <div class="rs-head-meta">
+            <span class="stage rs-dot-sun">{program.solar.stage}</span>
+            <p class="lead">{SOLAR.lead}</p>
+            <p class="rs-separate"><span class="rs-label">Separate research track</span>{SOLAR.separate}</p>
+          </div>
+        </header>
+
+        <SolarPath client:visible />
+
+        <div class="sp-questions">
+          <article class="sp-q" aria-labelledby="sp-q1">
+            <p class="rs-label">{SOLAR.technical.label}</p>
+            <h3 id="sp-q1" class="sp-q-title">{SOLAR.technical.question}</h3>
+            <dl class="sp-factors">
+              {
+                SOLAR.technical.factors.map((f) => (
+                  <div>
+                    <dt>{f.term}</dt>
+                    <dd>{f.detail}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </article>
+          <article class="sp-q" aria-labelledby="sp-q2">
+            <p class="rs-label">{SOLAR.commercial.label}</p>
+            <h3 id="sp-q2" class="sp-q-title">{SOLAR.commercial.question}</h3>
+            <div class="sp-ledger" role="group" aria-label="Lifetime cost analysis">
+              <div>
+                <h4>Complete installed cost</h4>
+                <ul>{SOLAR.commercial.cost.map((c) => <li>{c}</li>)}</ul>
+              </div>
+              <p class="sp-vs">against</p>
+              <div>
+                <h4>Measured benefit</h4>
+                <p>{SOLAR.commercial.benefit}</p>
+              </div>
+            </div>
+            <p class="sp-horizon">{SOLAR.commercial.horizon}</p>
+          </article>
+        </div>
+
+        <aside class="sp-boundary" aria-labelledby="sp-boundary">
+          <h3 id="sp-boundary">Research boundary</h3>
+          <p>{SOLAR.boundary}</p>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <CtaBand
+    eyebrow={RESEARCH_CTA.eyebrow}
+    title={RESEARCH_CTA.title}
+    body={RESEARCH_CTA.body}
+    primary={{ label: 'Prepare a research enquiry', href: contactHref('research') }}
+    secondary={{ label: 'See the connected platform', href: '/platform' }}
+  />
+</BaseLayout>

@@ -1,0 +1,184 @@
+     PMG vehicle software & optional SaaS — Mathsya Connected Services                        [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+PMG / VEHICLE SOFTWARE + OPTIONAL SaaS
+# Connect the insight.
+ Make it useful.
+Proactive Mobility Guardian is the vehicle software layer in Mathsya’s portfolio. It joins selected module insights with journey and customer context, then links verified outcomes to optional OEM and fleet services.
+ [Explore PMG ↗ ](#principle) [Follow the pitch journey →](pitch.html)
+Architecture and PoC planning · development-stage program
+ PMG / VEHICLE SOFTWARE CONCEPT
+       PMG BATTERY AI EVO CORE JOURNEY
+ A shared vehicle context.
+Module insight · customer intent · permitted action · verified outcome
+ [Working principle](#principle) [Software & SaaS](#deployment) [Use cases](#pmg) [Module applications](#modules) [Proof plan](#validation)
+{id=principle}
+PMG / A VEHICLE INTELLIGENCE LAYER
+## The modules see behavior.
+ PMG adds the vehicle story.
+A battery-health event is more useful when connected to the planned journey, available charging, customer permissions and a way to verify the outcome.
+ 03 / ORGANIZATIONAL LEARNING
+### Optional OEM & fleet services
+Authorized evidence · quality investigations · service learning
+ CLOUD / SaaS OPTIONS
+↑↓
+ 02 / VEHICLE SOFTWARE
+### Proactive Mobility Guardian
+Vehicle context · permitted recommendations · verified outcomes
+ [EXPLORE PMG ↗](pmg.html)
+↑↓
+ [ 01 / MODULE INTELLIGENCE
+### Battery & Charging AI
+Health, charge readiness and thermal context
+ SOFTWARE / EMBEDDED AI ↗ ](battery-ai.html) [ 01 / POWER HARDWARE
+### Evo Core
+Integrated control, power conversion and supervision
+ HARDWARE + EMBEDDED SOFTWARE ↗ ](evo-core.html)
+ OTHER VEHICLE MODULES
+### Approved interfaces
+Thermal, connected functions and future module AI
+ PARTNER / FUTURE APPLICATIONS
+Module products can be evaluated independently. PMG connects selected products through approved vehicle interfaces; the cloud adds learning without becoming a prerequisite for local operation.
+ One proposed coordination layer. Several ways to enter.
+PMG can start with existing module data and approved vehicle interfaces. Battery AI and Evo Core add portfolio-specific capabilities as they are independently validated; adopting PMG does not require every module to be replaced.
+{id=deployment}
+SOFTWARE DELIVERY / COMMERCIAL OPTIONS
+## Inside the vehicle.
+ Beyond it, where useful.
+PMG’s embedded runtime and its optional cloud services have different responsibilities and different routes to revenue.
+ ON THE VEHICLE / SOFTWARE
+### PMG edge runtime
+Runs on suitable vehicle compute, such as a gateway, telematics unit or central computer, as selected for the reference architecture.
+- Combine module events with vehicle and journey context.
+- Prepare reviewable recommendations and permitted action requests.
+- Preserve focused history and verify the result locally.
+- Define behavior for missing data and lost connectivity.
+ PROPOSED COMMERCIAL PATH
+Program integration + embedded-software licensing and support.
+ OFF THE VEHICLE / OPTIONAL SaaS
+### OEM & fleet learning services
+Authorized vehicle evidence can support cross-vehicle comparison and organization-level workflows.
+- Compare relevant events across permitted vehicles and versions.
+- Support quality investigations and service decisions.
+- Track whether a correction reduced the repeat behavior.
+- Manage access, consent, retention and data ownership.
+ PROPOSED COMMERCIAL PATH
+Enterprise subscription or service terms after buyer value is validated.
+SaaS describes the optional cloud offering. Local vehicle software still needs embedded integration, validation and lifecycle support.
+{id=pmg}
+PMG / FROM SIGNAL TO OUTCOME
+ Proposed product experience
+## {id=pmg-title}Anticipate.
+Act with permission.
+ Verify.
+Edge AI interprets behavior close to vehicle modules. PMG adds vehicle, journey and customer context; optional fleet learning could help engineering teams investigate recurring issues and evaluate corrections.
+{id=battery-tab}{data-case=battery}Battery care
+{id=quality-tab}{data-case=quality}OEM quality
+{id=incident-tab}{data-case=incident}Incident context
+Actions depend on approved interfaces and customer permissions. Certified vehicle safety functions remain authoritative.
+{id=case-panel}
+ ILLUSTRATIVE WORKFLOW {id=case-number}01 / 03
+### {id=case-title}Prepare for the next journey.
+{id=case-intro}Combine battery trends, departure intent and charging context into a useful readiness decision.
+{id=case-workflow}
+-  01
+ Understand the battery
+Read available health, charge and thermal trends.
+-  02
+ Add the journey
+Consider departure time, route and charging opportunities.
+-  03
+ Request a permitted action
+Recommend a charging plan or approved preconditioning.
+-  04
+ Verify readiness
+Check the outcome and record what helped.
+ PROOF TO EARN
+{id=case-proof}Useful readiness outcomes, appropriate alerts and low override rates.
+{id=modules}
+EXPLORE THE VALUE CHAIN
+## One intelligence direction.
+ Different module problems.
+Select an illustrative application to see how module observations could support a vehicle outcome and an organizational measure. These are candidate workflows, not measured product results.
+{id=module-battery-tab}{data-module=battery}Battery & charging
+{id=module-power-tab}{data-module=power}EV power & thermal
+{id=module-connectivity-tab}{data-module=connectivity}Connected functions
+{id=module-output}
+ILLUSTRATIVE APPLICATION
+### {id=module-title}Battery & charging readiness
+{id=module-signals}Available charge, health and temperature trends, combined with departure and charging context.
+ PROOF TO EARN
+{id=module-proof}Readiness usefulness, false alerts, override rate and attributable investigation effort.
+MODULE INTELLIGENCE
+{id=module-module}Interpret trends and flag unusual behavior for an approved readiness or service decision.
+VEHICLE VALUE
+{id=module-vehicle}Support useful charging plans and departure readiness.
+ORGANIZATIONAL VALUE
+{id=module-organization}Evaluate alert usefulness, repeat issues and the evidence available to quality and service teams.
+{id=value}
+CUSTOMER VALUE / OEM VALUE
+## A recommendation is useful
+ when the outcome is verified.
+ FOR CUSTOMERS
+### Readiness, clarity and care.
+Evaluate helpful charging guidance, useful service recommendations and a clearer explanation of the vehicle’s operating condition.
+ Measure readiness, recommendation acceptance, false alerts and avoidable repeat diagnosis.
+ FOR OEMS & FLEETS
+### Evidence that can travel.
+Connect the module event to hardware/software versions and operating context. Compare it across a permitted population and verify the correction.
+ Measure evidence completeness, investigation time, recurrence and attributable operating or warranty cost.
+ [Explore the complete benefit scenarios →](platform.html#benefits)
+{id=validation}
+DEVELOPMENT WITH DECISION GATES
+ Proposed PMG validation plan
+## {id=validation-title}The next investment
+funds proof.
+A proposed 12–16 week PMG PoC, beginning when the partner, approved data and test access are in place. Evo Core follows a separate hardware realization and qualification path.
+GATE 01 · WEEKS 0–2
+### Define the baseline
+Choose a vehicle use case. Confirm signal access, permissions and the customer or business measure.
+ Evidence: an agreed pilot scope
+GATE 02 · WEEKS 2–6
+### Connect the system
+Build the read-only pipeline, vehicle memory and policy checks. Demonstrate an approved action on a bench.
+ Evidence: a reviewable integration
+GATE 03 · WEEKS 6–10
+### Close the loops
+Exercise readiness, one quality case and incident context using replay, simulation and controlled tests.
+ Evidence: traceable outcomes
+GATE 04 · WEEKS 10–16
+### Earn the next stage
+Evaluate usefulness, intervention behavior and economics. Decide whether to narrow, extend or scale.
+ Evidence: a measured value case
+ CURRENT POSITION
+Architecture and use-case definition
+ NEXT PROOF
+Bench integration and controlled evaluation
+ FOLLOW-ON DECISION
+Productization, qualification and rollout
+QUESTIONS ABOUT PMG
+## A platform direction.
+ A scoped first proof.
+Is PMG a hardware product?
+PMG is a software product direction. It runs on suitable vehicle compute and can connect to optional cloud services. Evo Core is the portfolio’s EV power-hardware platform; Battery & Charging AI is a module software product.
+Does PMG control everything in the car?
+No. The selected architecture defines available interfaces and permitted requests. Validated control, protection and safety functions retain their authority; PMG coordinates context and evaluates outcomes within the approved scope.
+What makes this different from today’s diagnostics?
+The intended addition is a connected evidence loop: local behavioral insight, vehicle and customer context, a permitted response and verification after the response. The pilot must show an incremental advantage over existing diagnostics and service workflows.
+What is the first adoption path?
+Choose one valuable vehicle workflow with an OEM, supplier or fleet partner. Agree signals, the baseline, integration responsibility, customer permissions and acceptance criteria before expanding the scope.
+ [Download the PMG overview ↓](assets/PMG-Program-Overview.md)
+BUILD THE FIRST PROOF
+## Choose a vehicle workflow.
+Connect it to an outcome.
+Start with charging readiness, a known quality issue or a focused service-evidence case.
+ [Discuss a pilot ↗ ](contact.html?topic=PMG%20pilot)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

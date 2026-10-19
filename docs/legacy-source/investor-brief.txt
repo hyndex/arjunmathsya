@@ -1,0 +1,57 @@
+     Investor & partner brief — Mathsya Connected Services                        [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+MATHSYA / INVESTOR & PARTNER BRIEF
+OCTOBER 2026
+{id=print-brief}Print / save PDF ↗
+ [Download text ↓](assets/Mathsya-Investor-Brief.md)
+# Intelligence inside.
+ Value beyond.
+Automotive Edge AI across module software, connected vehicle intelligence and coordinated EV power hardware.
+ FOUNDER Arjun Amuthan · Bengaluru
+ CURRENT STAGE Architecture, use cases & PoC planning
+ NEXT STEP A partner-defined problem with approved data and measurable acceptance criteria
+## The problem and direction
+Module signals become more valuable when interpreted in context and linked to a useful decision. Mathsya’s direction starts with one battery, charging or power-system problem, connects it to vehicle and customer needs, and preserves evidence for service and OEM quality. Existing estimation, diagnostics and control form the baseline.
+## The product portfolio
+MODULE SOFTWARE
+### Battery & Charging AI
+Embedded intelligence for health/state-estimation evaluation, charging readiness, thermal context and available cell-level patterns, alongside the validated BMS.
+Proposed adoption: paid integration and embedded-runtime licensing.
+VEHICLE SOFTWARE / OPTIONAL SaaS
+### PMG
+Proactive Mobility Guardian joins selected module insight with journey and customer context, permitted recommendations and verified outcomes. Optional cloud services extend authorized OEM/fleet learning.
+Proposed adoption: vehicle-software licensing and optional enterprise/cloud services.
+POWER HARDWARE + SOFTWARE
+### Evo Core
+A coordinated EV power platform with common control and AI supervision. The proposed roadmap progresses from charging/power to battery/thermal and wider energy coordination.
+Proposed adoption: paid engineering, hardware supply and program software/support.
+## The Evo Core generation roadmap
+### Gen 1 → Gen 2 → Gen 3
+Gen 1: OBC, DC/DC, EVCC, HV distribution and common control. Gen 2: battery-state context, AI and broader thermal/charging options. Gen 3: wider energy supervision and optional inverter coordination.
+### Integration follows evidence
+Common control, physical power-stage integration and connected interfaces are distinct decisions. BMS sensing/protection, real-time controls and qualification retain defined ownership. Generations have no committed release dates.
+## Benefits and proof
+### Customer outcomes
+Useful readiness and charging guidance, clearer battery/thermal context and better-informed service planning. Measure verified outcomes, false alerts and customer overrides.
+### OEM outcomes
+Evidence-led investigations, repeat-issue learning and a credible commonization cost case. Measure investigation time, recurrence, reusable software and complete program cost.
+No achieved battery-life, range, warranty or savings percentages are claimed. Compare with existing methods and include data, integration, compute, validation and support costs.
+## The next milestone
+- Agree one problem, partner, approved data, baseline and acceptance gate.
+- For a proposed 12–16 week PMG software PoC, build a reviewable integration and evaluate a controlled workflow after access is agreed.
+- Scope Battery AI model development and Evo Core hardware as separate work packages with their own evidence gates.
+- Validate buyer willingness to adopt, pricing and a costed paid follow-on program.
+## Founder and investment purpose
+Founder Arjun Amuthan brings an automotive engineering background spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Funding should align to agreed software/data, hardware/bench and buyer/adoption work packages. The funding amount, market sizing and commercial terms require a sourced, bottom-up plan.
+Development-stage public overview. Architecture, generation scopes, benefits and commercial models are proposed. Production qualification, customer contracts and measured benefit claims are not established in this brief.
+ [Explore the complete pitch journey ↗](pitch.html)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

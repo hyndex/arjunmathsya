@@ -1,0 +1,167 @@
+/* /platform benefits: each scenario is drawn as a signal path. Stations replay a short staggered entry when a tab is shown. */
+.bf {
+  gap: 30px;
+}
+.bf-panel {
+  display: grid;
+  gap: 30px;
+}
+.bf-panel[data-state='inactive'] {
+  display: none;
+}
+.bf-intro {
+  display: grid;
+  gap: 10px;
+  max-width: 780px;
+}
+.bf-number {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acc-ink);
+}
+.bf-scene {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--c-slate);
+}
+
+.bf-path {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 0 0 0 30px;
+  list-style: none;
+}
+.bf-path::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: 7px;
+  width: 2px;
+  background: linear-gradient(var(--c-slate-2), var(--acc) 22%, var(--p-pmg) 48%, var(--c-ink) 72%, var(--acc-ink));
+  transform-origin: top;
+  animation: bf-rail-y 0.9s var(--ease-out) both;
+}
+.bf-st {
+  position: relative;
+  animation: bf-in 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 80ms + 140ms);
+}
+.bf-st::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: -30px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--c-slate-2);
+  background: var(--c-white);
+}
+.bf-st--module::before {
+  border-color: var(--acc);
+  background: var(--acc);
+}
+.bf-st--pmg::before {
+  border-color: var(--p-pmg);
+  background: var(--p-pmg);
+}
+.bf-st--outcome::before {
+  border-color: var(--c-ink);
+}
+.bf-st--measure::before {
+  border-style: dashed;
+  border-color: var(--acc-ink);
+}
+.bf-k {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+}
+.bf-st--module .bf-k { color: var(--acc-ink); }
+.bf-st--pmg .bf-k { color: var(--p-pmg-ink); }
+.bf-st p {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--c-ink-soft);
+}
+.bf-split {
+  display: grid;
+  gap: 14px;
+}
+.bf-sub {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--f-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--c-ink);
+}
+.bf-st--measure {
+  padding: 14px 16px 16px;
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-m);
+  background: var(--c-white);
+}
+.bf-st--measure::before {
+  left: -30px;
+  top: 16px;
+}
+.bf-note {
+  margin-top: 4px;
+}
+
+@keyframes bf-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes bf-rail-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes bf-rail-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (min-width: 1100px) {
+  .bf-path {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 0 26px;
+    padding: 38px 0 0;
+  }
+  .bf-path::before {
+    top: 7px;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-slate-2), var(--acc) 26%, var(--p-pmg) 50%, var(--c-ink) 74%, var(--acc-ink));
+    transform-origin: left;
+    animation-name: bf-rail-x;
+  }
+  .bf-st::before,
+  .bf-st--measure::before {
+    top: -38px;
+    left: 0;
+  }
+  .bf-st--measure {
+    align-self: start;
+  }
+  .bf-st--measure::before {
+    left: -1px;
+  }
+}

@@ -1,0 +1,587 @@
+---
+import { ArrowDown, ArrowRight, ArrowUpRight, Download, X } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+import StageMeter from '@/components/ui/StageMeter.astro';
+import Faq from '@/components/ui/Faq.astro';
+import { buttonVariants } from '@/components/ui/button';
+import PackExplorer from '@/components/battery/PackExplorer';
+import { trace, TRACE_W, TRACE_H } from '@/components/battery/traces';
+import { PRODUCTS } from '@/data/products';
+import { BENEFITS, BENEFIT_NOTE } from '@/data/portfolio';
+import { contactHref } from '@/data/site';
+import {
+  BATTERY_META,
+  BATTERY_HERO,
+  CAPABILITIES_HEAD,
+  SCENARIOS,
+  SIGNALS,
+  EVAL_INPUTS,
+  PRINCIPLE,
+  ALONGSIDE,
+  INTERFACES,
+  DEPLOYMENT,
+  DATA_HEAD,
+  RUNTIME,
+  OUTCOMES,
+  LIMITS,
+  FIRST_PROOF,
+  EVALUATION,
+  BATTERY_FAQ,
+  REFERENCES,
+  BATTERY_CTA,
+} from '@/data/battery';
+import '@/components/battery/battery.css';
+
+const P = PRODUCTS.battery;
+
+const nav = [
+  { id: 'capabilities', label: 'Capabilities' },
+  { id: 'principle', label: 'Principle' },
+  { id: 'bms', label: 'BMS & interfaces' },
+  { id: 'deployment', label: 'Deployment' },
+  { id: 'data', label: 'Data & runtime' },
+  { id: 'outcomes', label: 'Outcomes' },
+  { id: 'limits', label: 'Limits' },
+  { id: 'first-proof', label: 'First proof' },
+  { id: 'evaluation', label: 'Evaluation' },
+  { id: 'questions', label: 'FAQ' },
+];
+
+// Hero gauge geometry (viewBox 600 × 400). The lower half is the "x-ray": four signal lanes on one timeline.
+const LANE_X = 150;
+const LANE_W = 376;
+const LANE_Y = 200;
+const LANE_H = 35;
+const heroKinds = ['voltage', 'current', 'temperature', 'history'] as const;
+const heroLanes = heroKinds.map((kind, i) => ({
+  label: BATTERY_HERO.channels[i],
+  top: LANE_Y + i * LANE_H,
+  layers: trace(kind),
+}));
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(2)}%`;
+const scaleTicks = Array.from({ length: 9 }, (_, i) => `M${42 + (484 / 10) * (i + 1)} 58v${i === 4 ? 12 : 7}`).join('');
+const cutTicks = Array.from({ length: 61 }, (_, i) => `M${i * 10} 176v${i % 5 ? 4 : 8}`).join('');
+
+const spec = [
+  { k: 'Product role', v: P.role },
+  { k: 'Form', v: P.kind },
+  { k: 'Runs on', v: P.runsOn },
+  { k: 'Works with', v: 'A validated BMS, which keeps sensing, balancing, operating limits and protection' },
+  { k: 'Connects to', v: 'PMG and/or Evo Core, through agreed interfaces — or evaluated on its own' },
+  { k: 'Could be adopted by', v: P.buyers },
+  { k: 'Proposed commercial path', v: `${P.commercial}. Pricing and willingness to adopt require validation.` },
+];
+
+const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).includes(sid));
+---
+
+<BaseLayout title={BATTERY_META.title} description={BATTERY_META.description} image="/og/og-battery.png" bodyClass="page-battery">
+  <!-- ============ Hero ============ -->
+  <section class="bx-hero" aria-labelledby="bx-title">
+    <div class="bx-hero-panel" aria-hidden="true"></div>
+    <div class="container--wide bx-hero-grid">
+      <div class="bx-hero-copy">
+        <p class="eyebrow">{BATTERY_HERO.eyebrow}</p>
+        <h1 id="bx-title" class="bx-title">
+          {BATTERY_HERO.title} <span class="bx-ruled">{BATTERY_HERO.ruled}</span>
+        </h1>
+        <p class="bx-support">{BATTERY_HERO.support}</p>
+        <p class="lead bx-hero-lead">{BATTERY_HERO.lead}</p>
+        <p class="bx-boundary"><span class="bx-k">Boundary</span>{BATTERY_HERO.boundary}</p>
+        <div class="btn-row">
+          <a class={buttonVariants({ size: 'lg' })} href="#first-proof">See the first proof <ArrowDown aria-hidden="true" /></a>
+          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('battery')}>Discuss a battery pilot</a>
+        </div>
+      </div>
+
+      <figure class="bx-gauge" aria-labelledby="bx-gauge-cap">
+        <div class="bx-gauge-stage">
+          <svg class="bx-gauge-svg" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="bxg-inner"><rect x="42" y="58" width="484" height="284" rx="24"></rect></clipPath>
+              <pattern id="bxg-grid" width="12" height="12" patternUnits="userSpaceOnUse">
+                <path d="M12 0H0V12" fill="none" stroke="#087f6b" stroke-opacity="0.09"></path>
+              </pattern>
+            </defs>
+            <rect class="bxg-body" x="24" y="40" width="520" height="320" rx="40"></rect>
+            <rect class="bxg-nub" x="544" y="152" width="22" height="96" rx="8"></rect>
+            <g clip-path="url(#bxg-inner)">
+              <rect x="42" y="58" width="484" height="118" class="bxg-surface"></rect>
+              <rect x="42" y="58" width="300" height="118" class="bxg-fill"></rect>
+              <line x1="342" y1="58" x2="342" y2="176" class="bxg-level"></line>
+              <path d={scaleTicks} class="bxg-ticks"></path>
+              <rect x="42" y="176" width="484" height="166" class="bxg-xray"></rect>
+              {
+                heroLanes.map((lane) => (
+                  <g transform={`translate(${LANE_X} ${lane.top + 3}) scale(${LANE_W / TRACE_W} ${(LANE_H - 6) / TRACE_H})`}>
+                    {lane.layers.map((l) => (
+                      <path d={l.d} class={`bxg-trace bxg-trace--${l.role}`} vector-effect="non-scaling-stroke" />
+                    ))}
+                  </g>
+                ))
+              }
+              <rect x={LANE_X} y={LANE_Y - 4} width={LANE_W + 8} height={LANE_H * 4 + 8} class="bxg-curtain"></rect>
+              <rect x="42" y="176" width="484" height="166" fill="url(#bxg-grid)"></rect>
+              {heroLanes.slice(1).map((lane) => <line x1="42" x2="526" y1={lane.top} y2={lane.top} class="bxg-lane-rule" />)}
+              <line x1={LANE_X} x2={LANE_X} y1={LANE_Y - 4} y2="342" class="bxg-cursor"></line>
+            </g>
+            <g class="bxg-cut">
+              <line x1="0" y1="176" x2="600" y2="176" pathLength="1"></line>
+              <path d={cutTicks}></path>
+            </g>
+          </svg>
+          <div class="bxg-label bxg-label--surface" style={`left:${pct(58, 600)};top:${pct(70, 400)}`}>
+            <span class="bx-k">{BATTERY_HERO.surface}</span>
+            <span class="bxg-soc">State of charge</span>
+          </div>
+          <span class="bxg-pct" style={`left:${pct(352, 600)};top:${pct(66, 400)}`} aria-hidden="true">%</span>
+          <div class="bxg-label bxg-label--below" style={`left:${pct(58, 600)};top:${pct(182, 400)}`}>
+            <span class="bx-k">{BATTERY_HERO.below}</span>
+          </div>
+          {
+            heroLanes.map((lane, i) => (
+              <span class="bxg-ch" style={`left:${pct(52, 600)};top:${pct(lane.top + LANE_H / 2, 400)}`}>
+                <b>CH{i + 1}</b>
+                <span>{lane.label}</span>
+              </span>
+            ))
+          }
+        </div>
+        <ol class="bx-gauge-out" aria-label="From signals to a vehicle decision">
+          <li><span class="bx-k">Module intelligence</span>{BATTERY_HERO.output[1]}</li>
+          <li><span class="bx-k">Module output</span>Reviewable insight</li>
+          <li><span class="bx-k">Vehicle context</span>PMG coordination</li>
+        </ol>
+        <ul class="bx-gauge-legend" aria-hidden="true">
+          {heroLanes.map((lane, i) => <li><b>CH{i + 1}</b>{lane.label}</li>)}
+        </ul>
+        <figcaption id="bx-gauge-cap" class="fineprint">
+          <span class="visually-hidden">A battery charge indicator cut in half: the upper half shows the familiar state-of-charge fill; the lower half reveals four signal channels — {BATTERY_HERO.channels.join(', ')}. </span>{BATTERY_HERO.caption}
+        </figcaption>
+      </figure>
+
+      <div class="bx-hero-stage">
+        <StageMeter reached={2} label={P.stage} color="var(--p-battery)" />
+      </div>
+    </div>
+  </section>
+
+  <PageNav items={nav} label="Battery & Charging AI sections" />
+
+  <!-- ============ Product introduction ============ -->
+  <section id="introduction" class="section tone-white bx-intro" aria-labelledby="intro-title">
+    <div class="container bx-intro-grid">
+      <div class="bx-intro-copy">
+        <p class="eyebrow">Product introduction</p>
+        <h2 id="intro-title" class="h2">Software that reads the pack, next to the BMS that protects it.</h2>
+        <p class="lead">Battery &amp; Charging AI is a proposed Edge AI software layer for battery behaviour: health and state-estimation evaluation, charging readiness and thermal context. It can run on suitable BMS or adjacent module compute, alongside the validated BMS.</p>
+        <p class="bx-intro-more">Approved insight can connect to PMG and/or Evo Core through agreed interfaces. The module product can also be evaluated on its own, without the rest of the portfolio.</p>
+      </div>
+      <dl class="bx-spec" aria-label="Product facts">
+        {spec.map((r) => (<div><dt>{r.k}</dt><dd>{r.v}</dd></div>))}
+        <div class="bx-spec-not"><dt>It is not</dt><dd>{P.notThis}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ Signature: pack + scenario selector ============ -->
+  <section id="capabilities" class="section tone-mint bx-caps" aria-labelledby="caps-title">
+    <div class="container--wide">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{CAPABILITIES_HEAD.eyebrow}</p>
+          <h2 id="caps-title" class="h2">{CAPABILITIES_HEAD.title}</h2>
+        </div>
+        <p class="lead">{CAPABILITIES_HEAD.lead}</p>
+      </div>
+      <PackExplorer client:visible />
+    </div>
+  </section>
+
+  <!-- ============ Working principle ============ -->
+  <section id="principle" class="section tone-pearl bx-principle" aria-labelledby="principle-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{PRINCIPLE.eyebrow}</p>
+        <h2 id="principle-title" class="h2">{PRINCIPLE.title}</h2>
+      </div>
+      <div class="bx-chain-wrap">
+        <span class="bx-chain-rail" data-reveal="line" aria-hidden="true"></span>
+        <ol class="bx-chain">
+          {PRINCIPLE.steps.map((s) => (
+            <li>
+              <span class="bx-chain-node" aria-hidden="true">{s.n}</span>
+              <h3 class="bx-chain-verb">{s.verb}</h3>
+              <p>{s.body}</p>
+              <p class="bx-chain-out"><span class="bx-k">Produces</span>{s.out}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Technical visualization: alongside the BMS ============ -->
+  <section id="bms" class="section tone-white blueprint bx-bms" aria-labelledby="bms-title">
+    <div class="container--wide">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{ALONGSIDE.eyebrow}</p>
+          <h2 id="bms-title" class="h2">{ALONGSIDE.title}</h2>
+        </div>
+        <p class="lead">{ALONGSIDE.lead}</p>
+      </div>
+
+      <figure class="bx-along" data-live-zone aria-labelledby="along-cap">
+        <div class="bx-lanes">
+          <section class="bx-lane bx-lane--bms" aria-labelledby="lane-bms">
+            <header>
+              <p class="bx-k">Reference system · authority</p>
+              <h3 id="lane-bms" class="h3">{ALONGSIDE.bms.name}</h3>
+              <p class="bx-lane-role">{ALONGSIDE.bms.role}</p>
+            </header>
+            <ul class="bx-auth">
+              {ALONGSIDE.bms.items.map((it) => (<li data-k={it.k}><strong>{it.k}</strong><span>{it.v}</span></li>))}
+            </ul>
+            <p class="bx-lane-foot">{ALONGSIDE.bms.also}</p>
+          </section>
+
+          <div class="bx-wires" aria-hidden="true">
+            <div class="bx-wire bx-wire--read"><span class="bx-wire-label">{ALONGSIDE.read}</span><i class="bx-pulse"></i></div>
+            <div class="bx-wire bx-wire--blocked"><span class="bx-wire-label"><X size={14} /> No override</span></div>
+          </div>
+
+          <section class="bx-lane bx-lane--ai" aria-labelledby="lane-ai">
+            <header>
+              <p class="bx-k">Mathsya concept · alongside</p>
+              <h3 id="lane-ai" class="h3">{ALONGSIDE.runtime.name}</h3>
+              <p class="bx-lane-role">{ALONGSIDE.runtime.role}</p>
+            </header>
+            <ol class="bx-pipe">
+              {ALONGSIDE.runtime.items.map((it, i) => (<li><span class="bx-pipe-n">{String(i + 1).padStart(2, '0')}</span><strong>{it.k}</strong><span>{it.v}</span></li>))}
+            </ol>
+          </section>
+
+          <div class="bx-wires" aria-hidden="true">
+            <div class="bx-wire bx-wire--insight"><span class="bx-wire-label">{ALONGSIDE.insight}</span><i class="bx-pulse"></i></div>
+          </div>
+
+          <section class="bx-lane bx-lane--if" aria-labelledby="lane-if">
+            <header>
+              <p class="bx-k">Approved interfaces</p>
+              <h3 id="lane-if" class="h3">Where insight goes</h3>
+              <p class="bx-lane-role">{ALONGSIDE.interfaces.role}</p>
+            </header>
+            <ul class="bx-ports">
+              {ALONGSIDE.interfaces.items.map((it) => (<li data-tone={it.tone}><strong>{it.k}</strong><span>{it.v}</span></li>))}
+            </ul>
+          </section>
+        </div>
+
+        <p class="bx-return"><span class="bx-k">Return path</span>{ALONGSIDE.request}</p>
+        <p class="bx-guard"><X size={16} aria-hidden="true" /><span>{ALONGSIDE.blocked}. The BMS keeps its validated operating limits and protective authority.</span></p>
+
+        <figcaption id="along-cap" class="bx-along-cap">
+          <ul class="legend" aria-label="Legend">
+            <li class="legend-item"><span class="swatch swatch--reference" aria-hidden="true"></span>{ALONGSIDE.legend[0].t}</li>
+            <li class="legend-item"><span class="swatch bx-swatch-battery" aria-hidden="true"></span>{ALONGSIDE.legend[1].t}</li>
+            <li class="legend-item"><span class="swatch swatch--interface" aria-hidden="true"></span>{ALONGSIDE.legend[2].t}</li>
+          </ul>
+          <span class="fineprint">Schematic concept illustration · not a production design</span>
+        </figcaption>
+      </figure>
+
+      <div class="bx-iface">
+        <h3 class="h3" id="iface-title">{INTERFACES.title}</h3>
+        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="iface-title">
+          <table class="table bx-table bx-stack" role="table">
+            <caption>{INTERFACES.caption}</caption>
+            <thead role="rowgroup">
+              <tr role="row"><th scope="col" role="columnheader">Interface</th><th scope="col" role="columnheader">Direction</th><th scope="col" role="columnheader">What crosses it</th><th scope="col" role="columnheader">Boundary</th></tr>
+            </thead>
+            <tbody role="rowgroup">
+              {INTERFACES.rows.map((r) => (
+                <tr role="row"><th scope="row" role="rowheader">{r.name}</th><td role="cell" data-label="Direction"><span class="bx-dir">{r.dir}</span></td><td role="cell" data-label="What crosses it">{r.crosses}</td><td role="cell" data-label="Boundary">{r.boundary}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Possible deployment locations ============ -->
+  <section id="deployment" class="section tone-pearl bx-deploy-sec" aria-labelledby="deploy-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{DEPLOYMENT.eyebrow}</p>
+        <h2 id="deploy-title" class="h2">{DEPLOYMENT.title}</h2>
+        <p class="lead">{DEPLOYMENT.lead}</p>
+      </div>
+      <div class="bx-tree">
+        <article class="bx-tree-root" aria-labelledby="dep-root">
+          <p class="bx-k">{DEPLOYMENT.pilot.tag}</p>
+          <h3 id="dep-root" class="h3">{DEPLOYMENT.pilot.name}</h3>
+          <p>{DEPLOYMENT.pilot.body}</p>
+          <p class="bx-needs"><span class="bx-k">Needs</span>{DEPLOYMENT.pilot.needs}</p>
+        </article>
+        <ol class="bx-tree-branches" aria-label="Later deployment options">
+          {DEPLOYMENT.later.map((o) => (
+            <li>
+              <p class="bx-k">{o.tag}</p>
+              <h3 class="h4">{o.name}</h3>
+              <p>{o.body}</p>
+              <p class="bx-needs"><span class="bx-k">Needs</span>{o.needs}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p class="bx-rule">{DEPLOYMENT.rule}</p>
+    </div>
+  </section>
+
+  <!-- ============ Signal & data requirements ============ -->
+  <section id="data" class="section tone-white bx-data" aria-labelledby="data-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{DATA_HEAD.eyebrow}</p>
+          <h2 id="data-title" class="h2">{DATA_HEAD.title}</h2>
+        </div>
+        <p class="lead">{DATA_HEAD.lead}</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="matrix-cap">
+        <table class="table bx-matrix">
+          <caption id="matrix-cap">{DATA_HEAD.caption}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Runtime signal</th>
+              {SCENARIOS.map((s) => (<th scope="col" class="bx-matrix-cap"><span class="bx-matrix-h"><span class="bx-matrix-n">{s.n}</span> {s.short}</span></th>))}
+            </tr>
+          </thead>
+          <tbody>
+            {SIGNALS.map((sig) => (
+              <tr>
+                <th scope="row">{sig.name}<small class="bx-matrix-note">{sig.note}</small></th>
+                {used(sig.id).map((on) => (
+                  <td class="bx-matrix-cell">{on ? <span class="bx-dot" role="img" aria-label="Used" /> : <span class="visually-hidden">Not used</span>}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="bx-eval-in">
+        <h3 class="h4">{DATA_HEAD.evalTitle}</h3>
+        <ul>
+          {EVAL_INPUTS.map((e) => (<li><strong>{e.name}</strong><span>{e.note}</span></li>))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Edge runtime, confidence & failure handling ============ -->
+  <section id="runtime" class="section tone-mint bx-runtime" aria-labelledby="runtime-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{RUNTIME.eyebrow}</p>
+        <h2 id="runtime-title" class="h2">{RUNTIME.title}</h2>
+        <p class="lead">{RUNTIME.lead}</p>
+      </div>
+      <div class="bx-routes" role="table" aria-label="How one evaluation can end">
+        <div class="bx-route bx-route--head" role="row">
+          <span role="columnheader">Trigger</span>
+          <span role="columnheader">{RUNTIME.gate.name}</span>
+          <span role="columnheader">{RUNTIME.model.name}</span>
+          <span role="columnheader">Result state</span>
+        </div>
+        {RUNTIME.routes.map((r) => (
+          <div class="bx-route" role="row" data-code={r.code}>
+            <span role="cell" class="bx-route-trigger"><strong>{r.trigger}</strong><small>{r.triggerNote}</small></span>
+            <span role="cell" class="bx-route-step" data-v={r.check}><span class="bx-route-k">{RUNTIME.gate.name}</span>{r.check}</span>
+            <span role="cell" class="bx-route-step" data-v={r.model}><span class="bx-route-k">{RUNTIME.model.name}</span>{r.model}</span>
+            <span role="cell" class="bx-route-state"><code>{r.code}</code><strong>{r.name}</strong><small>{r.body}</small></span>
+          </div>
+        ))}
+      </div>
+      <div class="bx-record">
+        <p class="bx-k">{RUNTIME.evidence.name}</p>
+        <ol>{RUNTIME.evidence.items.map((it) => <li>{it}</li>)}</ol>
+        <p class="bx-record-note">{RUNTIME.gate.body} {RUNTIME.model.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Potential outcomes ============ -->
+  <section id="outcomes" class="section tone-pearl bx-outcomes" aria-labelledby="outcomes-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{OUTCOMES.eyebrow}</p>
+          <h2 id="outcomes-title" class="h2">{OUTCOMES.title}</h2>
+        </div>
+        <p class="lead">{OUTCOMES.lead}</p>
+      </div>
+      {OUTCOMES.ids.map((id) => {
+        const b = BENEFITS[id];
+        return (
+          <article class="bx-moment" aria-labelledby={`moment-${id}`}>
+            <header class="bx-moment-head">
+              <p class="bx-k">{b.number}</p>
+              <h3 id={`moment-${id}`} class="h3">{b.title}</h3>
+              <p class="bx-scene">{b.scene}</p>
+            </header>
+            <dl class="bx-moment-dl">
+              <div><dt>The input</dt><dd>{b.signals}</dd></div>
+              <div><dt>01 · Module intelligence</dt><dd>{b.module}</dd></div>
+              <div><dt>02 · PMG / vehicle context</dt><dd>{b.pmg}</dd></div>
+              <div><dt>For the customer</dt><dd>{b.customer}</dd></div>
+              <div><dt>For the OEM</dt><dd>{b.oem}</dd></div>
+              <div class="is-proof"><dt>What to measure</dt><dd>{b.proof}</dd></div>
+            </dl>
+          </article>
+        );
+      })}
+      <div class="bx-validate">
+        <p class="bx-k">Benefits to validate</p>
+        <dl>
+          <div><dt>Customer</dt><dd>{OUTCOMES.validate.customer}</dd></div>
+          <div><dt>OEM / BMS supplier</dt><dd>{OUTCOMES.validate.oem}</dd></div>
+        </dl>
+        <p class="fineprint">{BENEFIT_NOTE}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Limitations & false alerts ============ -->
+  <section id="limits" class="section tone-white bx-limits" aria-labelledby="limits-title">
+    <div class="container bx-limits-grid">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">{LIMITS.eyebrow}</p>
+          <h2 id="limits-title" class="h2">{LIMITS.title}</h2>
+        </div>
+        <ol class="bx-limit-list">
+          {LIMITS.items.map((l) => (<li><strong>{l.t}</strong> {l.b}</li>))}
+        </ol>
+      </div>
+      <aside class="bx-alerts" aria-labelledby="alerts-title">
+        <h3 id="alerts-title" class="h3">{LIMITS.falseAlerts.title}</h3>
+        <p class="bx-alerts-lead">{LIMITS.falseAlerts.lead}</p>
+        <ul>{LIMITS.falseAlerts.items.map((it) => <li>{it}</li>)}</ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ First pilot ============ -->
+  <section id="first-proof" class="section tone-mint bx-proof" aria-labelledby="proof-title" tabindex="-1">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{FIRST_PROOF.eyebrow}</p>
+          <h2 id="proof-title" class="h2">{FIRST_PROOF.title}</h2>
+        </div>
+        <p class="lead">{FIRST_PROOF.lead}</p>
+      </div>
+      <ol class="bx-gates">
+        {FIRST_PROOF.gates.map((g) => (
+          <li>
+            <span class="bx-gate-n">Gate {g.n}</span>
+            <h3 class="h3">{g.name}</h3>
+            <p>{g.body}</p>
+            <p class="bx-gate-out"><span class="bx-k">Evidence out</span>{g.out}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="bx-bring">
+        <div>
+          <h3 class="h4">{FIRST_PROOF.bring.title}</h3>
+          <ul>{FIRST_PROOF.bring.items.map((it) => <li>{it}</li>)}</ul>
+        </div>
+        <a class={buttonVariants({ size: 'lg' })} href={contactHref('battery')}>Discuss a battery pilot <ArrowRight aria-hidden="true" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Model evaluation ============ -->
+  <section id="evaluation" class="section tone-white bx-eval" aria-labelledby="eval-title">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">{EVALUATION.eyebrow}</p>
+          <h2 id="eval-title" class="h2">{EVALUATION.title}</h2>
+        </div>
+        <p class="lead">{EVALUATION.lead}</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="eval-cap">
+        <table class="table bx-table bx-stack" role="table">
+          <caption id="eval-cap">{EVALUATION.caption}</caption>
+          <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Measure</th><th scope="col" role="columnheader">What it shows</th><th scope="col" role="columnheader">How it must be measured</th></tr></thead>
+          <tbody role="rowgroup">
+            {EVALUATION.rows.map((r) => (<tr role="row"><th scope="row" role="rowheader">{r.m}</th><td role="cell" data-label="What it shows">{r.shows}</td><td role="cell" data-label="How it must be measured">{r.how}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <div class="bx-bench" aria-labelledby="bench-title">
+        <div class="bx-bench-head">
+          <h3 id="bench-title" class="h3">{EVALUATION.runtime.title}</h3>
+          <p>{EVALUATION.runtime.lead}</p>
+        </div>
+        <ul>
+          {EVALUATION.runtime.items.map((it) => (<li><span class="bx-bench-k">{it.k}</span><span>{it.v}</span><span class="bx-bench-state">To be measured</span></li>))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Questions, references, download ============ -->
+  <section id="questions" class="section tone-pearl bx-faq" aria-labelledby="faq-title">
+    <div class="container bx-faq-grid">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">{BATTERY_FAQ.eyebrow}</p>
+          <h2 id="faq-title" class="h2">{BATTERY_FAQ.title}</h2>
+        </div>
+        <Faq items={BATTERY_FAQ.items} />
+      </div>
+      <aside class="bx-refs" aria-labelledby="refs-title">
+        <h3 id="refs-title" class="bx-k">{REFERENCES.eyebrow}</h3>
+        <ul>
+          {REFERENCES.items.map((r) => (
+            <li>
+              <a href={r.href} target="_blank" rel="noopener noreferrer">
+                <span class="bx-ref-src">{r.source}</span>
+                <span class="bx-ref-title">{r.title} <ArrowUpRight size={16} aria-hidden="true" /></span>
+                <span class="visually-hidden">(opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="bx-refs-note">{REFERENCES.note}</p>
+        <a class="resource" href={REFERENCES.download.href} download>
+          <span class="resource-meta">{REFERENCES.download.meta}</span>
+          <strong class="h4">{REFERENCES.download.title}</strong>
+          <span class="bx-res-body">{REFERENCES.download.body}</span>
+          <span class="resource-action">Download the overview <Download size={16} aria-hidden="true" /></span>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow={BATTERY_CTA.eyebrow}
+    title={BATTERY_CTA.title}
+    body={BATTERY_CTA.body}
+    primary={{ label: 'Discuss a battery pilot', href: contactHref('battery') }}
+    secondary={{ label: 'See the connected architecture', href: '/platform' }}
+  />
+</BaseLayout>
+
+<script>
+  // Data-flow pulses in the static diagrams run only while the diagram is on screen.
+  const zones = document.querySelectorAll<HTMLElement>('[data-live-zone]');
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.toggleAttribute('data-live', e.isIntersecting)), { threshold: 0.15 });
+  zones.forEach((z) => io.observe(z));
+</script>

@@ -1,0 +1,212 @@
+---
+// (e) One module insight branching into customer and OEM outcomes. Worked example from the shared BENEFITS data.
+import { BENEFITS, BENEFIT_NOTE } from '@/data/portfolio';
+const b = BENEFITS.charging;
+---
+
+<figure class="vf" aria-labelledby="vf-title">
+  <div class="vf-scene">
+    <p class="vf-k" id="vf-title">Worked example · {b.tab}</p>
+    <p class="vf-scene-text">{b.scene}</p>
+  </div>
+
+  <div class="vf-grid">
+    <div class="vf-node vf-in">
+      <p class="vf-k">Input · available signals</p>
+      <p>{b.signals}</p>
+    </div>
+    <span class="vf-link" aria-hidden="true"></span>
+    <div class="vf-node vf-mod inv-pc-battery">
+      <p class="vf-k"><span class="vf-lvl">Level 01</span> Module insight · Battery AI</p>
+      <p>{b.module}</p>
+    </div>
+    <span class="vf-link" aria-hidden="true"></span>
+    <div class="vf-node vf-veh inv-pc-pmg">
+      <p class="vf-k"><span class="vf-lvl">Level 02</span> Vehicle context · PMG</p>
+      <p>{b.pmg}</p>
+    </div>
+    <svg class="vf-fork" viewBox="0 0 56 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 50 C 30 50 26 24 56 24" vector-effect="non-scaling-stroke"></path>
+      <path d="M0 50 C 30 50 26 76 56 76" vector-effect="non-scaling-stroke"></path>
+    </svg>
+    <p class="vf-branch" aria-hidden="true">One insight, two outcomes</p>
+    <div class="vf-out">
+      <div class="vf-node vf-end">
+        <p class="vf-k"><span class="vf-lvl">Level 02</span> For the customer</p>
+        <p>{b.customer}</p>
+      </div>
+      <div class="vf-node vf-end">
+        <p class="vf-k"><span class="vf-lvl">Level 03</span> For the OEM organization</p>
+        <p>{b.oem}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="vf-measure">
+    <p class="vf-k">What a pilot must measure</p>
+    <p>{b.proof}</p>
+  </div>
+  <figcaption class="fineprint">{BENEFIT_NOTE}</figcaption>
+</figure>
+
+<style>
+  .vf {
+    display: grid;
+    gap: 22px;
+    margin: 0;
+  }
+  .vf-k {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .vf-lvl {
+    margin-right: 6px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--c-ice);
+    color: var(--c-cobalt-ink);
+  }
+  .vf-scene {
+    display: grid;
+    gap: 8px;
+    max-width: 70ch;
+  }
+  .vf-scene-text {
+    font-family: var(--f-display);
+    font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .vf-grid {
+    display: grid;
+    gap: 0;
+  }
+  .vf-node {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 18px 20px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-m);
+    background: var(--c-white);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .vf-in {
+    background: var(--c-pearl);
+    border-style: dashed;
+  }
+  .vf-mod,
+  .vf-veh {
+    border-color: color-mix(in srgb, var(--pc) 45%, transparent);
+    box-shadow: inset 0 3px 0 var(--pc);
+  }
+  .vf-end {
+    border-color: var(--c-line-strong);
+  }
+  .vf-link {
+    justify-self: center;
+    position: relative;
+    width: 1.5px;
+    height: 30px;
+    background: var(--c-cobalt);
+  }
+  .vf-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border-style: solid;
+    border-width: 7px 5px 0;
+    border-color: var(--c-cobalt) transparent transparent;
+    transform: translateX(-50%);
+  }
+  .vf-fork {
+    display: none;
+  }
+  .vf-branch {
+    justify-self: center;
+    margin: 6px 0 10px;
+    padding-top: 30px;
+    background: linear-gradient(var(--c-cobalt), var(--c-cobalt)) top center / 1.5px 24px no-repeat;
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-cobalt-ink);
+  }
+  .vf-out {
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .vf-out {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .vf-measure {
+    display: grid;
+    gap: 6px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--c-cobalt);
+    background: var(--c-ice);
+    border-radius: 0 var(--r-s) var(--r-s) 0;
+    font-size: var(--fs-small);
+  }
+  @media (min-width: 1100px) {
+    .vf-grid {
+      grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr) 56px minmax(0, 1.15fr);
+      align-items: center;
+    }
+    .vf-link {
+      justify-self: stretch;
+      width: auto;
+      height: 1.5px;
+    }
+    .vf-link::after {
+      top: 50%;
+      bottom: auto;
+      left: auto;
+      right: 0;
+      border-width: 5px 0 5px 7px;
+      border-color: transparent transparent transparent var(--c-cobalt);
+      transform: translateY(-50%);
+    }
+    .vf-fork {
+      display: block;
+      align-self: stretch;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--c-cobalt);
+      stroke-width: 1.5;
+    }
+    .vf-branch {
+      display: none;
+    }
+    .vf-out {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+    }
+    .vf-end {
+      position: relative;
+      align-content: center;
+    }
+    .vf-end::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 50%;
+      border-style: solid;
+      border-width: 5px 0 5px 7px;
+      border-color: transparent transparent transparent var(--c-cobalt);
+      transform: translate(-100%, -50%);
+    }
+  }
+</style>

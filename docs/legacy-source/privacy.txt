@@ -1,0 +1,27 @@
+     Privacy note — Mathsya Connected Services                   [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+PRIVACY / ENQUIRY PREPARATION
+# Know what
+you choose to share.
+This note describes the current contact-page experience and the information you enter when preparing an enquiry.
+ [Return to contact ↗ ](contact.html) [Read the investor brief → ](investor-brief.html)
+Current website experience · October 2026
+## Enquiry preparation
+The contact form prepares a draft in your browser. The name, email, company and message fields are not uploaded to Mathsya when you prepare, copy or download that draft. The form does not save those fields in browser storage.
+## Information you choose to send
+The contact page shows whether a business email is available. If you choose Open email draft, your email application opens the enquiry addressed to Mathsya. You decide whether to send the message.
+## Website visits
+The hosting platform may process technical request and traffic information as part of providing the website. This site does not add a separate advertising tracker or use the contact form to create visitor accounts.
+## Contact details
+See the contact page for the current business contact details and enquiry options. This note will be updated if the website later collects or stores enquiry submissions.
+ [Return to contact →](contact.html)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+  

@@ -1,0 +1,132 @@
+     Evo Core hardware — Gen 1, Gen 2 & Gen 3 — Mathsya Connected Services                      [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+EVO CORE / HARDWARE + EMBEDDED SOFTWARE
+# Power, brought together.
+ Intelligence, built in.
+A proposed EV power platform combining shared control, defined conversion and distribution functions, and Edge AI supervision. Gen 1 establishes the foundation; later generations explore battery, thermal and wider energy coordination.
+ [Explore Gen 1, 2 & 3 ↗ ](#generations) [Follow the pitch journey →](pitch.html)
+Architecture and hardware planning · generations are a proposed roadmap
+ [IMG src=assets/evo-concept.webp alt='AI-generated concept render of an EV power-electronics assembly.']
+AI-generated concept illustration · not a production prototype
+ [Gen 1–3 roadmap](#generations) [Integration matrix](#scope) [How it integrates](#integration) [Benefits](#benefits) [Hardware proof](#gates)
+{id=generations}
+EVO CORE / PROPOSED GENERATION ROADMAP
+## Build the foundation.
+ Expand what earns its place.
+Explore what each generation could integrate, what connects through an interface, and the proof needed before the next step.
+{id=generation-gen1-tab}{data-generation=gen1} Gen 1 Charging & power
+{id=generation-gen2-tab}{data-generation=gen2} Gen 2 Battery & thermal
+{id=generation-gen3-tab}{data-generation=gen3} Gen 3 Energy & propulsion
+{id=generation-panel}
+{id=generation-number}GEN 1 / CHARGING & POWER
+### {id=generation-title}Establish the power backbone.
+{id=generation-intro}A first Evo Core architecture brings onboard charging, low-voltage conversion, charging communication and high-voltage distribution under a coordinated control foundation.
+ PROPOSED PRODUCT SCOPE
+{id=generation-integrated}
+- OBC · onboard charging
+- DC/DC · low-voltage conversion
+- EVCC · charging communication
+- HV distribution / junction functions
+- Common control + Edge AI supervision
+ CONNECTED THROUGH INTERFACES
+{id=generation-connected}
+- Existing BMS and its permitted limits
+- PMG vehicle software
+- Vehicle cooling and diagnostics interfaces
+ HOW INTEGRATION WORKS
+{id=generation-method}Start with controller and interface commonization. Retain, adapt or develop power stages according to the reference design; a single housing is a separate packaging decision.
+ CUSTOMER OUTCOME TO TEST
+{id=generation-customer}Evaluate charging readiness, clearer power-system diagnostics and consistent operating behavior.
+ OEM OUTCOME TO TEST
+{id=generation-oem}Test controller/interface simplification, reusable software and the complete integration cost case.
+ NEXT PROOF
+{id=generation-gate}Bench proof of interfaces, operating modes, timing and fault response, plus a bottom-up cost comparison.
+{id=generation-boundary}Working first-generation scope. Ratings, topology, packaging and qualification are defined with the reference program.
+{id=scope}
+FUNCTION BY FUNCTION
+## What joins the platform?
+ What connects to it?
+The generation labels organize a proposed development journey. A connected interface does not mean that its power stage, sensing or protection has moved into Evo Core.
+ Proposed scopes, subject to reference-vehicle feasibility, safety architecture and qualification. No released generation specification is claimed.
+  | Function  | Gen 1  | Gen 2  | Gen 3
+  | OBC / DC/DC / EVCC / HV distribution  |  Core scope   | Retained foundation  | Retained foundation
+  | Common control + module-health AI  |  Core scope   | Extended  | Extended
+  | Battery & Charging AI runtime  | Connected product option  |  Proposed extension   | Retained / extended
+  | Battery supervisory context  | BMS interface  | Limited BMS coordination  | Wider energy context
+  | Cell sensing, balancing & protection  | Validated BMS ownership  | Defined BMS ownership  | Defined BMS ownership
+  | Battery / power thermal coordination  | Selected interfaces  |  Proposed extension   | Wider coordination
+  | DC-session / V2L / V2G functions  | Reference-program decision  | Options requiring compatible hardware  | Options requiring validation
+  | Inverter / propulsion supervision  | External vehicle interface  | External vehicle interface  |  Future option
+  | Climate / vehicle thermal controllers  | Defined interfaces  | Coordinated interfaces  | Wider coordinated interfaces
+  | PMG vehicle software  | Connected software layer  | Connected software layer  | Connected software layer
+{id=integration}
+HOW HARDWARE INTEGRATION WORKS
+## Integration is more
+ than a shared enclosure.
+ 01
+### Control commonization
+Review shared compute, mode coordination, diagnostic services and reusable embedded software. Keep real-time and supervisory responsibilities defined.
+ 02
+### Power & interfaces
+Retain, adapt or develop OBC, DC/DC and distribution functions against the approved reference architecture and available supplier interfaces.
+ 03
+### Physical realization
+Evaluate housing, cooling, isolation, connectors and mechanical integration. A shared housing does not prove a lower cost or simpler qualification.
+ 04
+### System evidence
+Verify modes, timing, fault response, thermal behavior, EMC and the complete prototype, integration and qualification cost.
+ Common control and AI supervision have separate proof obligations.
+Hardware commonization must earn its cost case. The model must separately demonstrate useful insight within measured compute and latency limits. Validated protection and fault containment remain part of the architecture.
+{id=benefits}
+THE HARDWARE VALUE CASE
+## Fewer unnecessary boundaries.
+ More reusable evidence.
+ CUSTOMER / VEHICLE
+### Coordinated operating behavior
+Evaluate charging readiness, power/thermal explanations and useful health guidance through the approved vehicle interfaces.
+ Measure readiness, energy use in a defined test, false recommendations and service outcomes.
+ OEM / PRODUCT ENGINEERING
+### A platform that can be reused
+Explore shared control and software across defined power functions, with consistent diagnostics and linked operating evidence.
+ Measure controller/interface count, BOM, NRE, validation effort, software reuse and variant cost.
+ SERVICE / QUALITY
+### Context for a power-system event
+Link the module observation to operating mode, cooling context and hardware/software version. Compare behavior after an approved correction.
+ Measure triage time, evidence completeness, no-fault-found outcomes and recurrence.
+ BUSINESS CASE
+### The complete cost of integration
+Compare the integrated concept with the reference design, including redesign, tooling, supplier access, qualification, repairability and lifecycle support.
+ Measured net value, rather than controller count alone, decides the next generation.
+{id=gates}
+A SEPARATE HARDWARE DEVELOPMENT PATH
+## From architecture.
+ To a program-ready platform.
+ 01
+### Reference
+Vehicle scope, power ratings, interfaces, retained functions and responsibilities.
+ 02
+### Bench
+Controlled modes, interface timing, fault response and AI runtime feasibility.
+ 03
+### Prototype
+Power-stage realization, cooling, packaging, EMC and a complete cost model.
+ 04
+### Qualify
+Partner-defined vehicle integration, qualification and lifecycle readiness.
+Hardware generations have no committed release dates. The 12–16 week plan elsewhere on the site is a scoped PMG software PoC, not a production-hardware delivery promise.
+ [Download the Evo Core overview ↓](assets/Evo-Core-Program-Overview.md)
+BUILD THE FIRST PROOF
+## Define the reference.
+Build the first generation.
+Agree the power functions, supplier interfaces and proof needed for a credible hardware program.
+ [Discuss a pilot ↗ ](contact.html?topic=Evo%20Core%20collaboration)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+   

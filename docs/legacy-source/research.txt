@@ -1,0 +1,69 @@
+     Research and engineering programs — Mathsya Connected Services                   [Skip to content](#main)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+Menu ☰
+{id=navigation} [Home](index.html) [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Investors](investors.html) [About](about.html) [Contact](contact.html)
+{id=main}
+RESEARCH & ENABLING PROGRAMS
+# Connect the evidence.
+ Strengthen the lifecycle.
+Mathsya’s supporting programs bring engineering decisions, validation evidence and vehicle learning together. Each progresses against a defined problem, its own proof gate and the resources needed to establish value.
+ [Explore the programs ↗ ](#neural-chain) [Read the investor brief → ](investor-brief.html)
+Concepts, workflow design and exploratory research. Stages are identified below.
+ [Product Neural Chain](#neural-chain) [Engineering Intelligence](#engineering-intelligence) [Solar research](#solar)
+{id=neural-chain}
+01 / PRODUCT NEURAL CHAIN
+## Engineering decisions
+with connected memory.
+ Concept & PoC definition
+An evidence-linked approach to product lifecycle decisions: connect requirements, architecture, cost, reuse, validation and field feedback. Recommendations remain reviewable by the engineering owners.
+ 01Requirements & scope
+ 02Architecture & cost
+ 03Validation & release
+ 04Field learning
+### A focused pilot
+One product family and a small set of lifecycle decisions, with known source documents and decision owners.
+### The value to establish
+Decision time, reusable evidence, confirmed reuse opportunities and the cost impact of accepted changes.
+ Proof gate
+Traceable recommendations and verified changes must support a better engineering decision than the existing workflow.
+{id=engineering-intelligence}
+02 / ENGINEERING INTELLIGENCE
+## From a release event
+to a clearer investigation.
+ Workflow & validation design
+Link release changes, connected-service tests and system logs to localize failures and compare behavior across releases. The proposed initial scope includes remote operations, cellular connectivity and GNSS.
+EVIDENCE FOR RELEASE & QUALITY TEAMS
+ Change and test evidence Release context, test results and relevant logs
+→
+ Reviewable investigation Compare behavior and test a likely explanation
+→
+ Verified correction Check the fix and preserve reusable evidence
+### A focused pilot
+Select a connected function and representative failures. Compare assisted investigations with the current process.
+### The value to establish
+Failure-localization time, evidence completeness and behavior after an approved correction.
+{id=solar}
+03 / SOLAR-ASSISTED AUXILIARIES
+## Use available sunlight.
+ Measure useful energy.
+ Research & energy modeling
+Explore modest vehicle-roof solar supplying a defined low-voltage auxiliary load, with conventional vehicle power providing backup. This is a separate energy and commercial research track.
+TECHNICAL QUESTION
+### Does usable energy meet the load?
+Evaluate sunny, cloudy and shaded parking, usable storage, conversion losses and the actual auxiliary demand.
+COMMERCIAL QUESTION
+### Does the installation earn its cost?
+Include integration, storage, repair and lifetime performance alongside the reduction in energy supplied by the vehicle.
+ Research boundary
+Auxiliary energy coverage alone does not establish attractive payback. A credible prototype should compare measured useful energy and the complete installed cost.
+## Choose one engineering question.
+ Agree on the evidence.
+Supporting programs begin with a named decision, baseline and owner. Pilot scope follows the strongest technical and business case.
+ [Prepare a partnership enquiry ↗ ](contact.html?topic=Engineering%20tools)
+ [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)
+From module intelligence
+to customer and OEM value.
+ [Platform](platform.html) [Battery AI](battery-ai.html) [PMG](pmg.html) [Evo Core](evo-core.html) [Research](research.html) [About Mathsya](about.html) [Investors](investors.html) [Pitch journey](pitch.html) [Contact](contact.html) [Privacy](privacy.html)
+© 2026 Mathsya Connected Services · Bengaluru, India
+Development-stage portfolio · Proposed benefits and roadmap
+  

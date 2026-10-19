@@ -1,0 +1,168 @@
+---
+import { ArrowRight, Info } from '@lucide/astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { TECHNOLOGIES } from '@/data/site';
+
+const about = (id: string) => TECHNOLOGIES.find((t) => t.id === id)?.description ?? '';
+const links = [
+  { label: 'Home', href: '/', description: 'Overview of the portfolio.' },
+  { label: 'Vehicle Explorer', href: '/explore', description: 'Rotate, cut away and inspect where each technology operates.' },
+  { label: 'Platform', href: '/platform', description: 'How the portfolio connects.' },
+  { label: 'Battery & Charging AI', href: '/battery-ai', description: about('battery') },
+  { label: 'Proactive Mobility Guardian (PMG)', href: '/pmg', description: about('pmg') },
+  { label: 'Evo Core', href: '/evo-core', description: about('evo') },
+  { label: 'Investors', href: '/investors', description: 'The investment case and the investor and partner brief.' },
+  { label: 'Contact', href: '/contact', description: 'Prepare an enquiry in your browser.' },
+];
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you requested could not be found. Use these links to reach the main sections of Mathsya Connected Services."
+  noindex
+>
+  <section class="nf tone-pearl">
+    <div class="container nf-grid">
+      <div class="nf-copy">
+        <p class="eyebrow">Error 404 / Page not found</p>
+        <h1 class="h1 nf-title">We could not find that page.</h1>
+        <p class="lead">The address may be mistyped, or the page may have moved. The sections listed here are the places to start from.</p>
+        <p class="nf-path" id="nf-path" hidden>Requested address: <code id="nf-path-value"></code></p>
+        <a class={buttonVariants({ size: 'lg' })} href="/">Go to the homepage <ArrowRight aria-hidden="true" /></a>
+        <p class="note">
+          <Info size={16} aria-hidden="true" />
+          <span>The earlier pitch page is now part of <a href="/investors">Investors</a>.</span>
+        </p>
+      </div>
+
+      <nav class="nf-index" aria-labelledby="nf-index-title">
+        <h2 id="nf-index-title" class="nf-index-title">Main sections</h2>
+        <ul class="nf-list">
+          {
+            links.map((l) => (
+              <li>
+                <a class="nf-link" href={l.href}>
+                  <span class="nf-name">{l.label}</span>
+                  <span class="nf-route">{l.href}</span>
+                  <ArrowRight size={16} aria-hidden="true" />
+                  <span class="nf-desc">{l.description}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    padding-block: clamp(56px, 4vw + 32px, 112px) clamp(72px, 6vw + 32px, 136px);
+  }
+  .nf-grid {
+    display: grid;
+    gap: 48px;
+  }
+  @media (min-width: 960px) {
+    .nf-grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(48px, 7vw, 120px);
+      align-items: start;
+    }
+  }
+  .nf-copy {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+  .nf-title {
+    max-width: 12ch;
+    font-size: clamp(2.5rem, 1.2rem + 4.2vw, 4.5rem);
+  }
+  .nf-path {
+    margin: 0;
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
+  }
+  /* Solid ring: the shared Button ring is translucent (about 2:1 on white). */
+  .nf-copy > a:focus-visible {
+    --tw-ring-color: var(--c-cobalt);
+  }
+  .nf-copy .note a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  .nf-path code {
+    font-family: var(--f-mono);
+    color: var(--c-ink);
+    overflow-wrap: anywhere;
+  }
+
+  .nf-index-title {
+    margin-bottom: 14px;
+    font-family: var(--f-mono);
+    font-size: var(--fs-label);
+    font-weight: 500;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .nf-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line-strong);
+  }
+  .nf-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: baseline;
+    gap: 2px 16px;
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--c-line);
+    color: var(--c-ink);
+    text-decoration: none;
+    transition: background-color var(--dur-s);
+  }
+  .nf-link:hover {
+    background: var(--c-white);
+    text-decoration: none;
+  }
+  .nf-name {
+    font-family: var(--f-display);
+    font-size: 1.125rem;
+    font-weight: 680;
+    letter-spacing: -0.01em;
+  }
+  .nf-route {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    color: var(--c-slate);
+  }
+  .nf-link svg {
+    align-self: center;
+    color: var(--c-cobalt-ink);
+    transition: translate var(--dur-m) var(--ease-out);
+  }
+  .nf-link:hover svg {
+    translate: 3px 0;
+  }
+  .nf-desc {
+    grid-column: 1 / -1;
+    font-size: var(--fs-small);
+    color: var(--c-slate);
+  }
+</style>
+
+<script>
+  // Shows the address that was requested, as plain text only, so a typo is easy to spot. Nothing is stored or sent.
+  const wrap = document.getElementById('nf-path');
+  const value = document.getElementById('nf-path-value');
+  const here = window.location.pathname;
+  if (wrap && value && !/^\/404(\.html)?$/.test(here)) {
+    value.textContent = (here + window.location.search).slice(0, 120);
+    wrap.hidden = false;
+  }
+</script>

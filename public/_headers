@@ -1,0 +1,27 @@
+# Security and caching headers for hosts that read _headers (Cloudflare Pages, Netlify).
+# Every page also carries a hash-pinned Content-Security-Policy <meta> (astro.config.mjs → security.csp);
+# frame-ancestors only works as a header, so clickjacking protection lives here.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
+
+# Fingerprinted build assets never change.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Stable file names: cache, but revalidate so replacements reach visitors.
+/models/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/posters/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/og/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
+/resources/*
+  Cache-Control: public, max-age=3600, must-revalidate
