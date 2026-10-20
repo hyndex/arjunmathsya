@@ -1,4 +1,4 @@
-/* /investors — shared classes for the chapter frame, evidence notes and the two React islands.
+/* /investors — shared classes for the chapter frame and the portfolio-to-market island.
    Imported by src/pages/investors.astro only. Prefix: inv- */
 
 /* ---------- Product colour scope ---------- */
@@ -6,10 +6,8 @@
 .inv-pc-pmg,
 .inv-pc-cloud { --pc: var(--p-pmg); --pc-ink: var(--p-pmg-ink); --pc-bg: var(--p-pmg-bg); }
 .inv-pc-evo { --pc: var(--p-evo); --pc-ink: var(--p-evo-ink); --pc-bg: var(--p-evo-bg); }
-.inv-pc-neutral,
-.inv-pc-tools { --pc: var(--c-slate-2); --pc-ink: var(--c-slate); --pc-bg: var(--c-pearl); }
 
-/* ---------- Chapter frame: numeral | heading | evidence note, then full-width body ---------- */
+/* ---------- Chapter frame: numeral | heading, then full-width body ---------- */
 .inv-ch {
   padding-block: clamp(76px, 4vw + 44px, 140px);
   border-top: 1px solid var(--c-line);
@@ -43,84 +41,17 @@
 .inv-ch-title-2 {
   color: var(--c-slate);
 }
-@media (min-width: 760px) {
-  .inv-ch-head {
-    grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
-    column-gap: clamp(32px, 4vw, 64px);
-    align-items: start;
-  }
-  .inv-ch-num {
-    grid-column: 1 / -1;
-  }
-}
 @media (min-width: 1180px) {
   .inv-ch-head {
-    grid-template-columns: 132px minmax(0, 1fr) 300px;
+    grid-template-columns: 132px minmax(0, 1fr);
+    column-gap: clamp(32px, 4vw, 64px);
+    align-items: start;
   }
   .inv-ch-num {
     grid-column: auto;
     font-size: clamp(5rem, 3rem + 3vw, 7rem);
     margin-top: -0.06em;
   }
-}
-
-/* ---------- Evidence note + status indicator ---------- */
-.inv-ev {
-  display: grid;
-  gap: 8px;
-  align-content: start;
-  padding: 16px 18px 14px;
-  border: 1px dashed var(--c-line-strong);
-  border-radius: var(--r-s);
-  background: var(--c-white);
-  font-size: var(--fs-xs);
-  line-height: 1.5;
-  color: var(--c-slate);
-}
-.inv-ev-k {
-  font-family: var(--f-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-}
-.inv-ev-claim {
-  font-family: var(--f-display);
-  font-weight: 650;
-  font-size: 0.9rem;
-  line-height: 1.35;
-  color: var(--c-ink);
-}
-.inv-ev-text {
-  color: var(--c-ink-soft);
-}
-.inv-ev-status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 4px;
-  padding-top: 10px;
-  border-top: 1px solid var(--c-line);
-  font-family: var(--f-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-ink);
-}
-.inv-meter {
-  display: inline-grid;
-  grid-template-columns: repeat(3, 18px);
-  gap: 3px;
-  flex: none;
-}
-.inv-meter i {
-  height: 6px;
-  border-radius: 2px;
-  border: 1px dashed var(--c-slate-2);
-}
-.inv-meter i[data-on] {
-  border: 0;
-  background: var(--c-cobalt);
 }
 
 /* ---------- Portfolio-to-market map (MarketMap.tsx) ---------- */
@@ -291,130 +222,16 @@
 @media (min-width: 900px) {
   .inv-map {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: auto repeat(5, minmax(62px, auto));
+    grid-template-rows: auto repeat(4, minmax(62px, auto)); /* header + one row per offering / buyer */
     column-gap: clamp(28px, 4.2vw, 72px);
     row-gap: 10px;
   }
   .inv-map-col {
-    grid-row: 1 / span 6;
+    grid-row: 1 / span 5;
     grid-template-rows: subgrid;
   }
   .inv-map-list {
-    grid-row: 2 / span 5;
+    grid-row: 2 / span 4;
     grid-template-rows: subgrid;
   }
-}
-
-/* ---------- Audience tabs (AudienceTabs.tsx) ---------- */
-.inv-aud-panel {
-  display: grid;
-  gap: 32px;
-  padding: clamp(24px, 3vw, 44px);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-l);
-  background: var(--c-white);
-}
-@media (min-width: 900px) {
-  .inv-aud-panel {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
-    gap: clamp(32px, 5vw, 80px);
-  }
-}
-.inv-aud-label {
-  font-family: var(--f-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--c-cobalt-ink);
-}
-.inv-aud-copy {
-  display: grid;
-  gap: 16px;
-  align-content: start;
-  justify-items: start;
-}
-.inv-aud-copy > p:not(.inv-aud-label) {
-  color: var(--c-slate);
-  max-width: 56ch;
-}
-.inv-aud-points {
-  display: grid;
-  gap: 10px;
-  margin: 4px 0 8px;
-  padding: 0;
-  list-style: none;
-}
-.inv-aud-points li {
-  position: relative;
-  padding-left: 26px;
-  font-size: var(--fs-small);
-}
-.inv-aud-points li::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 0.62em;
-  width: 12px;
-  height: 1.5px;
-  background: var(--c-cobalt);
-}
-.inv-aud-chain {
-  display: grid;
-  align-content: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: chain;
-}
-.inv-aud-chain li {
-  position: relative;
-  display: grid;
-  gap: 2px;
-  padding: 0 0 26px 40px;
-  counter-increment: chain;
-}
-.inv-aud-chain li:last-child {
-  padding-bottom: 0;
-}
-.inv-aud-chain li::before {
-  content: counter(chain, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1.5px solid var(--c-cobalt);
-  background: var(--c-white);
-  font-family: var(--f-mono);
-  font-size: 0.66rem;
-  color: var(--c-cobalt-ink);
-}
-.inv-aud-chain li:last-child::before {
-  background: var(--c-cobalt);
-  color: var(--c-white);
-}
-.inv-aud-chain li:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 13.5px;
-  top: 30px;
-  bottom: 2px;
-  width: 1.5px;
-  background: var(--c-cobalt-soft);
-}
-.inv-aud-chain span {
-  font-family: var(--f-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-}
-.inv-aud-chain strong {
-  font-family: var(--f-display);
-  font-size: 1.05rem;
-  font-weight: 680;
-  line-height: 1.3;
 }

@@ -1,127 +1,121 @@
 # Mathsya — Pitch Deck Source
 October 2026 | Editable source for cohort, investor and OEM discussions
+Current stage: Architecture, use cases and proof of concept planning. Product capabilities, roadmap scopes and commercial models are proposed; measured results will be identified when available.
 
-## Slide 01 — The thesis
-**Intelligence inside. Value beyond.**
+The slides follow the order of the investor page (https://arjunmathsya.vercel.app/investors): problem, first application, products, benefits, adoption and revenue, proof, founder and next ask.
 
-Mathsya develops automotive Edge AI that connects module behavior to customer and OEM outcomes. The product portfolio separates module AI, vehicle software and EV power hardware.
+## Slide 01 — Title
+**A focused first proof. A connected growth path.**
 
-Visual: the three-level product ecosystem.
+Mathsya is developing automotive Edge AI across embedded battery and charging intelligence, EV power hardware and connected vehicle software. Our entry strategy is one observable problem, one accountable buyer and an agreed measure of value.
 
-**Evidence before pitching:** Confirm the first application and the named buyer; avoid presenting a platform vision as a shipped product.
+Visual: the schematic concept vehicle with the three product locations.
 
 ## Slide 02 — The problem
-**Signals need a useful decision.**
+**Make module evidence useful to a decision.**
 
-Charging readiness, battery-health guidance and power-system investigations can benefit from linked operating and vehicle context. Start with a specific issue and compare against today’s workflow.
+Charging readiness, battery-health guidance and power-system investigations depend on more than an isolated signal. We are exploring where local behavioural insight, vehicle context and outcome verification improve an existing workflow.
 
-Visual: one customer journey with the existing pain point.
+Visual: module signal → existing baseline → the decision → the evidence.
 
-**Evidence before pitching:** Obtain baseline readiness, investigation time and attributable cost from a partner. Do not imply every existing BMS or diagnostic system lacks intelligence.
+**Evidence before pitching:** a partner baseline for one named issue. Do not imply that existing BMS or diagnostic systems lack intelligence.
 
-## Slide 03 — The portfolio
-**Three product roles. One connected purpose.**
+## Slide 03 — The first application
+**Start with a battery or charging decision.**
 
-Battery & Charging AI is an embedded module-software product. Evo Core is EV power hardware plus embedded software. PMG is vehicle software with optional cloud/SaaS services. Each can have a separate adoption and commercial path.
+Agree a specific readiness, health or investigation problem with an OEM, supplier or fleet owner. Establish the current baseline, obtain approved signals and test a bounded implementation before extending the application.
 
-Visual: product architecture and deployment locations.
+Visual: accountable owner → measured baseline → controlled test → paid program.
 
-**Evidence before pitching:** Name what exists today, what is planned and what belongs to a future generation.
+## Slide 04 — The products
+**Three products with separate adoption paths.**
 
-## Slide 04 — Battery & Charging AI
-**Read the behavior behind the percentage.**
+Battery & Charging AI is embedded module software. Evo Core is power hardware plus embedded software. PMG is vehicle software with optional OEM and fleet services. Each product can be evaluated independently and connected through approved interfaces as its evidence develops.
 
-Evaluate health/state estimates, charging readiness, thermal trends and accessible cell patterns alongside the validated BMS. Share approved insight with PMG and/or Evo Core.
+Visual: three-level architecture (module, vehicle, optional organizational services).
 
-Visual: signals → local inference → approved interface → verified outcome.
+## Slide 05 — Battery & Charging AI
+**Care for the battery. Prepare for the journey.**
 
-**Evidence before pitching:** Use held-out batteries and conditions, independent reference measurements, false-alert rates and runtime resource evidence.
+A proposed embedded software layer for battery behaviour, health trends, charging readiness and thermal context, designed to work alongside a validated Battery Management System and provide useful insight to the module owner, PMG or Evo Core.
 
-## Slide 05 — PMG
-**Connect the module to the vehicle.**
+Visual: read approved signals → check data quality → run a bounded model → retain confidence and version → share a reviewable insight → verify against the baseline.
 
-Combine selected module insight with journey and customer context, prepare permitted recommendations, and verify the result. Optional OEM/fleet services can compare authorized evidence and track a correction.
+**Evidence before pitching:** held-out batteries and conditions, independent reference measurements, false alerts and runtime resources.
 
-Visual: charging-readiness or OEM quality workflow.
+## Slide 06 — PMG
+**Connect the insight. Make it useful.**
 
-**Evidence before pitching:** Demonstrate one end-to-end case, permissions, offline behavior and an acknowledged outcome.
+PMG connects selected module insights with vehicle, journey and customer context, prepares permitted recommendations and verifies the outcome. Optional cloud services support authorized OEM and fleet learning; they are separate from the embedded runtime.
 
-## Slide 06 — Evo Core
-**A deliberate hardware evolution.**
+Visual: the illustrative worked example — a warm battery, a 07:30 departure, a permitted readiness plan and a checked outcome.
 
-Gen 1: OBC, DC/DC, EVCC, HV distribution and common control. Gen 2: battery/thermal supervision and separately validated charging options. Gen 3: wider energy coordination with optional inverter supervision. Generations are a proposed roadmap.
+**Evidence before pitching:** one end-to-end demonstration with permissions, offline behaviour and an acknowledged outcome.
 
-Visual: generation roadmap and integration matrix.
+## Slide 07 — Evo Core
+**Power brought together. Intelligence built in.**
 
-**Evidence before pitching:** Separate shared control, physical power-stage integration and connected interfaces. Hardware release dates, ratings and costs require a reference program.
+A proposed EV power-hardware and embedded-software platform. Gen 1: OBC, DC/DC, EVCC and HV distribution under common control with Edge AI supervision. Gen 2: battery and thermal extensions; DC-session and bidirectional functions are options needing compatible hardware and separate validation. Gen 3: wider energy supervision and optional inverter supervision, subject to feasibility.
 
-## Slide 07 — The benefits
-**Follow the value. Measure the difference.**
+Visual: generation roadmap and the function-by-generation matrix, labelled as a proposed roadmap.
 
-Customer: readiness, clearer health/charging guidance and useful service planning. OEM: evidence-led triage, repeat-issue learning, reusable integration and a credible cost case.
+**Evidence before pitching:** a reference program for ratings, costs and timing. Keep shared control, physical integration and connected interfaces distinct.
 
-Visual: one module insight branching into customer and OEM outcomes.
+## Slide 08 — The benefits
+**Measure customer outcomes and organizational value.**
 
-**Evidence before pitching:** Compare against existing methods. Include error, false alerts, overrides and verified outcomes; do not state unmeasured battery-life, range or savings percentages.
+Evaluate useful readiness, clearer guidance and informed service planning for customers. For OEMs and partners, evaluate investigation effort, repeat issues, reusable integration and full lifecycle cost. Compare against the existing workflow and include errors, false alerts and the cost of adoption.
 
-## Slide 08 — The business model
+Visual: one module insight branching into a customer outcome and an OEM outcome, each with its measure.
+
+**Evidence before pitching:** no battery-life, range or savings figure before it is measured.
+
+## Slide 09 — Adoption and revenue
 **Match revenue to the product.**
 
-Battery AI: integration and embedded licensing. PMG: vehicle-software licensing and optional SaaS/enterprise services. Evo Core: paid engineering, hardware supply and program software/support.
+| Offering | Potential buyer | Proposed commercial path |
+| --- | --- | --- |
+| Battery & Charging AI | Battery or BMS supplier and OEM | Scoped integration, then embedded-runtime licensing and support |
+| PMG vehicle software | OEM vehicle platform and fleet program | Program integration, then embedded licensing and support |
+| Optional PMG cloud services | OEM quality or service organization and fleet | Authorized workflow, then enterprise subscription or services |
+| Evo Core | OEM and EV power-system partner | Paid engineering, then hardware supply and program software or support |
 
-Visual: product → buyer → paid entry → expansion.
-
-**Evidence before pitching:** Validate pricing, support ownership, customer willingness to pay and unit economics; do not treat a proposed model as booked revenue.
-
-## Slide 09 — The entry strategy
-**One useful wedge before the wider platform.**
-
-Select one buyer, an observable high-value problem, available data and a current baseline. Prove it through a scoped pilot, then seek a paid program before expanding across modules or generations.
-
-Visual: first use case → acceptance gate → paid next step.
-
-**Evidence before pitching:** Build a bottom-up TAM/SAM/SOM from eligible programs, volumes, attainable share and validated prices. Leave unsupported market figures out.
+**Evidence before pitching:** validated pricing, support ownership and willingness to pay. A proposed model is not booked revenue.
 
 ## Slide 10 — The proof plan
-**Fund the next milestone.**
+**Release the next commitment against evidence.**
 
-A proposed PMG 12–16 week software PoC: baseline, integration, controlled evaluation and commercial decision, after access is agreed. Battery AI and Evo Core hardware have separately scoped proof paths.
+The proposed PMG software PoC follows four gates over 12–16 weeks after partner, approved data and test access are agreed: define the baseline, connect the system, evaluate controlled workflows and decide the next stage. Battery model work and Evo Core hardware use separate scopes and evidence gates.
 
-Visual: four software gates beside a separate hardware path.
+Visual: four software gates beside a separate, unscaled hardware path.
 
-**Evidence before pitching:** Agree work packages, engineering/data/test ownership, acceptance criteria and the investment required for each gate.
+## Slide 11 — The founder
+**A perspective built across vehicle systems.**
 
-## Slide 11 — The founder & execution
-**A vehicle perspective. A product ambition.**
+Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.
 
-Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Build the first partner program around the relevant engineering and evaluation skills.
+**Evidence before pitching:** add a founder photograph, career highlights and team biographies only once approved. Do not imply team members, partnerships or endorsements.
 
-Visual: founder profile and work-package ownership.
+## Slide 12 — The next ask
+**Choose the first partner program.**
 
-**Evidence before pitching:** Add approved team biographies, a founder photo and execution commitments when confirmed. Do not invent team members, partnerships or employer endorsements.
+We are seeking an OEM, BMS, power-system or fleet partner with an accountable problem owner and approved signal or test access. The next funding discussion should align engineering, data, bench work and commercial evaluation to an agreed acceptance milestone and a costed work plan.
 
-## Slide 12 — The ask
-**Choose the partner. Define the proof.**
-
-Seek a scoped OEM/BMS/power-system partnership, approved signal/test access and milestone-based funding for the first measurable application. Use evidence from that proof to set the next program and growth decision.
-
-Visual: partner + data + team + milestone.
-
-**Evidence before pitching:** Set the funding amount and use of funds from an agreed costed plan. Public business contact, demo evidence and sourced market figures remain to be confirmed.
+What the first proof must establish: an agreed buyer problem and baseline; a useful end-to-end demonstration; measured error and runtime behaviour; the complete adoption cost; and a validated route to a paid program. Pricing, market sizing and a funding amount will follow a sourced, bottom-up plan.
 
 ## Presentation rules
-Keep the three product roles distinct. Label Gen 1–3 as a proposed roadmap. Do not convert target benefits into measured results. Embedded PMG and cloud/SaaS have different delivery models. Do not show investor, cohort, customer or employer logos as endorsements without confirmed authorization. Add funding and market figures only from a sourced bottom-up plan.
+Keep the three product roles distinct. Label Gen 1–3 as a proposed roadmap. Do not convert target benefits into measured results. Embedded PMG and optional cloud services have different delivery models. Do not show investor, cohort, customer or employer logos as endorsements without confirmed authorization. Add funding and market figures only from a sourced, bottom-up plan.
 
-Public source: https://mathsya-connected-services.arjtha.chatgpt.site
-
-## Suggested five-minute cut (six slides)
-| Slide | Content source | Time |
+## Suggested five-minute sequence
+| Part | Content | Time |
 | --- | --- | --- |
-| 1 | Thesis and specific customer/OEM problem (chapters 1–2) | 40 seconds |
-| 2 | Three product roles and connected architecture (chapter 3) | 50 seconds |
-| 3 | One battery/charging workflow (chapters 4–5); identify it as illustrative until demonstrated | 60 seconds |
-| 4 | Evo Core roadmap and outcomes to measure (chapters 6–7) | 45 seconds |
-| 5 | Buyer, business model and first adoption path (chapters 8–9) | 55 seconds |
-| 6 | Founder/execution, next proof and specific ask (chapters 10–12) | 50 seconds |
+| 1 | Problem and customer (slides 02–03) | 40 seconds |
+| 2 | Product architecture (slide 04) | 50 seconds |
+| 3 | One battery or charging workflow (slides 05–06), identified as illustrative until demonstrated | 60 seconds |
+| 4 | Evo Core roadmap and benefits (slides 07–08) | 45 seconds |
+| 5 | Buyer and commercial path (slide 09) | 55 seconds |
+| 6 | Founder, next proof and specific ask (slides 10–12) | 50 seconds |
 
-Total: 300 seconds. Tailor to the cohort's actual time limit and evaluation criteria. The full twelve chapters supply supporting material for longer investor discussions.
+Total: five minutes. Adapt to the cohort's actual presentation rules.
+
+Public source: https://arjunmathsya.vercel.app/

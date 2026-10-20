@@ -56,8 +56,9 @@ Product aliases: `--p-battery`, `--p-evo`, `--p-pmg` (+ `-ink`, `-bg`). Shadows 
 
 ## Shared content data (do not duplicate — import)
 
-- `@/data/products` — `PRODUCTS`, `PRODUCT_LIST`, `STAGES`, `VALUE_CHAIN`, `BOUNDARIES`.
-- `@/data/portfolio` — `BENEFITS` (4 scenarios), `GENERATIONS` (Gen 1–3), `MATRIX` + `MATRIX_NOTE`, `PMG_POC` + `POC_NOTE`, `HARDWARE_GATES`, `PROOF_PATH`, `PROGRAMS`, `BENEFIT_NOTE`.
+- `@/data/products` — `PRODUCTS` (incl. `summary` = the product card text, `commercial` = commercial direction), `PRODUCT_LIST`, `STAGES`, `BOUNDARIES`.
+- `@/data/portfolio` — `BENEFITS` (4 scenarios), `GENERATIONS` (Gen 1–3), `MATRIX` + `MATRIX_NOTE` + `ROADMAP_BOUNDARY`, `PMG_POC` + `POC_NOTE`, `HARDWARE_GATES`, `PROOF_PATH`, `PROGRAMS`, `BENEFIT_NOTE`, `MEASURES` (benefits-and-measures table).
+- `@/data/site` — `SITE.description` (short company description) and `SITE.stage` (sitewide development-stage statement: shown once, in the investor page's status summary; product pages use short stage labels).
 - `@/data/site` — `SITE`, `TOPICS`, `contactHref`.
 - Page-specific copy goes in `src/data/<page>.ts` (typed), transcribed from `docs/legacy-source/<page>.txt`.
 
@@ -88,12 +89,15 @@ Semantic landmarks and heading order; visible focus (global ring); every control
 
 ## Content and claim rules (non-negotiable)
 
-1. Source of truth: `docs/legacy-source/*.txt` (pages), `portfolio-data.js`, `app.js`, `modules.js`, and `public/assets|resources/*.md`. Rewrite for clarity, but do not drop technical meaning, caveats or proof requirements.
+1. Source of truth: `docs/editing-pack-2026-10-20.md` (current public copy — its "Publish this text" blocks; its implementation instructions, founder worksheet and acceptance checks stay off the public pages), then `docs/legacy-source/*.txt`, `portfolio-data.js`, `app.js`, `modules.js` and `public/assets|resources/*.md`. Rewrite for clarity, but do not drop technical meaning, caveats or proof requirements. The product name is written "Battery & Charging AI" everywhere.
 2. Never invent revenue, customers, partners, contracts, pilots, valuations, funding amounts, market sizes, prices, savings, battery-life or range gains, dates, team members, certifications or logos.
 3. Stages verbatim: Battery AI & PMG "Architecture & PoC planning"; Evo Core "Architecture & hardware planning"; Product Neural Chain "Concept & PoC definition"; Engineering Intelligence "Workflow & validation design"; Solar "Research & energy modeling". Generations are a proposed roadmap with no committed dates. The 12–16 week PoC is a PMG *software* PoC that starts after partner/data/test access is agreed.
 4. Boundaries: Battery AI is software alongside a validated BMS (BMS keeps sensing, balancing, limits, protection). PMG is vehicle software on suitable gateway/telematics/central compute — never draw it as a circuit board, never imply unrestricted control. Cloud/SaaS is optional and permission-governed; local runtime has defined offline behaviour. Evo Core: distinguish shared control vs physical integration vs connected interfaces vs future options; a shared housing does not prove lower cost or simpler qualification.
 5. Label concept visuals: "Schematic concept illustration · not a production design".
 6. No links to `/pitch` (it redirects to `/investors`). Use `/investors/brief` for the printable brief.
+7. CTA wording: a button that opens `/contact` with the investor category says "Discuss the investment"; navigation to `/investors` says "Explore the investment case".
+8. Contact: draft mode (prepare, copy, download; nothing is sent) until an approved inbox **and** a verified delivery backend exist. Never show a "sent" state for a draft. Change the page introduction, button, feedback, footer contact details and privacy wording together when the mode changes.
+9. Say a stage once: one status summary on `/investors`, short stage labels elsewhere. Do not repeat "this is open / not yet established" panels section by section.
 
 ## Page skeleton
 

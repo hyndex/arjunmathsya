@@ -2,18 +2,23 @@
 import { ArrowLeft, ArrowRight, Download, Printer } from '@lucide/astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { buttonVariants } from '@/components/ui/button';
-import { GENERATIONS } from '@/data/portfolio';
+import { GENERATIONS, PMG_POC } from '@/data/portfolio';
 import { PRODUCTS } from '@/data/products';
-import { BRIEF, MILESTONE, OPPORTUNITY } from '@/data/investors';
+import { BRIEF } from '@/data/investors';
 
 const gens = [GENERATIONS.gen1, GENERATIONS.gen2, GENERATIONS.gen3];
-const outcomes = [OPPORTUNITY.outcomes.customer, OPPORTUNITY.outcomes.oem];
-const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\//, '');
+const url = (path: string) => new URL(path, Astro.site).href;
+const links = [
+  { k: 'Website', href: url('/') },
+  { k: 'Full investor narrative', href: url('/investors') },
+  { k: 'Enquiry options', href: url('/contact') },
+];
 ---
 
 <BaseLayout
-  title="Investor & partner brief"
-  description="A printable brief on Mathsya: the problem, product portfolio, Evo Core roadmap, benefits still to prove, the next milestone and the investment purpose."
+  title="Investor and Partner Brief"
+  image="/og/og-investors.png"
+  description="A printable brief on Mathsya: the opportunity, three products, benefits to evaluate, the first proof, the partnership sought and the founder."
 >
   <div class="brief-page">
     <div class="brief-shell">
@@ -40,14 +45,11 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
                 <rect width="48" height="48" rx="13" fill="#185ADB"></rect>
                 <path d="M10 32V16h5l9 11 9-11h5v16h-5V23l-9 10-9-10v9z" fill="#fff"></path>
               </svg>
-              <span class="brief-word">mathsya<small>Connected Services</small></span>
             </span>
             <p class="brief-kicker"><span>Investor &amp; partner brief</span><span>{BRIEF.date}</span></p>
           </div>
-          <h1 id="brief-title" class="brief-title">
-            {BRIEF.title[0]}<span>{BRIEF.title[1]}</span>
-          </h1>
-          <p class="brief-lead">{BRIEF.lead}</p>
+          <h1 id="brief-title" class="brief-title">{BRIEF.title}</h1>
+          <p class="brief-lead">{BRIEF.subtitle}</p>
           <dl class="brief-facts">
             {
               BRIEF.facts.map((f) => (
@@ -60,92 +62,88 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
           </dl>
         </header>
 
-        <section class="brief-sec" aria-labelledby="b-problem">
-          <h2 id="b-problem"><span>01</span>The problem and direction</h2>
-          <p class="brief-prose">{BRIEF.problem}</p>
+        <section class="brief-sec" aria-labelledby="b-opportunity">
+          <h2 id="b-opportunity"><span>01</span>The opportunity</h2>
+          <p class="brief-prose">{BRIEF.opportunity}</p>
         </section>
 
-        <section class="brief-sec" aria-labelledby="b-portfolio">
-          <h2 id="b-portfolio"><span>02</span>The product portfolio</h2>
+        <section class="brief-sec" aria-labelledby="b-products">
+          <h2 id="b-products"><span>02</span>The products</h2>
           <div class="brief-products">
             {
-              BRIEF.portfolio.map((p) => (
+              BRIEF.products.map((p) => (
                 <section class={`brief-product brief-${p.product}`} aria-label={p.name}>
-                  <p class="brief-k">{p.kind}</p>
+                  <p class="brief-k">{PRODUCTS[p.product].kind}</p>
                   <h3>{p.name}</h3>
                   <p>{p.body}</p>
                   <p class="brief-adopt">
-                    <span>Proposed adoption</span>
-                    {p.adoption}
+                    <span>Potential commercial path</span>
+                    {p.path}
                   </p>
                   <p class="brief-stage">{PRODUCTS[p.product].stage}</p>
                 </section>
               ))
             }
           </div>
-        </section>
-
-        <section class="brief-sec" aria-labelledby="b-roadmap">
-          <h2 id="b-roadmap"><span>03</span>The Evo Core generation roadmap</h2>
           <div class="brief-roadmap">
-            <div>
-              <h3>Gen 1 → Gen 2 → Gen 3</h3>
-              <ol class="brief-gens">
-                {
-                  gens.map((g, i) => (
-                    <li>
-                      <span class="brief-gen-n">{g.short}</span>
-                      <strong>{g.label}</strong>
-                      <span class="brief-gen-body">{BRIEF.gens[i].body}</span>
-                    </li>
-                  ))
-                }
-              </ol>
-            </div>
-            <div class="brief-aside">
-              <h3>Integration follows evidence</h3>
-              <p>{BRIEF.integration}</p>
-            </div>
+            <h3>Proposed Evo Core roadmap <span>no committed dates</span></h3>
+            <ol class="brief-gens">
+              {
+                gens.map((g) => (
+                  <li>
+                    <span class="brief-gen-n">{g.short}</span>
+                    <strong>{g.label}</strong>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
         </section>
 
         <section class="brief-sec" aria-labelledby="b-benefits">
-          <h2 id="b-benefits"><span>04</span>Benefits and proof</h2>
-          <div class="brief-two">
-            {
-              outcomes.map((o) => (
-                <section aria-label={o.title}>
-                  <h3>{o.title}</h3>
-                  <p>{o.body}</p>
-                  <p class="brief-measure">
-                    <span>Measure</span>
-                    {o.measure}
-                  </p>
-                </section>
-              ))
-            }
-          </div>
-          <p class="brief-note">{OPPORTUNITY.note}</p>
+          <h2 id="b-benefits"><span>03</span>Benefits to evaluate</h2>
+          <p class="brief-prose">{BRIEF.benefits}</p>
         </section>
 
-        <section class="brief-sec" aria-labelledby="b-next">
-          <h2 id="b-next"><span>05</span>The next milestone</h2>
-          <ol class="brief-ms">
-            {MILESTONE.items.map((m) => <li>{m.body}</li>)}
+        <section class="brief-sec" aria-labelledby="b-proof">
+          <h2 id="b-proof"><span>04</span>The first proof</h2>
+          <p class="brief-prose">{BRIEF.firstProof}</p>
+          <ol class="brief-gates" aria-label="Proposed PMG software PoC gates">
+            {
+              PMG_POC.map((g) => (
+                <li>
+                  <span>{g.weeks}</span>
+                  <strong>{g.title}</strong>
+                </li>
+              ))
+            }
           </ol>
         </section>
 
+        <section class="brief-sec brief-ask" aria-labelledby="b-ask">
+          <h2 id="b-ask"><span>05</span>The partnership sought</h2>
+          <p class="brief-prose">{BRIEF.partnership}</p>
+        </section>
+
         <section class="brief-sec" aria-labelledby="b-founder">
-          <h2 id="b-founder"><span>06</span>Founder and investment purpose</h2>
+          <h2 id="b-founder"><span>06</span>Founder background</h2>
           <p class="brief-prose">{BRIEF.founder}</p>
         </section>
 
         <footer class="brief-foot">
-          <p class="brief-disclaimer">{BRIEF.disclaimer}</p>
-          <p class="brief-src">
-            <span>Complete investor narrative</span>
-            <a href="/investors">{narrativeUrl}</a>
-          </p>
+          <dl class="brief-links">
+            {
+              links.map((l) => (
+                <div>
+                  <dt>{l.k}</dt>
+                  <dd>
+                    <a href={l.href}>{l.href}</a>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="brief-disclaimer">{BRIEF.stageNote}</p>
         </footer>
       </article>
 
@@ -198,30 +196,8 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     padding-bottom: 18px;
     border-bottom: 2px solid var(--c-ink);
   }
-  .brief-mark {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
   .brief-mark svg {
-    flex: none;
-  }
-  .brief-word {
-    display: grid;
-    font-family: var(--f-display);
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-  .brief-word small {
-    margin-top: 4px;
-    font-family: var(--f-mono);
-    font-size: 0.52rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--c-slate);
+    display: block;
   }
   .brief-kicker {
     display: flex;
@@ -237,35 +213,35 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     color: var(--c-cobalt-ink);
   }
   .brief-title {
-    margin-top: clamp(28px, 4vw, 44px);
-    font-size: clamp(2.3rem, 1.5rem + 3.4vw, 4.1rem);
+    margin-top: clamp(24px, 3.5vw, 40px);
+    font-size: clamp(2.1rem, 1.4rem + 3vw, 3.6rem);
     font-weight: 750;
-    line-height: 1;
+    line-height: 1.02;
     letter-spacing: -0.045em;
   }
-  .brief-title span {
-    display: block;
-    color: var(--c-cobalt-ink);
-  }
   .brief-lead {
-    margin-top: 18px;
-    max-width: 52ch;
-    font-size: var(--fs-lead);
-    line-height: 1.45;
-    color: var(--c-slate);
+    margin-top: 14px;
+    max-width: 44ch;
+    font-family: var(--f-display);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--c-cobalt-ink);
   }
   .brief-facts {
     display: grid;
     gap: 0 28px;
-    margin: clamp(26px, 3.5vw, 40px) 0 0;
+    margin: clamp(22px, 3vw, 34px) 0 0;
   }
   .brief-facts > div {
     display: grid;
     gap: 4px;
-    padding: 14px 0;
+    padding: 12px 0;
     border-top: 1px solid var(--c-line-strong);
   }
-  .brief-facts dt {
+  .brief-facts dt,
+  .brief-links dt {
     font-family: var(--f-mono);
     font-size: 0.68rem;
     letter-spacing: 0.12em;
@@ -278,24 +254,24 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     font-weight: 650;
     line-height: 1.4;
   }
-  @media (min-width: 720px) {
+  @media (min-width: 640px) {
     .brief-facts {
-      grid-template-columns: 0.8fr 1fr 1.4fr;
+      grid-template-columns: 1fr 1.4fr;
     }
   }
 
   /* Sections */
   .brief-sec {
-    margin-top: clamp(30px, 4vw, 44px);
-    padding-top: clamp(22px, 3vw, 30px);
+    margin-top: clamp(26px, 3.5vw, 40px);
+    padding-top: clamp(20px, 2.6vw, 28px);
     border-top: 1px solid var(--c-line);
   }
   .brief-sec h2 {
     display: flex;
     align-items: baseline;
     gap: 12px;
-    margin-bottom: 14px;
-    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+    margin-bottom: 12px;
+    font-size: clamp(1.2rem, 1.08rem + 0.5vw, 1.45rem);
     font-weight: 720;
     letter-spacing: -0.02em;
   }
@@ -312,7 +288,7 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     letter-spacing: -0.01em;
   }
   .brief-prose {
-    max-width: 70ch;
+    max-width: 72ch;
     color: var(--c-ink-soft);
   }
 
@@ -363,10 +339,10 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     color: var(--c-ink);
   }
   .brief-adopt span,
-  .brief-measure span,
-  .brief-src span {
+  .brief-roadmap h3 span {
     font-family: var(--f-mono);
     font-size: 0.64rem;
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--c-slate);
@@ -388,129 +364,103 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
     background: var(--bp);
   }
 
+  /* Compact roadmaps: Evo Core generations, PMG PoC gates */
   .brief-roadmap {
     display: grid;
-    gap: 22px;
-  }
-  @media (min-width: 760px) {
-    .brief-roadmap {
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      gap: 32px;
-    }
-  }
-  .brief-gens {
-    display: grid;
     gap: 10px;
-    margin: 12px 0 0;
-    padding: 0;
-    list-style: none;
+    margin-top: 22px;
   }
-  .brief-gens li {
-    display: grid;
-    grid-template-columns: 58px minmax(0, 1fr);
-    gap: 2px 12px;
-    padding: 12px 14px;
-    border: 1px solid color-mix(in srgb, var(--p-evo) 30%, var(--c-line));
-    border-radius: var(--r-s);
-    background: var(--c-ivory);
-  }
-  .brief-gen-n {
-    grid-row: span 2;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    color: var(--c-tangerine-ink);
-  }
-  .brief-gens strong {
-    font-family: var(--f-display);
-  }
-  .brief-gen-body {
-    color: var(--c-ink-soft);
-  }
-  .brief-aside {
-    display: grid;
-    gap: 8px;
-    align-content: start;
-    padding-left: 18px;
-    border-left: 2px solid var(--p-evo);
-    color: var(--c-ink-soft);
-  }
-
-  .brief-two {
-    display: grid;
-    gap: 20px;
-  }
-  @media (min-width: 720px) {
-    .brief-two {
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-  }
-  .brief-two > section {
-    display: grid;
-    gap: 6px;
-    align-content: start;
-    color: var(--c-ink-soft);
-  }
-  .brief-two h3 {
-    color: var(--c-ink);
-  }
-  .brief-measure {
-    display: grid;
-    gap: 2px;
-    color: var(--c-ink);
-  }
-  .brief-note {
-    margin-top: 18px;
-    padding: 12px 16px;
-    border: 1px dashed var(--c-line-strong);
-    border-radius: var(--r-s);
-    font-size: var(--fs-xs);
-    color: var(--c-slate);
-  }
-
-  .brief-ms {
-    display: grid;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    counter-reset: ms;
-  }
-  .brief-ms li {
-    position: relative;
-    padding: 11px 0 11px 40px;
-    border-bottom: 1px solid var(--c-line);
-    counter-increment: ms;
-    color: var(--c-ink);
-  }
-  .brief-ms li::before {
-    content: counter(ms, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 12px;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    color: var(--c-cobalt-ink);
-  }
-
-  .brief-foot {
-    display: grid;
-    gap: 14px;
-    margin-top: clamp(30px, 4vw, 44px);
-    padding-top: 18px;
-    border-top: 2px solid var(--c-ink);
-  }
-  .brief-disclaimer {
-    font-size: var(--fs-xs);
-    color: var(--c-slate);
-  }
-  .brief-src {
+  .brief-roadmap h3 {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 4px 12px;
+  }
+  .brief-gens,
+  .brief-gates {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 560px) {
+    .brief-gens {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .brief-gates {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .brief-gens li,
+  .brief-gates li {
+    display: grid;
+    gap: 2px;
+    padding: 10px 12px;
+    border-radius: var(--r-s);
+    line-height: 1.35;
+  }
+  .brief-gens li {
+    border: 1px solid color-mix(in srgb, var(--p-evo) 30%, var(--c-line));
+    background: var(--c-ivory);
+  }
+  .brief-gates {
+    margin-top: 14px;
+  }
+  .brief-gates li {
+    border: 1px solid var(--c-cobalt-soft);
+    background: var(--c-ice);
+  }
+  .brief-gen-n,
+  .brief-gates span {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+  }
+  .brief-gen-n {
+    color: var(--c-tangerine-ink);
+  }
+  .brief-gates span {
+    color: var(--c-cobalt-ink);
+  }
+  .brief-gens strong,
+  .brief-gates strong {
+    font-family: var(--f-display);
+    font-size: 0.92rem;
+  }
+
+  .brief-ask .brief-prose {
+    padding: 14px 18px;
+    border-left: 3px solid var(--c-cobalt);
+    background: var(--c-ice);
+    border-radius: 0 var(--r-s) var(--r-s) 0;
+    color: var(--c-ink);
+  }
+
+  .brief-foot {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(28px, 4vw, 44px);
+    padding-top: 18px;
+    border-top: 2px solid var(--c-ink);
+  }
+  .brief-links {
+    display: grid;
+    gap: 10px 24px;
+    margin: 0;
+  }
+  @media (min-width: 720px) {
+    .brief-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .brief-links dd {
+    margin: 2px 0 0;
     font-size: var(--fs-xs);
     overflow-wrap: anywhere;
+  }
+  .brief-disclaimer {
+    font-size: var(--fs-xs);
+    color: var(--c-slate);
   }
   .brief-next {
     margin-top: 24px;
@@ -518,10 +468,11 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
 </style>
 
 <style is:global>
+  /* Print / save PDF: two to three readable A4 pages, no site chrome or controls. */
   @media print {
     @page {
       size: A4;
-      margin: 14mm 14mm 16mm;
+      margin: 16mm 16mm 18mm;
     }
     html,
     body {
@@ -549,48 +500,68 @@ const narrativeUrl = new URL('/investors', Astro.site).href.replace(/^https?:\/\
       border: 0 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
-      font-size: 9.5pt !important;
-      line-height: 1.45 !important;
+      font-size: 10.5pt !important;
+      line-height: 1.5 !important;
     }
     .brief-title {
-      margin-top: 8mm !important;
-      font-size: 28pt !important;
+      margin-top: 9mm !important;
+      font-size: 30pt !important;
     }
     .brief-lead {
-      font-size: 12pt !important;
+      font-size: 14pt !important;
     }
     .brief-sec {
-      margin-top: 6mm !important;
-      padding-top: 4mm !important;
+      margin-top: 7mm !important;
+      padding-top: 5mm !important;
     }
     .brief-sec h2 {
-      font-size: 13pt !important;
+      font-size: 14pt !important;
       break-after: avoid;
     }
     .brief h3 {
+      font-size: 11.5pt !important;
       break-after: avoid;
     }
     .brief-facts {
-      grid-template-columns: 0.8fr 1fr 1.4fr !important;
+      grid-template-columns: 1fr 1.4fr !important;
     }
+    /* Full-width product blocks: each one stays whole, and page 1 is not left half empty. */
     .brief-products {
+      grid-template-columns: 1fr !important;
+      gap: 5mm !important;
+    }
+    .brief-product {
+      padding-top: 3mm !important;
+    }
+    .brief-gens {
       grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     }
-    .brief-roadmap {
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) !important;
+    .brief-gates {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     }
-    .brief-two {
-      grid-template-columns: 1fr 1fr !important;
+    .brief-links {
+      grid-template-columns: 1fr !important;
+      gap: 2mm !important;
+    }
+    .brief-links > div {
+      display: flex;
+      gap: 4mm;
+      align-items: baseline;
+    }
+    .brief-links dt {
+      flex: 0 0 48mm;
     }
     .brief-product,
-    .brief-gens li,
-    .brief-two > section,
+    .brief-roadmap,
+    .brief-gates,
     .brief-facts > div,
-    .brief-ms li,
-    .brief-aside,
-    .brief-note,
+    .brief-ask,
     .brief-foot {
       break-inside: avoid;
+    }
+    .brief-prose {
+      orphans: 3;
+      widows: 3;
     }
     .brief a {
       color: inherit !important;

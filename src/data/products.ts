@@ -18,12 +18,10 @@ export const PRODUCTS = {
     tint: 'var(--p-battery-bg)',
     stage: 'Architecture & PoC planning',
     stageIndex: 2, // reached: Concept, Proposed architecture; working on PoC planning
-    headline: 'Understand the battery behind the percentage.',
     summary:
-      'Embedded intelligence for battery health, charging readiness and useful thermal context, designed to work alongside a validated Battery Management System.',
+      'Embedded intelligence for battery health trends, charge-session behaviour, thermal context and accessible cell patterns. Designed to work alongside a validated BMS and share approved insights with the vehicle.',
     runsOn: 'Suitable BMS, module or adjacent vehicle compute',
-    tags: ['Battery health', 'Charging context', 'Module runtime'],
-    commercial: 'Paid integration / PoC → embedded-runtime licensing and program support',
+    commercial: 'Paid integration or a scoped proof of concept, followed by embedded-runtime licensing and program support where technical value and buyer demand are established.',
     buyers: 'Battery and BMS suppliers, OEMs',
     notThis: 'Not a battery pack, and not a replacement for BMS sensing, balancing or protection.',
   },
@@ -40,12 +38,10 @@ export const PRODUCTS = {
     tint: 'var(--p-evo-bg)',
     stage: 'Architecture & hardware planning',
     stageIndex: 1,
-    headline: 'Power, brought together. Intelligence, built in.',
     summary:
-      'A proposed EV power platform combining shared control, defined conversion and distribution functions, and Edge AI supervision — evolving through a Gen 1–3 roadmap.',
+      'EV power hardware and embedded software for shared control, defined power conversion and distribution functions, and supervisory intelligence. Its proposed Gen 1–3 roadmap expands only as engineering and commercial evidence supports it.',
     runsOn: 'Vehicle power-electronics location, defined by the reference program',
-    tags: ['Power integration', 'Gen 1–3 roadmap', 'Common control'],
-    commercial: 'Paid engineering / reference program → hardware supply and embedded-software / support terms',
+    commercial: 'Paid engineering, then hardware supply and program software or support.',
     buyers: 'OEMs and EV power-system partners',
     notThis: 'Not a released product. Generations are a proposed roadmap with no committed release dates.',
   },
@@ -62,26 +58,16 @@ export const PRODUCTS = {
     tint: 'var(--p-pmg-bg)',
     stage: 'Architecture & PoC planning',
     stageIndex: 2,
-    headline: 'Connect the insight. Make it useful.',
     summary:
-      'A vehicle-software intelligence layer on suitable gateway, telematics or central compute. It joins selected module insight with vehicle, journey and customer context, then verifies the outcome.',
+      'Vehicle software that combines module insights with journey, customer and service context. PMG prepares permitted recommendations and checks their outcomes; optional cloud services support authorized OEM and fleet learning.',
     runsOn: 'Suitable gateway, telematics or central vehicle compute',
-    tags: ['Vehicle coordination', 'Customer context', 'OEM services'],
-    commercial: 'Program integration + embedded-software licensing; optional enterprise subscription / services',
+    commercial: 'Program integration, embedded-software licensing and support, with optional enterprise subscriptions or services where recurring organizational value is demonstrated.',
     buyers: 'OEMs, vehicle platforms and fleets',
     notThis: 'Not a hardware product, and not an unrestricted controller. Validated control and safety functions keep their authority.',
   },
 } as const;
 
 export const PRODUCT_LIST = [PRODUCTS.battery, PRODUCTS.pmg, PRODUCTS.evo];
-
-/** The company logic, in four verbs. */
-export const VALUE_CHAIN = [
-  { verb: 'Understand', object: 'the module', detail: 'Interpret module signals locally, with confidence and data-quality checks.' },
-  { verb: 'Connect', object: 'the vehicle', detail: 'Join module insight to journey, customer and service context through approved interfaces.' },
-  { verb: 'Verify', object: 'the outcome', detail: 'Check whether a permitted recommendation or action actually helped.' },
-  { verb: 'Improve', object: 'organizational learning', detail: 'Share authorized evidence with quality, service and fleet teams — optionally, and with permission.' },
-] as const;
 
 /** What each product does and does not do. Engineering boundaries from the source FAQs and overviews. */
 export const BOUNDARIES = [

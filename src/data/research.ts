@@ -1,4 +1,4 @@
-// /research copy. Sources: docs/legacy-source/research.txt (programs, pilots, value, proof gate, boundary),
+// /research copy. Sources: docs/editing-pack-2026-10-20.md (section 11: program leads), docs/legacy-source/research.txt (programs, pilots, value, proof gate, boundary),
 // modules.js "connected functions & telematics" (signal vocabulary), investors.txt (engineering-tools adoption path).
 // Program names, stages and summaries come from PROGRAMS in @/data/portfolio.
 
@@ -85,7 +85,7 @@ export const CHAIN_LINKS: { from: ChainStageId; to: ChainStageId; carries: strin
 export const NEURAL_CHAIN = {
   number: '01',
   title: 'Engineering decisions with connected memory',
-  lead: 'An evidence-linked approach to product lifecycle decisions: connect requirements, architecture, cost, reuse, validation and field feedback. Recommendations remain reviewable by the engineering owners.',
+  lead: 'An enabling program connecting requirements, architecture, cost, reuse, validation and field feedback to support reviewable product lifecycle decisions. A first pilot should measure decision time, evidence reuse and the value of confirmed changes.',
   pilot: 'One product family and a small set of lifecycle decisions, with known source documents and decision owners.',
   value: ['Decision time', 'Reusable evidence', 'Confirmed reuse opportunities', 'Cost impact of accepted changes'],
   gate: 'Traceable recommendations and verified changes must support a better engineering decision than the existing workflow.',
@@ -148,7 +148,7 @@ export const INVESTIGATION_STEPS: InvestigationStep[] = [
 export const ENGINEERING_INTELLIGENCE = {
   number: '02',
   title: 'From a release event to a clearer investigation',
-  lead: 'Link release changes, connected-service tests and system logs to localize failures and compare behaviour across releases.',
+  lead: 'An enabling program linking release changes, connected-service tests and system logs to support failure localization and comparison across releases. A first pilot should measure investigation effort and evidence quality against the current workflow.',
   scope: ['Connected functions', 'Remote operations', 'Cellular connectivity', 'GNSS'],
   pilot: 'Select a connected function and representative failures. Compare assisted investigations with the current process.',
   value: ['Failure-localization time', 'Evidence completeness', 'Behaviour after an approved correction'],
@@ -195,8 +195,8 @@ export const SOLAR_PATH = [
 export const SOLAR = {
   number: '03',
   title: 'Use available sunlight. Measure useful energy.',
-  lead: 'Explore modest vehicle-roof solar supplying a defined low-voltage auxiliary load, with conventional vehicle power providing backup. This is a separate energy and commercial research track.',
-  separate: 'Kept apart from Battery & Charging AI, PMG and Evo Core. No product, rating or release is implied.',
+  lead: 'A separate research track evaluating modest vehicle-integrated solar for a defined low-voltage auxiliary load with conventional vehicle backup. Useful energy, parking exposure, installation, repair and full system cost determine the case. It is separate from the three primary product roles.',
+  separate: 'No product, rating or release is implied.',
   technical: {
     label: 'Technical question',
     question: 'Does usable energy meet the load?',

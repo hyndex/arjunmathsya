@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { TOPICS, contactHref } from '@/data/site';
 import { buildDraft, enquirySchema, mailtoFor, MAILTO_LIMIT, resolveTopic, type EnquiryValues } from './enquiry';
 
 const valid: EnquiryValues = {
@@ -24,6 +25,9 @@ describe('resolveTopic', () => {
     };
     for (const [raw, id] of Object.entries(legacy)) expect(resolveTopic(raw)).toBe(id);
   });
+  it('every CTA link (contactHref) preselects its own category', () => {
+    for (const t of TOPICS) expect(resolveTopic(new URL(contactHref(t.id), 'https://example.com').searchParams.get('topic'))).toBe(t.id);
+  });
   it('ignores empty, unknown and hostile values', () => {
     expect(resolveTopic(null)).toBeUndefined();
     expect(resolveTopic('')).toBeUndefined();
@@ -37,7 +41,13 @@ describe('enquirySchema', () => {
     const r = enquirySchema.safeParse({ ...valid, name: '  Asha Rao  ' });
     expect(r.success && r.data.name).toBe('Asha Rao');
   });
-  it('rejects whitespace-only names, bad emails, short messages and unknown topics', () => {
+  it('rejects empty and whitespace-only required fields, bad emails, short messages and unknown topics', () => {
+    for (const field of ['name', 'email', 'message'] as const) {
+      expect(enquirySchema.safeParse({ ...valid, [field]: '' }).success, field).toBe(false);
+      expect(enquirySchema.safeParse({ ...valid, [field]: ' \t\n ' }).success, field).toBe(false);
+    }
+    expect(enquirySchema.safeParse({ ...valid, topic: '' }).success).toBe(false);
+    expect(enquirySchema.safeParse({ ...valid, company: '   ' }).success).toBe(true); // optional
     expect(enquirySchema.safeParse({ ...valid, name: '   ' }).success).toBe(false);
     expect(enquirySchema.safeParse({ ...valid, email: 'asha@' }).success).toBe(false);
     expect(enquirySchema.safeParse({ ...valid, message: 'Too short' }).success).toBe(false);

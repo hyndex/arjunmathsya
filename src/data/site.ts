@@ -3,9 +3,14 @@ export const SITE = {
   name: 'Mathsya Connected Services',
   shortName: 'Mathsya',
   tagline: 'Intelligence inside. Value beyond.',
-  mission: 'From module intelligence to customer and OEM value.',
   location: 'Bengaluru, India',
   founder: 'Arjun Amuthan',
+  /** Short company description (footer, structured data). */
+  description:
+    'Mathsya Connected Services is developing automotive Edge AI across battery and charging intelligence, coordinated EV power hardware and vehicle software. Our direction connects module behaviour to useful vehicle decisions and evidence for engineering, quality and service.',
+  /** Sitewide development-stage statement: shown once, in the investor page's status summary. Elsewhere use short stage labels. */
+  stage:
+    'Mathsya is developing its product architecture and planning focused proofs of concept. Capabilities, generation scopes and benefits described here are proposed unless a measured result is explicitly identified.',
   stageNote: 'Development-stage portfolio · Proposed benefits and roadmap',
   conceptNote: 'Vehicle and component visuals are schematic concept renders, not production designs or prototypes.',
   /**

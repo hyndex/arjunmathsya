@@ -2,7 +2,7 @@
 import puppeteer from 'puppeteer-core';
 const base = process.argv[2] ?? 'http://localhost:4321';
 const routes = (process.argv[3] ?? '/,/explore,/platform,/pmg,/battery-ai,/evo-core,/research,/investors,/investors/brief,/about,/contact,/privacy,/404').split(',');
-const widths = [360, 390, 768, 1024, 1920];
+const widths = [360, 390, 768, 1024, 1280, 1348, 1440, 1920];
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args: ['--use-angle=metal', '--enable-gpu'] });
 const page = await browser.newPage();
 for (const r of routes) {

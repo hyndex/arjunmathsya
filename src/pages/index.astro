@@ -9,9 +9,8 @@ import BatteryScenarios from '@/components/home/BatteryScenarios';
 import GenSelector from '@/components/home/GenSelector';
 import PmgJourney from '@/components/home/PmgJourney';
 import ConnectivityToggle from '@/components/home/ConnectivityToggle';
-import ValueScenarios from '@/components/home/ValueScenarios';
-import { PRODUCTS, BOUNDARIES, VALUE_CHAIN } from '@/data/products';
-import { MATRIX, MATRIX_NOTE, PMG_POC, POC_NOTE, PROOF_PATH, PROGRAMS } from '@/data/portfolio';
+import { PRODUCTS, BOUNDARIES } from '@/data/products';
+import { MATRIX, MATRIX_NOTE, MEASURES, PMG_POC, POC_NOTE, PROOF_PATH, PROGRAMS } from '@/data/portfolio';
 import { SITE, contactHref } from '@/data/site';
 import '@/styles/home.css';
 
@@ -25,56 +24,67 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
 ---
 
 <BaseLayout
-  title="Intelligence inside. Value beyond."
-  description="Mathsya develops automotive Edge AI: Battery & Charging AI, the Evo Core EV power roadmap and PMG vehicle software — scroll through the vehicle to see where each one works."
+  title="Automotive Edge AI"
+  description="Explore Mathsya’s Battery & Charging AI, PMG vehicle software and Evo Core power platform, with customer and OEM benefits and a proposed proof roadmap."
 >
   <div class="story" data-story>
     <div class="story-stage" data-story-stage aria-hidden="true">
       <div class="story-floor"></div>
-      <!-- Static hero frame (same camera as the 3D hero): paints immediately and is the LCP image; fades out once WebGL draws. -->
-      <picture class="story-hero-frame" data-hero-frame>
-        <source media="(max-width: 899px)" srcset="/posters/hero-mobile.webp" width="780" height="1688" />
-        <img src="/posters/hero-desktop.webp" alt="" width="1600" height="900" fetchpriority="high" decoding="async" />
-      </picture>
       <StoryStage client:idle />
     </div>
 
     <div class="story-scenes">
-      <!-- 01 · Arrival -->
+      <!-- 01 · Arrival. The text and the vehicle have separate areas: the 3D camera frames the car inside [data-hero-visual]. -->
       <section class="scene scene--hero" data-scene="arrival" id="scene-arrival" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Mathsya Connected Services · Edge AI for automotive</p>
-          <h1 id="hero-title" class="display hero-title">
-            <span class="soft-break">Intelligence inside.</span>
-            <span class="soft-break hero-accent">Value beyond.</span>
-          </h1>
-        </div>
-        <div class="hero-lower">
-          <p class="lead hero-lead">Connecting automotive Edge AI, EV power systems and vehicle intelligence to customer and OEM outcomes that can be measured.</p>
-          <div class="btn-row">
-            <a class={buttonVariants({ size: 'lg' })} href="#scene-surface">Explore the intelligence <ArrowDown aria-hidden="true" /></a>
-            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/about">Discover Mathsya</a>
+        <div class="hero-grid">
+          <div class="hero-head">
+            <p class="eyebrow">Mathsya Connected Services · Edge AI for automotive</p>
+            <h1 id="hero-title" class="display hero-title">
+              <span class="soft-break">Intelligence inside.</span>
+              <span class="soft-break hero-accent">Value beyond.</span>
+            </h1>
           </div>
-          <ul class="hero-products" aria-label="Product roles">
-            <li><a href="/battery-ai" class="pchip pchip--battery">Battery &amp; Charging AI</a></li>
-            <li><a href="/pmg" class="pchip pchip--pmg">Proactive Mobility Guardian</a></li>
-            <li><a href="/evo-core" class="pchip pchip--evo">Evo Core</a></li>
-          </ul>
+          <figure class="hero-visual">
+            <!-- Caption above the frame: on desktop the car stays put while the page scrolls, so the caption moves away from it. -->
+            <figcaption class="fineprint">Schematic concept vehicle · not a production design or prototype</figcaption>
+            <div class="hero-frame" data-hero-visual>
+              <!-- Still of the same framing: paints immediately (LCP) and fades out once the 3D vehicle draws. -->
+              <img class="hero-poster" src="/posters/hero-car.webp" alt="" width="1832" height="654" fetchpriority="high" decoding="async" />
+            </div>
+          </figure>
+          <div class="hero-body">
+            <p class="lead hero-lead">
+              We are developing Edge AI for battery health, charging readiness and connected vehicle intelligence. Battery &amp; Charging AI interprets module behaviour, Evo Core brings EV
+              power functions under coordinated control, and PMG connects the insights to customer and OEM decisions.
+            </p>
+            <div class="btn-row">
+              <a class={buttonVariants({ size: 'lg' })} href="#scene-surface">Explore the intelligence <ArrowDown aria-hidden="true" /></a>
+              <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/investors/brief">Read the investor brief</a>
+            </div>
+            <ul class="hero-products" aria-label="Products">
+              <li><a href="/battery-ai" class="pchip pchip--battery">Battery &amp; Charging AI</a></li>
+              <li><a href="/evo-core" class="pchip pchip--evo">Evo Core</a></li>
+              <li><a href="/pmg" class="pchip pchip--pmg">Proactive Mobility Guardian</a></li>
+            </ul>
+            <p class="hero-stage"><span class="stage"><span class="visually-hidden">Development stage: </span>Architecture and proof of concept planning</span></p>
+          </div>
         </div>
         <div class="hero-foot">
           <span class="scroll-cue" aria-hidden="true"><span></span>Scroll to explore</span>
           <a class="skip-story" href="#after-story">Skip the story</a>
-          <span class="fineprint concept-tag">Schematic concept vehicle · not a production design · {SITE.location}</span>
         </div>
       </section>
 
-      <!-- 02 · Under the surface -->
+      <!-- 02 · The opportunity -->
       <section class="scene scene--right" data-scene="surface" id="scene-surface" aria-labelledby="h-surface">
         <div class="scene-plate" data-plate>
-          <p class="eyebrow">02 · Under the surface</p>
-          <h2 id="h-surface" class="h3 plate-title">A vehicle is more than the sum of its components.</h2>
-          <p>A battery knows its operating state. A charger knows its session. A power module knows its temperature. Each signal is useful on its own — and far more useful in context.</p>
-          <p>Mathsya’s products work at specific points in this architecture and reach the rest through approved interfaces. They do not replace the vehicle around them.</p>
+          <p class="eyebrow">02 · The opportunity</p>
+          <h2 id="h-surface" class="h3 plate-title">A useful signal needs a useful decision.</h2>
+          <p>
+            A battery reports its condition. A charger reports a session. A power module reports its operating behaviour. The opportunity is to interpret those observations in context,
+            connect them to the vehicle’s needs and check whether the resulting recommendation helped.
+          </p>
+          <p>The x-ray marks where each product works. All three reach the rest of the vehicle through approved interfaces; none replaces it.</p>
           <ul class="plate-legend" aria-label="Legend">
             {legend.map((l) => <li><span class={`swatch swatch--${l.k}`} aria-hidden="true"></span>{l.t}</li>)}
           </ul>
@@ -109,7 +119,7 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
       <section class="scene scene--left" data-scene="power" id="scene-power" aria-labelledby="h-power">
         <div class="scene-plate" data-plate>
           <p class="eyebrow accent-evo">05 · Evo Core</p>
-          <h2 id="h-power" class="h3 plate-title">Power, brought together. Intelligence, built in.</h2>
+          <h2 id="h-power" class="h3 plate-title">Power brought together. Intelligence built in.</h2>
           <p>Charging and power conversion usually arrive as separate units with separate controllers. Evo Core proposes one coordinated platform with common control and supervisory intelligence.</p>
           <dl class="fn-list">
             <div><dt>OBC</dt><dd>Converts AC grid power to charge the high-voltage battery</dd></div>
@@ -126,7 +136,7 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
       <!-- 06 · Explore Evo Core -->
       <section class="scene scene--right scene--wide" data-scene="evo" id="scene-evo" aria-labelledby="h-evo">
         <div class="scene-plate" data-plate>
-          <p class="eyebrow accent-evo">06 · A deliberate evolution</p>
+          <p class="eyebrow accent-evo">06 · Proposed Gen 1–3 roadmap</p>
           <h2 id="h-evo" class="h3 plate-title">Three generations. Each must earn the next.</h2>
           <GenSelector client:visible />
           <details class="matrix-details">
@@ -194,33 +204,23 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
         </div>
       </section>
 
-      <!-- 10 · The value reveal -->
-      <section class="scene scene--right scene--wide" data-scene="value" id="scene-value" aria-labelledby="h-value">
+      <!-- 10 · Benefits (short; the full benefits-and-measures table is on /platform) -->
+      <section class="scene scene--right" data-scene="value" id="scene-value" aria-labelledby="h-value">
         <div class="scene-plate" data-plate>
-          <p class="eyebrow">10 · One connected direction</p>
-          <h2 id="h-value" class="h3 plate-title">Different benefits, each with its own measure.</h2>
-          <div class="value-who">
+          <p class="eyebrow">10 · Customer and OEM value</p>
+          <h2 id="h-value" class="h3 plate-title">Follow the decision. Measure the difference.</h2>
+          <dl class="value-who">
             <div>
-              <p class="gen-k">For customers</p>
-              <ul>
-                <li>Better-informed charging readiness</li>
-                <li>Battery information that makes sense</li>
-                <li>Useful service planning</li>
-                <li>Recommendations that fit the journey</li>
-              </ul>
+              <dt class="gen-k">For customers</dt>
+              <dd>Evaluate better-informed charging readiness, clearer battery and thermal guidance, and more useful service planning.</dd>
             </div>
             <div>
-              <p class="gen-k">For OEMs &amp; engineering teams</p>
-              <ul>
-                <li>Reviewable technical evidence</li>
-                <li>Investigation workflows to evaluate</li>
-                <li>Better-informed engineering decisions</li>
-                <li>Repeat-issue learning</li>
-                <li>Potential integration and lifecycle value</li>
-              </ul>
+              <dt class="gen-k">For OEMs</dt>
+              <dd>Evaluate focused investigation evidence, learning across repeat issues, reusable integration and the complete cost of adopting the solution.</dd>
             </div>
-          </div>
-          <ValueScenarios client:visible />
+          </dl>
+          <p class="note">{MEASURES.note}</p>
+          <a class="link-arrow" href="/platform#benefits">Benefits and measures for each application <ArrowRight size={16} aria-hidden="true" /></a>
         </div>
       </section>
 
@@ -228,7 +228,7 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
       <section class="scene scene--center" data-scene="ecosystem" id="scene-ecosystem" aria-labelledby="h-eco">
         <div class="scene-plate scene-plate--eco" data-plate>
           <p class="eyebrow">11 · The Mathsya portfolio</p>
-          <h2 id="h-eco" class="h2 plate-title">Three product roles. One connected purpose.</h2>
+          <h2 id="h-eco" class="h2 plate-title">Three products with a connected purpose.</h2>
           <figure class="eco-links">
             <svg viewBox="-60 0 880 200" role="img" aria-labelledby="eco-links-t">
               <title id="eco-links-t">Battery &amp; Charging AI shares approved insight with PMG. Evo Core shares power and thermal events with PMG. Battery &amp; Charging AI can also run within Evo Core as a proposed Gen 2 option. Each product can be adopted on its own.</title>
@@ -247,11 +247,11 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
           <div class="eco-grid">
             {[PRODUCTS.battery, PRODUCTS.evo, PRODUCTS.pmg].map((p) => (
               <a class={`eco-item eco-item--${p.id}`} href={p.href}>
-                <span class="eco-role">{p.role}</span>
-                <strong>{p.name}</strong>
                 <span class="eco-kind">{p.kind}</span>
+                <strong>{p.name}</strong>
+                <span class="eco-body">{p.summary}</span>
                 <span class={`stage stage--${p.id}`}>{p.stage}</span>
-                <span class="eco-go">Explore <ArrowUpRight size={15} aria-hidden="true" /></span>
+                <span class="eco-go">Explore {p.short} <ArrowUpRight size={15} aria-hidden="true" /></span>
               </a>
             ))}
           </div>
@@ -268,9 +268,12 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
       <div class="section-head section-head--split">
         <div class="stack">
           <p class="eyebrow">12 · From vision to proof</p>
-          <h2 id="h-proof" class="h2">Build the first proof.<span class="soft-break muted">Then earn the next.</span></h2>
+          <h2 id="h-proof" class="h2">Start with one problem worth solving.</h2>
         </div>
-        <p class="lead">Mathsya is a development-stage company. The entry point is a partner-defined module or vehicle problem with approved data, a current baseline and an outcome worth measuring.</p>
+        <p class="lead">
+          A first program needs an accountable problem owner, approved data, an existing baseline and a measurable acceptance gate. Establish the incremental value before expanding to more
+          functions or vehicle programs.
+        </p>
       </div>
       <ol class="proof-path">
         {PROOF_PATH.map((s) => (
@@ -291,6 +294,11 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
           </ol>
           <p class="fineprint">{POC_NOTE}</p>
         </div>
+        <div class="proof-track proof-track--model">
+          <p class="eyebrow accent-battery">Battery model development · separate scope</p>
+          <p>One pack and one health or charging question, held-out batteries and conditions, and an agreed comparison with the existing system.</p>
+          <a class="link-arrow" href="/battery-ai#first-proof">See the first battery proof <ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
         <div class="proof-track proof-track--hw">
           <p class="eyebrow accent-evo">Evo Core hardware · separate path</p>
           <p>Reference → bench → prototype → partner qualification. Hardware generations have no committed release dates.</p>
@@ -300,40 +308,40 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
     </div>
   </section>
 
-  <!-- Essentials: roles + boundaries (for every reader, including those who skipped the story) -->
-  <section class="section tone-pearl essentials" aria-labelledby="h-essentials">
+  <!-- Product boundaries: compact and collapsed (each product page carries the detail) -->
+  <section class="section section--tight tone-pearl essentials" aria-labelledby="h-essentials">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What each product is — and where its boundary sits</p>
-        <h2 id="h-essentials" class="h2">Clear roles. Defined authority.</h2>
-        <ol class="value-verbs" aria-label="The company logic">
-          {VALUE_CHAIN.map((v, i) => <li><span>{String(i + 1).padStart(2, '0')}</span><strong>{v.verb}</strong> {v.object}</li>)}
-        </ol>
-      </div>
-      <div class="boundary-rows">
-        {BOUNDARIES.map((b) => {
-          const p = PRODUCTS[b.product];
-          return (
-            <article class={`boundary boundary--${p.id}`} aria-labelledby={`b-${p.id}`}>
-              <header class="boundary-head">
-                <p class="eco-role">{p.kind}</p>
-                <h3 id={`b-${p.id}`} class="h3">{p.name}</h3>
-                <p class="boundary-runs"><span class="mono">Runs on</span> {p.runsOn}</p>
-                <span class={`stage stage--${p.id}`}>{p.stage}</span>
-                <a class="link-arrow" href={p.href}>Product details <ArrowRight size={16} aria-hidden="true" /></a>
-              </header>
-              <div class="boundary-col">
-                <p class="gen-k">Does</p>
-                <ul>{b.does.map((d) => <li><Check size={16} aria-hidden="true" />{d}</li>)}</ul>
-              </div>
-              <div class="boundary-col boundary-col--not">
-                <p class="gen-k">Does not</p>
-                <ul>{b.doesNot.map((d) => <li><X size={16} aria-hidden="true" />{d}</li>)}</ul>
-              </div>
-            </article>
-          );
-        })}
-      </div>
+      <details class="bounds-details">
+        <summary>
+          <span class="eyebrow">Product boundaries</span>
+          <h2 id="h-essentials" class="h3">What each product does, and what stays with the vehicle</h2>
+        </summary>
+        <div class="boundary-rows">
+          {
+            BOUNDARIES.map((b) => {
+              const p = PRODUCTS[b.product];
+              return (
+                <article class={`boundary boundary--${p.id}`} aria-labelledby={`b-${p.id}`}>
+                  <header class="boundary-head">
+                    <p class="eco-kind">{p.kind}</p>
+                    <h3 id={`b-${p.id}`} class="h4">{p.name}</h3>
+                    <p class="boundary-runs"><span class="mono">Runs on</span> {p.runsOn}</p>
+                    <a class="link-arrow" href={p.href}>Product details <ArrowRight size={16} aria-hidden="true" /></a>
+                  </header>
+                  <div class="boundary-col">
+                    <p class="gen-k">Does</p>
+                    <ul>{b.does.map((d) => <li><Check size={16} aria-hidden="true" />{d}</li>)}</ul>
+                  </div>
+                  <div class="boundary-col boundary-col--not">
+                    <p class="gen-k">Does not</p>
+                    <ul>{b.doesNot.map((d) => <li><X size={16} aria-hidden="true" />{d}</li>)}</ul>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </details>
     </div>
   </section>
 
@@ -342,7 +350,7 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
       <div class="company-founder">
         <p class="eyebrow">The company</p>
         <h2 id="h-company" class="h2">Built from vehicle experience.</h2>
-        <p class="lead">Founder {SITE.founder} brings an automotive engineering background spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.</p>
+        <p class="lead">Founder {SITE.founder} brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.</p>
         <div class="btn-row">
           <a class={buttonVariants({ variant: 'secondary' })} href="/about">About Mathsya</a>
           <a class={buttonVariants({ variant: 'ghost' })} href="/investors">Investors &amp; partnerships <ArrowRight aria-hidden="true" /></a>
@@ -361,7 +369,6 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
             </li>
           ))}
         </ul>
-        <p class="fineprint">Solar-assisted auxiliaries are a separate research track, distinct from the three products.</p>
       </div>
     </div>
   </section>
@@ -369,9 +376,8 @@ const kindLabel: Record<string, string> = { core: 'Core', extension: 'Extension'
   <CtaBand
     eyebrow="Start the conversation"
     title={'Bring a problem.\nBuild the first proof.'}
-    body="Explore the technologies, scope an OEM pilot around one measurable problem, or review the investment case and proof plan."
+    body="Discuss a battery, charging, vehicle intelligence or power-system application with Mathsya. Start with the decision you want to improve and the evidence available to evaluate it."
     primary={{ label: 'Discuss an OEM pilot', href: contactHref('oem-pilot') }}
-    secondary={{ label: 'Explore our technologies', href: '/platform' }}
-    tertiary={{ label: 'Explore the investment case', href: '/investors' }}
+    secondary={{ label: 'Explore the investment case', href: '/investors' }}
   />
 </BaseLayout>

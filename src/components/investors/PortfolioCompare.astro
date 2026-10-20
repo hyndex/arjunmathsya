@@ -1,13 +1,11 @@
 ---
 // (b) Product adoption-path comparison. Rows align across products (subgrid) so each phase can be read across.
 import { ArrowRight } from '@lucide/astro';
-import EvidenceNote from './EvidenceNote.astro';
 import { PRODUCTS, STAGES } from '@/data/products';
-import { HARDWARE_GATES, PROGRAMS } from '@/data/portfolio';
-import { ADOPTION, ADOPTION_PHASES, EVIDENCE, PORTFOLIO } from '@/data/investors';
+import { HARDWARE_GATES } from '@/data/portfolio';
+import { ADOPTION, ADOPTION_PHASES } from '@/data/investors';
 
-const order = ['battery', 'pmg', 'evo'] as const;
-const enabling = PROGRAMS.filter((p) => p.id !== 'solar');
+const order = ['battery', 'evo', 'pmg'] as const;
 ---
 
 <div class="pf">
@@ -66,7 +64,6 @@ const enabling = PROGRAMS.filter((p) => p.id !== 'solar');
               <span>Boundary</span>
               {p.notThis}
             </p>
-            <EvidenceNote ev={EVIDENCE[id]} showClaim={false} />
             <a class="link-arrow pf-link" href={p.href}>
               Explore {p.short} <ArrowRight size={16} aria-hidden="true" />
             </a>
@@ -75,31 +72,6 @@ const enabling = PROGRAMS.filter((p) => p.id !== 'solar');
       })
     }
   </div>
-
-  <section class="pf-enable" aria-labelledby="pf-enable-title">
-    <div class="pf-enable-head">
-      <p class="pf-kind">Enabling track</p>
-      <h3 class="h4" id="pf-enable-title">Engineering tools</h3>
-      <p>
-        Engineering tools and selected research support the wider evidence and product lifecycle. Proposed path: a focused workflow pilot with
-        engineering and validation teams, then enterprise tooling or services.
-      </p>
-      <a class="link-arrow" href="/research">Research & engineering programs <ArrowRight size={16} aria-hidden="true" /></a>
-    </div>
-    <ul class="pf-programs">
-      {
-        enabling.map((pr) => (
-          <li>
-            <strong>{pr.name}</strong>
-            <span class="stage stage--neutral">{pr.stage}</span>
-            <span class="pf-programs-sum">{pr.summary}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <p class="note">{PORTFOLIO.connectNote}</p>
 </div>
 
 <style>
@@ -159,12 +131,12 @@ const enabling = PROGRAMS.filter((p) => p.id !== 'solar');
   @media (min-width: 980px) {
     .pf-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: repeat(10, auto);
+      grid-template-rows: repeat(9, auto);
       column-gap: 20px;
       row-gap: 0;
     }
     .pf-col {
-      grid-row: span 10;
+      grid-row: span 9;
       grid-template-rows: subgrid;
       row-gap: 0;
     }
@@ -309,67 +281,5 @@ const enabling = PROGRAMS.filter((p) => p.id !== 'solar');
   }
   .pf-link {
     align-self: end;
-  }
-
-  .pf-enable {
-    display: grid;
-    gap: 22px;
-    padding: clamp(22px, 2.4vw, 32px);
-    border: 1px dashed var(--c-line-strong);
-    border-radius: var(--r-m);
-    background: var(--c-pearl);
-  }
-  @media (min-width: 900px) {
-    .pf-enable {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 40px;
-    }
-  }
-  .pf-enable-head {
-    display: grid;
-    gap: 10px;
-    justify-items: start;
-    align-content: start;
-  }
-  .pf-enable-head .link-arrow {
-    padding-block: 8px;
-  }
-  .pf-enable-head > p:not(.pf-kind) {
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
-  .pf-programs {
-    display: grid;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .pf-programs li {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 6px 16px;
-    align-items: center;
-    padding: 14px 0;
-    border-top: 1px solid var(--c-line);
-  }
-  .pf-programs li:last-child {
-    border-bottom: 1px solid var(--c-line);
-  }
-  .pf-programs strong {
-    font-family: var(--f-display);
-  }
-  .pf-programs-sum {
-    grid-column: 1 / -1;
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
-  @media (max-width: 520px) {
-    .pf-programs li {
-      grid-template-columns: 1fr;
-      justify-items: start;
-    }
-    .pf-programs .stage {
-      white-space: normal;
-    }
   }
 </style>

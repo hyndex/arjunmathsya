@@ -4,8 +4,8 @@ import { AnimatedBeam } from '@/components/ui/animated-beam';
 import { BUYERS, COMMERCIAL, type OfferingId } from '@/data/investors';
 
 // Hex needed for SVG gradient stops (CSS vars are not reliable in presentation attributes).
-const HEX = { battery: '#087F6B', pmg: '#185ADB', evo: '#F07831', neutral: '#55667A' } as const;
-const pcClass = (id: OfferingId) => `inv-pc-${id === 'tools' ? 'neutral' : id}`;
+const HEX = { battery: '#087F6B', pmg: '#185ADB', evo: '#F07831' } as const;
+const pcClass = (id: OfferingId) => `inv-pc-${id}`;
 
 /** (a) Portfolio-to-market diagram: select an offering to trace product → buyer → paid entry → expansion. */
 export default function MarketMap() {
@@ -92,7 +92,7 @@ export default function MarketMap() {
             {COMMERCIAL.map((c) => (
               <li key={c.id} data-active={c.id === active}>
                 <div ref={refs[`e-${c.id}`] as RefObject<HTMLDivElement>} className={`inv-map-node ${pcClass(c.id)}`} data-active={c.id === active}>
-                  {c.entryShort}
+                  {c.entry}
                 </div>
               </li>
             ))}
@@ -107,7 +107,7 @@ export default function MarketMap() {
             {COMMERCIAL.map((c) => (
               <li key={c.id} data-active={c.id === active}>
                 <div ref={refs[`x-${c.id}`] as RefObject<HTMLDivElement>} className={`inv-map-node ${pcClass(c.id)}`} data-active={c.id === active}>
-                  {c.expansionShort}
+                  {c.expansion}
                 </div>
               </li>
             ))}

@@ -1,11 +1,11 @@
-// /about copy. Sources: docs/legacy-source/about.txt (hero, vision, founder, approach), index.txt (module signals),
+// /about copy. Sources: docs/editing-pack-2026-10-20.md (section 11), docs/legacy-source/about.txt (hero, vision, founder, approach), index.txt (module signals),
 // platform.txt (engineering principles, portfolio relationships), battery-ai.txt (baseline), pmg.txt (measures),
 // investor-brief.txt (founder line, next milestone), Mathsya-Pitch-Deck-Source.md slide 11.
 // Founder facts are limited to the verified line; no employers, dates, degrees, team members or partners.
 
 export const ABOUT_HERO = {
   eyebrow: 'About Mathsya · Bengaluru, India',
-  lead: 'Mathsya Connected Services is developing Edge AI for automotive modules, with a focus on connecting local intelligence to useful vehicle decisions and organizational value.',
+  lead: 'Mathsya Connected Services is developing automotive Edge AI that connects module behaviour to vehicle decisions and organizational learning. Our portfolio spans Battery & Charging AI, PMG vehicle software and the Evo Core power platform.',
 };
 
 export const COLOPHON = [
@@ -55,8 +55,8 @@ export const FOUNDER = {
   role: 'Founder, Mathsya Connected Services',
   place: 'Bengaluru, India',
   title: 'A perspective built across vehicle systems.',
-  experience: 'Arjun’s automotive engineering experience spans vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
-  purpose: 'Mathsya brings these disciplines together to develop Edge AI with measurable module, vehicle and organizational value.',
+  experience: 'Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
+  purpose: 'Our approach begins with a useful problem, approved interfaces and measurable acceptance criteria.',
   execution: 'The first partner program will be staffed around the engineering and evaluation skills that program requires.',
 };
 

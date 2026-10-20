@@ -28,7 +28,7 @@ export const SCENES: SceneKey[] = [
   },
   {
     id: 'surface',
-    title: 'Under the surface',
+    title: 'The opportunity',
     side: 'right',
     cam: [3.0, 6.95, 7.9],
     target: [0.3, 0.35, 0],
@@ -68,7 +68,7 @@ export const SCENES: SceneKey[] = [
   },
   {
     id: 'evo',
-    title: 'Evo Core generations',
+    title: 'Evo Core roadmap',
     side: 'right',
     cam: [4.55, 2.4, 2.35],
     target: [1.95, 0.72, 0.05],
@@ -108,7 +108,7 @@ export const SCENES: SceneKey[] = [
   },
   {
     id: 'value',
-    title: 'The value',
+    title: 'Customer and OEM value',
     side: 'right',
     cam: [-6.05, 3.55, 7.3],
     target: [0.15, 0.55, 0],

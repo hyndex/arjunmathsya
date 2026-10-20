@@ -1,7 +1,6 @@
 ---
-// Numbered chapter frame: numeral | heading + lead | evidence note, then a full-width body.
-import EvidenceNote from './EvidenceNote.astro';
-import { CHAPTERS, EVIDENCE, type ChapterId } from '@/data/investors';
+// Numbered chapter frame: numeral | heading + lead, then a full-width body.
+import { CHAPTERS, type ChapterId } from '@/data/investors';
 
 interface Props {
   id: ChapterId;
@@ -25,7 +24,6 @@ const lines = typeof title === 'string' ? [title] : title;
         </h2>
         {lead && <p class="lead">{lead}</p>}
       </div>
-      <EvidenceNote ev={EVIDENCE[id]} />
     </header>
     <slot />
   </div>

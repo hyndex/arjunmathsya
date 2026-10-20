@@ -1,6 +1,6 @@
 # Content inventory — legacy site → redesigned site
 
-Source of truth: the legacy static site (October 2026), mirrored in `docs/legacy-source/` (page text, `portfolio-data.js`, `app.js`, `modules.js`, `site.js`) and the Markdown resources in `public/assets` and `public/resources`. This table records where every meaningful block now lives, so nothing is lost when the presentation changes.
+Current public copy: `docs/editing-pack-2026-10-20.md` (applied 21 October 2026). Original source: the legacy static site (October 2026), mirrored in `docs/legacy-source/` (page text, `portfolio-data.js`, `app.js`, `modules.js`, `site.js`) and the Markdown resources in `public/assets` and `public/resources`. This table records where every meaningful block now lives, so nothing is lost when the presentation changes.
 
 ## Routes
 
@@ -22,11 +22,11 @@ Source of truth: the legacy static site (October 2026), mirrored in `docs/legacy
 
 | Legacy block | Now |
 |---|---|
-| Hero "Intelligence inside. Value beyond." + development-stage note | Scene 01 hero; stage note in hero foot and footer |
+| Hero "Intelligence inside. Value beyond." + development-stage note | Scene 01 hero (pack copy, separate text and vehicle areas, stage label); footer stage note |
 | Ecosystem graphic (module → vehicle → organization) | Scenes 02, 07, 09; `/platform` architecture |
-| "A vehicle has signals. Value needs context." + customer/module/OEM | Scene 02 plate copy; `/platform` |
-| Product portfolio cards (3 products, stages, tags) | Scene 11; "Clear roles. Defined authority." (with does / does-not) |
-| Benefits explorer (battery, charging, thermal, service) | Scene 10 `ValueScenarios` (all 4 from `BENEFITS`), `/platform` |
+| "A vehicle has signals. Value needs context." + customer/module/OEM | Scene 02 "A useful signal needs a useful decision."; `/platform` |
+| Product portfolio cards (3 products, stages, tags) | Scene 11 cards (`PRODUCTS.summary`); product boundaries in a collapsed section after the story |
+| Benefits explorer (battery, charging, thermal, service) | Scene 10 short customer/OEM text → `/platform#benefits` (measures table + `BenefitFlow` with all 4 `BENEFITS`) |
 | Evo Core Gen 1–3 teaser | Scene 05–06 (`GenSelector` + integration matrix) |
 | "Make one use case work" + 12–16 week PoC + 4 steps | "From vision to proof" (`PROOF_PATH`, `PMG_POC`, `POC_NOTE`) |
 | Company / founder teaser, enabling programs | "Built from vehicle experience" + programs list |
@@ -42,8 +42,8 @@ Source of truth: the legacy static site (October 2026), mirrored in `docs/legacy
 | `evo-core.txt` + `portfolio-data.js` generations | `/evo-core` (`src/data/evo.ts`); `GENERATIONS` + `MATRIX` shared in `src/data/portfolio.ts` |
 | `research.txt` (Product Neural Chain, Engineering Intelligence, solar) | `/research` (`src/data/research.ts`) |
 | `about.txt` (vision, founder, approach) | `/about` (`src/data/about.ts`) |
-| `investors.txt` + `pitch.txt` (12 chapters, evidence notes) + `app.js` audiences | `/investors` (`src/data/investors.ts`), evidence notes rephrased as "evidence to establish" |
-| `investor-brief.txt` | `/investors/brief` (print stylesheet) |
+| `investors.txt` + `pitch.txt` (12 chapters, evidence notes) + `app.js` audiences | `/investors` (`src/data/investors.ts`) in the pack's order; the per-chapter evidence notes are consolidated into one evidence section and milestone plan; old anchors (`#thesis`, `#entry`, `#opportunity`, `#partner`, `#milestone`) redirect in `BaseLayout` |
+| `investor-brief.txt` | `/investors/brief` (pack section 09; print stylesheet for two to three A4 pages) |
 | `contact.txt` + `site.js` (draft preparation, copy, download, mailto only when configured) | `/contact` — same honest behaviour; `SITE.contactEmail` stays empty until an approved inbox exists |
 | `privacy.txt` | `/privacy`, updated to describe the implemented behaviour (self-hosted fonts and 3D, no trackers) |
 

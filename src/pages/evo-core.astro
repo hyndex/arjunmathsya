@@ -9,13 +9,14 @@ import ExplodedView from '@/components/evo/ExplodedView';
 import GenerationExplorer from '@/components/evo/GenerationExplorer';
 import { IsoStack } from '@/components/evo/IsometricSvg';
 import { PRODUCTS } from '@/data/products';
-import { MATRIX, MATRIX_NOTE, HARDWARE_GATES, GENERATIONS } from '@/data/portfolio';
+import { MATRIX, MATRIX_NOTE, HARDWARE_GATES, GENERATIONS, ROADMAP_BOUNDARY } from '@/data/portfolio';
 import { contactHref } from '@/data/site';
 import {
   EVO_META,
   EVO_HERO,
   FUNCTIONS,
   MATRIX_KINDS,
+  INTEGRATION_LEAD,
   INTEGRATION_STEPS,
   PROOF_OBLIGATIONS,
   ENGINEERING,
@@ -27,6 +28,7 @@ import {
   EVO_CTA,
 } from '@/data/evo';
 import '@/components/evo/evo.css';
+import { fileSize } from '@/lib/fileSize';
 
 const evo = PRODUCTS.evo;
 const nav = [
@@ -124,9 +126,10 @@ const titleBlock = [
       <div class="section-head ev-gens-head">
         <p class="eyebrow accent-evo">Proposed generation roadmap</p>
         <h2 id="gen-title" class="h2"><span class="soft-break">Build the foundation.</span> <span class="soft-break">Expand what earns its place.</span></h2>
-        <p class="lead">For each generation: what could join the platform, what connects through an interface, and the proof needed before the next step. No generation has a committed date.</p>
+        <p class="lead">For each generation: what could join the platform, what connects through an interface, and the proof needed before the next step. All three generations are a proposed roadmap.</p>
       </div>
       <GenerationExplorer client:visible />
+      <p class="note ev-roadmap-note"><Info size={16} aria-hidden="true" />{ROADMAP_BOUNDARY}</p>
     </div>
   </section>
 
@@ -185,7 +188,7 @@ const titleBlock = [
       <div class="ev-integ-intro">
         <p class="eyebrow accent-evo">How hardware integration works</p>
         <h2 id="integ-title" class="h2">Integration is more than a shared enclosure.</h2>
-        <p class="lead">Four separate decisions, in order. Each one concerns a different layer of the assembly, and the last one tests them together.</p>
+        <p class="lead">{INTEGRATION_LEAD}</p>
         <figure class="ev-proof" aria-labelledby="proof-title">
           <figcaption id="proof-title" class="ev-proof-title">{PROOF_OBLIGATIONS.title}</figcaption>
           <div class="ev-proof-tracks">
@@ -341,7 +344,7 @@ const titleBlock = [
           <p class="eyebrow accent-evo">Prototype pathway · a separate hardware path</p>
           <h2 id="gates-title" class="h2">From architecture to a program-ready platform</h2>
         </div>
-        <p class="lead">Reference scope, bench evidence, a costed prototype, then partner-defined vehicle qualification. Each gate closes specific items in the engineering ledger.</p>
+        <p class="lead">Reference architecture; controlled bench evidence; prototype and cost evidence; partner vehicle integration and qualification. Each gate closes specific items in the engineering ledger.</p>
       </div>
       <ol class="ev-gate-track">
         {
@@ -367,7 +370,7 @@ const titleBlock = [
       <div class="ev-gates-foot">
         <p class="note"><Info size={16} aria-hidden="true" />{GATES_NOTE}</p>
         <a class="resource ev-resource" href={OVERVIEW_DOC.href} download>
-          <span class="resource-meta">{OVERVIEW_DOC.meta}</span>
+          <span class="resource-meta">Markdown · {fileSize(OVERVIEW_DOC.href)} · October 2026</span>
           <strong class="h4">{OVERVIEW_DOC.title}</strong>
           <span class="ev-resource-body">{OVERVIEW_DOC.body}</span>
           <span class="resource-action">Download the Evo Core overview <Download size={16} aria-hidden="true" /></span>
@@ -380,7 +383,7 @@ const titleBlock = [
     eyebrow={EVO_CTA.eyebrow}
     title={EVO_CTA.title}
     body={EVO_CTA.body}
-    primary={{ label: 'Discuss Evo Core hardware', href: contactHref('evo') }}
+    primary={{ label: 'Discuss an Evo Core reference program', href: contactHref('evo') }}
     secondary={{ label: 'See how the products connect', href: '/platform' }}
   />
 </BaseLayout>
