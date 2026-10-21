@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { BenefitId } from '@/data/portfolio';
+import type Lenis from 'lenis';
 
 // Shared between the homepage islands (3D stage ↔ interactive scene panels). Islands share this module instance.
 export type BatteryScenario = 'health' | 'charging' | 'thermal' | 'cells' | 'power';
@@ -9,8 +9,9 @@ type StoryState = {
   battery: BatteryScenario;
   gen: 1 | 2 | 3;
   pmgStep: number; // 0..5
-  benefit: BenefitId;
   online: boolean;
+  /** Smooth scrolling, when active. Programmatic scrolls go through it so they never fight the native scroll. */
+  lenis: Lenis | null;
   set: (p: Partial<Omit<StoryState, 'set'>>) => void;
 };
 
@@ -19,7 +20,7 @@ export const useStory = create<StoryState>((set) => ({
   battery: 'health',
   gen: 1,
   pmgStep: 0,
-  benefit: 'battery',
   online: true,
+  lenis: null,
   set: (p) => set(p),
 }));

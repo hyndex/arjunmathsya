@@ -51,10 +51,6 @@ const ticks = [0, 2, 6, 10, 12, 16];
             </p>
             <h4 class="tl-gate-title">{g.title}</h4>
             <p>{g.body}</p>
-            <p class="tl-lens">
-              <span>Investor view</span>
-              {PROOF.gateLens[i]}
-            </p>
             <p class="tl-evidence">
               <span>Gate evidence</span>
               {g.evidence}
@@ -64,7 +60,7 @@ const ticks = [0, 2, 6, 10, 12, 16];
       }
     </ol>
 
-    <p class="tl-model"><span>Model path · Battery AI</span>{PROOF.batteryNote}</p>
+    <p class="tl-model"><span>Model path · Battery &amp; Charging AI</span>{PROOF.batteryNote}</p>
     <p class="note">{POC_NOTE}</p>
   </section>
 
@@ -92,7 +88,7 @@ const ticks = [0, 2, 6, 10, 12, 16];
   </section>
 
   <section class="tl-ws" aria-labelledby="tl-ws-title">
-    <h3 id="tl-ws-title" class="h3">What milestone funding covers</h3>
+    <h3 id="tl-ws-title" class="h3">What a costed work plan covers</h3>
     <dl class="tl-ws-list">
       {
         PROOF.workstreams.map((w) => (
@@ -331,7 +327,6 @@ const ticks = [0, 2, 6, 10, 12, 16];
     letter-spacing: -0.015em;
     color: var(--c-ink);
   }
-  .tl-lens,
   .tl-evidence,
   .tl-model {
     display: grid;
@@ -340,7 +335,6 @@ const ticks = [0, 2, 6, 10, 12, 16];
     line-height: 1.5;
     color: var(--c-slate);
   }
-  .tl-lens span,
   .tl-evidence span,
   .tl-model span {
     font-family: var(--f-mono);

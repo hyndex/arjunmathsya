@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState, createRef, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { useInView, useReducedMotion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
 import {
   ARCH_CONNECTORS,
@@ -28,7 +29,8 @@ const BEAMS: { id: string; from: NodeId; to: NodeId; c0: string; c1: string; cur
 
 const SELECTABLE: NodeId[] = ['battery', 'evo', 'pmg', 'cloud'];
 
-export default function ArchitectureDiagram({ eyebrow, title, lead }: { eyebrow: string; title: string; lead: string }) {
+/** `children`: the three level descriptions, shown beside the live explanation (the page renders the section heading). */
+export default function ArchitectureDiagram({ children }: { children?: ReactNode }) {
   const [sel, setSel] = useState<ArchSelection>('all');
   const reduce = useReducedMotion() ?? false;
   const rootRef = useRef<HTMLDivElement>(null);
@@ -67,12 +69,7 @@ export default function ArchitectureDiagram({ eyebrow, title, lead }: { eyebrow:
 
   return (
     <div className="arch" ref={rootRef} data-sel={sel} data-live={live ? '' : undefined} style={{ '--sel': selColor } as CSSProperties}>
-      <header className="arch-head">
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 id="architecture-title" className="h2">{title}</h2>
-        <p className="lead">{lead}</p>
-      </header>
-
+      {children && <div className="arch-head">{children}</div>}
       <div className="arch-bar">
         <p className="arch-bar-label" id="arch-options-label">
           Select a product to trace its relationships
@@ -114,6 +111,11 @@ export default function ArchitectureDiagram({ eyebrow, title, lead }: { eyebrow:
                 <span>Boundary</span>
                 {e.boundary}
               </p>
+              {e.href && (
+                <a className="link-arrow" href={e.href}>
+                  {e.title} details <ArrowRight className="size-4" aria-hidden="true" />
+                </a>
+              )}
             </article>
           );
         })}
@@ -301,7 +303,7 @@ export default function ArchitectureDiagram({ eyebrow, title, lead }: { eyebrow:
             </li>
           ))}
         </ul>
-        <p className="fineprint">Schematic concept illustration · not a production design</p>
+        <p className="fineprint">Lines show approved data and recommendation interfaces, not physical power paths · Schematic concept illustration · not a production design</p>
       </footer>
     </div>
   );

@@ -17,7 +17,7 @@ Share the module or vehicle problem, the people who own it and the outcome you w
 {id=contact-status}BUSINESS INBOX SETUP PENDING
 {id=public-email}The public business email will appear here once confirmed.
 {id=contact-availability}Prepare and download your enquiry below. This page does not send messages yet.
- Founder: Arjun Amuthan
+ Founder: [name withheld]
 Bengaluru, India [Read the investor brief →](investor-brief.html)
 {id=enquiry-form}
 Your name *

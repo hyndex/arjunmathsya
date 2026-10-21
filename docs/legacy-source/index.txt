@@ -137,7 +137,7 @@ THE COMPANY BEHIND THE JOURNEY
 ## Built from vehicle experience.
  Focused on useful intelligence.
  [Meet Mathsya and the founder →](about.html)
-Founder Arjun Amuthan brings an automotive engineering background spanning vehicle programs, connected systems, telematics hardware, validation and EV power electronics.
+The founder brings an automotive engineering background spanning vehicle programs, connected systems, telematics hardware, validation and EV power electronics.
 Product Neural Chain and Engineering Intelligence support the wider lifecycle. Solar-assisted auxiliaries remain a separate research track.
  [Explore the enabling programs →](research.html)
 BUILD THE FIRST PROOF

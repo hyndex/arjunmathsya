@@ -1,4 +1,4 @@
-// /pmg copy. Source: docs/legacy-source/pmg.txt, app.js (workflows), modules.js (module applications) and
+// /pmg copy. Sources: docs/editing-pack-2026-10-20.md (section 05), docs/legacy-source/pmg.txt, app.js (workflows), modules.js and
 // public/assets/PMG-Program-Overview.md. PMG_POC / POC_NOTE / BOUNDARIES are imported from the shared data.
 import { PRODUCTS } from '@/data/products';
 
@@ -11,7 +11,7 @@ export const PMG_META = {
 export const PMG_HERO = {
   eyebrow: 'PMG / Vehicle software + optional SaaS',
   lines: ['Connect the insight.', 'Make it useful.'],
-  lead: 'Proactive Mobility Guardian is the vehicle software layer in Mathsya’s portfolio. It joins selected module insights with journey and customer context, then links verified outcomes to optional OEM and fleet services.',
+  lead: 'Proactive Mobility Guardian is Mathsya’s vehicle software direction. PMG connects selected module insights with vehicle, journey and customer context, prepares permitted recommendations and verifies the outcome.',
   stage: PRODUCTS.pmg.stage,
 };
 
@@ -102,9 +102,9 @@ export const WORKFLOWS_INTRO = {
 /* ---------- Driver-facing interface concept + permissions ---------- */
 
 export const INTERFACE_COPY = {
-  eyebrow: 'Customer permission',
-  title: 'What a driver could see, and what they decide',
-  lead: 'Available interfaces and customer permissions govern recommendations and action requests. Validated vehicle control and safety functions keep their authority.',
+  eyebrow: 'Worked example · illustrative',
+  title: 'A warm battery. An early departure. A useful plan.',
+  lead: 'A vehicle arrives after a long drive with a warm battery, plugs in overnight and has a departure planned for 07:30. Battery & Charging AI supplies available condition and confidence information. PMG adds departure intent, charging status and customer permissions. It evaluates guidance or an approved scheduling or preconditioning request, checks the outcome and retains relevant evidence. This is an illustrative workflow for evaluation.',
   label: 'Illustrative interface concept',
   annotations: [
     { n: '1', title: 'Departure intent', body: 'The customer’s planned departure: the intent a readiness plan works towards.' },
@@ -118,7 +118,7 @@ export const PERMISSION_MODEL = [
   { label: 'Agreed first', text: 'Signals, baseline, integration responsibility, customer permissions and acceptance criteria are agreed before a pilot expands its scope.' },
   { label: 'Approved interfaces', text: 'The selected architecture defines which interfaces are available and which requests are permitted.' },
   { label: 'Customer permission', text: 'Recommendations and action requests stay within what the customer has permitted.' },
-  { label: 'Authority', text: 'Validated control, protection and safety functions retain their authority. PMG coordinates context and evaluates outcomes within the approved scope.' },
+  { label: 'Authority', text: 'Validated control, protection and safety functions retain authority. Available interfaces and customer permissions determine what PMG may recommend or request.' },
 ];
 
 /* ---------- Runtime vs optional SaaS ---------- */
@@ -130,7 +130,7 @@ export const PMG_DEPLOYMENT = {
   runtime: {
     label: 'On the vehicle / software',
     title: 'PMG edge runtime',
-    body: 'Runs on suitable vehicle compute, such as a gateway, telematics unit or central computer, as selected for the reference architecture.',
+    body: 'PMG can run on suitable gateway, telematics or central vehicle compute selected for the reference architecture. It combines approved inputs, retains focused operating context and defines local behaviour for missing data or lost connectivity.',
     hosts: ['Gateway', 'Telematics unit', 'Central computer'],
     tasks: [
       'Combine module events with vehicle and journey context.',
@@ -138,19 +138,19 @@ export const PMG_DEPLOYMENT = {
       'Preserve focused history and verify the result locally.',
       'Define behaviour for missing data and lost connectivity.',
     ],
-    path: 'Program integration + embedded-software licensing and support.',
+    path: 'Program integration, embedded-software licensing and support.',
   },
   saas: {
     label: 'Off the vehicle / optional SaaS',
     title: 'OEM & fleet learning services',
-    body: 'Authorized vehicle evidence can support cross-vehicle comparison and organization-level service and quality workflows.',
+    body: 'With agreed access and permissions, selected evidence can support OEM quality investigations, service workflows, fleet comparisons and tracking of a correction. These services can have a SaaS or enterprise delivery model; they are separate from the embedded runtime.',
     tasks: [
       'Compare relevant events across permitted vehicles and versions.',
       'Support quality investigations and service decisions.',
       'Track whether a correction reduced the repeat behaviour.',
       'Manage access, consent, retention and data ownership.',
     ],
-    path: 'Enterprise subscription or service terms after buyer value is validated.',
+    path: 'Optional enterprise subscriptions or services where recurring organizational value is demonstrated.',
   },
   note: 'SaaS describes the optional cloud offering. Local vehicle software still needs embedded integration, validation and lifecycle support.',
 };
@@ -173,7 +173,7 @@ export const RUNTIME_SPEC = [
 export const PMG_DELIVERY = [
   { label: 'Paid integration', text: 'Program integration with an OEM, supplier or fleet partner, starting with a scoped software PoC.' },
   { label: 'Embedded licensing & support', text: 'Licensing and lifecycle support for the vehicle runtime.' },
-  { label: 'Optional enterprise services', text: 'Subscription or service terms for OEM and fleet learning, after recurring buyer value is proven.' },
+  { label: 'Optional enterprise services', text: 'Subscriptions or services for OEM and fleet learning, where recurring organizational value is demonstrated.' },
 ];
 export const PMG_DELIVERY_NOTE = 'Proposed commercial path. No achieved performance, signed contracts or released pricing is claimed.';
 
@@ -231,14 +231,14 @@ export const PMG_VALUE = {
       id: 'customers',
       label: 'For customers',
       title: 'Readiness, clarity and care.',
-      body: 'Evaluate helpful charging guidance, useful service recommendations and a clearer explanation of the vehicle’s operating condition.',
+      body: 'Evaluate charging guidance that fits the next journey, understandable recommendations and better-informed service planning.',
       measures: ['Readiness', 'Recommendation acceptance', 'False alerts', 'Avoidable repeat diagnosis'],
     },
     {
       id: 'oems',
       label: 'For OEMs & fleets',
       title: 'Evidence that can travel.',
-      body: 'Connect the module event to hardware/software versions and operating context. Compare it across a permitted population and verify the correction.',
+      body: 'Evaluate events linked to operating context and hardware or software versions, comparable investigation evidence and verification after an approved correction.',
       measures: ['Evidence completeness', 'Investigation time', 'Recurrence', 'Attributable operating or warranty cost'],
     },
   ],
@@ -250,7 +250,7 @@ export const PMG_VALUE = {
 export const PMG_PROOF = {
   eyebrow: 'Development with decision gates',
   title: 'A scoped first proof, in four gates',
-  lead: 'A proposed PMG software PoC. Week 0 starts once a partner, approved data and test access are in place.',
+  lead: 'A proposed 12–16 week PMG software PoC begins after partner, approved data and test access are agreed. Define the baseline, connect the runtime, evaluate a controlled workflow and decide the next paid program. Battery model development and Evo Core hardware require separately scoped work.',
   position: [
     { label: 'Current position', text: 'Architecture and use-case definition' },
     { label: 'Next proof', text: 'Bench integration and controlled evaluation' },
@@ -282,7 +282,7 @@ export const PMG_FAQ = [
   },
   {
     q: 'Does PMG control everything in the car?',
-    a: 'No. The selected architecture defines available interfaces and permitted requests. Validated control, protection and safety functions retain their authority; PMG coordinates context and evaluates outcomes within the approved scope.',
+    a: 'No. Validated control, protection and safety functions retain authority. Available interfaces and customer permissions determine what PMG may recommend or request; PMG coordinates context and evaluates outcomes within the approved scope.',
   },
   {
     q: 'What makes this different from today’s diagnostics?',

@@ -34,7 +34,7 @@ function delta(id: GenId) {
   const prev = id === 'gen2' ? GENERATIONS.gen1 : GENERATIONS.gen2;
   const added = s.integrated.filter((m) => m.isNew && m.status === 'core').length;
   const options = s.integrated.filter((m) => m.status === 'option').length;
-  return `Retains the proven ${prev.short} foundation · adds ${added} proposed scope items · ${options} ${options === 1 ? 'option needs' : 'options need'} validation`;
+  return `Retains the evaluated ${prev.short} foundation · adds ${added} proposed scope items · ${options} ${options === 1 ? 'option needs' : 'options need'} validation`;
 }
 
 function GenPanel({ id, active, reduce }: { id: GenId; active: boolean; reduce: boolean }) {

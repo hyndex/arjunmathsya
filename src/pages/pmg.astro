@@ -33,7 +33,7 @@ import {
 
 const nav = [
   { id: 'workflows', label: 'Workflows' },
-  { id: 'interface', label: 'Permissions' },
+  { id: 'interface', label: 'Worked example' },
   { id: 'runtime', label: 'Runtime & SaaS' },
   { id: 'modules', label: 'Module applications' },
   { id: 'value', label: 'Value' },
@@ -61,11 +61,11 @@ const ticks = [...new Set(gates.flatMap((g) => [g.a, g.b]))];
         <p class="lead">{PMG_HERO.lead}</p>
         <div class="btn-row">
           <a class={buttonVariants({ size: 'lg' })} href="#workflows">See the workflows <ArrowDown aria-hidden="true" /></a>
-          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('pmg')}>Discuss a PMG pilot</a>
+          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('pmg')}>Discuss a PMG software pilot</a>
         </div>
         <div class="pmg-hero-stage">
           <StageMeter reached={PRODUCTS.pmg.stageIndex} label={PMG_HERO.stage} color="var(--p-pmg)" />
-          <p class="fineprint">Development-stage program · proposed benefits and roadmap</p>
+          <p class="fineprint">Development-stage program · proposed benefits</p>
         </div>
       </div>
       <HostStack />
@@ -185,7 +185,7 @@ const ticks = [...new Set(gates.flatMap((g) => [g.a, g.b]))];
           }
         </dl>
         <div class="rt-delivery">
-          <h3 class="rt-delivery-title">Commercial delivery options</h3>
+          <h3 class="rt-delivery-title">Commercial direction</h3>
           <ol>
             {
               PMG_DELIVERY.map((d, i) => (
@@ -330,7 +330,7 @@ const ticks = [...new Set(gates.flatMap((g) => [g.a, g.b]))];
   <CtaBand
     title={PMG_CTA.title}
     body={PMG_CTA.body}
-    primary={{ label: 'Discuss a PMG pilot', href: contactHref('pmg') }}
+    primary={{ label: 'Discuss a PMG software pilot', href: contactHref('pmg') }}
     secondary={{ label: 'See the connected platform', href: '/platform' }}
   />
 </BaseLayout>

@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { CameraControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import Vehicle from '@/components/three/Vehicle';
+import Drawn from '@/components/three/Drawn';
 import Systems from '@/components/three/Systems';
 import Studio from '@/components/three/Studio';
 import { StateContext, createState, dampState, useVehicleState, type VehicleState } from '@/components/three/state';
@@ -51,7 +52,7 @@ function targetState(view: View, selected: string): VehicleState {
   return s;
 }
 
-function Director({ view, selected, reduced, controls, onSelect, portal }: { view: View; selected: string; reduced: boolean; controls: MutableRefObject<CameraControls | null>; onSelect: (id: string) => void; portal: RefObject<HTMLElement> }) {
+function Director({ view, selected, reduced, controls, onSelect, onDrawn, portal }: { view: View; selected: string; reduced: boolean; controls: MutableRefObject<CameraControls | null>; onSelect: (id: string) => void; onDrawn: () => void; portal: RefObject<HTMLElement> }) {
   const state = useMemo(() => ({ current: createState() }), []);
   return (
     <StateContext.Provider value={state}>
@@ -59,6 +60,7 @@ function Director({ view, selected, reduced, controls, onSelect, portal }: { vie
       <Studio />
       <Suspense fallback={null}>
         <Vehicle />
+        <Drawn onDrawn={onDrawn} />
       </Suspense>
       <Systems />
       <Markers selected={selected} onSelect={onSelect} portal={portal} />
@@ -118,6 +120,7 @@ export default function ExplorerScene({
   handleRef,
   reduced,
   onLost,
+  onDrawn,
 }: {
   selected: string;
   view: View;
@@ -125,6 +128,7 @@ export default function ExplorerScene({
   handleRef: MutableRefObject<ExplorerHandle | null>;
   reduced: boolean;
   onLost?: () => void;
+  onDrawn: () => void;
 }) {
   const controls = useRef<CameraControls | null>(null);
   const markerLayer = useRef<HTMLDivElement>(null);
@@ -150,7 +154,7 @@ export default function ExplorerScene({
       onCreated={({ gl }) => onContextLost(gl.domElement, onLost)}
     >
       <CameraControls ref={controls} makeDefault minDistance={1.6} maxDistance={15} maxPolarAngle={Math.PI * 0.49} smoothTime={reduced ? 0 : 0.55} />
-      <Director view={view} selected={selected} reduced={reduced} controls={controls} onSelect={onSelect} portal={markerLayer as RefObject<HTMLElement>} />
+      <Director view={view} selected={selected} reduced={reduced} controls={controls} onSelect={onSelect} onDrawn={onDrawn} portal={markerLayer as RefObject<HTMLElement>} />
     </Canvas>
     </>
   );

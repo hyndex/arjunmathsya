@@ -23,24 +23,16 @@
 .story-canvas {
   position: absolute !important;
   inset: 0;
+  pointer-events: none; /* decorative: no drag or hotspots on the homepage */
   animation: stage-in 1.4s var(--ease-out) both;
+}
+html.lenis {
+  scroll-behavior: auto; /* Lenis animates in-page scrolls itself */
 }
 @keyframes stage-in {
   from {
     opacity: 0;
   }
-}
-.story-hero-frame img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.9s var(--ease-out);
-}
-.story-stage.is-3d .story-hero-frame img,
-.story-stage.is-scrolled .story-hero-frame img {
-  opacity: 0;
 }
 .story-labels {
   position: absolute;
@@ -153,52 +145,77 @@
   font-size: 0.9rem;
 }
 
-/* Hero */
+/* Hero: a protected text area and a separate visual area. The 3D camera fits the car inside .hero-frame
+   (StoryCanvas → fitHero), so the vehicle never sits behind the heading, introduction, buttons or product links. */
 .scene--hero {
+  --hero-pad: max(var(--gutter), calc((100vw - 1480px) / 2));
   min-height: calc(100svh - var(--header-h));
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  padding-top: clamp(40px, 9svh, 110px);
-  padding-bottom: 28px;
+  gap: 24px;
+  padding: clamp(28px, 6svh, 80px) var(--hero-pad) 24px;
 }
-.hero-copy {
-  pointer-events: auto;
+.hero-grid {
   display: grid;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'head' 'visual' 'body';
+  gap: clamp(18px, 2.6svh, 28px);
+  align-items: center;
+  pointer-events: auto;
+}
+.hero-head {
+  grid-area: head;
+  display: grid;
+  gap: 18px;
   justify-items: start;
 }
 .hero-title {
   color: var(--c-ink);
-  font-size: clamp(2.9rem, 0.3rem + 6.1vw, 7.4rem);
-}
-.hero-title .soft-break {
-  white-space: nowrap;
-}
-.hero-lower {
-  pointer-events: auto;
-  display: grid;
-  gap: 22px;
-  max-width: 560px;
-  margin-top: auto;
-  padding-top: 24px;
+  font-size: clamp(2.5rem, 0.3rem + 6.1vw, 7.4rem);
 }
 .hero-accent {
   color: var(--c-cobalt);
 }
+.hero-visual {
+  grid-area: visual;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+.hero-frame {
+  aspect-ratio: 2.8; /* ≈ the car's projected bounding box from the hero camera */
+}
+.hero-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.9s var(--ease-out);
+}
+.story-stage.is-3d + .story-scenes .hero-poster {
+  opacity: 0;
+}
+.hero-body {
+  grid-area: body;
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}
 .hero-lead {
-  max-width: 36ch;
+  max-width: 46ch;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
   color: var(--c-ink-soft);
 }
 .hero-products {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 20px;
-  margin: 6px 0 0;
+  gap: 4px 20px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 .hero-products a {
+  min-height: 32px;
   color: var(--c-ink-soft);
   text-decoration: none;
   font-size: 0.88rem;
@@ -207,12 +224,30 @@
   color: var(--c-ink);
   text-decoration: underline;
 }
+.hero-stage .stage {
+  white-space: normal;
+}
 .hero-foot {
   pointer-events: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 28px;
+}
+@media (min-width: 900px) {
+  .hero-grid {
+    flex: 1;
+    grid-template-columns: minmax(0, min(34rem, 48%)) minmax(0, 1fr);
+    grid-template-areas: 'head head' 'body visual';
+    align-content: center;
+    column-gap: clamp(32px, 4vw, 72px);
+  }
+  .hero-title .soft-break {
+    white-space: nowrap;
+  }
+  .hero-visual {
+    margin-right: calc(16px - var(--hero-pad)); /* the car may use the page margin; the text column may not */
+  }
 }
 .scroll-cue {
   display: inline-flex;
@@ -257,12 +292,12 @@
   }
 }
 .skip-story {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--c-ink);
-}
-.concept-tag {
-  flex-basis: 100%;
 }
 
 /* Rail */
@@ -801,60 +836,23 @@
 /* Value */
 .value-who {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--c-line);
-}
-.value-who ul {
-  display: grid;
-  gap: 4px;
+  gap: 8px;
   margin: 0;
-  padding-left: 18px;
-  font-size: 0.86rem;
-  color: var(--c-ink);
 }
-.value-scene {
-  font-size: 0.92rem;
-  color: var(--c-ink);
-}
-.value-chain {
+.value-who > div {
   display: grid;
-  gap: 8px;
-  margin: 12px 0 0;
-  padding: 0;
-  list-style: none;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--c-ice);
 }
-.value-chain li,
-.value-out > div {
-  display: grid;
-  gap: 3px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: var(--c-pearl);
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--c-ink);
-}
-.value-chain span,
-.value-out span {
-  font-family: var(--f-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-}
-.value-out {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 8px;
-}
-.value-out > div:first-child {
+.value-who > div:first-child {
   background: var(--c-mint);
 }
-.value-out > div:last-child {
-  background: var(--c-ice);
+.value-who dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--c-ink);
 }
 
 /* Ecosystem relationships (animated dashes run along real data directions) */
@@ -932,7 +930,7 @@
   width: min(1100px, 100%) !important;
   text-align: center;
   justify-items: center;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--c-white); /* opaque: the 3D product labels behind it must not ghost through */
 }
 .scene-plate--eco .plate-title {
   font-size: var(--fs-h2);
@@ -988,13 +986,17 @@
   font-size: 1.3rem;
   letter-spacing: -0.02em;
 }
-.eco-role,
 .eco-kind {
   font-family: var(--f-mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--c-slate);
+}
+.eco-body {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--c-ink-soft);
 }
 .eco-go {
   display: inline-flex;
@@ -1043,7 +1045,7 @@
 }
 .proof-tracks {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: 18px;
   margin-top: clamp(40px, 5vw, 64px);
 }
@@ -1054,6 +1056,9 @@
   padding: clamp(22px, 2.4vw, 32px);
   border-radius: var(--r-l);
   background: var(--c-ice);
+}
+.proof-track--model {
+  background: var(--c-mint);
 }
 .proof-track--hw {
   background: var(--c-ivory);
@@ -1085,29 +1090,37 @@
   color: var(--c-slate);
 }
 
-.value-verbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 28px;
-  margin: 8px 0 0;
-  padding: 0;
+.bounds-details > summary {
+  display: grid;
+  gap: 8px;
+  padding: 18px 56px 18px 0;
+  border-top: 2px solid var(--c-ink);
+  border-bottom: 1px solid var(--c-line-strong);
+  cursor: pointer;
   list-style: none;
-  font-size: 1.05rem;
-  color: var(--c-slate);
+  position: relative;
 }
-.value-verbs span {
-  margin-right: 6px;
+.bounds-details > summary::-webkit-details-marker {
+  display: none;
+}
+.bounds-details > summary::after {
+  content: '+';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: var(--f-mono);
-  font-size: 0.72rem;
+  font-size: 1.6rem;
+  line-height: 1;
   color: var(--c-cobalt-ink);
 }
-.value-verbs strong {
-  color: var(--c-ink);
-  font-family: var(--f-display);
+.bounds-details[open] > summary::after {
+  content: '−';
 }
 .boundary-rows {
   display: grid;
   gap: 18px;
+  margin-top: 24px;
 }
 .boundary {
   display: grid;
@@ -1222,8 +1235,9 @@
     transform: translateX(-50%);
     padding: 6px 12px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--c-white); /* opaque: plate text scrolls underneath, as under the header */
     border: 1px solid var(--c-line);
+    box-shadow: var(--sh-1);
     font-size: 0.74rem;
     color: var(--c-slate);
     white-space: nowrap;
@@ -1262,16 +1276,13 @@
   }
   .scene--hero {
     min-height: calc(100svh - var(--header-h));
-    padding: 28px 16px 20px;
+    padding: 20px 16px 16px;
     justify-content: space-between;
     align-items: stretch;
   }
   .scene-plate,
   .scene--wide .scene-plate {
     width: 100%;
-  }
-  .concept-tag {
-    margin-left: 0;
   }
   .proof-tracks,
   .company-grid,
@@ -1285,50 +1296,23 @@
 }
 @media (max-width: 640px) {
   .hero-title {
-    font-size: clamp(2.5rem, 1rem + 7.4vw, 3.4rem);
+    font-size: clamp(2.3rem, 0.9rem + 7.2vw, 3.4rem);
   }
-  .hero-title .soft-break {
-    white-space: normal;
+  .hero-head {
+    gap: 12px;
   }
-  .hero-lower {
+  .hero-body {
     gap: 16px;
   }
-  .hero-lead {
-    font-size: 1.02rem;
-  }
-  .hero-lower .btn-row a {
+  .hero-body .btn-row a {
     min-height: 46px;
     padding: 10px 18px;
     font-size: 0.95rem;
   }
-  .hero-products {
-    display: none;
-  }
   .hero-foot {
-    gap: 6px 18px;
+    gap: 0 18px;
   }
-  .story-hero-frame img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.9s var(--ease-out);
-}
-.story-stage.is-3d .story-hero-frame img,
-.story-stage.is-scrolled .story-hero-frame img {
-  opacity: 0;
-}
-.story-labels {
-    display: none;
-  }
-  .scene-plate [data-slot='tabs-list'] {
-    flex-wrap: nowrap;
-    max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .scene-plate [data-slot='tabs-list']::-webkit-scrollbar {
+  .story-labels {
     display: none;
   }
   .flow-chain {

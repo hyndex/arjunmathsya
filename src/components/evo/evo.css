@@ -2072,3 +2072,9 @@
     transform: scaleY(0);
   }
 }
+
+/* Roadmap boundary under the generation explorer */
+.ev-roadmap-note {
+  margin-top: 28px;
+  max-width: 900px;
+}

@@ -8,7 +8,7 @@ ABOUT MATHSYA / BENGALURU, INDIA
  An Edge AI direction.
 Mathsya Connected Services is developing Edge AI for automotive modules, with a focus on connecting local intelligence to useful vehicle decisions and organizational value.
  [Meet the founder ↗ ](#founder) [Read the investor brief → ](investor-brief.html)
-Development-stage portfolio led by founder Arjun Amuthan.
+Development-stage portfolio led by its founder.
  [IMG src=assets/automotive-concept.webp alt='Concept illustration of intelligence distributed across a passenger vehicle.']
 AI-generated concept illustration · development-stage program
 OUR VISION
@@ -22,10 +22,10 @@ Battery & Charging AI, PMG and Evo Core connect module software, vehicle intelli
 FOUNDER
 ## A perspective built
 across vehicle systems.
-Arjun’s automotive engineering experience spans vehicle programs, connected services, telematics hardware, validation and EV power electronics.
+The founder’s automotive engineering experience spans vehicle programs, connected services, telematics hardware, validation and EV power electronics.
 AA
 FOUNDER / MATHSYA CONNECTED SERVICES
-### Arjun Amuthan
+### [Founder]
 Bengaluru, India
 Automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.
 Mathsya brings these disciplines together to develop Edge AI with measurable module, vehicle and organizational value.

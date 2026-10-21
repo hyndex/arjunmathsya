@@ -10,7 +10,7 @@ OCTOBER 2026
 # Intelligence inside.
  Value beyond.
 Automotive Edge AI across module software, connected vehicle intelligence and coordinated EV power hardware.
- FOUNDER Arjun Amuthan · Bengaluru
+ FOUNDER [name withheld] · Bengaluru
  CURRENT STAGE Architecture, use cases & PoC planning
  NEXT STEP A partner-defined problem with approved data and measurable acceptance criteria
 ## The problem and direction
@@ -45,7 +45,7 @@ No achieved battery-life, range, warranty or savings percentages are claimed. Co
 - Scope Battery AI model development and Evo Core hardware as separate work packages with their own evidence gates.
 - Validate buyer willingness to adopt, pricing and a costed paid follow-on program.
 ## Founder and investment purpose
-Founder Arjun Amuthan brings an automotive engineering background spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Funding should align to agreed software/data, hardware/bench and buyer/adoption work packages. The funding amount, market sizing and commercial terms require a sourced, bottom-up plan.
+The founder brings an automotive engineering background spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Funding should align to agreed software/data, hardware/bench and buyer/adoption work packages. The funding amount, market sizing and commercial terms require a sourced, bottom-up plan.
 Development-stage public overview. Architecture, generation scopes, benefits and commercial models are proposed. Production qualification, customer contracts and measured benefit claims are not established in this brief.
  [Explore the complete pitch journey ↗](pitch.html)
  [ [IMG src=assets/mark.svg alt=''] mathsyaCONNECTED SERVICES  ](index.html)

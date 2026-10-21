@@ -1,4 +1,4 @@
-// /evo-core page copy. Sources: docs/legacy-source/evo-core.txt, public/assets/Evo-Core-Program-Overview.md
+// /evo-core page copy. Sources: docs/editing-pack-2026-10-20.md (section 06), docs/legacy-source/evo-core.txt, public/assets/Evo-Core-Program-Overview.md
 // and the shared data in @/data/portfolio (GENERATIONS, MATRIX, HARDWARE_GATES) + @/data/products (PRODUCTS.evo).
 // No ratings, kW figures, dates or results: the architecture is proposed, not released.
 import type { EvoFocus } from '@/components/three/EvoCoreScene';
@@ -12,8 +12,8 @@ export const EVO_META = {
 
 export const EVO_HERO = {
   eyebrow: 'Evo Core · EV power hardware + embedded software',
-  lines: ['Power, brought together.', 'Intelligence, built in.'],
-  lead: 'A proposed EV power platform combining shared control, defined conversion and distribution functions, and Edge AI supervision. Gen 1 establishes the foundation; later generations explore battery, thermal and wider energy coordination.',
+  lines: ['Power brought together.', 'Intelligence built in.'],
+  lead: 'Evo Core is a proposed EV power-hardware and embedded-software platform. It explores common control across defined charging, conversion and distribution functions, with supervisory intelligence for operating context and module behaviour.',
   roadmapNote: 'Generations are a proposed roadmap with no committed release dates.',
   sheetNote: 'Schematic concept illustration · not a production design',
 };
@@ -247,32 +247,34 @@ export const MATRIX_KINDS: { kind: MatrixCell['kind']; label: string }[] = [
 /* ---------------------------------------------------------------- integration */
 
 export type Layer = 'control' | 'power' | 'housing' | 'all';
+export const INTEGRATION_LEAD =
+  'First establish control ownership and approved interfaces. Evaluate shared compute and software, then retained or new power functions. Assess cooling, isolation, connectors, housing and repairability. Verify modes, timing, fault response and the complete cost of realization and qualification.';
 export const INTEGRATION_STEPS: { n: string; title: string; body: string; layer: Layer; decides: string }[] = [
   {
     n: '01',
     title: 'Control commonization',
-    body: 'Review shared compute, mode coordination, diagnostic services and reusable embedded software. Keep real-time and supervisory responsibilities defined.',
+    body: 'Establish control ownership and approved interfaces, then evaluate shared compute, mode coordination, diagnostic services and reusable embedded software. Real-time and supervisory responsibilities stay defined.',
     layer: 'control',
     decides: 'Control board + supervisory layer',
   },
   {
     n: '02',
     title: 'Power & interfaces',
-    body: 'Retain, adapt or develop OBC, DC/DC and distribution functions against the approved reference architecture and available supplier interfaces.',
+    body: 'Evaluate retained or new power functions: OBC, DC/DC and distribution are retained, adapted or developed against the reference architecture and available supplier interfaces.',
     layer: 'power',
     decides: 'Power stages, distribution, EVCC',
   },
   {
     n: '03',
     title: 'Physical realization',
-    body: 'Evaluate housing, cooling, isolation, connectors and mechanical integration. A shared housing does not prove a lower cost or simpler qualification.',
+    body: 'Assess cooling, isolation, connectors, housing and repairability. A shared housing does not by itself prove a lower cost or simpler qualification.',
     layer: 'housing',
     decides: 'Housing, cooling plate, lid',
   },
   {
     n: '04',
     title: 'System evidence',
-    body: 'Verify modes, timing, fault response, thermal behaviour, EMC and the complete prototype, integration and qualification cost.',
+    body: 'Verify modes, timing, fault response, thermal behaviour and EMC, and the complete cost of realization and qualification.',
     layer: 'all',
     decides: 'The complete assembly, on test',
   },
@@ -373,7 +375,6 @@ export const GATES_NOTE =
 export const OVERVIEW_DOC = {
   href: '/assets/Evo-Core-Program-Overview.md',
   title: 'Evo Core program overview',
-  meta: 'Markdown · 3 KB · October 2026',
   body: 'Product role, Gen 1–3 scope, how integration works, outcomes to validate, hardware gates and the proposed commercial path.',
 };
 
@@ -381,19 +382,19 @@ export const OVERVIEW_DOC = {
 
 export const VALUE_BLOCKS: { audience: string; title: string; body: string; measure: string }[] = [
   {
-    audience: 'Customer / vehicle',
+    audience: 'Customer value to evaluate',
     title: 'Coordinated operating behaviour',
-    body: 'Evaluate charging readiness, power/thermal explanations and useful health guidance through the approved vehicle interfaces.',
+    body: 'Charging readiness, clearer power and thermal explanations, and useful health or service guidance through approved vehicle interfaces.',
     measure: 'Readiness, energy use in a defined test, false recommendations and service outcomes.',
   },
   {
-    audience: 'OEM / product engineering',
+    audience: 'OEM value to evaluate',
     title: 'A platform that can be reused',
-    body: 'Explore shared control and software across defined power functions, with consistent diagnostics and linked operating evidence.',
+    body: 'Reusable control and diagnostic software, manageable interfaces and variants, better investigation evidence and a complete commonization cost case.',
     measure: 'Controller/interface count, BOM, NRE, validation effort, software reuse and variant cost.',
   },
   {
-    audience: 'Service / quality',
+    audience: 'Service and quality',
     title: 'Context for a power-system event',
     body: 'Link the module observation to operating mode, cooling context and hardware/software version. Compare behaviour after an approved correction.',
     measure: 'Triage time, evidence completeness, no-fault-found outcomes and recurrence.',

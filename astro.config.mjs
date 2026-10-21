@@ -6,11 +6,11 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Canonical origin for canonical tags, social images, the sitemap and robots.txt:
-// SITE_URL if set, else the project's production domain on Vercel (set automatically there), else the current public address.
+// SITE_URL if set, else the project's production domain on Vercel (set automatically there), else the public Vercel address.
 const site =
   process.env.SITE_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
-  'https://mathsya-connected-services.arjtha.chatgpt.site';
+  'https://arjunmathsya.vercel.app';
 
 export default defineConfig({
   site,

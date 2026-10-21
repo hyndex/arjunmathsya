@@ -9,43 +9,39 @@ import ValueFlow from '@/components/investors/ValueFlow.astro';
 import PortfolioCompare from '@/components/investors/PortfolioCompare.astro';
 import ProofTimeline from '@/components/investors/ProofTimeline.astro';
 import MarketMap from '@/components/investors/MarketMap';
-import AudienceTabs from '@/components/investors/AudienceTabs';
 import '@/components/investors/investors.css';
-import { contactHref } from '@/data/site';
+import { SITE } from '@/data/site';
+import { fileSize as kb } from '@/lib/fileSize';
 import {
+  ACTIONS,
   AT_A_GLANCE,
   BRIEF,
   BUSINESS,
   CHAPTERS,
   COMMERCIAL,
   COMMERCIAL_NOTE,
-  ECONOMICS,
-  ENTRY,
+  EVIDENCE,
+  FIRST_APPLICATION,
   FOUNDER,
   HERO,
-  MILESTONE,
-  OPEN_NUMBERS,
-  OPPORTUNITY,
-  PARTNER,
+  NEXT_ASK,
   PORTFOLIO,
   PROBLEM,
   PROOF,
   RESOURCES,
-  THESIS,
-  kb,
+  VALUE,
 } from '@/data/investors';
 
 const nav = [...CHAPTERS.map((c) => ({ id: c.id, label: c.nav })), { id: 'resources', label: 'Resources' }];
-const chapter = (id: string) => CHAPTERS.find((c) => c.id === id)!;
 const oemPaths = COMMERCIAL.filter((c) => c.buyers.includes('oem')).length;
-const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${tone}`);
 ---
 
 <BaseLayout
-  title="Investors & strategic partnerships"
-  description="Mathsya’s investor narrative: thesis, product portfolio, proposed business model, separate software and hardware proof paths, and the partnership sought."
+  title="Investors and Partnerships"
+  image="/og/og-investors.png"
+  description="Mathsya’s automotive Edge AI portfolio, proposed business models, first partner program and technical and commercial proof milestones."
 >
-  <!-- Hero -->
+  <!-- Hero: narrative, the three actions and one status summary -->
   <section class="inv-hero tone-white" aria-labelledby="inv-title">
     <div class="container">
       <p class="eyebrow">{HERO.eyebrow}</p>
@@ -56,18 +52,23 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
         <div class="inv-hero-copy">
           <p class="lead">{HERO.lead}</p>
           <div class="inv-actions">
-            <a class={buttonVariants({ size: 'lg' })} href="#thesis">Start with the thesis <ArrowDown aria-hidden="true" /></a>
-            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href="/investors/brief">Read the printable brief</a>
+            <a class={buttonVariants({ size: 'lg' })} href={ACTIONS.brief.href}>{ACTIONS.brief.label} <ArrowRight aria-hidden="true" /></a>
+            <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={ACTIONS.invest.href}>{ACTIONS.invest.label}</a>
+            <a class={buttonVariants({ variant: 'ghost', size: 'lg' })} href={ACTIONS.pilot.href}>{ACTIONS.pilot.label}</a>
           </div>
-          <p class="inv-hero-stage"><span class="stage stage--pmg">Current stage</span> {HERO.stage}</p>
+          <a class="link-arrow" href="#problem">Read the narrative <ArrowDown size={16} aria-hidden="true" /></a>
         </div>
 
         <aside class="inv-glance" aria-labelledby="glance-title">
           <div class="inv-glance-head">
-            <h2 id="glance-title" class="inv-glance-title">At a glance</h2>
+            <h2 id="glance-title" class="inv-glance-title">Status summary</h2>
             <span>{BRIEF.date}</span>
           </div>
           <dl>
+            <div class="inv-glance-stage">
+              <dt>Current stage</dt>
+              <dd>{HERO.stage}</dd>
+            </div>
             {
               AT_A_GLANCE.map((f) => (
                 <div>
@@ -77,10 +78,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
               ))
             }
           </dl>
-          <p class="inv-glance-legend">
-            <span class="inv-meter" aria-hidden="true"><i data-on></i><i data-on></i><i></i></span>
-            <span>Each chapter names its open evidence: claim proposed, evidence defined, not yet established.</span>
-          </p>
+          <p class="inv-glance-note">{SITE.stage}</p>
         </aside>
       </div>
     </div>
@@ -88,35 +86,8 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
 
   <PageNav items={nav} label="Investor narrative chapters" />
 
-  <!-- 01 Thesis -->
-  <Chapter id="thesis" title={THESIS.title} lead={THESIS.lead}>
-    <div class="thesis">
-      <div class="thesis-copy">
-        <p class="thesis-standfirst">{THESIS.statement}</p>
-        <p class="muted">{THESIS.pathsIntro}</p>
-      </div>
-      <div class="thesis-paths">
-        <h3 class="thesis-paths-title">{THESIS.pathsTitle}</h3>
-        <ol class="thesis-list">
-          {
-            THESIS.paths.map((p, i) => (
-              <li class={`inv-pc-${p.product}`}>
-                <span class="thesis-mark" aria-hidden="true" />
-                <p class="thesis-k">
-                  {String(i + 1).padStart(2, '0')} · {p.k}
-                </p>
-                <h4 class="h4">{p.title}</h4>
-                <p>{p.body}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </div>
-  </Chapter>
-
-  <!-- 02 Problem -->
-  <Chapter id="problem" title={PROBLEM.title} lead={PROBLEM.lead} tone="pearl">
+  <!-- 01 Problem -->
+  <Chapter id="problem" title={PROBLEM.title} lead={PROBLEM.lead}>
     <ol class="stations" aria-label="From module signal to decision and evidence">
       {
         PROBLEM.stations.map((s, i) => (
@@ -131,48 +102,19 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
         ))
       }
     </ol>
-    <div class="problem-foot">
-      <div class="firstcases">
-        <p class="label-k">First issues to test</p>
-        <ul>
-          {PROBLEM.firstCases.map((c) => <li>{c}</li>)}
-        </ul>
-      </div>
-      <p class="note">{PROBLEM.baselineNote}</p>
+  </Chapter>
+
+  <!-- 02 First application -->
+  <Chapter id="first-application" title={FIRST_APPLICATION.title} lead={FIRST_APPLICATION.lead} tone="pearl">
+    <div class="firstcases">
+      <p class="label-k">Candidate first problems</p>
+      <ul>
+        {FIRST_APPLICATION.cases.map((c) => <li>{c}</li>)}
+      </ul>
     </div>
-  </Chapter>
-
-  <!-- 03 Opportunity -->
-  <Chapter id="opportunity" title={OPPORTUNITY.title} lead={OPPORTUNITY.lead}>
-    <ValueFlow />
-    <div class="outcomes">
-      <h3 class="outcomes-title">Outcomes to measure across the portfolio</h3>
+    <ol class="stairs" aria-label="Four steps of the first application">
       {
-        [OPPORTUNITY.outcomes.customer, OPPORTUNITY.outcomes.oem].map((o) => (
-          <section class="outcome" aria-label={o.title}>
-            <h4 class="h4">{o.title}</h4>
-            <p>{o.body}</p>
-            <p class="outcome-measure">
-              <span>Measure</span>
-              {o.measure}
-            </p>
-          </section>
-        ))
-      }
-    </div>
-    <p class="note">{OPPORTUNITY.note}</p>
-  </Chapter>
-
-  <!-- 04 Portfolio -->
-  <Chapter id="portfolio" title={PORTFOLIO.title} lead={PORTFOLIO.lead} tone="pearl">
-    <PortfolioCompare />
-  </Chapter>
-
-  <!-- 05 Entry strategy -->
-  <Chapter id="entry" title={ENTRY.title} lead={ENTRY.lead}>
-    <ol class="stairs" aria-label="Four steps of the first wedge">
-      {
-        ENTRY.steps.map((s, i) => (
+        FIRST_APPLICATION.steps.map((s, i) => (
           <li style={`--i:${i}`}>
             <p class="stairs-commit">{s.commit}</p>
             <p class="stairs-n">{s.n}</p>
@@ -182,17 +124,27 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
         ))
       }
     </ol>
-    <p class="stairs-rule">{ENTRY.rule}</p>
+    <p class="stairs-rule">{FIRST_APPLICATION.rule}</p>
   </Chapter>
 
-  <!-- 06 Business model -->
-  <Chapter id="business" title={BUSINESS.title} lead={BUSINESS.lead} tone="ice">
+  <!-- 03 Products -->
+  <Chapter id="portfolio" title={PORTFOLIO.title} lead={PORTFOLIO.lead}>
+    <PortfolioCompare />
+  </Chapter>
+
+  <!-- 04 Benefits -->
+  <Chapter id="value" title={VALUE.title} lead={VALUE.lead} tone="pearl">
+    <ValueFlow />
+  </Chapter>
+
+  <!-- 05 Adoption and revenue -->
+  <Chapter id="business" title={BUSINESS.title} tone="ice">
     <div class="biz">
       <div class="biz-intro">
         <h3 class="h3">Trace an offering to its market</h3>
         <p>
-          Select an offering to follow its potential buyer, paid entry and expansion. OEMs appear in {oemPaths} of the {COMMERCIAL.length} proposed paths:
-          one relationship could carry several products, provided each earns its own proof.
+          Select an offering to follow its potential buyer, paid entry and expansion. OEMs appear in {oemPaths} of the {COMMERCIAL.length} proposed paths: one relationship
+          could carry several products, provided each earns its own proof.
         </p>
       </div>
       <MarketMap client:visible />
@@ -204,8 +156,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
             <tr>
               <th scope="col">Offering</th>
               <th scope="col">Potential buyer</th>
-              <th scope="col">Paid entry</th>
-              <th scope="col">Expansion</th>
+              <th scope="col">Proposed commercial path</th>
             </tr>
           </thead>
           <tbody>
@@ -213,14 +164,13 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
               COMMERCIAL.map((c) => (
                 <tr>
                   <th scope="row">
-                    <span class={pchip(c.tone)} style={c.tone === 'neutral' ? '--pchip: var(--c-slate-2)' : undefined}>
-                      {c.offering}
-                    </span>
+                    <span class={`pchip pchip--${c.tone}`}>{c.offering}</span>
                   </th>
                   <td>{c.buyer}</td>
-                  <td>{c.entry}</td>
                   <td>
-                    <span class="biz-arrow" aria-hidden="true">→</span> {c.expansion}
+                    {c.entry} <span class="biz-arrow" aria-hidden="true">→</span>
+                    <span class="visually-hidden">, then </span>
+                    {c.expansion.charAt(0).toLowerCase() + c.expansion.slice(1)}
                   </td>
                 </tr>
               ))
@@ -228,164 +178,76 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
           </tbody>
         </table>
       </div>
-
-      <section class="econ" aria-labelledby="econ-title">
-        <div class="econ-head">
-          <p class="label-k">Economics to validate</p>
-          <h3 id="econ-title" class="h3">{ECONOMICS.title}</h3>
-        </div>
-        <ol class="eq" aria-label="Net value formula">
-          {
-            ECONOMICS.plus.map((t, i) => (
-              <li class="eq-term eq-term--plus">
-                {i > 0 && (
-                  <span class="eq-op">
-                    <span aria-hidden="true">+</span>
-                    <span class="visually-hidden">plus</span>
-                  </span>
-                )}
-                <span class="eq-box">{t}</span>
-              </li>
-            ))
-          }
-          <li class="eq-term eq-term--minus">
-            <span class="eq-op"><span aria-hidden="true">−</span><span class="visually-hidden">minus</span></span>
-            <span class="eq-box">{ECONOMICS.minus}</span>
-          </li>
-          <li class="eq-term eq-term--result">
-            <span class="eq-op"><span aria-hidden="true">=</span><span class="visually-hidden">equals</span></span>
-            <span class="eq-box">{ECONOMICS.result}</span>
-          </li>
-        </ol>
-        <p class="econ-note">{ECONOMICS.note}</p>
-      </section>
-
-      <section class="opennum" aria-labelledby="opennum-title">
-        <div class="opennum-head">
-          <h3 id="opennum-title" class="h3">The numbers the next proof must establish</h3>
-          <p>
-            Buyer interviews, addressable reference programs, pricing, unit economics, TAM/SAM/SOM and the funding ask require a sourced, bottom-up case. They
-            remain open here rather than being presented as traction.
-          </p>
-        </div>
-        <dl class="opennum-grid">
-          {
-            OPEN_NUMBERS.map((n) => (
-              <div class="opennum-cell">
-                <dt>{n.k}</dt>
-                <dd class="opennum-val">
-                  <span aria-hidden="true">—</span>
-                  <span class="visually-hidden">Not yet established.</span>
-                </dd>
-                <dd class="opennum-how">{n.how}</dd>
-                <dd class="opennum-status">Open</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </section>
     </div>
   </Chapter>
 
-  <!-- 07 Proof roadmap -->
+  <!-- 06 Proof -->
   <Chapter id="proof" title={PROOF.title} lead={PROOF.lead}>
     <ProofTimeline />
   </Chapter>
 
-  <!-- 08 Investment & partnership -->
-  <Chapter id="partner" title={PARTNER.title} lead={PARTNER.lead} tone="pearl">
-    <div class="partner">
-      <div class="partner-sought">
-        <p class="label-k">The collaboration sought</p>
-        <ol class="eq eq--ask" aria-label="Partner plus data plus team plus milestone">
-          {
-            PARTNER.sought.map((s, i) => (
-              <li class="eq-term eq-term--plus">
-                {i > 0 && (
-                  <span class="eq-op">
-                    <span aria-hidden="true">+</span>
-                    <span class="visually-hidden">plus</span>
-                  </span>
-                )}
-                <span class="eq-box">
-                  <strong>{s.k}</strong>
-                  {s.body}
-                </span>
-              </li>
-            ))
-          }
-          <li class="eq-term eq-term--result">
-            <span class="eq-op"><span aria-hidden="true">=</span><span class="visually-hidden">equals</span></span>
-            <span class="eq-box"><strong>Result</strong>{PARTNER.result}</span>
-          </li>
-        </ol>
-      </div>
-      <p class="partner-aud">{PARTNER.audienceLine}</p>
-      <AudienceTabs client:visible />
+  <!-- 07 Founder -->
+  <Chapter id="founder" title={FOUNDER.title} lead={FOUNDER.lead} tone="pearl">
+    <div class="founder-card">
+      <ul class="founder-disc" aria-label="Areas of experience">
+        {FOUNDER.disciplines.map((d) => <li>{d}</li>)}
+      </ul>
+      <a class="link-arrow" href="/about">About Mathsya and the founder <ArrowRight size={16} aria-hidden="true" /></a>
     </div>
   </Chapter>
 
-  <!-- 09 Founder & execution -->
-  <Chapter id="founder" title={FOUNDER.title}>
-    <div class="founder">
-      <div class="founder-card">
-        <p class="founder-mono" aria-hidden="true">{FOUNDER.initials}</p>
-        <div class="founder-id">
-          <h3 class="h3">{FOUNDER.name}</h3>
-          <p class="founder-role">{FOUNDER.role} · {FOUNDER.location}</p>
-        </div>
-        <p class="founder-sum">{FOUNDER.summary}</p>
-        <ul class="founder-disc" aria-label="Areas of experience">
-          {FOUNDER.disciplines.map((d) => <li>{d}</li>)}
-        </ul>
-        <a class="link-arrow" href="/about">About Mathsya and the founder <ArrowRight size={16} aria-hidden="true" /></a>
-      </div>
-      <div class="founder-exec">
-        <h3 class="label-k">How execution is organized</h3>
-        <dl>
-          {
-            FOUNDER.execution.map((e) => (
-              <div>
-                <dt>{e.k}</dt>
-                <dd>{e.body}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </div>
-    </div>
-  </Chapter>
-
-  <!-- 10 Next milestone -->
-  <Chapter id="milestone" title={MILESTONE.title} lead={MILESTONE.lead} tone="pearl">
-    <ol class="ms">
+  <!-- 08 Next ask -->
+  <Chapter id="next-ask" title={NEXT_ASK.title} lead={NEXT_ASK.lead}>
+    <ol class="eq eq--ask" aria-label="Partner plus access plus work plan plus milestone">
       {
-        MILESTONE.items.map((m, i) => (
-          <li class="ms-item">
-            <span class="ms-n" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
+        NEXT_ASK.sought.map((s, i) => (
+          <li class="eq-term eq-term--plus">
+            {i > 0 && (
+              <span class="eq-op">
+                <span aria-hidden="true">+</span>
+                <span class="visually-hidden">plus</span>
+              </span>
+            )}
+            <span class="eq-box">
+              <strong>{s.k}</strong>
+              {s.body}
             </span>
-            <p class="ms-body">{m.body}</p>
-            <p class="ms-moves">
-              <span class="ms-moves-k">Evidence it should produce</span>
-              <span class="ms-links">
-                {m.moves.map((id) => (
-                  <a href={`#${id}`}>
-                    {chapter(id).n} {chapter(id).nav}
-                  </a>
-                ))}
-              </span>
-            </p>
-            <p class="ms-status">
-              <span class="inv-meter" aria-hidden="true"><i data-on /><i data-on /><i /></span>
-              <span>
-                <span class="visually-hidden">Status: </span>Open
-              </span>
-            </p>
           </li>
         ))
       }
+      <li class="eq-term eq-term--result">
+        <span class="eq-op"><span aria-hidden="true">=</span><span class="visually-hidden">equals</span></span>
+        <span class="eq-box"><strong>Result</strong>{NEXT_ASK.result}</span>
+      </li>
     </ol>
+  </Chapter>
+
+  <!-- 09 Evidence: the one structured section for what is still to be shown -->
+  <Chapter id="evidence" title={EVIDENCE.title} lead={EVIDENCE.lead} tone="pearl">
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ev-cap">
+      <table class="table ev-table">
+        <caption id="ev-cap">Milestone plan for the first partner program. Each step is accepted against its agreed gate before the next one starts.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Milestone</th>
+            <th scope="col">What it should establish</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            EVIDENCE.milestones.map((m, i) => (
+              <tr>
+                <th scope="row">
+                  <span class="ev-n">{String(i + 1).padStart(2, '0')}</span>
+                  {m.step}
+                </th>
+                <td>{m.establishes}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
   </Chapter>
 
   <!-- Resources -->
@@ -410,7 +272,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
               <span class="res-body">{r.body}</span>
               <span class="resource-meta res-type">
                 {r.meta}
-                {r.bytes ? ` · ${kb(r.bytes)}` : ''}
+                {r.download ? ` · ${kb(r.href)}` : ''}
               </span>
               <span class="resource-action">
                 {r.action} {r.download ? <Download size={16} aria-hidden="true" /> : <ArrowRight size={16} aria-hidden="true" />}
@@ -431,7 +293,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
                   {f.title}
                 </span>
                 <span class="res-row-body">{f.body}</span>
-                <span class="res-row-meta">Markdown · {kb(f.bytes)}</span>
+                <span class="res-row-meta">Markdown · {kb(f.href)}</span>
                 <span class="res-row-action">
                   Download <Download size={16} aria-hidden="true" />
                 </span>
@@ -444,10 +306,12 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
   </section>
 
   <CtaBand
+    eyebrow="Next step"
     title={'Bring a use case.\nAlign the next investment.'}
-    body="Agree the first proof, the team and data needed, the milestone and a paid follow-on path."
-    primary={{ label: 'Explore the investment case', href: contactHref('investor') }}
-    secondary={{ label: 'Discuss an OEM pilot', href: contactHref('oem-pilot') }}
+    body="Agree the first problem, the access it needs, the acceptance milestone and a costed work plan."
+    primary={{ label: ACTIONS.invest.label, href: ACTIONS.invest.href }}
+    secondary={{ label: ACTIONS.pilot.label, href: ACTIONS.pilot.href }}
+    tertiary={{ label: ACTIONS.brief.label, href: ACTIONS.brief.href }}
   />
 </BaseLayout>
 
@@ -479,18 +343,13 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     gap: 28px;
     justify-items: start;
   }
+  .inv-hero-copy .link-arrow {
+    padding-block: 8px;
+  }
   .inv-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-  }
-  .inv-hero-stage {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    font-size: var(--fs-small);
-    color: var(--c-slate);
   }
   .inv-glance {
     border-top: 2px solid var(--c-ink);
@@ -539,14 +398,18 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
   .inv-glance dd {
     margin: 0;
   }
-  .inv-glance-legend {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-top: 14px;
-    border-top: 1px solid var(--c-line);
+  .inv-glance-stage dd {
+    font-family: var(--f-display);
+    font-weight: 650;
+    color: var(--c-ink);
+  }
+  .inv-glance-note {
+    padding: 14px 16px;
+    border-radius: var(--r-s);
+    background: var(--c-ice);
     font-size: var(--fs-xs);
-    color: var(--c-slate);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
   }
 
   .label-k {
@@ -558,84 +421,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     color: var(--c-slate);
   }
 
-  /* ---------- 01 Thesis ---------- */
-  .thesis {
-    display: grid;
-    gap: 48px;
-  }
-  @media (min-width: 980px) {
-    .thesis {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: clamp(48px, 7vw, 120px);
-    }
-  }
-  .thesis-copy {
-    display: grid;
-    gap: 22px;
-    align-content: start;
-  }
-  .thesis-standfirst {
-    font-family: var(--f-display);
-    font-size: clamp(1.35rem, 1.05rem + 1.1vw, 2rem);
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-  }
-  .thesis-paths-title {
-    margin-bottom: 18px;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--c-slate);
-  }
-  .thesis-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .thesis-list li {
-    position: relative;
-    display: grid;
-    gap: 6px;
-    padding: 0 0 30px 40px;
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
-  .thesis-list li:last-child {
-    padding-bottom: 0;
-  }
-  .thesis-list li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 22px;
-    bottom: 4px;
-    width: 1.5px;
-    background: var(--c-line-strong);
-  }
-  .thesis-mark {
-    position: absolute;
-    left: 0;
-    top: 3px;
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    background: var(--pc);
-  }
-  .thesis-k {
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--pc-ink);
-  }
-  .thesis-list .h4 {
-    color: var(--c-ink);
-  }
-
-  /* ---------- 02 Problem ---------- */
+  /* ---------- 01 Problem ---------- */
   .stations {
     display: grid;
     margin: 0;
@@ -721,21 +507,10 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
       top: 1px;
     }
   }
-  .problem-foot {
-    display: grid;
-    gap: 24px;
-    margin-top: clamp(32px, 4vw, 52px);
-  }
-  @media (min-width: 900px) {
-    .problem-foot {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: start;
-      gap: 48px;
-    }
-  }
   .firstcases {
     display: grid;
     gap: 12px;
+    margin-bottom: clamp(32px, 4vw, 52px);
   }
   .firstcases ul {
     display: flex;
@@ -755,53 +530,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     font-size: 0.92rem;
   }
 
-  /* ---------- 03 Opportunity ---------- */
-  .outcomes {
-    display: grid;
-    gap: 0 48px;
-    margin-top: clamp(40px, 5vw, 64px);
-    margin-bottom: 24px;
-  }
-  .outcomes-title {
-    grid-column: 1 / -1;
-    margin-bottom: 8px;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--c-slate);
-  }
-  .outcome {
-    display: grid;
-    gap: 8px;
-    align-content: start;
-    padding: 18px 0;
-    border-top: 1px solid var(--c-line-strong);
-    color: var(--c-slate);
-  }
-  .outcome .h4 {
-    color: var(--c-ink);
-  }
-  .outcome-measure {
-    font-size: var(--fs-small);
-    color: var(--c-ink-soft);
-  }
-  .outcome-measure span {
-    margin-right: 8px;
-    font-family: var(--f-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-cobalt-ink);
-  }
-  @media (min-width: 760px) {
-    .outcomes {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* ---------- 05 Entry staircase ---------- */
+  /* ---------- 02 First application: staircase ---------- */
   .stairs {
     display: grid;
     gap: 26px;
@@ -875,7 +604,7 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     color: var(--c-slate);
   }
 
-  /* ---------- 06 Business model ---------- */
+  /* ---------- 05 Adoption and revenue ---------- */
   .biz {
     display: grid;
     gap: clamp(40px, 5vw, 64px);
@@ -896,30 +625,8 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     color: var(--c-cobalt);
     font-weight: 700;
   }
-  .econ,
-  .opennum {
-    display: grid;
-    gap: 22px;
-    padding: clamp(22px, 3vw, 40px);
-    border: 1px solid var(--c-line);
-    border-radius: var(--r-l);
-    background: var(--c-white);
-  }
-  .econ-head,
-  .opennum-head {
-    display: grid;
-    gap: 8px;
-  }
-  .opennum-head p {
-    max-width: 70ch;
-    color: var(--c-slate);
-  }
-  .econ-note {
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
 
-  /* Equation layout (economics + collaboration sought) */
+  /* ---------- 08 Next ask: equation ---------- */
   .eq {
     display: grid;
     gap: 10px;
@@ -957,13 +664,6 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     font-weight: 650;
     line-height: 1.35;
     color: var(--c-ink);
-  }
-  .eq-term--minus .eq-box {
-    border: 1.5px dashed var(--c-ink-soft);
-    background: var(--c-white);
-  }
-  .eq-term--minus .eq-op {
-    border-style: dashed;
   }
   .eq-term--result .eq-box {
     border-color: var(--c-cobalt);
@@ -1024,128 +724,14 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     }
   }
 
-  /* Open numbers: deliberately blank figures */
-  .opennum-grid {
-    display: grid;
-    margin: 0;
-    border-top: 1px solid var(--c-line);
-  }
-  .opennum-cell {
-    display: grid;
-    gap: 8px;
-    align-content: start;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--c-line);
-  }
-  @media (min-width: 640px) {
-    .opennum-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      border-left: 1px solid var(--c-line);
-    }
-    .opennum-cell {
-      padding: 20px 22px;
-      border-right: 1px solid var(--c-line);
-    }
-  }
-  @media (min-width: 1000px) {
-    .opennum-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-  .opennum-cell dt {
-    font-family: var(--f-display);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .opennum-cell dd {
-    margin: 0;
-  }
-  .opennum-val {
-    font-family: var(--f-display);
-    font-size: 2.6rem;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--c-slate-2);
-  }
-  .opennum-how {
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
-  .opennum-status {
-    justify-self: start;
-    padding: 2px 9px;
-    border: 1px dashed var(--c-slate-2);
-    border-radius: var(--r-pill);
-    font-family: var(--f-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-ink-soft);
-  }
-
-  /* ---------- 08 Partner ---------- */
-  .partner {
-    display: grid;
-    gap: 28px;
-  }
-  .partner-sought {
-    display: grid;
-    gap: 14px;
-  }
-  .partner-aud {
-    margin-top: clamp(16px, 3vw, 36px);
-    font-family: var(--f-display);
-    font-size: 1.15rem;
-    font-weight: 650;
-  }
-
-  /* ---------- 09 Founder ---------- */
-  .founder {
-    display: grid;
-    gap: 40px;
-  }
-  @media (min-width: 960px) {
-    .founder {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: clamp(48px, 6vw, 112px);
-    }
-  }
+  /* ---------- 07 Founder ---------- */
   .founder-card {
     display: grid;
     gap: 18px;
     justify-items: start;
-    align-content: start;
-  }
-  .founder-mono {
-    display: grid;
-    place-items: center;
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1.5px solid var(--c-ink);
-    font-family: var(--f-display);
-    font-size: 1.9rem;
-    font-weight: 300;
-    letter-spacing: -0.04em;
   }
   .founder-card .link-arrow {
     padding-block: 8px;
-  }
-  .founder-id {
-    display: grid;
-    gap: 6px;
-  }
-  .founder-role {
-    font-size: var(--fs-small);
-    color: var(--c-slate);
-  }
-  .founder-sum {
-    font-family: var(--f-display);
-    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.015em;
-    max-width: 34ch;
   }
   .founder-disc {
     display: flex;
@@ -1163,131 +749,22 @@ const pchip = (tone: string) => (tone === 'neutral' ? 'pchip' : `pchip pchip--${
     font-weight: 600;
     color: var(--c-ink-soft);
   }
-  .founder-exec {
-    display: grid;
-    gap: 12px;
-    align-content: start;
-  }
-  .founder-exec dl {
-    margin: 0;
-  }
-  .founder-exec dl > div {
-    display: grid;
-    gap: 4px 24px;
-    padding: 18px 0;
-    border-top: 1px solid var(--c-line-strong);
-  }
-  .founder-exec dl > div:last-child {
-    border-bottom: 1px solid var(--c-line-strong);
-  }
-  @media (min-width: 560px) {
-    .founder-exec dl > div {
-      grid-template-columns: 110px minmax(0, 1fr);
-    }
-  }
-  .founder-exec dt {
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-cobalt-ink);
-    padding-top: 3px;
-  }
-  .founder-exec dd {
-    margin: 0;
-    color: var(--c-ink-soft);
-  }
-
-  /* ---------- 10 Next milestone ---------- */
-  .ms {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-top: 2px solid var(--c-ink);
-  }
-  .ms-item {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 10px 18px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--c-line-strong);
-  }
-  .ms-n {
-    grid-row: span 3;
+  /* ---------- 09 Evidence ---------- */
+  .ev-table th[scope='row'] {
+    min-width: 280px;
     font-family: var(--f-display);
-    font-size: 1.9rem;
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--c-cobalt);
-  }
-  .ms-body {
-    font-family: var(--f-display);
-    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
     font-weight: 650;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
   }
-  .ms-moves {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    font-size: var(--fs-xs);
-  }
-  .ms-moves-k,
-  .ms-status {
+  .ev-n {
+    display: block;
+    margin-bottom: 4px;
     font-family: var(--f-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-slate);
-  }
-  .ms-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .ms-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 4px 14px;
-    border: 1px solid var(--c-line-strong);
-    border-radius: var(--r-pill);
-    background: var(--c-white);
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--c-ink);
-  }
-  .ms-links a:hover {
-    border-color: var(--c-cobalt);
+    font-size: 0.78rem;
+    font-weight: 500;
     color: var(--c-cobalt-ink);
   }
-  .ms-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--c-ink);
-  }
-  @media (min-width: 900px) {
-    .ms-item {
-      grid-template-columns: 64px minmax(0, 1.25fr) minmax(0, 1fr) 110px;
-      align-items: start;
-      gap: 24px;
-    }
-    .ms-n {
-      grid-row: auto;
-      font-size: 2.4rem;
-    }
-    .ms-moves {
-      flex-direction: column;
-      align-items: start;
-    }
-    .ms-status {
-      justify-content: end;
-      padding-top: 6px;
-    }
+  .ev-table td {
+    min-width: 220px;
   }
 
   /* ---------- Resources ---------- */

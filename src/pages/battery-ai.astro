@@ -33,6 +33,7 @@ import {
   BATTERY_CTA,
 } from '@/data/battery';
 import '@/components/battery/battery.css';
+import { fileSize } from '@/lib/fileSize';
 
 const P = PRODUCTS.battery;
 
@@ -71,7 +72,7 @@ const spec = [
   { k: 'Works with', v: 'A validated BMS, which keeps sensing, balancing, operating limits and protection' },
   { k: 'Connects to', v: 'PMG and/or Evo Core, through agreed interfaces — or evaluated on its own' },
   { k: 'Could be adopted by', v: P.buyers },
-  { k: 'Proposed commercial path', v: `${P.commercial}. Pricing and willingness to adopt require validation.` },
+  { k: 'Commercial direction', v: P.commercial },
 ];
 
 const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).includes(sid));
@@ -85,14 +86,14 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
       <div class="bx-hero-copy">
         <p class="eyebrow">{BATTERY_HERO.eyebrow}</p>
         <h1 id="bx-title" class="bx-title">
-          {BATTERY_HERO.title} <span class="bx-ruled">{BATTERY_HERO.ruled}</span>
+          <span class="soft-break">{BATTERY_HERO.title}</span> <span class="bx-ruled">{BATTERY_HERO.ruled}</span>
         </h1>
         <p class="bx-support">{BATTERY_HERO.support}</p>
         <p class="lead bx-hero-lead">{BATTERY_HERO.lead}</p>
         <p class="bx-boundary"><span class="bx-k">Boundary</span>{BATTERY_HERO.boundary}</p>
         <div class="btn-row">
           <a class={buttonVariants({ size: 'lg' })} href="#first-proof">See the first proof <ArrowDown aria-hidden="true" /></a>
-          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('battery')}>Discuss a battery pilot</a>
+          <a class={buttonVariants({ variant: 'secondary', size: 'lg' })} href={contactHref('battery')}>Discuss a battery or BMS application</a>
         </div>
       </div>
 
@@ -176,7 +177,7 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
       <div class="bx-intro-copy">
         <p class="eyebrow">Product introduction</p>
         <h2 id="intro-title" class="h2">Software that reads the pack, next to the BMS that protects it.</h2>
-        <p class="lead">Battery &amp; Charging AI is a proposed Edge AI software layer for battery behaviour: health and state-estimation evaluation, charging readiness and thermal context. It can run on suitable BMS or adjacent module compute, alongside the validated BMS.</p>
+        <p class="lead">It runs on suitable BMS or adjacent module compute and reads the signals the selected pack already provides. Each capability below names the signals it needs and the proof a first pilot must produce.</p>
         <p class="bx-intro-more">Approved insight can connect to PMG and/or Evo Core through agreed interfaces. The module product can also be evaluated on its own, without the rest of the portfolio.</p>
       </div>
       <dl class="bx-spec" aria-label="Product facts">
@@ -206,6 +207,7 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
       <div class="section-head">
         <p class="eyebrow">{PRINCIPLE.eyebrow}</p>
         <h2 id="principle-title" class="h2">{PRINCIPLE.title}</h2>
+        <p class="lead">{PRINCIPLE.lead}</p>
       </div>
       <div class="bx-chain-wrap">
         <span class="bx-chain-rail" data-reveal="line" aria-hidden="true"></span>
@@ -445,10 +447,10 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
         );
       })}
       <div class="bx-validate">
-        <p class="bx-k">Benefits to validate</p>
+        <p class="bx-k">Value to evaluate</p>
         <dl>
           <div><dt>Customer</dt><dd>{OUTCOMES.validate.customer}</dd></div>
-          <div><dt>OEM / BMS supplier</dt><dd>{OUTCOMES.validate.oem}</dd></div>
+          <div><dt>OEM and supplier</dt><dd>{OUTCOMES.validate.oem}</dd></div>
         </dl>
         <p class="fineprint">{BENEFIT_NOTE}</p>
       </div>
@@ -500,7 +502,7 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
           <h3 class="h4">{FIRST_PROOF.bring.title}</h3>
           <ul>{FIRST_PROOF.bring.items.map((it) => <li>{it}</li>)}</ul>
         </div>
-        <a class={buttonVariants({ size: 'lg' })} href={contactHref('battery')}>Discuss a battery pilot <ArrowRight aria-hidden="true" /></a>
+        <a class={buttonVariants({ size: 'lg' })} href={contactHref('battery')}>Discuss a battery or BMS application <ArrowRight aria-hidden="true" /></a>
       </div>
     </div>
   </section>
@@ -561,7 +563,7 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
         </ul>
         <p class="bx-refs-note">{REFERENCES.note}</p>
         <a class="resource" href={REFERENCES.download.href} download>
-          <span class="resource-meta">{REFERENCES.download.meta}</span>
+          <span class="resource-meta">Markdown · {fileSize(REFERENCES.download.href)}</span>
           <strong class="h4">{REFERENCES.download.title}</strong>
           <span class="bx-res-body">{REFERENCES.download.body}</span>
           <span class="resource-action">Download the overview <Download size={16} aria-hidden="true" /></span>
@@ -574,7 +576,7 @@ const used = (sid: string) => SCENARIOS.map((s) => (s.signals as string[]).inclu
     eyebrow={BATTERY_CTA.eyebrow}
     title={BATTERY_CTA.title}
     body={BATTERY_CTA.body}
-    primary={{ label: 'Discuss a battery pilot', href: contactHref('battery') }}
+    primary={{ label: 'Discuss a battery or BMS application', href: contactHref('battery') }}
     secondary={{ label: 'See the connected architecture', href: '/platform' }}
   />
 </BaseLayout>

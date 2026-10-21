@@ -12,6 +12,7 @@ export const CAR = {
   nose: 2.46,
   tail: -2.15,
   roof: 1.214,
+  halfWidth: 1.344, // body |z| including mirrors (measured from the model)
 };
 
 /** World positions of every system in the schematic vehicle. Labels, hotspots and cameras read these. */

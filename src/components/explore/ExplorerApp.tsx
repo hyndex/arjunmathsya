@@ -29,6 +29,7 @@ export default function ExplorerApp() {
   const [webgl, setWebgl] = useState<boolean | null>(null);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false); // start 3D on first interaction or shortly after load; the still shows meanwhile
+  const [drawn, setDrawn] = useState(false); // the still stays until the car itself has rendered (the model may load slowly)
   const fail = () => {
     setFailed(true);
     setWebgl(false);
@@ -95,15 +96,15 @@ export default function ExplorerApp() {
   return (
     <div className="explorer">
       <div className="explorer-stage" tabIndex={0} onKeyDown={onKey} aria-label="Interactive 3D vehicle. Arrow keys rotate, plus and minus zoom, zero resets the view. All details are also listed in the panel." role="application">
-        {/* The still is server-rendered, so it paints before any JavaScript; 3D replaces it once running. */}
-        {!(webgl && ready) && webgl !== false && STILL}
         {webgl && ready && (
           <Guard fallback={null} onError={fail}>
-            <Suspense fallback={STILL}>
-              <ExplorerScene selected={selected} view={view} onSelect={(id) => select(id, true)} handleRef={handle} reduced={reduced} onLost={fail} />
+            <Suspense fallback={null}>
+              <ExplorerScene selected={selected} view={view} onSelect={(id) => select(id, true)} handleRef={handle} reduced={reduced} onLost={fail} onDrawn={() => setDrawn(true)} />
             </Suspense>
           </Guard>
         )}
+        {/* The still is server-rendered, so it paints before any JavaScript; it covers the 3D view until the car has drawn. */}
+        {webgl !== false && !drawn && STILL}
         {webgl === false && (
           <div className="explorer-fallback">
             <img src="/posters/explore-cutaway.webp" alt="Schematic cutaway of the concept vehicle showing the battery pack, Evo Core power unit, vehicle compute and networks." width={1600} height={1000} />

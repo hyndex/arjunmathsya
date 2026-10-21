@@ -1,5 +1,5 @@
-// /platform copy. Source: docs/legacy-source/platform.txt (+ battery-ai.txt, evo-core.txt, pmg.txt where a
-// relationship is described there). Shared facts (PRODUCTS, BENEFITS, BOUNDARIES) are imported, not copied.
+// /platform copy. Sources: docs/editing-pack-2026-10-20.md (section 03) and docs/legacy-source/platform.txt (+ battery-ai.txt,
+// evo-core.txt, pmg.txt where a relationship is described there). Shared facts (PRODUCTS, BENEFITS, BOUNDARIES) are imported.
 import { BOUNDARIES, PRODUCTS, type ProductId } from '@/data/products';
 
 const lcFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -13,15 +13,37 @@ export const PLATFORM_META = {
 };
 
 export const PLATFORM_HERO = {
-  eyebrow: 'The Mathsya platform / from cell to customer',
-  lines: [
-    { text: 'From the module.', note: '01 · Module intelligence & power hardware' },
-    { text: 'Through the vehicle.', note: '02 · Vehicle intelligence' },
-    { text: 'Into learning.', note: '03 · Organizational learning, optional' },
-  ],
-  statement: 'Local intelligence. Connected outcomes.',
-  lead: 'Battery & Charging AI interprets module behaviour. Evo Core provides a coordinated power foundation. PMG connects the insights at vehicle level, with optional cloud services for authorized OEM and fleet learning.',
+  eyebrow: 'The Mathsya platform / three levels of value',
+  title: ['Local intelligence.', 'Connected outcomes.'],
+  lead: 'Mathsya’s portfolio connects three levels of value. Module intelligence interprets behaviour. Vehicle software adds operating and customer context. Authorized organizational services help engineering and service teams learn from verified outcomes.',
   stage: 'Architecture and PoC planning · development-stage program',
+};
+
+/** The three levels in words. Product names are linked to their pages where they appear. */
+export const LEVELS = [
+  {
+    n: '01',
+    title: 'Module intelligence',
+    body: 'Battery & Charging AI evaluates battery behaviour on suitable BMS or adjacent compute. Evo Core combines defined EV power functions with common control and supervisory insight. Other modules can contribute approved events and operating information.',
+  },
+  {
+    n: '02',
+    title: 'Vehicle intelligence',
+    body: 'PMG combines selected module insights with vehicle, journey and customer context. It prepares reviewable recommendations, requests only permitted actions and checks the result.',
+  },
+  {
+    n: '03',
+    title: 'Organizational learning',
+    note: 'Optional',
+    body: 'Optional OEM and fleet services can compare authorized evidence across vehicles and versions, support investigations and track whether a correction reduced the repeat issue.',
+  },
+] as const;
+
+export const ARCH_NOTES = {
+  adoption:
+    'A partner can start with one product and one application. The connected portfolio is an expansion path; it does not require replacing every vehicle module or adopting all products together.',
+  boundary:
+    'Real-time control, protection and permitted actuator authority remain defined by the validated vehicle architecture. Model output is a reviewable input to an approved decision process.',
 };
 
 /* ---------- Signature: 3-level architecture ---------- */
@@ -61,7 +83,7 @@ export const ARCH_OPTIONS: { id: ArchSelection; label: string; color: string }[]
 ];
 
 type Link = { to: string; text: string };
-export const ARCH_EXPLAIN: Record<ArchSelection, { title: string; where: string; links: Link[]; boundary: string }> = {
+export const ARCH_EXPLAIN: Record<ArchSelection, { title: string; href?: string; where: string; links: Link[]; boundary: string }> = {
   all: {
     title: 'The whole platform',
     where: 'Three products at two levels inside the vehicle, plus optional services outside it.',
@@ -75,6 +97,7 @@ export const ARCH_EXPLAIN: Record<ArchSelection, { title: string; where: string;
   },
   battery: {
     title: 'Battery & Charging AI',
+    href: '/battery-ai',
     where: 'Embedded software on suitable BMS or adjacent module compute, alongside a validated BMS.',
     links: [
       { to: 'Validated BMS', text: 'Reads permitted voltage, current, temperature and history from an agreed pack and reference system.' },
@@ -85,6 +108,7 @@ export const ARCH_EXPLAIN: Record<ArchSelection, { title: string; where: string;
   },
   evo: {
     title: 'Evo Core',
+    href: '/evo-core',
     where: 'EV power hardware plus embedded software, at the vehicle power-electronics location defined by the reference program.',
     links: [
       { to: 'BMS, cooling & diagnostics', text: 'Connects through defined interfaces; validated protection and fault containment remain part of the architecture.' },
@@ -95,6 +119,7 @@ export const ARCH_EXPLAIN: Record<ArchSelection, { title: string; where: string;
   },
   pmg: {
     title: 'Proactive Mobility Guardian',
+    href: '/pmg',
     where: 'Vehicle software on suitable gateway, telematics or central compute.',
     links: [
       { to: 'Level 01 modules', text: 'Receives health and context events from Battery & Charging AI, Evo Core or other modules through approved interfaces, and can start with existing module data.' },
@@ -126,7 +151,7 @@ export const ARCH_RELATIONS: Record<ArchSelection, { nodes: string[]; paths: str
 export const ARCH_LEGEND = [
   { swatch: 'concept', label: 'Mathsya concept' },
   { swatch: 'reference', label: 'Reference vehicle system' },
-  { swatch: 'interface', label: 'Approved interface' },
+  { swatch: 'interface', label: 'Approved data / recommendation interface' },
   { swatch: 'future', label: 'Optional / future' },
 ] as const;
 
@@ -224,7 +249,7 @@ export const ROLES_CAPTION = 'Proposed product roles and commercial paths; produ
 /* ---------- Independent adoption ---------- */
 
 export const ADOPTION_LEAD =
-  'A customer can begin with one product. The connected architecture is the expansion path, rather than a requirement to purchase the complete portfolio.';
+  'A partner can start with one product and one application. The connected portfolio is an expansion path; it does not require replacing every vehicle module or adopting all products together.';
 
 export const ADOPTION_ROUTES: { id: ProductId; start: string; who: string; first: string; later: string }[] = [
   {
@@ -326,7 +351,7 @@ export const HW_SW_ROWS: { id: ProductId; product: string; summary: string; cell
 
 /* ---------- Benefits section (data: BENEFITS in @/data/portfolio) ---------- */
 
-export const BENEFITS_INTRO = 'Choose a candidate scenario to see the module intelligence, the role of PMG and the outcomes a pilot should measure.';
+export const BENEFITS_INTRO = 'Follow one decision: choose a candidate scenario to see the module intelligence, the role of PMG and what a pilot should measure.';
 
 /* ---------- Principles, validation, integration ---------- */
 
@@ -342,7 +367,7 @@ export const PRINCIPLES = [
     n: '02',
     label: 'Validated control',
     title: 'Respect existing limits.',
-    body: 'Protection, real-time control and permitted actuator authority belong to the validated vehicle architecture. Model output is not an unrestricted control command.',
+    body: 'Real-time control, protection and permitted actuator authority remain defined by the validated vehicle architecture. Model output is a reviewable input to an approved decision process.',
     require: 'Only permitted actions are requested, operating limits are respected and outcomes are checked locally.',
   },
   {

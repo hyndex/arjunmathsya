@@ -57,7 +57,7 @@
 }
 .bx-title {
   margin-top: 20px;
-  font-size: clamp(2.5rem, 1.2rem + 4.1vw, 5.2rem);
+  font-size: clamp(2.3rem, 0.9rem + 3.1vw, 4.4rem);
   line-height: 0.98;
   letter-spacing: var(--ls-display);
   font-weight: 750;
@@ -955,7 +955,7 @@
 .bx-chain {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0;
   margin: 0;
   padding: 0;
@@ -979,14 +979,14 @@
   font-size: 0.76rem;
   color: var(--c-ink);
 }
-.bx-chain li:nth-child(2) .bx-chain-node {
+.bx-chain li:nth-child(3) .bx-chain-node {
   background: var(--c-emerald);
   border-color: var(--c-emerald);
   color: var(--c-white);
 }
 .bx-chain-verb {
   margin-top: 16px;
-  font-size: clamp(1.9rem, 1.3rem + 1.7vw, 2.9rem);
+  font-size: clamp(1.7rem, 1.2rem + 1.3vw, 2.4rem);
   letter-spacing: -0.04em;
 }
 .bx-chain li > p:not(.bx-chain-out) {
@@ -1948,6 +1948,14 @@
 
 /* ================================ Responsive ================================ */
 @media (max-width: 1180px) {
+  /* six steps: three per row until the wide layout */
+  .bx-chain {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 48px;
+  }
+  .bx-chain-rail {
+    display: none;
+  }
   .bx-explorer {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'select' 'stage' 'readout';
@@ -2101,7 +2109,7 @@
     grid-template-columns: minmax(0, 1fr);
   }
   .bx-chain {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     row-gap: 48px;
   }
   .bx-chain-rail {

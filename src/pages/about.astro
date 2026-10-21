@@ -33,14 +33,13 @@ const jsonLd = {
     '@type': 'Organization',
     name: SITE.name,
     address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressCountry: 'IN' },
-    founder: { '@type': 'Person', name: FOUNDER.name, jobTitle: 'Founder' },
   },
 };
 ---
 
 <BaseLayout
   title="About"
-  description="Mathsya Connected Services, Bengaluru: automotive Edge AI led by founder Arjun Amuthan. Our vision, approach to validation and long-term direction."
+  description="Mathsya Connected Services, Bengaluru: automotive Edge AI built on vehicle-systems engineering experience. Our vision, approach to validation and long-term direction."
   jsonLd={jsonLd}
 >
   <div class="ab">
@@ -49,7 +48,7 @@ const jsonLd = {
         <div class="ab-hero-grid">
           <div class="ab-hero-copy">
             <p class="eyebrow">{HERO.eyebrow}</p>
-            <h1 id="ab-title" class="ab-title">Automotive experience. <span>An Edge&nbsp;AI direction.</span></h1>
+            <h1 id="ab-title" class="ab-title">Automotive experience. <span>Useful intelligence.</span></h1>
             <p class="lead">{HERO.lead}</p>
             <div class="btn-row">
               <a class={buttonVariants({ variant: 'default' })} href="#founder">Meet the founder <ArrowDown aria-hidden="true" /></a>
@@ -144,16 +143,7 @@ const jsonLd = {
 
     <!-- Founder -->
     <section id="founder" class="ab-section ab-section--warm" aria-labelledby="founder-title">
-      <div class="container ab-founder-grid">
-        <div class="ab-mono">
-          <span class="ab-mono-letters" aria-hidden="true">AA</span>
-          <span class="ab-mono-rule" data-reveal="line" aria-hidden="true"></span>
-          <p class="ab-name">{FOUNDER.name}</p>
-          <p class="ab-name-meta">
-            <span class="ab-label">{FOUNDER.role}</span>
-            <span class="ab-label">{FOUNDER.place}</span>
-          </p>
-        </div>
+      <div class="container">
         <div class="ab-founder-copy">
           <p class="eyebrow">The founder’s perspective</p>
           <h2 id="founder-title" class="h2">{FOUNDER.title}</h2>

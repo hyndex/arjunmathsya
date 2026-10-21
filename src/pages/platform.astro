@@ -9,9 +9,12 @@ import IntegrationStepper from '@/components/platform/IntegrationStepper';
 import BenefitFlow from '@/components/platform/BenefitFlow';
 import VehiclePlan from '@/components/platform/VehiclePlan.astro';
 import { contactHref } from '@/data/site';
+import { MEASURES } from '@/data/portfolio';
 import {
   PLATFORM_META,
   PLATFORM_HERO,
+  LEVELS,
+  ARCH_NOTES,
   ROLE_ROWS,
   ROLES_CAPTION,
   ADOPTION_LEAD,
@@ -39,30 +42,22 @@ const nav = [
 ];
 const chip = (id: string) => `pchip pchip--${id}`;
 const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
+// Product names inside the level descriptions link to their detail pages.
+const PRODUCT_LINKS: Record<string, string> = { 'Battery & Charging AI': '/battery-ai', 'Evo Core': '/evo-core', PMG: '/pmg' };
+const linked = (text: string) => text.split(/(Battery & Charging AI|Evo Core|PMG)/).map((part) => ({ part, href: PRODUCT_LINKS[part] }));
 ---
 
 <BaseLayout title={PLATFORM_META.title} description={PLATFORM_META.description}>
-  <!-- ============ Hero: the headline is the diagram ============ -->
+  <!-- ============ Hero ============ -->
   <section class="pf-hero" aria-labelledby="pf-title">
     <div class="container--wide pf-hero-inner">
       <p class="eyebrow">{PLATFORM_HERO.eyebrow}</p>
-      <h1 id="pf-title" class="pf-title">
-        {
-          PLATFORM_HERO.lines.map((l, i) => (
-            <>
-              <span class="pf-line" data-i={i} data-note={l.note} style={`--i:${i}`}>
-                <span class="pf-node" data-level={i} aria-hidden="true" />
-                <span class="pf-text">{l.text}</span>
-              </span>{' '}
-            </>
-          ))
-        }
+      <h1 id="pf-title" class="h1 pf-title">
+        <span class="soft-break">{PLATFORM_HERO.title[0]}</span>
+        <span class="soft-break pf-title-2">{PLATFORM_HERO.title[1]}</span>
       </h1>
       <div class="pf-hero-foot">
-        <div class="pf-hero-copy">
-          <p class="pf-statement">{PLATFORM_HERO.statement}</p>
-          <p class="lead">{PLATFORM_HERO.lead}</p>
-        </div>
+        <p class="lead">{PLATFORM_HERO.lead}</p>
         <div class="pf-hero-actions">
           <div class="btn-row">
             <a class={buttonVariants({ size: 'lg' })} href="#architecture">Explore the architecture <ArrowDown aria-hidden="true" /></a>
@@ -79,12 +74,42 @@ const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
   <!-- ============ 01 Architecture (signature) ============ -->
   <section id="architecture" class="section tone-ice" aria-labelledby="architecture-title">
     <div class="container--wide">
-      <ArchitectureDiagram
-        client:visible
-        eyebrow="One portfolio / three levels"
-        title="Three levels, joined by approved interfaces"
-        lead="Battery & Charging AI and Evo Core work at module level, PMG at vehicle level, and optional services outside the vehicle. Each level keeps its own role; selecting a product shows what it exchanges, and with whom."
-      />
+      <div class="section-head section-head--split">
+        <div class="stack" style="--stack:18px">
+          <p class="eyebrow">One portfolio / three levels</p>
+          <h2 id="architecture-title" class="h2">Three levels, joined by approved interfaces</h2>
+        </div>
+        <p class="lead">
+          The lines are approved data and recommendation interfaces, not physical power paths. Non-Mathsya systems are shown as reference systems. Select a product to see what
+          it exchanges, and with whom.
+        </p>
+      </div>
+      <ArchitectureDiagram client:visible>
+        <ol class="levels">
+          {
+            LEVELS.map((l) => (
+              <li class="level">
+                <p class="level-k">
+                  <span class="level-n">{l.n}</span>
+                  {l.title}
+                  {'note' in l && <span class="level-tag">{l.note}</span>}
+                </p>
+                <p class="level-body">{linked(l.body).map(({ part, href }) => (href ? <a href={href}>{part}</a> : part))}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </ArchitectureDiagram>
+      <dl class="arch-notes">
+        <div>
+          <dt>Adoption</dt>
+          <dd>{ARCH_NOTES.adoption}</dd>
+        </div>
+        <div>
+          <dt>Engineering boundary</dt>
+          <dd>{ARCH_NOTES.boundary}</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
@@ -277,15 +302,44 @@ const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
     </div>
   </section>
 
-  <!-- ============ 06 Benefits ============ -->
+  <!-- ============ 06 Benefits and measures ============ -->
   <section id="benefits" class="section tone-white" aria-labelledby="benefits-title">
     <div class="container">
       <div class="section-head section-head--split">
         <div class="stack" style="--stack:18px">
-          <p class="eyebrow">Customer and OEM benefits</p>
-          <h2 id="benefits-title" class="h2">Start with a moment. Follow the value.</h2>
+          <p class="eyebrow">Benefits and measures</p>
+          <h2 id="benefits-title" class="h2">{MEASURES.title}</h2>
         </div>
-        <p class="lead">{BENEFITS_INTRO}</p>
+        <p class="lead">{MEASURES.lead}</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="measures-cap">
+        <table class="table measures-table">
+          <caption id="measures-cap">Benefits to evaluate in a first proof, each with its measures. No result is claimed before the comparison exists.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Application</th>
+              <th scope="col">Customer and OEM value to evaluate</th>
+              <th scope="col">Measures for the first proof</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              MEASURES.rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.app}</th>
+                  <td>{r.value}</td>
+                  <td>{r.measures}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="note measures-note">{MEASURES.note}</p>
+
+      <div class="benefit-flow-head">
+        <h3 class="h3">Follow one decision</h3>
+        <p class="muted">{BENEFITS_INTRO}</p>
       </div>
       <BenefitFlow client:visible />
     </div>
@@ -370,89 +424,18 @@ const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
     position: relative;
   }
   .pf-title {
-    --step: 0px;
-    --gut: 26px;
-    position: relative;
-    display: grid;
-    gap: 0.16em;
-    margin: 26px 0 0;
-    padding-left: var(--gut);
-    font-size: clamp(2.45rem, 0.6rem + 5.6vw, 7rem);
-    font-weight: 750;
-    line-height: 0.98;
-    letter-spacing: var(--ls-display);
+    margin-top: 22px;
   }
-  /* mobile rail through the three levels */
-  .pf-title::before {
-    content: '';
-    position: absolute;
-    top: calc(18px + 0.49em);
-    bottom: 0.49em;
-    left: 7px;
-    width: 2px;
-    background: linear-gradient(var(--p-battery), var(--p-pmg) 60%, var(--c-slate-2));
-    transform-origin: top;
-    animation: pf-grow-y 1.1s var(--ease-out) 0.2s both;
-  }
-  .pf-line {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding-left: calc(var(--i) * var(--step));
-    animation: pf-rise 0.9s var(--ease-out) both;
-    animation-delay: calc(var(--i) * 140ms + 60ms);
-  }
-  .pf-node {
-    position: absolute;
-    top: calc(18px + 0.49em);
-    left: calc(var(--gut) * -1);
-    width: 16px;
-    height: 16px;
-    margin-top: -8px;
-    border-radius: 50%;
-    background: var(--c-white);
-    border: 2px solid var(--c-ink);
-  }
-  .pf-node[data-level='0'] {
-    border: 0;
-    background: linear-gradient(90deg, var(--p-battery) 50%, var(--p-evo) 50%);
-  }
-  .pf-node[data-level='1'] {
-    border: 0;
-    background: var(--p-pmg);
-  }
-  .pf-node[data-level='2'] {
-    border: 2px dashed var(--c-slate);
-  }
-  /* level annotation lives in CSS so the h1 text stays the headline alone (empty alt text hides it from AT) */
-  .pf-line::before {
-    content: attr(data-note);
-    content: attr(data-note) / '';
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--c-slate);
+  .pf-title-2 {
+    color: var(--c-cobalt-ink);
   }
   .pf-hero-foot {
     display: grid;
     gap: 32px;
     margin-top: clamp(36px, 5vw, 64px);
   }
-  .pf-hero-copy {
-    display: grid;
-    gap: 14px;
+  .pf-hero-foot .lead {
     max-width: 62ch;
-  }
-  .pf-statement {
-    font-family: var(--f-display);
-    font-size: var(--fs-h3);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
   }
   .pf-hero-actions {
     display: grid;
@@ -465,77 +448,111 @@ const mark = { yes: 'Yes', no: 'No', optional: 'Optional' } as const;
     border-radius: var(--r-s);
     line-height: 1.4;
   }
-
   @media (min-width: 768px) {
-    .pf-title {
-      --step: clamp(48px, 9vw, 168px);
-      --gut: 0.62em;
-      gap: 0.1em;
-    }
-    .pf-title::before {
-      display: none;
-    }
-    .pf-line {
-      flex-direction: row;
-      align-items: center;
-      gap: 0.32em;
-      padding-left: calc(var(--i) * var(--step));
-    }
-    .pf-line::before {
-      order: 2;
-      max-width: 15ch;
-      font-size: clamp(0.62rem, 0.5rem + 0.2vw, 0.74rem);
-    }
-    .pf-node {
-      top: 0.52em;
-      left: calc(var(--i) * var(--step) - var(--gut) + 0.08em);
-      width: 0.22em;
-      height: 0.22em;
-      margin-top: -0.11em;
-    }
-    .pf-node[data-level='2'] {
-      border-width: 0.03em;
-    }
-    /* elbow connector from each level down to the next */
-    .pf-line:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 0.68em;
-      left: calc(var(--i) * var(--step) - var(--gut) + 0.18em);
-      width: var(--step);
-      height: 0.92em;
-      border-left: 2px solid rgba(23, 43, 69, 0.3);
-      border-bottom: 2px solid rgba(23, 43, 69, 0.3);
-      border-bottom-left-radius: 0.24em;
-      transform-origin: top;
-      animation: pf-grow-y 0.7s var(--ease-out) both;
-      animation-delay: calc(var(--i) * 140ms + 420ms);
-    }
-    .pf-line[data-i='1']::after {
-      border-style: dashed;
-    }
     .pf-hero-foot {
       grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
       align-items: start;
       gap: 32px clamp(32px, 4vw, 72px);
     }
   }
-  @media (min-width: 1100px) {
-    /* align with the third step of the headline: 2 steps + the node gutter (0.62em of the title size) */
-    .pf-hero-foot {
-      margin-left: calc(2 * clamp(48px, 9vw, 168px) + 0.62 * clamp(2.45rem, 0.6rem + 5.6vw, 7rem));
+
+  /* ---------- Three levels (inside the architecture diagram's head slot) ---------- */
+  .levels {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--c-ink);
+  }
+  .level {
+    display: grid;
+    gap: 6px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+  .level-k {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    font-family: var(--f-display);
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .level-n {
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--c-cobalt-ink);
+  }
+  .level-tag {
+    padding: 2px 9px;
+    border: 1px dashed var(--c-slate-2);
+    border-radius: var(--r-pill);
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .level-body {
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .level-body a {
+    font-weight: 650;
+    color: var(--c-cobalt-ink);
+  }
+  .arch-notes {
+    display: grid;
+    gap: 16px 40px;
+    margin: 28px 0 0;
+  }
+  .arch-notes > div {
+    display: grid;
+    gap: 6px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--c-ink);
+    background: var(--c-white);
+    border-radius: 0 var(--r-s) var(--r-s) 0;
+  }
+  .arch-notes dt {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
+  .arch-notes dd {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--c-ink);
+  }
+  @media (min-width: 900px) {
+    .arch-notes {
+      grid-template-columns: 1fr 1fr;
     }
   }
-  /* transform only: the headline is never invisible, even before the animation clock starts */
-  @keyframes pf-rise {
-    from {
-      transform: translateY(0.22em);
-    }
+
+  /* ---------- Benefits and measures ---------- */
+  .measures-table {
+    min-width: 760px;
   }
-  @keyframes pf-grow-y {
-    from {
-      transform: scaleY(0);
-    }
+  .measures-table tbody th {
+    min-width: 150px;
+  }
+  .measures-note {
+    margin-top: 16px;
+  }
+  .benefit-flow-head {
+    display: grid;
+    gap: 8px;
+    margin: clamp(48px, 6vw, 80px) 0 24px;
+    max-width: 62ch;
   }
 
   /* ---------- Product chips used in tables ---------- */

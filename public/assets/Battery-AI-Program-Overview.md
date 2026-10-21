@@ -1,39 +1,35 @@
 # Mathsya — Battery & Charging AI
-October 2026 | Embedded module software | Concept and PoC planning
+October 2026 | Embedded module software | Architecture and PoC planning
 
-## Product role
-An Edge AI software layer for battery behavior, health/state-estimation evaluation, charging readiness and thermal context. It can run on suitable BMS or adjacent module compute, alongside the validated BMS. Approved insight can connect to PMG and/or Evo Core. It can also be evaluated as a standalone module product.
+## Care for the battery. Prepare for the journey.
+Battery & Charging AI is a proposed embedded software layer for battery behaviour, health trends, charging readiness and thermal context. It is designed to work alongside a validated Battery Management System (BMS) and provide useful insight to the module owner, PMG or Evo Core.
 
 ## Capabilities to evaluate
-- Battery-health and aging trends, with confidence and data-quality checks.
-- Charge-session behavior and readiness within permitted operating limits.
-- Thermal patterns in relation to accessible load and ambient context.
-- Cell-level imbalance/anomaly patterns where cell signals are available.
-- State-of-power context: available charge/discharge power under current conditions, within the validated limits.
+- **Battery health:** Evaluate state-of-health estimates and ageing patterns using approved operating histories. State of health describes battery condition relative to a defined reference. The model should report confidence and identify when the available data is insufficient.
+- **Charging readiness:** Interpret charge-session behaviour, battery condition and permitted charge limits to support a useful charging or departure-readiness recommendation.
+- **Thermal behaviour:** Compare available temperature trends with load and operating conditions. Flag a reviewable change for an approved cooling decision or service investigation.
+- **Cell patterns:** Where cell measurements are accessible, evaluate imbalance trends and unusual behaviour. Sensing, balancing and the pack's electrical architecture determine what information and actions are available.
+- **Available power:** Evaluate state-of-power context: the charge or discharge power available under current conditions and defined operating limits. Compare any added estimation value against the existing method.
 
-## How the product works
-1. Access approved voltage, current, temperature and operating-history data.
-2. Evaluate a bounded model, retaining confidence, version and evidence.
-3. Provide reviewable insight to the module owner, PMG or Evo Core through agreed interfaces.
-4. Verify the outcome against existing estimation, diagnostics and control methods.
+## How it works
+Read approved signals; check data quality; run a bounded model on suitable compute; retain confidence and version information; share a reviewable insight; verify the resulting decision against the baseline.
 
-## Customer and OEM benefits to validate
-Customer: clearer health/charging guidance, useful journey readiness and better-informed service planning.
-OEM/BMS supplier: health and event evidence, better-informed investigations and reusable module software.
-Measures: independent estimation error on held-out batteries/conditions, actionable alerts, false alerts, overrides, verified readiness, investigation effort and runtime resources.
+## Value to evaluate
+Customer: clearer battery-health information, useful charging guidance and better-informed service planning.
+OEM and supplier: better evidence for health and event investigations, reviewable service decisions and reusable embedded intelligence across agreed reference programs.
 
 ## First proof
-One pack, one useful question and an agreed baseline. Use independent reference measurements and batteries/conditions excluded from model development. Measure memory, latency, compute, local fallback behavior and full integration/validation/support cost.
+Choose one pack and one useful health or charging question. Use independent reference measurements, batteries and operating conditions held out of model development, and an agreed comparison with the existing system. Measure error, false alerts, runtime resources and the complete integration cost.
 
-## Engineering scope
-The BMS keeps defined sensing, balancing, protection and operating-limit ownership. AI alone does not provide independently controlled cell-charging paths; the electrical topology and balancing/power hardware determine that capability. Battery-life/range gains are potential outcomes, not demonstrated product results.
+## Boundary
+The initial product adds intelligence alongside the BMS. Its sensing, balancing, operating limits and protective functions retain defined ownership. AI alone does not create independently controlled charging paths for individual cells. Battery-life or range gains are potential outcomes to measure, not demonstrated results.
 
-## Commercial path
-Proposed: paid integration/PoC, then embedded-runtime licensing and program support. Buyers could include battery/BMS suppliers and OEMs. Pricing and willingness to adopt require validation.
+## Commercial direction
+Paid integration or a scoped proof of concept, followed by embedded-runtime licensing and program support where technical value and buyer demand are established. Potential buyers: battery and BMS suppliers, OEMs.
 
 ## Technical context
 - https://www.ti.com/applications/automotive/hev-ev-powertrain/hev-ev-battery-management-system-bms/overview.html
 - https://arxiv.org/abs/2406.06151
 These independent sources provide background; they do not validate Mathsya's proposed product.
 
-Public source: https://mathsya-connected-services.arjtha.chatgpt.site
+Public source: https://arjunmathsya.vercel.app/battery-ai

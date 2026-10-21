@@ -1,4 +1,5 @@
-// Shared portfolio content used by several pages. Source: legacy portfolio-data.js, evo-core, pmg, investors pages.
+// Shared portfolio content used by several pages. Sources: legacy portfolio-data.js, evo-core, pmg, investors pages and
+// docs/editing-pack-2026-10-20.md (generation scopes, matrix, PoC gates, benefits and measures).
 
 export type BenefitId = 'battery' | 'charging' | 'thermal' | 'service';
 
@@ -77,7 +78,8 @@ export const GENERATIONS: Record<
     label: 'Charging & power',
     number: 'Gen 1 / Charging & power',
     title: 'Establish the power backbone.',
-    intro: 'A first Evo Core architecture brings onboard charging, low-voltage conversion, charging communication and high-voltage distribution under a coordinated control foundation.',
+    intro:
+      'Establish the foundation around the onboard charger (OBC), high-to-low-voltage DC/DC conversion, charging communication through the Electric Vehicle Communication Controller (EVCC), and high-voltage distribution or junction functions, with common control and Edge AI supervision. The reference program determines retained power stages, interfaces, ratings and packaging.',
     integrated: ['OBC · onboard charging', 'DC/DC · low-voltage conversion', 'EVCC · charging communication', 'HV distribution / junction functions', 'Common control + Edge AI supervision'],
     connected: ['Existing BMS and its permitted limits', 'PMG vehicle software', 'Vehicle cooling and diagnostics interfaces'],
     method: 'Start with controller and interface commonization. Retain, adapt or develop power stages according to the reference design; a single housing is a separate packaging decision.',
@@ -92,8 +94,9 @@ export const GENERATIONS: Record<
     label: 'Battery & thermal',
     number: 'Gen 2 / Battery & thermal',
     title: 'Connect energy conversion to battery intelligence.',
-    intro: 'Extend a proven Gen 1 foundation with battery-state context, Battery & Charging AI and broader battery/power thermal coordination.',
-    integrated: ['Proven Gen 1 power foundation', 'Battery & Charging AI runtime', 'Battery supervisory coordination', 'Battery / power thermal orchestration', 'DC-session and bidirectional functions · options'],
+    intro:
+      'Extend an evaluated foundation with battery-state context, Battery & Charging AI, limited battery supervisory coordination and broader battery or power thermal orchestration. DC-session and bidirectional functions are options requiring compatible power hardware, interfaces and separate validation.',
+    integrated: ['Evaluated Gen 1 power foundation', 'Battery & Charging AI runtime', 'Battery supervisory coordination', 'Battery / power thermal orchestration', 'DC-session and bidirectional functions · options'],
     connected: ['Cell monitors and validated BMS protection', 'Pumps, fans and thermal controllers', 'PMG journey and service context'],
     method: 'Share approved battery information and supervisory decisions with the power platform. Cell sensing, protection and balancing hardware keep defined ownership. DC-session support and V2L/V2G require their own compatible interfaces and power hardware.',
     customer: 'Evaluate better charging guidance, thermal readiness and useful battery-health recommendations.',
@@ -107,8 +110,9 @@ export const GENERATIONS: Record<
     label: 'Energy & propulsion',
     number: 'Gen 3 / Energy & propulsion',
     title: 'Scale toward coordinated vehicle energy.',
-    intro: 'Explore a wider energy platform linking the Gen 2 foundation to propulsion and other vehicle energy demands, while PMG connects outcomes at vehicle level.',
-    integrated: ['Proven Gen 2 power / battery foundation', 'Wider energy-supervision runtime', 'Inverter supervisory functions · option', 'Shared compute / packaging · subject to feasibility', 'Reusable product and diagnostic interfaces'],
+    intro:
+      'Explore wider energy supervision, reusable interfaces and optional inverter supervisory functions. Any broader control or physical integration depends on compute, isolation, timing, thermal, fault-containment and qualification feasibility.',
+    integrated: ['Evaluated Gen 2 power / battery foundation', 'Wider energy-supervision runtime', 'Inverter supervisory functions · option', 'Shared compute / packaging · subject to feasibility', 'Reusable product and diagnostic interfaces'],
     connected: ['Validated motor-drive control and protection', 'Vehicle climate / thermal controllers', 'PMG + authorized OEM learning services'],
     method: 'Expand supervisory coordination through approved interfaces. Select any inverter-control commonization or physical power-stage integration only after compute, isolation, thermal and validation feasibility is demonstrated.',
     customer: 'Evaluate consistent energy decisions across charging, propulsion, thermal demand and the planned journey.',
@@ -121,29 +125,31 @@ export const GENERATIONS: Record<
 /** Function-by-function integration matrix. `core` marks proposed core/extension scope; `future` marks options. */
 export type MatrixCell = { text: string; kind: 'core' | 'extension' | 'retained' | 'interface' | 'owned' | 'option' | 'future' };
 export const MATRIX: { fn: string; cells: [MatrixCell, MatrixCell, MatrixCell] }[] = [
-  { fn: 'OBC / DC/DC / EVCC / HV distribution', cells: [{ text: 'Core scope', kind: 'core' }, { text: 'Retained foundation', kind: 'retained' }, { text: 'Retained foundation', kind: 'retained' }] },
-  { fn: 'Common control + module-health AI', cells: [{ text: 'Core scope', kind: 'core' }, { text: 'Extended', kind: 'extension' }, { text: 'Extended', kind: 'extension' }] },
-  { fn: 'Battery & Charging AI runtime', cells: [{ text: 'Connected product option', kind: 'interface' }, { text: 'Proposed extension', kind: 'extension' }, { text: 'Retained / extended', kind: 'retained' }] },
+  { fn: 'OBC, DC/DC, EVCC and HV distribution', cells: [{ text: 'Core scope', kind: 'core' }, { text: 'Retained foundation', kind: 'retained' }, { text: 'Retained foundation', kind: 'retained' }] },
+  { fn: 'Common control and supervisory AI', cells: [{ text: 'Core scope', kind: 'core' }, { text: 'Extended', kind: 'extension' }, { text: 'Extended', kind: 'extension' }] },
+  { fn: 'Battery & Charging AI', cells: [{ text: 'Connected option', kind: 'interface' }, { text: 'Proposed extension', kind: 'extension' }, { text: 'Retained or extended', kind: 'retained' }] },
   { fn: 'Battery supervisory context', cells: [{ text: 'BMS interface', kind: 'interface' }, { text: 'Limited BMS coordination', kind: 'extension' }, { text: 'Wider energy context', kind: 'extension' }] },
-  { fn: 'Cell sensing, balancing & protection', cells: [{ text: 'Validated BMS ownership', kind: 'owned' }, { text: 'Defined BMS ownership', kind: 'owned' }, { text: 'Defined BMS ownership', kind: 'owned' }] },
-  { fn: 'Battery / power thermal coordination', cells: [{ text: 'Selected interfaces', kind: 'interface' }, { text: 'Proposed extension', kind: 'extension' }, { text: 'Wider coordination', kind: 'extension' }] },
-  { fn: 'DC-session / V2L / V2G functions', cells: [{ text: 'Reference-program decision', kind: 'option' }, { text: 'Options requiring compatible hardware', kind: 'option' }, { text: 'Options requiring validation', kind: 'option' }] },
-  { fn: 'Inverter / propulsion supervision', cells: [{ text: 'External vehicle interface', kind: 'interface' }, { text: 'External vehicle interface', kind: 'interface' }, { text: 'Future option', kind: 'future' }] },
-  { fn: 'Climate / vehicle thermal controllers', cells: [{ text: 'Defined interfaces', kind: 'interface' }, { text: 'Coordinated interfaces', kind: 'interface' }, { text: 'Wider coordinated interfaces', kind: 'interface' }] },
-  { fn: 'PMG vehicle software', cells: [{ text: 'Connected software layer', kind: 'interface' }, { text: 'Connected software layer', kind: 'interface' }, { text: 'Connected software layer', kind: 'interface' }] },
+  { fn: 'Cell sensing, balancing and protection', cells: [{ text: 'Defined BMS ownership', kind: 'owned' }, { text: 'Defined BMS ownership', kind: 'owned' }, { text: 'Defined BMS ownership', kind: 'owned' }] },
+  { fn: 'Power and battery thermal coordination', cells: [{ text: 'Selected interfaces', kind: 'interface' }, { text: 'Proposed extension', kind: 'extension' }, { text: 'Wider coordination', kind: 'extension' }] },
+  { fn: 'Bidirectional functions', cells: [{ text: 'Reference program decision', kind: 'option' }, { text: 'Options requiring hardware proof', kind: 'option' }, { text: 'Options requiring validation', kind: 'option' }] },
+  { fn: 'Inverter supervision', cells: [{ text: 'External interface', kind: 'interface' }, { text: 'External interface', kind: 'interface' }, { text: 'Future option', kind: 'future' }] },
+  { fn: 'PMG', cells: [{ text: 'Connected vehicle software', kind: 'interface' }, { text: 'Connected vehicle software', kind: 'interface' }, { text: 'Connected vehicle software', kind: 'interface' }] },
 ];
 export const MATRIX_NOTE =
-  'Proposed scopes, subject to reference-vehicle feasibility, safety architecture and qualification. No released generation specification is claimed. A connected interface does not mean that its power stage, sensing or protection has moved into Evo Core.';
+  'Proposed Gen 1–3 roadmap, subject to reference-vehicle feasibility, safety architecture and qualification. A connected interface does not move a power stage, its sensing or its protection into Evo Core.';
+/** Roadmap boundary, shown with the generations and the matrix. */
+export const ROADMAP_BOUNDARY =
+  'Generation scopes are a working development direction. Ratings, release dates and production specifications are not committed. Sharing control or a housing does not by itself establish lower cost, fewer qualification obligations or bidirectional capability.';
 
 /** Proposed 12–16 week PMG software PoC (starts once partner, approved data and test access are agreed). */
 export const PMG_POC = [
   { gate: 'Gate 01', weeks: 'Weeks 0–2', title: 'Define the baseline', body: 'Choose a vehicle use case. Confirm signal access, permissions and the customer or business measure.', evidence: 'An agreed pilot scope' },
   { gate: 'Gate 02', weeks: 'Weeks 2–6', title: 'Connect the system', body: 'Build the read-only pipeline, vehicle memory and policy checks. Demonstrate an approved action on a bench.', evidence: 'A reviewable integration' },
-  { gate: 'Gate 03', weeks: 'Weeks 6–10', title: 'Close the loops', body: 'Exercise readiness, one quality case and incident context using replay, simulation and controlled tests.', evidence: 'Traceable outcomes' },
-  { gate: 'Gate 04', weeks: 'Weeks 10–16', title: 'Earn the next stage', body: 'Evaluate usefulness, intervention behaviour and economics. Decide whether to narrow, extend or scale.', evidence: 'A measured value case' },
+  { gate: 'Gate 03', weeks: 'Weeks 6–10', title: 'Evaluate controlled workflows', body: 'Exercise readiness, one quality case and incident context using replay, simulation and controlled tests.', evidence: 'Traceable outcomes' },
+  { gate: 'Gate 04', weeks: 'Weeks 10–16', title: 'Decide the next stage', body: 'Evaluate usefulness, intervention behaviour and economics. Decide whether to narrow, extend or scale.', evidence: 'A measured value case' },
 ] as const;
 export const POC_NOTE =
-  'A proposed 12–16 week PMG software PoC, beginning when the partner, approved data and test access are in place. It is not a production-hardware delivery promise; Evo Core follows a separate hardware realization and qualification path.';
+  'A proposed 12–16 week PMG software PoC that begins once the partner, approved data and test access are agreed. It is not a hardware release schedule: battery model development and Evo Core hardware are scoped separately, each with its own evidence gates.';
 
 /** Evo Core hardware development path (separate from the software PoC). */
 export const HARDWARE_GATES = [
@@ -169,3 +175,17 @@ export const PROGRAMS = [
   { id: 'engineering-intelligence', name: 'Engineering Intelligence', stage: 'Workflow & validation design', summary: 'Link release changes, connected-service tests and system logs to localize failures across releases.' },
   { id: 'solar', name: 'Solar-assisted auxiliaries', stage: 'Research & energy modeling', summary: 'Modest roof solar for a defined low-voltage auxiliary load, with conventional vehicle backup. A separate research track.' },
 ] as const;
+
+/** Benefits and measures (editing pack, section 07). Full table on /platform#benefits; the homepage links to it. */
+export const MEASURES = {
+  title: 'Define the benefit. Check the outcome.',
+  lead: 'The first proof compares the proposed application with today’s estimation, diagnostics or operating workflow. It includes useful outcomes, errors, customer overrides, runtime needs and the full cost of adoption.',
+  rows: [
+    { app: 'Battery health', value: 'Understandable guidance and better-informed service decisions', measures: 'Independent estimation error on held-out batteries and conditions; useful and false alerts' },
+    { app: 'Charging readiness', value: 'A useful departure plan and clearer session investigations', measures: 'Readiness at the agreed departure; session completion; overrides; attributable energy use' },
+    { app: 'Thermal behaviour', value: 'Clearer operating guidance and focused cooling or component investigations', measures: 'Known-event detection; false alerts; thermal outcome; cooling energy under comparable conditions' },
+    { app: 'Quality and service', value: 'Less repeated diagnosis and better evidence after a correction', measures: 'Investigation hours; evidence completeness; repeat visits; no-fault-found outcomes; recurrence' },
+    { app: 'Power integration', value: 'Reusable software and a credible hardware cost case', measures: 'BOM and NRE; integration and qualification effort; interfaces; variants; repair and lifecycle support cost' },
+  ],
+  note: 'A model score or an alert is not the same as a customer benefit. The evaluation must link the insight to a useful decision and a verified result.',
+};

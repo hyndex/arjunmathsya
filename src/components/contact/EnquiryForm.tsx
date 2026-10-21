@@ -10,8 +10,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { TOPICS } from '@/data/site';
 import { DRAFT_FILENAME, buildDraft, enquirySchema, resolveTopic, type Draft, type EnquiryValues } from './enquiry';
 
-// There is no backend. This island validates the fields, builds a plain-text draft in memory and lets the
-// visitor download or copy it. Nothing is sent, uploaded or saved (no storage APIs, no network calls).
+// Draft mode: there is no submission backend. This island validates the fields, builds a plain-text draft in memory
+// and lets the visitor copy or download it. Nothing is sent, uploaded or saved (no storage APIs, no network calls).
+// A delivery mode needs a verified server-side receiver first; see docs/editing-pack-2026-10-20.md, section 10.
 
 const IDS = {
   name: 'enquiry-name',
@@ -74,7 +75,7 @@ export default function EnquiryForm({ contactEmail = '' }: { contactEmail?: stri
   const onValid = (values: EnquiryValues) => {
     setActionStatus('');
     setDraft(buildDraft(values, recipient));
-    setStatus('Your enquiry is ready to review and download. It has not been sent.');
+    setStatus('Your enquiry is ready to review. It has not been sent.');
   };
 
   const onInvalid = () => {
@@ -206,7 +207,7 @@ export default function EnquiryForm({ contactEmail = '' }: { contactEmail?: stri
               Problem or proposal
             </Label>
             <p id={`${IDS.message}-hint`} className="ct-hint">
-              Include the application, what happens today, who owns it and the outcome you want to improve.
+              Describe the module or vehicle problem, the current baseline, the team or role that owns it and the outcome you want to improve.
             </p>
             <Textarea className="ct-control ct-textarea" id={IDS.message} rows={6} autoComplete="off" required {...aria('message', errors.message?.message, true)} {...register('message')} />
             <FieldError id={`${IDS.message}-error`} message={errors.message?.message} />
@@ -218,7 +219,8 @@ export default function EnquiryForm({ contactEmail = '' }: { contactEmail?: stri
             Prepare enquiry <ArrowRight aria-hidden="true" />
           </Button>
           <p className="ct-fineprint">
-            Prepare enquiry builds a plain-text draft in this browser. It does not send, upload or save your entries. <a href="/privacy">Read the privacy note</a>.
+            This form prepares a draft in your browser. Preparing, copying or downloading it does not upload the entered fields to Mathsya. The form does not save those fields in browser
+            storage. <a href="/privacy">Read the privacy note</a>.
           </p>
         </div>
       </form>
@@ -239,11 +241,11 @@ export default function EnquiryForm({ contactEmail = '' }: { contactEmail?: stri
           </pre>
 
           <div className="ct-draft-actions">
-            <Button type="button" onClick={download}>
-              Download enquiry <Download aria-hidden="true" />
-            </Button>
-            <Button type="button" variant="secondary" onClick={copy}>
+            <Button type="button" onClick={copy}>
               Copy enquiry <Copy aria-hidden="true" />
+            </Button>
+            <Button type="button" variant="secondary" onClick={download}>
+              Download enquiry <Download aria-hidden="true" />
             </Button>
             {draft.mailto && (
               <a className={buttonVariants({ variant: 'secondary' })} href={draft.mailto}>
@@ -261,7 +263,7 @@ export default function EnquiryForm({ contactEmail = '' }: { contactEmail?: stri
             {draft.mailto ? (
               <span>Open email draft opens your own email application with this text. You decide whether to send it. Some email applications shorten long drafts, so Download enquiry keeps the complete text.</span>
             ) : (
-              <span>The public business inbox is not set up yet, so there is no email option and this page does not send messages. Download or copy the draft to keep it.</span>
+              <span>Our public business inbox is being configured, so this page does not send a message. Copy or download the draft to keep it.</span>
             )}
           </p>
           <p className="ct-fineprint">Editing the form above clears this draft. Select Prepare enquiry again to refresh it.</p>

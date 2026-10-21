@@ -1,4 +1,4 @@
-// /battery-ai copy. Sources: docs/legacy-source/battery-ai.txt, portfolio-data.js (benefits: battery, charging) and
+// /battery-ai copy. Sources: docs/editing-pack-2026-10-20.md (section 04), docs/legacy-source/battery-ai.txt, portfolio-data.js (benefits) and
 // public/assets/Battery-AI-Program-Overview.md. PRODUCTS.battery, BENEFITS, BENEFIT_NOTE and BOUNDARIES are imported
 // from the shared data where they are used — not duplicated here.
 import type { BatteryFocus } from '@/components/three/BatteryPackScene';
@@ -12,11 +12,12 @@ export const BATTERY_META = {
 
 export const BATTERY_HERO = {
   eyebrow: 'Battery & Charging AI / Embedded module software',
-  title: 'Understand the battery behind the',
-  ruled: 'percentage.', // set on a measured rule
-  support: 'Care for the battery. Prepare for the journey.',
-  lead: 'Mathsya is developing an Edge AI layer for battery health, charging readiness and useful thermal context, with module insight available to PMG and Evo Core.',
-  boundary: 'Designed to work alongside a validated BMS. Sensing, balancing, operating limits and protection stay with the BMS.',
+  title: 'Care for the battery.',
+  ruled: 'Prepare for the journey.', // set on a measured rule
+  support: 'Understand the battery behind the percentage.',
+  lead: 'Battery & Charging AI is a proposed embedded software layer for battery behaviour, health trends, charging readiness and thermal context. It is designed to work alongside a validated Battery Management System and provide useful insight to the module owner, PMG or Evo Core.',
+  boundary:
+    'The initial product adds intelligence alongside the BMS. Its sensing, balancing, operating limits and protective functions retain defined ownership. AI alone does not create independently controlled charging paths for individual cells.',
   surface: 'What the driver sees',
   below: 'What the battery is doing',
   channels: ['Cell voltages', 'Pack current', 'Temperatures', 'Charging history'],
@@ -95,7 +96,8 @@ export const SCENARIOS: Scenario[] = [
       { label: 'Operating history', kind: 'history' },
     ],
     signals: ['cellV', 'packI', 'temps', 'history', 'estimates'],
-    interprets: 'Ageing patterns and state-of-health estimates from approved operating histories, shown with a confidence value and an explicit state when the data is insufficient.',
+    interprets:
+      'Evaluate state-of-health estimates and ageing patterns using approved operating histories. State of health describes battery condition relative to a defined reference. The model should report confidence and identify when the available data is insufficient.',
     output: ['Health trend', 'Confidence', 'Insufficient-data state'],
     customer: BENEFITS.battery.customer,
     oem: BENEFITS.battery.oem,
@@ -115,7 +117,7 @@ export const SCENARIOS: Scenario[] = [
       { label: 'Session status · departure', kind: 'session' },
     ],
     signals: ['estimates', 'temps', 'limits', 'session', 'intent'],
-    interprets: 'Battery condition and session behaviour, to support a permitted charging or readiness recommendation — always within approved charging limits.',
+    interprets: 'Interpret charge-session behaviour, battery condition and permitted charge limits to support a useful charging or departure-readiness recommendation.',
     output: ['Readiness for departure', 'Unusual session behaviour'],
     customer: BENEFITS.charging.customer,
     oem: BENEFITS.charging.oem,
@@ -134,7 +136,7 @@ export const SCENARIOS: Scenario[] = [
       { label: 'Ambient context', kind: 'ambient' },
     ],
     signals: ['temps', 'packI', 'ambient'],
-    interprets: 'Temperature trends compared against load and ambient context, flagging useful patterns for an approved cooling or service evaluation.',
+    interprets: 'Compare available temperature trends with load and operating conditions. Flag a reviewable change for an approved cooling decision or service investigation.',
     output: ['Thermal pattern', 'Load & ambient context'],
     customer: 'A clearer explanation when temperature limits charging or performance, and better-informed service planning.',
     oem: 'Focused evidence for cooling and calibration investigations, and for recurring thermal issues.',
@@ -152,7 +154,8 @@ export const SCENARIOS: Scenario[] = [
       { label: 'Cell temperatures', kind: 'temperature' },
     ],
     signals: ['cellV', 'temps', 'history'],
-    interprets: 'Where cell signals are accessible, imbalance trends and unusual cell behaviour.',
+    interprets:
+      'Where cell measurements are accessible, evaluate imbalance trends and unusual behaviour. Sensing, balancing and the pack’s electrical architecture determine what information and actions are available.',
     output: ['Imbalance trend', 'Cell event for review'],
     customer: 'Better-informed service planning when a cell-level pattern needs attention.',
     oem: 'Cell-event evidence for battery and BMS suppliers, and better-informed investigations.',
@@ -172,7 +175,8 @@ export const SCENARIOS: Scenario[] = [
       { label: 'State estimates', kind: 'soc' },
     ],
     signals: ['packI', 'temps', 'estimates', 'limits'],
-    interprets: 'Available charge and discharge power under current conditions (state of power), always inside the BMS and power-system limits.',
+    interprets:
+      'Evaluate state-of-power context: the charge or discharge power available under current conditions and defined operating limits. Compare any added estimation value against the existing method.',
     output: ['Available charge power', 'Available discharge power'],
     customer: 'A clearer explanation when available power is temporarily limited, with fewer avoidable surprises to test.',
     oem: 'A measured comparison with the existing state-of-power estimate under real operating conditions.',
@@ -205,13 +209,16 @@ export const SCENARIOS: Scenario[] = [
 /* ---------- Working principle ---------- */
 
 export const PRINCIPLE = {
-  eyebrow: 'Working principle',
+  eyebrow: 'How it works',
   title: 'Signals become insight; insight becomes a decision.',
+  lead: 'Read approved signals; check data quality; run a bounded model on suitable compute; retain confidence and version information; share a reviewable insight; verify the resulting decision against the baseline.',
   steps: [
-    { n: '01', verb: 'Access', body: 'Read permitted voltage, current, temperature and history from an agreed pack and reference system.', out: 'Permitted, time-aligned signals' },
-    { n: '02', verb: 'Interpret', body: 'Evaluate a bounded model on suitable BMS or adjacent compute, with confidence and versioned evidence.', out: 'Estimate · confidence · model version' },
-    { n: '03', verb: 'Coordinate', body: 'Provide approved insights to PMG and/or Evo Core. The BMS keeps its validated operating limits and protective authority.', out: 'Approved insight on an agreed interface' },
-    { n: '04', verb: 'Check', body: 'Compare outcomes with existing estimation, diagnostics and control methods. Retain useful evidence for engineering.', out: 'Comparison with the baseline' },
+    { n: '01', verb: 'Read', body: 'Permitted voltage, current, temperature and history from an agreed pack and reference system.', out: 'Approved, time-aligned signals' },
+    { n: '02', verb: 'Check', body: 'Missing, stale or implausible inputs are caught before any inference.', out: 'A data-quality state' },
+    { n: '03', verb: 'Run', body: 'A bounded model on suitable BMS or adjacent compute, inside its defined inputs and operating range.', out: 'An estimate or pattern' },
+    { n: '04', verb: 'Retain', body: 'Confidence and version information with every result, or an explicit insufficient-data state.', out: 'Confidence · model version' },
+    { n: '05', verb: 'Share', body: 'A reviewable insight for the module owner, PMG or Evo Core. The BMS keeps its operating limits and protective authority.', out: 'Approved insight on an agreed interface' },
+    { n: '06', verb: 'Verify', body: 'The resulting decision against the baseline: today’s estimation, diagnostics and control.', out: 'Comparison with the baseline' },
   ],
 };
 
@@ -330,8 +337,8 @@ export const OUTCOMES = {
   lead: 'Two candidate scenarios show the module intelligence, the role of PMG and the outcomes a pilot should measure.',
   ids: ['battery', 'charging'] as const,
   validate: {
-    customer: 'Clearer health and charging guidance, useful journey readiness and better-informed service planning.',
-    oem: 'Health and event evidence, better-informed investigations and reusable module software.',
+    customer: 'Clearer battery-health information, useful charging guidance and better-informed service planning.',
+    oem: 'Better evidence for health and event investigations, reviewable service decisions and reusable embedded intelligence across agreed reference programs.',
   },
 };
 
@@ -366,7 +373,7 @@ export const LIMITS = {
 export const FIRST_PROOF = {
   eyebrow: 'The first battery proof · pilot requirements',
   title: 'Choose one pack. Answer one useful question.',
-  lead: 'Start with an observable health or charging problem and approved test data. Test on batteries and operating conditions excluded from model development.',
+  lead: 'Choose one pack and one useful health or charging question. Use independent reference measurements, batteries and operating conditions held out of model development, and an agreed comparison with the existing system. Measure error, false alerts, runtime resources and the complete integration cost.',
   gates: [
     { n: '01', name: 'Baseline', body: 'Define existing estimation, diagnostic performance and the cost of the problem.', out: 'An agreed baseline' },
     { n: '02', name: 'Data', body: 'Agree sensing access, timestamps, reference labels and independent measurements.', out: 'An approved, labelled dataset' },
@@ -437,7 +444,6 @@ export const REFERENCES = {
   download: {
     href: '/assets/Battery-AI-Program-Overview.md',
     title: 'Battery & Charging AI program overview',
-    meta: 'Markdown · 3 KB',
     body: 'Product role, capabilities to evaluate, first proof, engineering scope and the proposed commercial path.',
   },
 };

@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Guard from '@/components/three/Guard';
@@ -45,7 +46,8 @@ export default function StoryStage() {
   // Smooth scrolling + scroll-synced plate choreography (GSAP ScrollTrigger). Skipped for reduced motion.
   useEffect(() => {
     if (reduced !== false) return;
-    const lenis = new Lenis({ anchors: { offset: -80 }, lerp: 0.11 });
+    const lenis = new Lenis({ anchors: true, lerp: 0.11 }); // anchor targets already respect the CSS scroll-padding-top (header)
+    useStory.getState().set({ lenis });
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
@@ -73,17 +75,15 @@ export default function StoryStage() {
       document.removeEventListener('click', onAnchor);
       ctx.revert();
       gsap.ticker.remove(tick);
+      useStory.getState().set({ lenis: null });
       lenis.destroy();
     };
   }, [reduced]);
 
-  // Without 3D (no WebGL, data-saver, or a failure), show a still for the scene in view; the static hero frame covers scene 1.
+  // Without 3D (no WebGL, data-saver, or a failure), show a still for the scene in view; the hero keeps its own still.
   useEffect(() => {
-    if (webgl !== false) return;
-    const stage = document.querySelector('[data-story-stage]');
-    stage?.classList.remove('is-3d');
-    stage?.classList.toggle('is-scrolled', scene > 0);
-  }, [webgl, scene]);
+    if (webgl === false) document.querySelector('[data-story-stage]')?.classList.remove('is-3d');
+  }, [webgl]);
   const still = scene > 0 ? <div className="story-poster" data-scene-poster={SCENES[scene]?.id} aria-hidden="true" /> : null;
   if (webgl === false) return still;
   if (!ready || !webgl) return null;

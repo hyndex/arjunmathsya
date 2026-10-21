@@ -8,11 +8,12 @@ export default function ConnectivityToggle() {
   const set = useStory((s) => s.set);
   return (
     <div className="grid gap-4">
+      <p className="gen-k" id="conn-sim">Connectivity simulation</p>
       <ToggleGroup
         type="single"
         value={online ? 'online' : 'offline'}
         onValueChange={(v) => v && set({ online: v === 'online' })}
-        aria-label="Simulate vehicle connectivity"
+        aria-labelledby="conn-sim"
         className="conn-toggle"
       >
         <ToggleGroupItem value="online" aria-label="Connected">
@@ -24,7 +25,7 @@ export default function ConnectivityToggle() {
       </ToggleGroup>
       <div className="conn-cols" aria-live="polite">
         <div>
-          <p className="gen-k">In the vehicle — always</p>
+          <p className="gen-k">In the vehicle — {online ? 'running' : 'still running locally'}</p>
           <ul className="gen-list gen-list--iface">
             <li>Module insight and PMG runtime keep their defined behaviour</li>
             <li>Recommendations stay within local permissions</li>
@@ -33,7 +34,7 @@ export default function ConnectivityToggle() {
           </ul>
         </div>
         <div className={online ? '' : 'is-paused'}>
-          <p className="gen-k">Optional OEM / fleet services — {online ? 'available' : 'waiting'}</p>
+          <p className="gen-k">Optional OEM / fleet services — {online ? 'available' : 'waiting for connectivity'}</p>
           <ul className="gen-list">
             <li>Quality investigations across permitted vehicles</li>
             <li>Service evidence and repeat-issue analysis</li>

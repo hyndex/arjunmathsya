@@ -225,45 +225,6 @@
 }
 
 /* ---------- Founder ---------- */
-.ab-founder-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 56px 96px;
-  align-items: center;
-}
-.ab-mono {
-  display: grid;
-  justify-items: start;
-}
-.ab-mono-letters {
-  margin-left: -0.05em;
-  font-family: var(--f-display);
-  font-size: clamp(8.5rem, 3rem + 20vw, 19rem);
-  font-weight: 200;
-  line-height: 0.76;
-  letter-spacing: -0.1em;
-  color: var(--c-ink);
-}
-.ab-mono-rule {
-  width: 100%;
-  height: 2px;
-  margin-top: clamp(22px, 3vw, 36px);
-  background: var(--c-cobalt);
-}
-.ab-name {
-  margin-top: 22px;
-  font-family: var(--f-display);
-  font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.6rem);
-  font-weight: 720;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-}
-.ab-name-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
-  margin-top: 10px;
-}
 .ab-founder-copy {
   display: grid;
   gap: 22px;
@@ -692,7 +653,6 @@
   .ab-hero-grid,
   .ab-split,
   .ab-edge-grid,
-  .ab-founder-grid,
   .ab-map-head,
   .ab-evidence {
     grid-template-columns: minmax(0, 1fr);
