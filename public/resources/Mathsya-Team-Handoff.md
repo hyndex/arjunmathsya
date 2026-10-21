@@ -37,7 +37,7 @@ Canonical tags, sharing images, the sitemap and robots.txt use `SITE_URL` when i
 Battery & Charging AI = embedded module software alongside a validated BMS. Evo Core = EV power hardware plus embedded software. PMG = vehicle software with optional cloud services.
 Gen 1–3 are a proposed roadmap with no committed dates. Distinguish shared control, physical integration and connected interfaces. The 12–16 week PMG PoC is a software PoC, not a hardware release schedule; battery model development and Evo Core hardware are scoped separately.
 Every numerical performance, savings, market, funding or traction claim needs approved evidence. Buttons that open an investor enquiry say "Discuss the investment"; navigation to /investors says "Explore the investment case".
-All vehicle and component visuals are schematic concept renders and stay labelled as such.
+All vehicle and component visuals are schematic concept renders and stay labelled as such. The founder is not named on the site, in downloads or in structured data.
 
 ## Contact modes (publish one at a time)
 - **Draft mode (current):** no approved inbox or backend. The form prepares a plain-text draft in the browser; Copy enquiry and Download enquiry never claim that anything was sent. Editing a field clears a prepared draft.

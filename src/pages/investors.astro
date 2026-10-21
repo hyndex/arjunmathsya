@@ -189,11 +189,6 @@ const oemPaths = COMMERCIAL.filter((c) => c.buyers.includes('oem')).length;
   <!-- 07 Founder -->
   <Chapter id="founder" title={FOUNDER.title} lead={FOUNDER.lead} tone="pearl">
     <div class="founder-card">
-      <p class="founder-mono" aria-hidden="true">{FOUNDER.initials}</p>
-      <div class="founder-id">
-        <h3 class="h3">{FOUNDER.name}</h3>
-        <p class="founder-role">{FOUNDER.role} · {FOUNDER.location}</p>
-      </div>
       <ul class="founder-disc" aria-label="Areas of experience">
         {FOUNDER.disciplines.map((d) => <li>{d}</li>)}
       </ul>
@@ -732,37 +727,11 @@ const oemPaths = COMMERCIAL.filter((c) => c.buyers.includes('oem')).length;
   /* ---------- 07 Founder ---------- */
   .founder-card {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 18px 24px;
-    align-items: center;
+    gap: 18px;
     justify-items: start;
-  }
-  .founder-card .founder-disc,
-  .founder-card .link-arrow {
-    grid-column: 1 / -1;
-  }
-  .founder-mono {
-    display: grid;
-    place-items: center;
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1.5px solid var(--c-ink);
-    font-family: var(--f-display);
-    font-size: 1.9rem;
-    font-weight: 300;
-    letter-spacing: -0.04em;
   }
   .founder-card .link-arrow {
     padding-block: 8px;
-  }
-  .founder-id {
-    display: grid;
-    gap: 6px;
-  }
-  .founder-role {
-    font-size: var(--fs-small);
-    color: var(--c-slate);
   }
   .founder-disc {
     display: flex;

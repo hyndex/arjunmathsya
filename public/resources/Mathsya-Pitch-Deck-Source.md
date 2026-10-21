@@ -92,7 +92,7 @@ Visual: four software gates beside a separate, unscaled hardware path.
 ## Slide 11 — The founder
 **A perspective built across vehicle systems.**
 
-Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.
+The founder brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.
 
 **Evidence before pitching:** add a founder photograph, career highlights and team biographies only once approved. Do not imply team members, partnerships or endorsements.
 

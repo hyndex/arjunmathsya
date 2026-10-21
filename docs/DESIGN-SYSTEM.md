@@ -98,6 +98,7 @@ Semantic landmarks and heading order; visible focus (global ring); every control
 7. CTA wording: a button that opens `/contact` with the investor category says "Discuss the investment"; navigation to `/investors` says "Explore the investment case".
 8. Contact: draft mode (prepare, copy, download; nothing is sent) until an approved inbox **and** a verified delivery backend exist. Never show a "sent" state for a draft. Change the page introduction, button, feedback, footer contact details and privacy wording together when the mode changes.
 9. Say a stage once: one status summary on `/investors`, short stage labels elsewhere. Do not repeat "this is open / not yet established" panels section by section.
+10. Do not name the founder anywhere on the site, in downloads or in structured data (owner's decision, 21 October 2026): write "the founder". No initials monograms either.
 
 ## Page skeleton
 

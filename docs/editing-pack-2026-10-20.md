@@ -1,5 +1,7 @@
 # Mathsya Website Editing Pack
 
+> Copy of the pack received on 20 October 2026. The founder's name is redacted in this copy: at the owner's request (21 October 2026) the founder is not named on the public site.
+
 Website copy and implementation instructions
 
 20 October 2026
@@ -288,7 +290,7 @@ Present the story in this order: problem, first application, products, benefits,
 
 **Founder heading:** A perspective built across vehicle systems.
 
-**Founder paragraph:** Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.
+**Founder paragraph:** The founder brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.
 
 **Next ask heading:** Choose the first partner program.
 
@@ -312,7 +314,7 @@ Keep a concise printable brief with readable product summaries, a compact roadma
 
 **Subtitle:** Automotive Edge AI from module behaviour to customer and OEM value
 
-**Founder:** Arjun Amuthan · Bengaluru, India
+**Founder:** [name withheld] · Bengaluru, India
 
 **Current stage:** Architecture, use cases and proof of concept planning
 
@@ -330,7 +332,7 @@ Keep a concise printable brief with readable product summaries, a compact roadma
 
 **The partnership sought:** An accountable OEM, BMS, power-system or fleet problem owner; approved signal and test access; and milestone-based resources or funding for a measurable first application. Pricing, market size, funding amount and commercial terms require an agreed bottom-up plan.
 
-**Founder background:** Arjun Amuthan brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.
+**Founder background:** The founder brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.
 
 **Website:** https://arjunmathsya.vercel.app/
 
@@ -397,7 +399,7 @@ Retain the enquiry categories already used by the Vercel app. Ensure the existin
 
 Mathsya Connected Services is developing automotive Edge AI that connects module behaviour to vehicle decisions and organizational learning. Our portfolio spans Battery and Charging AI, PMG vehicle software and the Evo Core power platform.
 
-Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Our approach begins with a useful problem, approved interfaces and measurable acceptance criteria.
+The founder brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Our approach begins with a useful problem, approved interfaces and measurable acceptance criteria.
 
 **Publish this Research text**
 

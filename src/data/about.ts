@@ -1,7 +1,8 @@
 // /about copy. Sources: docs/editing-pack-2026-10-20.md (section 11), docs/legacy-source/about.txt (hero, vision, founder, approach), index.txt (module signals),
 // platform.txt (engineering principles, portfolio relationships), battery-ai.txt (baseline), pmg.txt (measures),
 // investor-brief.txt (founder line, next milestone), Mathsya-Pitch-Deck-Source.md slide 11.
-// Founder facts are limited to the verified line; no employers, dates, degrees, team members or partners.
+// Founder facts are limited to the verified experience line; the founder is not named on the site (owner's decision,
+// 21 October 2026). No employers, dates, degrees, team members or partners.
 
 export const ABOUT_HERO = {
   eyebrow: 'About Mathsya · Bengaluru, India',
@@ -11,7 +12,6 @@ export const ABOUT_HERO = {
 export const COLOPHON = [
   { term: 'Company', detail: 'Mathsya Connected Services' },
   { term: 'Based in', detail: 'Bengaluru, India' },
-  { term: 'Founder', detail: 'Arjun Amuthan' },
   { term: 'Stage', detail: 'Development-stage portfolio; benefits and roadmap are proposed' },
   { term: 'Work', detail: 'Automotive Edge AI across module software, vehicle software and EV power hardware' },
 ];
@@ -51,11 +51,8 @@ export const EDGE = {
 };
 
 export const FOUNDER = {
-  name: 'Arjun Amuthan',
-  role: 'Founder, Mathsya Connected Services',
-  place: 'Bengaluru, India',
   title: 'A perspective built across vehicle systems.',
-  experience: 'Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
+  experience: 'The founder brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
   purpose: 'Our approach begins with a useful problem, approved interfaces and measurable acceptance criteria.',
   execution: 'The first partner program will be staffed around the engineering and evaluation skills that program requires.',
 };

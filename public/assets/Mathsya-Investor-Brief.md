@@ -1,6 +1,6 @@
 # Mathsya Connected Services — Investor & Partner Brief
 Automotive Edge AI from module behaviour to customer and OEM value
-October 2026 | Founder: Arjun Amuthan · Bengaluru, India
+October 2026 | Bengaluru, India
 Current stage: Architecture, use cases and proof of concept planning
 
 ## The opportunity
@@ -21,7 +21,7 @@ Agree one problem, a buyer, approved data, a baseline and an acceptance gate. A 
 An accountable OEM, BMS, power-system or fleet problem owner; approved signal and test access; and milestone-based resources or funding for a measurable first application. Pricing, market size, funding amount and commercial terms require an agreed bottom-up plan.
 
 ## Founder background
-Arjun Amuthan brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.
+The founder brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.
 
 ## Links
 - Website: https://arjunmathsya.vercel.app/

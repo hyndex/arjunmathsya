@@ -13,7 +13,7 @@ export const HERO = {
 };
 
 export const AT_A_GLANCE = [
-  { k: 'Founder', v: 'Arjun Amuthan · Bengaluru, India' },
+  { k: 'Based in', v: 'Bengaluru, India' },
   { k: 'Products', v: 'Battery & Charging AI, PMG vehicle software and the Evo Core power platform' },
   { k: 'First proof', v: 'A proposed 12–16 week PMG software PoC, once partner, approved data and test access are agreed' },
   { k: 'Next step', v: 'An OEM, BMS, power-system or fleet partner with an accountable problem owner and approved signal or test access' },
@@ -149,11 +149,7 @@ export const PROOF = {
 // ---------- 07 Founder ----------
 export const FOUNDER = {
   title: 'A perspective built across vehicle systems.',
-  lead: 'Founder Arjun Amuthan brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.',
-  name: 'Arjun Amuthan',
-  initials: 'AA',
-  role: 'Founder, Mathsya Connected Services',
-  location: 'Bengaluru, India',
+  lead: 'The founder brings automotive engineering experience spanning vehicle programs, connected services, telematics hardware, validation and EV power electronics. Mathsya brings these disciplines together around useful module, vehicle and organizational outcomes.',
   disciplines: ['Vehicle programs', 'Connected services', 'Telematics hardware', 'Validation', 'EV power electronics'],
 };
 
@@ -225,7 +221,7 @@ export const BRIEF = {
   title: 'Mathsya Connected Services',
   subtitle: 'Automotive Edge AI from module behaviour to customer and OEM value',
   facts: [
-    { k: 'Founder', v: 'Arjun Amuthan · Bengaluru, India' },
+    { k: 'Based in', v: 'Bengaluru, India' },
     { k: 'Current stage', v: 'Architecture, use cases and proof of concept planning' },
   ],
   opportunity:
@@ -256,7 +252,7 @@ export const BRIEF = {
     'Agree one problem, a buyer, approved data, a baseline and an acceptance gate. A proposed 12–16 week PMG software PoC begins after access is agreed. Battery model development and Evo Core hardware require separately scoped work packages. Compare useful outcomes, error, false alerts, runtime needs and total adoption cost.',
   partnership:
     'An accountable OEM, BMS, power-system or fleet problem owner; approved signal and test access; and milestone-based resources or funding for a measurable first application. Pricing, market size, funding amount and commercial terms require an agreed bottom-up plan.',
-  founder: 'Arjun Amuthan brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
+  founder: 'The founder brings automotive engineering experience across vehicle programs, connected services, telematics hardware, validation and EV power electronics.',
   stageNote:
     'This is a development-stage overview. Proposed benefits and generation scopes require validation; measured performance and commercial results will be identified explicitly.',
 };

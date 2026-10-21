@@ -27,7 +27,6 @@ const org = {
   url: new URL('/', Astro.site).href,
   logo: new URL('/favicon.svg', Astro.site).href,
   description: SITE.description,
-  founder: { '@type': 'Person', name: SITE.founder },
   address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressCountry: 'IN' },
 };
 const ld = [path === '/' ? org : null, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])].filter(Boolean);
